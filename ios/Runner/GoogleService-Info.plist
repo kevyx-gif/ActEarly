@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>284941075546-6h87684pci5rjo4nm7ir0qo20dtr2jvk.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.284941075546-6h87684pci5rjo4nm7ir0qo20dtr2jvk</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAVpXy27s1JVc4rsaquESwvlMppu8GauN4</string>
+	<key>GCM_SENDER_ID</key>
+	<string>284941075546</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.actearly</string>
+	<key>PROJECT_ID</key>
+	<string>actearly-db</string>
+	<key>STORAGE_BUCKET</key>
+	<string>actearly-db.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:284941075546:ios:9d020b42a295c7747bc463</string>
+</dict>
+</plist>

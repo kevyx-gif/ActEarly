@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "284941075546",
+    "project_id": "actearly-db",
+    "storage_bucket": "actearly-db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:284941075546:android:20dd7bcb22e627487bc463",
+        "android_client_info": {
+          "package_name": "com.example.actearly"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "284941075546-l9a1i5cm1365786cot3v60oflko7i8lo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCi_GwVKFPxTVWgPX5nDnP7TTvAEIB649E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "284941075546-l9a1i5cm1365786cot3v60oflko7i8lo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
