@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:actearly/pages/main_screens/screen1.dart';
 import 'package:actearly/pages/main_screens/screen2.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 //Farebase imports
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();  //Initialize server with firebase
+  WidgetsFlutterBinding.ensureInitialized(); //Initialize server with firebase
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -24,8 +25,31 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       title: 'ActEarly',
-      home: const MyHomePage(),
+      home: FutureBuilder(
+        future: _checkTermsAndConditionsAccepted(),
+        builder: (context, AsyncSnapshot<bool> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            // Mientras se comprueba si los términos han sido aceptados
+            return CircularProgressIndicator();
+          } else {
+            if (snapshot.data == true) {
+              // Si los términos ya han sido aceptados, muestra la pantalla principal con el menú
+              return MyHomePage();
+            } else {
+              // Si los términos no han sido aceptados, muestra la pantalla de términos y condiciones
+              return TermsAndConditionsScreen();
+            }
+          }
+        },
+      ),
     );
+  }
+
+  Future<bool> _checkTermsAndConditionsAccepted() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool? accepted = prefs.getBool('terms_accepted');
+    return accepted ??
+        false; // Si no existe el valor, devuelve false (no aceptado)
   }
 }
 
@@ -93,6 +117,32 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget _buildPage() {
     return Center(
       child: Text('Página Inicial'),
+    );
+  }
+}
+
+class TermsAndConditionsScreen extends StatelessWidget {
+  const TermsAndConditionsScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Términos y Condiciones'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () async {
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            prefs.setBool('terms_accepted', true);
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => MyHomePage()),
+            );
+          },
+          child: Text('Aceptar'),
+        ),
+      ),
     );
   }
 }
