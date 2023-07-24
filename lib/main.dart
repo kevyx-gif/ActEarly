@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:actearly/pages/main_screens/screen1.dart';
 import 'package:actearly/pages/main_screens/screen2.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 //Farebase imports
 import 'package:firebase_core/firebase_core.dart';
@@ -10,6 +9,15 @@ import 'firebase_options.dart';
 
 //Text Imports
 import 'package:get/get.dart';
+
+//Widgets import
+import 'package:actearly/widgets/languageDialogs.dart';
+
+//pages import
+import 'package:actearly/pages/another_pages/terms&cond.dart';
+
+//futures import
+import 'package:actearly/utils/futures.dart';
 
 bool isChecked = false;
 
@@ -31,30 +39,37 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'ActEarly',
       home: FutureBuilder(
-        future: _checkTermsAndConditionsAccepted(),
+        future: firstChooseLanguaje(),
         builder: (context, AsyncSnapshot<bool> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            // Mientras se comprueba si los términos han sido aceptados
+            // Mientras se comprueba si ya hay un lenguaje predeterminado
             return const CircularProgressIndicator();
           } else {
             if (snapshot.data == true) {
-              // Si los términos ya han sido aceptados, muestra la pantalla principal con el menú
-              return const MyHomePage();
+              // Si ya hay lenguaje comprobamos los terminos y condiciones
+              return FutureBuilder(
+                future: checkTermsAndConditionsAccepted(),
+                builder: (context, AsyncSnapshot<bool> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    // Mientras se comprueba si estan aceptados los terminos y condiciones
+                    return const CircularProgressIndicator();
+                  } else {
+                    if (snapshot.data == true) {
+                      return const MyHomePage();
+                    } else {
+                      return TermsAndConditionsScreen();
+                    }
+                  }
+                },
+              );
             } else {
-              // Si los términos no han sido aceptados, muestra la pantalla de términos y condiciones
-              return const TermsAndConditionsScreen();
+              // Si no hay lenguaje elegido se envia a elegir
+              return LanguageSelectionWidget();
             }
           }
         },
       ),
     );
-  }
-
-  Future<bool> _checkTermsAndConditionsAccepted() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool? accepted = prefs.getBool('terms_accepted');
-    return accepted ??
-        false; // Si no existe el valor, devuelve false (no aceptado)
   }
 }
 
@@ -124,27 +139,5 @@ class _MyHomePageState extends State<MyHomePage> {
     return const Center(
       child: Text('Página Inicial'),
     );
-  }
-}
-
-class TermsAndConditionsScreen extends StatelessWidget {
-  const TermsAndConditionsScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      Text('Términos y condiciones de uso de la aplicación \"ActEarly\"',
-          style: TextStyle(fontSize: 15)),
-      SizedBox(height: 10),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          ElevatedButton(onPressed: () {}, child: Text('Español')),
-          ElevatedButton(onPressed: () {}, child: Text('English')),
-          ElevatedButton(onPressed: () {}, child: Text('Français')),
-        ],
-      )
-    ]));
   }
 }
