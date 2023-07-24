@@ -72,6 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
           _buildPage(),
           Screen1(),
           Screen2(),
+          
         ],
       ),
       floatingActionButton: FloatingActionButton(
