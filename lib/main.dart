@@ -76,8 +76,8 @@ class _MyHomePageState extends State<MyHomePage> {
         index: _currentIndex,
         children: <Widget>[
           _buildPage(),
-          const Screen1(),
-          const Screen2(),
+          Screen1(),
+          Screen2(),
         ],
       ),
       floatingActionButton: FloatingActionButton(

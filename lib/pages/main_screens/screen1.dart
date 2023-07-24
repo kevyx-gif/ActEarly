@@ -4,11 +4,9 @@ import 'package:flutter/material.dart';
 //import 'package:crud_firebase/services/firebase_service.dart';
 
 class Screen1 extends StatelessWidget {
-  const Screen1({super.key});
-
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       //  child: Text('Contenido de la pantalla 1'),
       body: FutureBuilder(
           future: getUser(),
