@@ -8,6 +8,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
+//Text Imports
+import 'package:get/get.dart';
+
+bool isChecked = false;
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); //Initialize server with firebase
   await Firebase.initializeApp(
@@ -30,14 +35,14 @@ class MyApp extends StatelessWidget {
         builder: (context, AsyncSnapshot<bool> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             // Mientras se comprueba si los términos han sido aceptados
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           } else {
             if (snapshot.data == true) {
               // Si los términos ya han sido aceptados, muestra la pantalla principal con el menú
-              return MyHomePage();
+              return const MyHomePage();
             } else {
               // Si los términos no han sido aceptados, muestra la pantalla de términos y condiciones
-              return TermsAndConditionsScreen();
+              return const TermsAndConditionsScreen();
             }
           }
         },
@@ -57,6 +62,7 @@ class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _MyHomePageState createState() => _MyHomePageState();
 }
 
@@ -70,8 +76,8 @@ class _MyHomePageState extends State<MyHomePage> {
         index: _currentIndex,
         children: <Widget>[
           _buildPage(),
-          Screen1(),
-          Screen2(),
+          const Screen1(),
+          const Screen2(),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -81,17 +87,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 0; // Establecer el índice a 0 para volver a la página principal
           });
         },
-        child: Icon(Icons.home),
+        child: const Icon(Icons.home),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
+        shape: const CircularNotchedRectangle(),
         notchMargin: 8.0,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             IconButton(
-              icon: Icon(Icons.people),
+              icon: const Icon(Icons.people),
               onPressed: () {
                 setState(() {
                   _currentIndex =
@@ -100,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
             IconButton(
-              icon: Icon(Icons.settings),
+              icon: const Icon(Icons.settings),
               onPressed: () {
                 setState(() {
                   _currentIndex =
@@ -115,7 +121,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _buildPage() {
-    return Center(
+    return const Center(
       child: Text('Página Inicial'),
     );
   }
@@ -127,22 +133,18 @@ class TermsAndConditionsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Términos y Condiciones'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () async {
-            SharedPreferences prefs = await SharedPreferences.getInstance();
-            prefs.setBool('terms_accepted', true);
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => MyHomePage()),
-            );
-          },
-          child: Text('Aceptar'),
-        ),
-      ),
-    );
+        body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+      Text('Términos y condiciones de uso de la aplicación \"ActEarly\"',
+          style: TextStyle(fontSize: 15)),
+      SizedBox(height: 10),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          ElevatedButton(onPressed: () {}, child: Text('Español')),
+          ElevatedButton(onPressed: () {}, child: Text('English')),
+          ElevatedButton(onPressed: () {}, child: Text('Français')),
+        ],
+      )
+    ]));
   }
 }

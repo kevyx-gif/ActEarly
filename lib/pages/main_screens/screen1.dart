@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 class Screen1 extends StatelessWidget {
+  const Screen1({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text('Contenido de la pantalla 1'),
     );
   }
