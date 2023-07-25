@@ -66,9 +66,11 @@ class TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
                   color: Colors.green, // button color
                   child: InkWell(
                       splashColor: Colors.lightGreen, // splash color
-                      onTap: () {}, // button pressed
+                      onTap: () {
+                        acceptTermsAndConditionsAccepted();
+                      }, // button pressed
                       child: Padding(
-                        padding: EdgeInsets.all(8),
+                        padding: EdgeInsets.all(6),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
