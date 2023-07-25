@@ -71,17 +71,32 @@ class MyApp extends StatelessWidget {
               );
             } else {
               // Si no hay lenguaje elegido se envia a elegir
-              return LanguageSelectionWidget();
+              LanguageSelectionWidgetState(context);
+              return FutureBuilder(
+                future: checkTermsAndConditionsAccepted(),
+                builder: (context, AsyncSnapshot<bool> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    // Mientras se comprueba si estan aceptados los terminos y condiciones
+                    return const CircularProgressIndicator();
+                  } else {
+                    if (snapshot.data == true) {
+                      return const MyHomePage();
+                    } else {
+                      return TermsAndConditionsScreen();
+                    }
+                  }
+                },
+              );
             }
           }
         },
       ),
       //initialRoute: '/',
       routes: {
-        '/login':(context) => const LoginPage(),
-        '/register':(context) => const RegisterPage(),
+        '/login': (context) => const LoginPage(),
+        '/register': (context) => const RegisterPage(),
       },
-      onGenerateRoute: (settings){
+      onGenerateRoute: (settings) {
         return MaterialPageRoute(
           builder: (context) => const Page404(),
         );
