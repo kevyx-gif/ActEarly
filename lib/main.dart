@@ -9,6 +9,7 @@ import 'firebase_options.dart';
 
 //Text Imports
 import 'package:get/get.dart';
+import 'package:actearly/utils/Messages.dart';
 
 //Widgets import
 import 'package:actearly/widgets/languageDialogs.dart';
@@ -26,6 +27,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  Get.put(Messages());
   runApp(const MyApp());
 }
 
@@ -36,7 +38,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 
-    return MaterialApp(
+    return GetMaterialApp(
+      locale: const Locale('en', 'CAN'),
+      translationsKeys: Messages(),
       title: 'ActEarly',
       home: FutureBuilder(
         future: firstChooseLanguaje(),
