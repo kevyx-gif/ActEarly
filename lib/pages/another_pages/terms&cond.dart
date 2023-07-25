@@ -91,9 +91,9 @@ class TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
               side: BorderSide(width: 2, color: Colors.blue)),
           onPressed: () async {
             setState(() => state = ButtonState.loading);
-            await Future.delayed(Duration(seconds: 3));
+            await Future.delayed(Duration(milliseconds: 1200));
             setState(() => state = ButtonState.done);
-            await Future.delayed(Duration(seconds: 3));
+            await Future.delayed(Duration(milliseconds: 1200));
             acceptTermsAndConditionsAccepted();
             //Navigator.pushNamed(context, '/login');
             Navigator.pushReplacementNamed(context, '/login');

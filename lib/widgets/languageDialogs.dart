@@ -31,6 +31,7 @@ class _LanguageSelectionWidgetState extends State<LanguageSelectionWidget> {
           heightFactor: null,
           widthFactor: null,
           child: Card(
+            margin: EdgeInsets.symmetric(vertical: 0, horizontal: 30),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.0),
             ),
@@ -40,14 +41,14 @@ class _LanguageSelectionWidgetState extends State<LanguageSelectionWidget> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 0),
+                  padding: EdgeInsets.fromLTRB(10, 60, 10, 20),
                   child: Text(
                     "titleLanguaje".tr,
-                    style: TextStyle(fontSize: 24),
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                  padding: EdgeInsets.fromLTRB(10, 20, 10, 60),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -66,6 +67,7 @@ class _LanguageSelectionWidgetState extends State<LanguageSelectionWidget> {
 
   Widget _buildLanguageButton(String language) {
     return ElevatedButton(
+      style: ElevatedButton.styleFrom(shape: StadiumBorder()),
       onPressed: () {
         if (language == 'English') {
           QuickAlert.show(
@@ -108,7 +110,10 @@ class _LanguageSelectionWidgetState extends State<LanguageSelectionWidget> {
               onCancelBtnTap: () => {});
         }
       },
-      child: Text(language),
+      child: Text(
+        language,
+        style: TextStyle(fontSize: 15),
+      ),
     );
   }
 }
