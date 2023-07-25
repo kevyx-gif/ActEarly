@@ -95,6 +95,8 @@ class TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
             setState(() => state = ButtonState.done);
             await Future.delayed(Duration(seconds: 3));
             acceptTermsAndConditionsAccepted();
+            Navigator.pushNamed(context, '/login');
+
           },
           child: FittedBox(
             child: Text('textAccept'.tr,
