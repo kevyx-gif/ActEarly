@@ -8,70 +8,107 @@ import 'package:quickalert/quickalert.dart';
 //Text Imports
 import 'package:get/get.dart';
 
-void LanguageSelectionWidgetState(BuildContext context) {
-  showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return Scaffold(
-          body: Center(
+class LanguageSelectionWidget extends StatefulWidget {
+  @override
+  _LanguageSelectionWidgetState createState() =>
+      _LanguageSelectionWidgetState();
+}
+
+class _LanguageSelectionWidgetState extends State<LanguageSelectionWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("lib/assets/img/bg.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Center(
+          heightFactor: null,
+          widthFactor: null,
+          child: Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30.0),
+            ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
               children: [
-                buildLanguageButton('English', context),
-                buildLanguageButton('Español', context),
-                buildLanguageButton('Français', context),
+                Container(
+                  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 0),
+                  child: Text(
+                    "titleLanguaje".tr,
+                    style: TextStyle(fontSize: 24),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        _buildLanguageButton('English'),
+                        _buildLanguageButton('Español'),
+                        _buildLanguageButton('Français'),
+                      ]),
+                )
               ],
             ),
           ),
-        );
-      });
-}
+        ),
+      ),
+    );
+  }
 
-Widget buildLanguageButton(String language, BuildContext context) {
-  return ElevatedButton(
-    onPressed: () {
-      if (language == 'English') {
-        QuickAlert.show(
-            context: context,
-            type: QuickAlertType.confirm,
-            text: 'Are you sure you should choose this language?',
-            confirmBtnText: 'Yes',
-            cancelBtnText: 'No',
-            confirmBtnColor: Colors.green,
-            onConfirmBtnTap: () {
-              Get.updateLocale(Locale('en', 'CAN'));
-              chooseLanguaje();
-            },
-            onCancelBtnTap: () => {CloseButton()});
-      } else if (language == 'Español') {
-        QuickAlert.show(
-            context: context,
-            type: QuickAlertType.confirm,
-            text: '¿Está seguro de que debe elegir este idioma?',
-            confirmBtnText: 'Sí',
-            cancelBtnText: 'No',
-            confirmBtnColor: Colors.green,
-            onConfirmBtnTap: () {
-              Get.updateLocale(Locale('es', 'MX'));
-              chooseLanguaje();
-            },
-            onCancelBtnTap: () => {});
-      } else {
-        QuickAlert.show(
-            context: context,
-            type: QuickAlertType.confirm,
-            text: 'Êtes-vous sûr de choisir cette langue?',
-            confirmBtnText: 'oui',
-            cancelBtnText: 'Non',
-            confirmBtnColor: Colors.green,
-            onConfirmBtnTap: () {
-              Get.updateLocale(Locale('fr', 'CA'));
-              chooseLanguaje();
-            },
-            onCancelBtnTap: () => {});
-      }
-    },
-    child: Text(language),
-  );
+  Widget _buildLanguageButton(String language) {
+    return ElevatedButton(
+      onPressed: () {
+        if (language == 'English') {
+          QuickAlert.show(
+              context: context,
+              type: QuickAlertType.confirm,
+              text: 'Are you sure you should choose this language?',
+              confirmBtnText: 'Yes',
+              cancelBtnText: 'No',
+              confirmBtnColor: Colors.green,
+              onConfirmBtnTap: () {
+                Get.updateLocale(Locale('en', 'CAN'));
+                chooseLanguaje();
+              },
+              onCancelBtnTap: () => {CloseButton()});
+        } else if (language == 'Español') {
+          QuickAlert.show(
+              context: context,
+              type: QuickAlertType.confirm,
+              text: '¿Está seguro de que debe elegir este idioma?',
+              confirmBtnText: 'Sí',
+              cancelBtnText: 'No',
+              confirmBtnColor: Colors.green,
+              onConfirmBtnTap: () {
+                Get.updateLocale(Locale('es', 'MX'));
+                chooseLanguaje();
+              },
+              onCancelBtnTap: () => {});
+        } else {
+          QuickAlert.show(
+              context: context,
+              type: QuickAlertType.confirm,
+              text: 'Êtes-vous sûr de choisir cette langue?',
+              confirmBtnText: 'oui',
+              cancelBtnText: 'Non',
+              confirmBtnColor: Colors.green,
+              onConfirmBtnTap: () {
+                Get.updateLocale(Locale('fr', 'CA'));
+                chooseLanguaje();
+              },
+              onCancelBtnTap: () => {});
+        }
+      },
+      child: Text(language),
+    );
+  }
 }

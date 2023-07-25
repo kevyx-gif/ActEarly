@@ -70,23 +70,7 @@ class MyApp extends StatelessWidget {
                 },
               );
             } else {
-              // Si no hay lenguaje elegido se envia a elegir
-              LanguageSelectionWidgetState(context);
-              return FutureBuilder(
-                future: checkTermsAndConditionsAccepted(),
-                builder: (context, AsyncSnapshot<bool> snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    // Mientras se comprueba si estan aceptados los terminos y condiciones
-                    return const CircularProgressIndicator();
-                  } else {
-                    if (snapshot.data == true) {
-                      return const MyHomePage();
-                    } else {
-                      return TermsAndConditionsScreen();
-                    }
-                  }
-                },
-              );
+              return LanguageSelectionWidget();
             }
           }
         },
