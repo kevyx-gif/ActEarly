@@ -17,8 +17,10 @@ class _LoginPageState extends State<LoginPage> {
       body: Center(
         child: ElevatedButton(
           onPressed: (){
-            Navigator.pushNamed(context, '/register');
-          }, child: const Text('Sign in')),
+            Navigator.pushNamed(context, '/');
+          }, child: const Text('Create')
+          ),
+         //TextField()
       ),
     );
   }

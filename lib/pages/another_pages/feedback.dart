@@ -12,13 +12,13 @@ class _FeedBackPageState extends State<FeedBackPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login Page'),
+        title: const Text('Feedback Page'),
       ),  
       body: Center(
         child: ElevatedButton(
           onPressed: (){
-            Navigator.pushNamed(context, '/register');
-          }, child: const Text('Sign in')),
+            Navigator.pushNamed(context, '/registerFirst');
+          }, child: const Text('Next')),
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:actearly/pages/another_pages/login.dart';
 import 'package:actearly/pages/another_pages/page404.dart';
 import 'package:actearly/pages/another_pages/register.dart';
+import 'package:actearly/pages/another_pages/registerFirst.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:actearly/pages/main_screens/screen1.dart';
@@ -79,6 +80,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/login': (context) => const LoginPage(),
         '/register': (context) => const RegisterPage(),
+        '/registerFirst': (context) => const RegisterFirstPage(),
       },
       onGenerateRoute: (settings) {
         return MaterialPageRoute(
