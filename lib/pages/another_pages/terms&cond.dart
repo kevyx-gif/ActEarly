@@ -41,13 +41,14 @@ class TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(height: 15),
-          Text(
-            "titleTermsCond".tr,
-            style: TextStyle(fontSize: 25),
-            textAlign: TextAlign.center,
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+            child: Text(
+              "titleTermsCond".tr,
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
+            ),
           ),
-          SizedBox(height: 5),
           Expanded(
             child: Card(
               margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
@@ -68,7 +69,8 @@ class TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
                             vertical: 5, horizontal: 4),
                         child: Text(
                           "termsAndCond".tr,
-                          style: TextStyle(fontSize: 17),
+                          style: TextStyle(
+                              fontSize: 17, fontWeight: FontWeight.w400),
                           textAlign: TextAlign.justify,
                         )),
                   ),
@@ -97,9 +99,8 @@ class TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
   }
 
   Widget buildButton() => Container(
-      decoration: BoxDecoration(color: ColorConstants.btnColor),
-      child: OutlinedButton(
-          style: OutlinedButton.styleFrom(
+      child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
               shape: StadiumBorder(),
               side: BorderSide(width: 2, color: ColorConstants.borderBtnColor)),
           onPressed: () async {
@@ -113,7 +114,7 @@ class TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
           },
           child: FittedBox(
             child: Text('textAccept'.tr,
-                style: TextStyle(fontSize: 18, color: Colors.black)),
+                style: TextStyle(fontSize: 18, color: Colors.white)),
           )));
 
   Widget buildSmallButton(bool isDone) {
