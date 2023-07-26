@@ -56,8 +56,7 @@ class TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
                 borderRadius: BorderRadius.circular(30.0),
               ),
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                padding: const EdgeInsets.fromLTRB(25, 15, 25, 25),
                 child: Align(
                   alignment: Alignment.center,
                   child: SingleChildScrollView(
