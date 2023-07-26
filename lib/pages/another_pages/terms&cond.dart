@@ -6,6 +6,9 @@ import 'package:get/get.dart';
 //futures import
 import 'package:actearly/utils/futures.dart';
 
+//colors import
+import 'package:actearly/utils/colors.dart';
+
 enum ButtonState { init, loading, done }
 
 class TermsAndConditionsScreen extends StatefulWidget {
@@ -94,17 +97,18 @@ class TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
   }
 
   Widget buildButton() => Container(
+      decoration: BoxDecoration(color: ColorConstants.btnColor),
       child: OutlinedButton(
           style: OutlinedButton.styleFrom(
               shape: StadiumBorder(),
-              side: BorderSide(width: 2, color: Colors.blue)),
+              side: BorderSide(width: 2, color: ColorConstants.borderBtnColor)),
           onPressed: () async {
             setState(() => state = ButtonState.loading);
             await Future.delayed(Duration(milliseconds: 1200));
             setState(() => state = ButtonState.done);
             await Future.delayed(Duration(milliseconds: 1200));
             acceptTermsAndConditionsAccepted();
-            //Navigator.pushNamed(context, '/login');
+            //Mandar al login
             Navigator.pushReplacementNamed(context, '/login');
           },
           child: FittedBox(
@@ -113,7 +117,7 @@ class TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
           )));
 
   Widget buildSmallButton(bool isDone) {
-    final color = isDone ? Colors.green : Colors.blue;
+    final color = isDone ? Colors.green : ColorConstants.btnColor;
 
     return Container(
         decoration: BoxDecoration(shape: BoxShape.circle, color: color),
