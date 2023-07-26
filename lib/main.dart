@@ -4,8 +4,6 @@ import 'package:actearly/pages/another_pages/register.dart';
 import 'package:actearly/pages/another_pages/registerFirst.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:actearly/pages/main_screens/screen1.dart';
-import 'package:actearly/pages/main_screens/screen2.dart';
 
 //Farebase imports
 import 'package:firebase_core/firebase_core.dart';
@@ -20,6 +18,7 @@ import 'package:actearly/widgets/languageDialogs.dart';
 
 //pages import
 import 'package:actearly/pages/another_pages/terms&cond.dart';
+import 'package:actearly/pages/main_screens/main_screen.dart';
 
 //futures import
 import 'package:actearly/utils/futures.dart';
@@ -47,7 +46,7 @@ class MyApp extends StatelessWidget {
       translationsKeys: Messages(),
       title: 'ActEarly',
       home: FutureBuilder(
-        future: firstChooseLanguaje(),
+        future: checkChosenLanguage(),
         builder: (context, AsyncSnapshot<bool> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             // Mientras se comprueba si ya hay un lenguaje predeterminado
@@ -58,12 +57,29 @@ class MyApp extends StatelessWidget {
               return FutureBuilder(
                 future: checkTermsAndConditionsAccepted(),
                 builder: (context, AsyncSnapshot<bool> snapshot) {
+                  // Mientras se comprueba si estan aceptados los terminos y condiciones
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    // Mientras se comprueba si estan aceptados los terminos y condiciones
                     return const CircularProgressIndicator();
                   } else {
+                    // si ya estan aceptados los terminos y condiciones
                     if (snapshot.data == true) {
-                      return const MyHomePage();
+                      return FutureBuilder(
+                        future: checkLoggedInAccount(),
+                        builder: (context, AsyncSnapshot<bool> snapshot) {
+                          // Mientras se comprueba si ya esta logueado
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const CircularProgressIndicator();
+                          } else {
+                            // si ya esta logueado
+                            if (snapshot.data == true) {
+                              return const MyHomePage();
+                            } else {
+                              return LoginPage();
+                            }
+                          }
+                        },
+                      );
                     } else {
                       return TermsAndConditionsScreen();
                     }
@@ -76,7 +92,6 @@ class MyApp extends StatelessWidget {
           }
         },
       ),
-      //initialRoute: '/',
       routes: {
         '/login': (context) => const LoginPage(),
         '/register': (context) => const RegisterPage(),
@@ -87,75 +102,6 @@ class MyApp extends StatelessWidget {
           builder: (context) => const Page404(),
         );
       },
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
-  @override
-  // ignore: library_private_types_in_public_api
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _currentIndex = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: IndexedStack(
-        index: _currentIndex,
-        children: <Widget>[
-          _buildPage(),
-          Screen1(),
-          Screen2(),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            _currentIndex =
-                0; // Establecer el índice a 0 para volver a la página principal
-          });
-        },
-        child: const Icon(Icons.home),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        notchMargin: 8.0,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            IconButton(
-              icon: const Icon(Icons.people),
-              onPressed: () {
-                setState(() {
-                  _currentIndex =
-                      1; // Establecer el índice a 1 para ir a la Página 1
-                });
-              },
-            ),
-            IconButton(
-              icon: const Icon(Icons.settings),
-              onPressed: () {
-                setState(() {
-                  _currentIndex =
-                      2; // Establecer el índice a 2 para ir a la Página 2
-                });
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildPage() {
-    return const Center(
-      child: Text('Página Inicial'),
     );
   }
 }

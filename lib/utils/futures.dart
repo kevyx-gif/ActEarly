@@ -14,7 +14,7 @@ void acceptTermsAndConditionsAccepted() async {
   await prefs.setBool('terms_accepted', true);
 }
 
-Future<bool> firstChooseLanguaje() async {
+Future<bool> checkChosenLanguage() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   bool? accepted = prefs.getBool('first_choose');
   return accepted ??
@@ -24,4 +24,16 @@ Future<bool> firstChooseLanguaje() async {
 void chooseLanguaje() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   await prefs.setBool('first_choose', true);
+}
+
+Future<bool> checkLoggedInAccount() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  bool? accepted = prefs.getBool('account_initiated');
+  return accepted ??
+      false; // Si no existe el valor, devuelve false (no aceptado)
+}
+
+void loggedIn() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setBool('account_initiated', true);
 }
