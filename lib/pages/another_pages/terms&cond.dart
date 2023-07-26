@@ -46,9 +46,17 @@ class TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
             child: Text(
               "titleTermsCond".tr,
               style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.w800,
-                  color: Colors.white),
+                fontSize: 25,
+                fontWeight: FontWeight.w800,
+                color: Colors.white,
+                shadows: <Shadow>[
+                  Shadow(
+                    offset: Offset(0, 4),
+                    blurRadius: 25,
+                    color: Color.fromARGB(255, 0, 0, 0),
+                  ),
+                ],
+              ),
               textAlign: TextAlign.center,
             ),
           ),
@@ -104,7 +112,7 @@ class TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(
               shape: StadiumBorder(),
-              side: BorderSide(width: 2, color: ColorConstants.borderBtnColor)),
+              side: BorderSide(width: 2, color: Colors.blue.shade600)),
           onPressed: () async {
             setState(() => state = ButtonState.loading);
             await Future.delayed(Duration(milliseconds: 1200));
