@@ -23,7 +23,7 @@ class _LanguageSelectionWidgetState extends State<LanguageSelectionWidget> {
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("lib/assets/img/bg.jpg"),
+            image: AssetImage("lib/assets/img/bg4.png"),
             fit: BoxFit.cover,
           ),
         ),
@@ -31,6 +31,7 @@ class _LanguageSelectionWidgetState extends State<LanguageSelectionWidget> {
           heightFactor: null,
           widthFactor: null,
           child: Card(
+            elevation: 36,
             margin: EdgeInsets.symmetric(vertical: 0, horizontal: 30),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.0),

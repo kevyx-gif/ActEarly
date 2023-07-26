@@ -34,3 +34,4 @@ flutter:
   assets:
     - lib/assets/icons/IconSv.svg
     - lib/assets/img/bg.jpg
+    - lib/assets/img/bg4.png

@@ -34,7 +34,7 @@ class TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
       height: MediaQuery.of(context).size.height,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("lib/assets/img/bg.jpg"),
+          image: AssetImage("lib/assets/img/bg4.png"),
           fit: BoxFit.cover,
         ),
       ),
@@ -45,7 +45,10 @@ class TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
             padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
             child: Text(
               "titleTermsCond".tr,
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.w800,
+                  color: Colors.white),
               textAlign: TextAlign.center,
             ),
           ),
