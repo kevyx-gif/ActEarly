@@ -26,7 +26,16 @@ class TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
     final isStretched = isAnimating || state == ButtonState.init;
     final isDone = state == ButtonState.done;
     return Scaffold(
-      body: Column(
+        body: Container(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("lib/assets/img/bg.jpg"),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(height: 15),
@@ -81,7 +90,7 @@ class TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
           )
         ],
       ),
-    );
+    ));
   }
 
   Widget buildButton() => Container(

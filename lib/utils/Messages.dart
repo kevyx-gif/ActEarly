@@ -7,7 +7,7 @@ Map<String, Map<String, String>> Messages() {
       'textAccept': 'Accept',
       'appreciation': '¡Thank You!',
       'titleLanguaje': 'Choose your language',
-      'titleCond': 'Terms and Conditions of Use for the "ActEarly" Application'
+      'titleCond': 'Terms and Conditions of Use for the "ActEarly" Application',
     },
     'es_MX': {
       'termsAndCond':
@@ -17,7 +17,7 @@ Map<String, Map<String, String>> Messages() {
       'textAccept': 'Aceptar',
       'appreciation': '¡Gracias!',
       'titleLanguaje': 'Elige tu idioma',
-      'titleCond': 'Condiciones de uso de la aplicación "ActEarly"'
+      'titleCond': 'Condiciones de uso de la aplicación "ActEarly"',
     },
     'fr_CA': {
       'termsAndCond':
@@ -26,7 +26,7 @@ Map<String, Map<String, String>> Messages() {
       'textAccept': 'Accepter',
       'appreciation': '¡Merci!',
       'titleLanguaje': 'Choisir sa langue',
-      'titleCond': 'Conditions d\'utilisation de l\'application "ActEarly'
+      'titleCond': 'Conditions d\'utilisation de l\'application "ActEarly',
     },
   };
 

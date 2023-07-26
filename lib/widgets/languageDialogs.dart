@@ -73,41 +73,47 @@ class _LanguageSelectionWidgetState extends State<LanguageSelectionWidget> {
           QuickAlert.show(
               context: context,
               type: QuickAlertType.confirm,
-              text: 'Are you sure you should choose this language?',
+              title: 'Are you sure you should choose this language?',
               confirmBtnText: 'Yes',
               cancelBtnText: 'No',
               confirmBtnColor: Colors.green,
               onConfirmBtnTap: () {
                 Get.updateLocale(Locale('en', 'CAN'));
                 chooseLanguaje();
+                Navigator.pop(context);
               },
-              onCancelBtnTap: () => {CloseButton()});
+              onCancelBtnTap: () => {Navigator.pop(context)});
         } else if (language == 'Español') {
           QuickAlert.show(
               context: context,
               type: QuickAlertType.confirm,
-              text: '¿Está seguro de que debe elegir este idioma?',
+              title: '¿Está seguro de que debe elegir este idioma?',
               confirmBtnText: 'Sí',
               cancelBtnText: 'No',
               confirmBtnColor: Colors.green,
               onConfirmBtnTap: () {
                 Get.updateLocale(Locale('es', 'MX'));
                 chooseLanguaje();
+                Navigator.pop(context);
               },
-              onCancelBtnTap: () => {});
+              onCancelBtnTap: () => {Navigator.pop(context)});
         } else {
           QuickAlert.show(
               context: context,
               type: QuickAlertType.confirm,
-              text: 'Êtes-vous sûr de choisir cette langue?',
+              title: 'Êtes-vous sûr de choisir cette langue?',
               confirmBtnText: 'oui',
               cancelBtnText: 'Non',
               confirmBtnColor: Colors.green,
+              cancelBtnTextStyle: TextStyle(
+                color: Colors.blueGrey,
+              ),
               onConfirmBtnTap: () {
                 Get.updateLocale(Locale('fr', 'CA'));
                 chooseLanguaje();
+                Navigator.pop(context);
               },
-              onCancelBtnTap: () => {});
+              onCancelBtnTap: () => {Navigator.pop(context)});
         }
       },
       child: Text(
