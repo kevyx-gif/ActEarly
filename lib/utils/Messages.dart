@@ -12,6 +12,8 @@ Map<String, Map<String, String>> Messages() {
       'btnSettings': 'Settings',
       'btnHelp': 'Help',
       'btnTips': 'Tips',
+      'wrongPassword': 'wrong password',
+      'wrongEmail': 'Incorrect email address',
     },
     'es_MX': {
       'termsAndCond':
@@ -24,6 +26,8 @@ Map<String, Map<String, String>> Messages() {
       'btnSettings': 'Ajustes',
       'btnHelp': 'Ayuda',
       'btnTips': 'Consejos',
+      'wrongPassword': 'Contraseña incorrecta',
+      'wrongEmail': 'Correo electronico incorrecto',
     },
     'fr_CA': {
       'termsAndCond':
@@ -36,6 +40,8 @@ Map<String, Map<String, String>> Messages() {
       'btnSettings': 'Ajustements',
       'btnHelp': 'Aider',
       'btnTips': 'Conseils',
+      'wrongPassword': 'Mot de passe incorrect',
+      'wrongEmail': 'Adresse électronique incorrecte',
     },
   };
 

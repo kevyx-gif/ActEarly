@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:actearly/utils/futures.dart';
+//Text Imports
+import 'package:get/get.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -72,28 +74,18 @@ class _LoginPageState extends State<LoginPage> {
                           },
                         );
                       } else {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              // Retrieve the text the that user has entered by using the
-                              // TextEditingController.
-                              content: Text('Password Incorrecto'),
-                            );
-                          },
-                        );
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(
+                          'wrongPassword'.tr,
+                          textAlign: TextAlign.center,
+                        )));
                       }
                     } else {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            // Retrieve the text the that user has entered by using the
-                            // TextEditingController.
-                            content: Text('Email incorrecto'),
-                          );
-                        },
-                      );
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(
+                        'wrongEmail'.tr,
+                        textAlign: TextAlign.center,
+                      )));
                     }
                   },
                   child: const Text('main')),
