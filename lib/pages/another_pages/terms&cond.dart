@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 
+//Checar plataforma
+import 'dart:io' show Platform;
+
+//Progress Indicador IOS
+import 'package:flutter/cupertino.dart';
+
 //Text Imports
 import 'package:get/get.dart';
 
@@ -137,10 +143,12 @@ class TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
             : Center(
                 child: SizedBox(
                 child: Center(
-                    child: CircularProgressIndicator(
-                  color: Colors.white,
-                  strokeWidth: 2,
-                )),
+                    child: Platform.isAndroid
+                        ? CircularProgressIndicator(
+                            color: Colors.white,
+                            strokeWidth: 2,
+                          )
+                        : CupertinoActivityIndicator()),
                 height: 30.0,
                 width: 30.0,
               )));

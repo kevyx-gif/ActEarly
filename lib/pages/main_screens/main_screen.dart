@@ -1,5 +1,6 @@
 import 'package:actearly/pages/main_screens/screen1.dart';
 import 'package:actearly/pages/main_screens/screen2.dart';
+import 'package:actearly/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 //NabBar import
@@ -7,6 +8,10 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 
 //Text Imports
 import 'package:get/get.dart';
+
+//Pages
+import 'package:actearly/widgets/addChild.dart';
+import 'package:actearly/widgets/showChild.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -18,6 +23,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0;
+  //Tipos de usuario , nuevo(primer registro de hijo(s)) / simple(1 hijo añadido) / grande(más de 1 hijo registrado)
+  String _userType = 'simple';
 
   @override
   Widget build(BuildContext context) {
@@ -31,15 +38,16 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
         bottomNavigationBar: Container(
-          color: Colors.black,
+          color: Color.fromARGB(255, 235, 235, 235),
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 25),
             child: GNav(
-              backgroundColor: Colors.black,
-              color: Colors.white,
-              tabBackgroundColor: Colors.tealAccent.shade200,
-              padding: EdgeInsets.all(15),
-              gap: 8,
+              backgroundColor: Color.fromARGB(255, 235, 235, 235),
+              color: ColorConstants.borderBtnColor,
+              activeColor: Colors.white,
+              tabBackgroundColor: ColorConstants.btnColor,
+              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              gap: 9,
               onTabChange: (index) {
                 setState(() {
                   _currentIndex = index;
@@ -69,8 +77,10 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _buildPage() {
-    return const Center(
-      child: Text('Página Inicial'),
-    );
+    if (_userType == 'nuevo') {
+      return addChildWidget();
+    } else {
+      return ShowChildWidget(_userType);
+    }
   }
 }

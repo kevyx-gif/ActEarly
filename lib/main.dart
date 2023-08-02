@@ -93,6 +93,7 @@ class MyApp extends StatelessWidget {
         },
       ),
       routes: {
+        '/main': (context) => const MyHomePage(),
         '/login': (context) => const LoginPage(),
         '/register': (context) => const RegisterPage(),
         '/registerFirst': (context) => const RegisterFirstPage(),
