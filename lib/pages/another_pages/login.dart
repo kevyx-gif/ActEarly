@@ -63,16 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                       //found password
                       if (await searchByFieldInCollection(
                           'users', 'password', password.text)) {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              // Retrieve the text the that user has entered by using the
-                              // TextEditingController.
-                              content: Text('Cuenta logueada con exito'),
-                            );
-                          },
-                        );
+                           Navigator.pushNamed(context, '/main');
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text(
@@ -88,9 +79,20 @@ class _LoginPageState extends State<LoginPage> {
                       )));
                     }
                   },
-                  child: const Text('main')),
+                  child: const Text('main')), 
+            ),
+            Center(
+              child: ElevatedButton(
+                  onPressed: () async {
+                    Navigator.pushNamed(context, '/register');
+                  }, 
+                  child: const Text('Register'),
+              ),
+                  
             ),
           ],
-        ));
+        )
+
+        );
   }
 }

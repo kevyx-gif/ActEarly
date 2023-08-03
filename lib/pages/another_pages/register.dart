@@ -8,17 +8,40 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+
+  final email = TextEditingController();
+  final password = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    email.dispose();
+    password.dispose();
+    super.dispose();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login Page'),
+        title: const Text('Register Page'),
       ),  
-      body: Center(
-        child: ElevatedButton(
-          onPressed: (){
-            //Navigator.pushNamed(context, '/register');
-          }, child: const Text('Register :)')),
+      body: Column(
+        children: [
+          Center(
+            child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'correo',
+                  ),
+                  controller: email,
+                ),
+              ),
+          ),
+        ],
       ),
     );
   }
