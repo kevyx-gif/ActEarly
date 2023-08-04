@@ -45,11 +45,12 @@ class _LoginPageState extends State<LoginPage> {
             Center(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                child: TextField(
+                child: TextFormField(
                   controller: password,
-                  decoration: InputDecoration(
+                  obscureText: true,
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    hintText: 'contraseña',
+                    labelText: 'Password',
                   ),
                 ),
               ),
@@ -63,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
                       //found password
                       if (await searchByFieldInCollection(
                           'users', 'password', password.text)) {
-                           Navigator.pushNamed(context, '/main');
+                        Navigator.pushNamed(context, '/main');
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text(
@@ -79,20 +80,17 @@ class _LoginPageState extends State<LoginPage> {
                       )));
                     }
                   },
-                  child: const Text('main')), 
+                  child: const Text('main')),
             ),
             Center(
               child: ElevatedButton(
-                  onPressed: () async {
-                    Navigator.pushNamed(context, '/register');
-                  }, 
-                  child: const Text('Register'),
+                onPressed: () async {
+                  Navigator.pushNamed(context, '/register');
+                },
+                child: const Text('Register'),
               ),
-                  
             ),
           ],
-        )
-
-        );
+        ));
   }
 }

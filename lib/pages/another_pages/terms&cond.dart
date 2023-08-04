@@ -31,7 +31,7 @@ class TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
+    final width = MediaQuery.of(context).size.width / 2.5;
     final isStretched = isAnimating || state == ButtonState.init;
     final isDone = state == ButtonState.done;
     return Scaffold(
@@ -40,7 +40,7 @@ class TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
       height: MediaQuery.of(context).size.height,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("lib/assets/img/bg4.png"),
+          image: AssetImage("lib/assets/img/bg.png"),
           fit: BoxFit.cover,
         ),
       ),
@@ -48,48 +48,49 @@ class TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+            padding: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
             child: Text(
               "titleTermsCond".tr,
               style: TextStyle(
                 fontSize: 25,
-                fontWeight: FontWeight.w800,
+                fontFamily: 'Archive',
+                fontWeight: FontWeight.w700,
                 color: Colors.white,
-                shadows: <Shadow>[
-                  Shadow(
-                    offset: Offset(0, 4),
-                    blurRadius: 25,
-                    color: Color.fromARGB(255, 0, 0, 0),
-                  ),
-                ],
               ),
               textAlign: TextAlign.center,
             ),
           ),
-          Expanded(
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: 700,
             child: Card(
-              margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+              margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.0),
+                borderRadius: BorderRadius.circular(20.0),
               ),
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(25, 15, 25, 25),
+                padding: const EdgeInsets.fromLTRB(20, 15, 10, 25),
                 child: Align(
                   alignment: Alignment.center,
-                  child: SingleChildScrollView(
-                    physics: ClampingScrollPhysics(),
-                    padding: EdgeInsets.symmetric(vertical: 4),
-                    scrollDirection: Axis.vertical,
-                    child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 5, horizontal: 4),
-                        child: Text(
-                          "termsAndCond".tr,
-                          style: TextStyle(
-                              fontSize: 17, fontWeight: FontWeight.w400),
-                          textAlign: TextAlign.justify,
-                        )),
-                  ),
+                  child: RawScrollbar(
+                      isAlwaysShown: true,
+                      thumbColor: ColorConstants.bgColor,
+                      thickness: 7,
+                      radius: Radius.circular(50),
+                      child: SingleChildScrollView(
+                        physics: ClampingScrollPhysics(),
+                        padding:
+                            EdgeInsets.symmetric(vertical: 4, horizontal: 5),
+                        scrollDirection: Axis.vertical,
+                        child: Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 5, 15, 5),
+                            child: Text(
+                              "termsAndCond".tr,
+                              style: TextStyle(
+                                  fontSize: 17, fontWeight: FontWeight.w400),
+                              textAlign: TextAlign.justify,
+                            )),
+                      )),
                 ),
               ),
             ),
@@ -104,7 +105,7 @@ class TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
                     curve: Curves.easeIn,
                     width: state == ButtonState.init ? width : 50,
                     onEnd: () => setState(() => isAnimating = !isAnimating),
-                    height: 40,
+                    height: 35,
                     child: isStretched
                         ? buildButton()
                         : buildSmallButton(isDone))),
@@ -118,13 +119,15 @@ class TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(
               shape: StadiumBorder(),
-              side: BorderSide(width: 2, color: Colors.blue.shade600)),
+              side: BorderSide(width: 2, color: ColorConstants.blueGray),
+              backgroundColor: ColorConstants.blue),
           onPressed: () async {
             setState(() => state = ButtonState.loading);
             await Future.delayed(Duration(milliseconds: 1200));
             setState(() => state = ButtonState.done);
             await Future.delayed(Duration(milliseconds: 1200));
             acceptTermsAndConditionsAccepted();
+            //setState(() => state = ButtonState.init);
             //Mandar al login
             Navigator.pushReplacementNamed(context, '/login');
           },
@@ -134,23 +137,26 @@ class TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
           )));
 
   Widget buildSmallButton(bool isDone) {
-    final color = isDone ? Colors.green : ColorConstants.btnColor;
+    final color = isDone ? ColorConstants.blue : ColorConstants.blue;
 
     return Container(
         decoration: BoxDecoration(shape: BoxShape.circle, color: color),
         child: isDone
-            ? Icon(Icons.done, size: 30, color: Colors.white)
-            : Center(
-                child: SizedBox(
+            ? Icon(Icons.done, size: 30, color: ColorConstants.white)
+            : Padding(
+                padding: EdgeInsets.all(3),
                 child: Center(
-                    child: Platform.isAndroid
-                        ? CircularProgressIndicator(
-                            color: Colors.white,
-                            strokeWidth: 2,
-                          )
-                        : CupertinoActivityIndicator()),
-                height: 30.0,
-                width: 30.0,
-              )));
+                    child: SizedBox(
+                  child: Center(
+                      child: Platform.isAndroid
+                          ? CircularProgressIndicator(
+                              color: ColorConstants.white,
+                              strokeWidth: 2,
+                            )
+                          : CupertinoActivityIndicator()),
+                  height: 30.0,
+                  width: 30.0,
+                )),
+              ));
   }
 }
