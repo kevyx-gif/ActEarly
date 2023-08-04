@@ -14,6 +14,9 @@ Map<String, Map<String, String>> Messages() {
       'btnTips': 'Tips',
       'wrongPassword': 'wrong password',
       'wrongEmail': 'Incorrect email address',
+      'greeting': 'Welcome Back,',
+      'tittleLogin': 'Login',
+      'subtittleLogin': 'to ActEarly',
     },
     'es_MX': {
       'termsAndCond':
@@ -28,6 +31,9 @@ Map<String, Map<String, String>> Messages() {
       'btnTips': 'Consejos',
       'wrongPassword': 'Contraseña incorrecta',
       'wrongEmail': 'Correo electronico incorrecto',
+      'greeting': 'Bienvenido,',
+      'tittleLogin': 'Ingresa a tu Cuenta',
+      'subtittleLogin': 'a ActEarly',
     },
     'fr_CA': {
       'termsAndCond':
@@ -42,6 +48,9 @@ Map<String, Map<String, String>> Messages() {
       'btnTips': 'Conseils',
       'wrongPassword': 'Mot de passe incorrect',
       'wrongEmail': 'Adresse électronique incorrecte',
+      'greeting': 'Bienvenue,',
+      'tittleLogin': 'login',
+      'subtittleLogin': 'à ActEarly',
     },
   };
 
