@@ -135,16 +135,30 @@ class _LoginPageState extends State<LoginPage> {
                                                   color:
                                                       ColorConstants.TextGray),
                                               decoration: InputDecoration(
-                                                fillColor: ColorConstants.white,
+                                                fillColor: ColorConstants
+                                                    .BackgroundGray,
                                                 filled: true,
                                                 contentPadding:
                                                     EdgeInsets.symmetric(
                                                         horizontal: 20,
-                                                        vertical: 20),
-                                                border: OutlineInputBorder(
+                                                        vertical: 21),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          Colors.transparent),
                                                   borderRadius:
                                                       BorderRadius.circular(
-                                                          50.0),
+                                                          24.0), // Adjust the radius as needed
+                                                ),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          Colors.transparent),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          24.0), // Adjust the radius as needed
                                                 ),
                                                 hintText: 'textInputEmail'.tr,
                                                 hintStyle: TextStyle(
@@ -157,25 +171,38 @@ class _LoginPageState extends State<LoginPage> {
                                         Center(
                                           child: Padding(
                                             padding: EdgeInsets.symmetric(
-                                                horizontal: 8, vertical: 16),
+                                                horizontal: 12, vertical: 16),
                                             child: TextFormField(
                                               controller: password,
                                               obscureText: true,
                                               style: TextStyle(
-                                                  backgroundColor:
-                                                      ColorConstants
-                                                          .BackgroundGray,
                                                   color:
                                                       ColorConstants.TextGray),
                                               decoration: InputDecoration(
+                                                fillColor: ColorConstants
+                                                    .BackgroundGray,
+                                                filled: true,
                                                 contentPadding:
                                                     EdgeInsets.symmetric(
                                                         horizontal: 20,
                                                         vertical: 20),
-                                                border: OutlineInputBorder(
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          Colors.transparent),
                                                   borderRadius:
                                                       BorderRadius.circular(
-                                                          50.0),
+                                                          24.0), // Adjust the radius as needed
+                                                ),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color:
+                                                          Colors.transparent),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          24.0), // Adjust the radius as needed
                                                 ),
                                                 hintText: 'textInputPassw'.tr,
                                                 hintStyle: TextStyle(
