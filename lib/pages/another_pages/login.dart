@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
-import 'package:actearly/utils/futures.dart';
+//utils import
+import 'package:actearly/utils/functions.dart';
 //Text Imports
 import 'package:get/get.dart';
 //colors import
@@ -65,199 +66,266 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ],
                             ))),
-                    Center(
-                      child: Container(
-                        margin: EdgeInsets.fromLTRB(0, 0, 0, 40),
-                        child: Text(
-                          'subtittleLogin'.tr,
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontFamily: 'Archive',
-                            color: ColorConstants.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        height: 700,
-                        child: Card(
-                            margin: const EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 30),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
+                    Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Center(
+                            child: Container(
+                              margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                              child: Text(
+                                'subtittleLogin'.tr,
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontFamily: 'Archive',
+                                  color: ColorConstants.white,
+                                ),
+                              ),
                             ),
-                            child: Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(25, 15, 25, 25),
-                                child: Align(
-                                    alignment: Alignment.center,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Center(
-                                          child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Text('Act',
-                                                    style: TextStyle(
-                                                        color:
-                                                            ColorConstants.blue,
-                                                        fontFamily: 'Work_Sans',
-                                                        fontSize: 34)),
-                                                Text('Early',
+                          ),
+                          SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              height: 740,
+                              child: Card(
+                                  margin: const EdgeInsets.symmetric(
+                                      vertical: 10, horizontal: 30),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  child: Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          25, 15, 25, 25),
+                                      child: Align(
+                                          alignment: Alignment.center,
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Container(
+                                                margin: EdgeInsets.fromLTRB(
+                                                    0, 0, 0, 20),
+                                                child: Column(children: [
+                                                  Center(
+                                                    child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Text('Act',
+                                                              style: TextStyle(
+                                                                color:
+                                                                    ColorConstants
+                                                                        .blue,
+                                                                fontFamily:
+                                                                    'Work_Sans',
+                                                                fontSize: 40,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w700,
+                                                              )),
+                                                          Text('Early',
+                                                              style: TextStyle(
+                                                                color: ColorConstants
+                                                                    .purpleGray,
+                                                                fontFamily:
+                                                                    'Work_Sans',
+                                                                fontSize: 40,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w700,
+                                                              ))
+                                                        ]),
+                                                  ),
+                                                  Center(
+                                                      child: Text(
+                                                    'Learn the signs.',
                                                     style: TextStyle(
                                                         color: ColorConstants
-                                                            .purpleGray,
+                                                            .purple,
                                                         fontFamily: 'Work_Sans',
-                                                        fontSize: 34))
-                                              ]),
-                                        ),
-                                        Center(
-                                            child: Text('Learn the signs.',
-                                                style: TextStyle(
-                                                    color:
-                                                        ColorConstants.purple,
-                                                    fontFamily: 'Work_Sans',
-                                                    fontSize: 15,
-                                                    fontWeight:
-                                                        FontWeight.w700))),
-                                        Center(
-                                          child: Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 12, vertical: 16),
-                                            child: TextField(
-                                              style: TextStyle(
-                                                  color:
-                                                      ColorConstants.TextGray),
-                                              decoration: InputDecoration(
-                                                fillColor: ColorConstants
-                                                    .BackgroundGray,
-                                                filled: true,
-                                                contentPadding:
-                                                    EdgeInsets.symmetric(
-                                                        horizontal: 20,
-                                                        vertical: 21),
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      color:
-                                                          Colors.transparent),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          24.0), // Adjust the radius as needed
-                                                ),
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      color:
-                                                          Colors.transparent),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          24.0), // Adjust the radius as needed
-                                                ),
-                                                hintText: 'textInputEmail'.tr,
-                                                hintStyle: TextStyle(
-                                                    fontFamily: 'Archive'),
+                                                        fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.w700),
+                                                  )),
+                                                ]),
                                               ),
-                                              controller: email,
-                                            ),
-                                          ),
-                                        ),
-                                        Center(
-                                          child: Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 12, vertical: 16),
-                                            child: TextFormField(
-                                              controller: password,
-                                              obscureText: true,
-                                              style: TextStyle(
-                                                  color:
-                                                      ColorConstants.TextGray),
-                                              decoration: InputDecoration(
-                                                fillColor: ColorConstants
-                                                    .BackgroundGray,
-                                                filled: true,
-                                                contentPadding:
-                                                    EdgeInsets.symmetric(
-                                                        horizontal: 20,
-                                                        vertical: 20),
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      color:
-                                                          Colors.transparent),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          24.0), // Adjust the radius as needed
-                                                ),
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      color:
-                                                          Colors.transparent),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          24.0), // Adjust the radius as needed
-                                                ),
-                                                hintText: 'textInputPassw'.tr,
-                                                hintStyle: TextStyle(
-                                                    fontFamily: 'Archive'),
+
+                                              //-----------------------Input botons----------------------------//
+                                              Container(
+                                                child: Column(children: [
+                                                  Center(
+                                                    child: Padding(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 12,
+                                                          vertical: 16),
+                                                      child: TextFormField(
+                                                        controller: email,
+                                                        obscureText: false,
+                                                        style: const TextStyle(
+                                                            color:
+                                                                ColorConstants
+                                                                    .TextGray),
+                                                        decoration:
+                                                            InputDecoration(
+                                                          fillColor:
+                                                              ColorConstants
+                                                                  .BackgroundGray,
+                                                          filled: true,
+                                                          contentPadding:
+                                                              const EdgeInsets
+                                                                      .symmetric(
+                                                                  horizontal:
+                                                                      20,
+                                                                  vertical: 20),
+                                                          enabledBorder:
+                                                              OutlineInputBorder(
+                                                            borderSide:
+                                                                const BorderSide(
+                                                                    color: Colors
+                                                                        .transparent),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        24.0), // Adjust the radius as needed
+                                                          ),
+                                                          focusedBorder:
+                                                              OutlineInputBorder(
+                                                            borderSide:
+                                                                const BorderSide(
+                                                                    color: Colors
+                                                                        .transparent),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        24.0), // Adjust the radius as needed
+                                                          ),
+                                                          hintText:
+                                                              'textInputEmail'
+                                                                  .tr,
+                                                          hintStyle:
+                                                              const TextStyle(
+                                                                  fontFamily:
+                                                                      'Archive'),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Center(
+                                                    child: Padding(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 12,
+                                                          vertical: 16),
+                                                      child: TextFormField(
+                                                        controller: password,
+                                                        obscureText: true,
+                                                        style: const TextStyle(
+                                                            color:
+                                                                ColorConstants
+                                                                    .TextGray),
+                                                        decoration:
+                                                            InputDecoration(
+                                                          fillColor:
+                                                              ColorConstants
+                                                                  .BackgroundGray,
+                                                          filled: true,
+                                                          contentPadding:
+                                                              const EdgeInsets
+                                                                      .symmetric(
+                                                                  horizontal:
+                                                                      20,
+                                                                  vertical: 18),
+                                                          enabledBorder:
+                                                              OutlineInputBorder(
+                                                            borderSide:
+                                                                const BorderSide(
+                                                                    color: Colors
+                                                                        .transparent),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        24.0), // Adjust the radius as needed
+                                                          ),
+                                                          focusedBorder:
+                                                              OutlineInputBorder(
+                                                            borderSide:
+                                                                const BorderSide(
+                                                                    color: Colors
+                                                                        .transparent),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        24.0), // Adjust the radius as needed
+                                                          ),
+                                                          hintText:
+                                                              'textInputPassw'
+                                                                  .tr,
+                                                          hintStyle:
+                                                              const TextStyle(
+                                                                  fontFamily:
+                                                                      'Archive'),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.end,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      TextButton(
+                                                        style: TextButton
+                                                            .styleFrom(
+                                                          foregroundColor:
+                                                              Colors.black,
+                                                        ),
+                                                        onPressed: () {},
+                                                        child: Text(
+                                                            'Olvidaste la contraseña',
+                                                            style: TextStyle(
+                                                                decoration:
+                                                                    TextDecoration
+                                                                        .underline,
+                                                                fontFamily:
+                                                                    'Archive',
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w700)),
+                                                      )
+                                                    ],
+                                                  )
+                                                ]),
                                               ),
-                                            ),
-                                          ),
-                                        ),
-                                        Center(
-                                          child: ElevatedButton(
-                                              onPressed: () async {
-                                                //Found Email Navigator.pushNamed(context, '/main');
-                                                if (await searchByFieldInCollection(
-                                                    'users',
-                                                    'email',
-                                                    email.text)) {
-                                                  //found password
-                                                  if (await searchByFieldInCollection(
-                                                      'users',
-                                                      'password',
-                                                      password.text)) {
+
+                                              //-----------------------Input botons----------------------------//
+                                              Center(
+                                                child: ElevatedButton(
+                                                    onPressed: () => login(
+                                                        context,
+                                                        email,
+                                                        password),
+                                                    child: const Text('main')),
+                                              ),
+                                              Center(
+                                                child: ElevatedButton(
+                                                  onPressed: () async {
                                                     Navigator.pushNamed(
-                                                        context, '/main');
-                                                  } else {
-                                                    ScaffoldMessenger.of(
-                                                            context)
-                                                        .showSnackBar(SnackBar(
-                                                            content: Text(
-                                                      'wrongPassword'.tr,
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                    )));
-                                                  }
-                                                } else {
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(SnackBar(
-                                                          content: Text(
-                                                    'wrongEmail'.tr,
-                                                    textAlign: TextAlign.center,
-                                                  )));
-                                                }
-                                              },
-                                              child: const Text('main')),
-                                        ),
-                                        Center(
-                                          child: ElevatedButton(
-                                            onPressed: () async {
-                                              Navigator.pushNamed(
-                                                  context, '/register');
-                                            },
-                                            child: const Text('Register'),
-                                          ),
-                                        ),
-                                      ],
-                                    ))))),
+                                                        context, '/register');
+                                                  },
+                                                  child: const Text('Register'),
+                                                ),
+                                              ),
+                                            ],
+                                          ))))),
+                        ],
+                      ),
+                    ),
                   ],
                 ))));
   }

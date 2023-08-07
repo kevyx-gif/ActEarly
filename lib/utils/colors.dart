@@ -10,7 +10,7 @@ class ColorConstants {
   static const white = Color(0xFFFFFFFF);
   static const black = Color(0xFF000000);
   static const green = Color(0xFF56CC80);
-  static const TextGray = Color(0xFF999999);
+  static const TextGray = Color.fromARGB(255, 121, 121, 121);
   static const BackgroundGray = Color(0xFFDFDFDF);
   static const greenGray = Color.fromARGB(255, 94, 165, 119);
   static const blue = Color(0xFF48C5FB);
