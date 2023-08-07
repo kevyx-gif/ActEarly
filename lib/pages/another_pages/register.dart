@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import "package:flutter/material.dart";
 import 'package:actearly/widgets/dropdown.dart';
 
@@ -13,6 +15,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   final email = TextEditingController();
   final password = TextEditingController();
+  final firebase = FirebaseFirestore.instance;
   
   @override
   void dispose() {
@@ -20,6 +23,19 @@ class _RegisterPageState extends State<RegisterPage> {
     email.dispose();
     password.dispose();
     super.dispose();
+  }
+
+  registerUser() async{
+    try{
+      await firebase.collection('users').doc().set({
+        "email": email.text,
+        "password": password.text,
+        }
+      );
+    }catch(e){
+      print('ERROR '+e.toString());
+    }
+
   }
 
   @override
@@ -37,11 +53,12 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                 child: TextField(
+                  controller: email,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'correo',
                   ),
-                  controller: email,
+                  
                 ),
               ),
           ),
@@ -63,6 +80,17 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
           Center( 
             child: DropdownButtonExample(listProvincesTerritory),   
+            
+          ),
+          Center( 
+            child: ElevatedButton(
+              onPressed: (){
+                print('Enviando datos...');
+                registerUser();
+              },
+              child: Text('Registrarse'),
+              
+            ),  
             
           ),
         ],  
