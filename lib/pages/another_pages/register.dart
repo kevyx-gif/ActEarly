@@ -24,8 +24,9 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> list = <String>['Padre/Tutor Legal', 'Educador/Maestro', 'Usuario/Cuidador', 'Evaluador a domicilio'];
-
+    List<String> listUser = <String>['Padre/Tutor Legal', 'Educador/Maestro', 'Usuario/Cuidador', 'Evaluador a domicilio'];
+    List<String> listProvincesTerritory = <String>['Alberta', 'British Columbia', 'Manitoba', 'New Brunswick', 'Newfoundland and Labrador', 'Northwest Territories', 'Nova Scotia', 'Nunavut', 'Ontario', 'Prince Edward Islan', 'Quebec','Saskatchewan', 'Yukon'];
+    
     return Scaffold(
       appBar: AppBar(
         title: const Text('Register Page'),
@@ -57,7 +58,11 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
             ),
           Center( 
-            child: DropdownButtonExample(list),   
+            child: DropdownButtonExample(listUser),   
+            
+          ),
+          Center( 
+            child: DropdownButtonExample(listProvincesTerritory),   
             
           ),
         ],  
