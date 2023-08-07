@@ -9,6 +9,9 @@ import 'package:quickalert/quickalert.dart';
 //Text Imports
 import 'package:get/get.dart';
 
+//text size adapable
+import 'package:auto_size_text/auto_size_text.dart';
+
 class LanguageSelectionWidget extends StatefulWidget {
   @override
   _LanguageSelectionWidgetState createState() =>
@@ -20,7 +23,7 @@ class _LanguageSelectionWidgetState extends State<LanguageSelectionWidget> {
   Widget build(BuildContext context) {
     // Obtén la información de escalabilidad actual del dispositivo
     final mediaQueryData =
-        MediaQueryData.fromWindow(WidgetsBinding.instance!.window);
+        MediaQueryData.fromWindow(WidgetsBinding.instance.window);
 
     // Establece la información de escalabilidad manualmente para deshabilitarla
     final fixedMediaQueryData = mediaQueryData.copyWith(
@@ -55,10 +58,10 @@ class _LanguageSelectionWidgetState extends State<LanguageSelectionWidget> {
                   children: [
                     Container(
                       padding: EdgeInsets.fromLTRB(10, 60, 10, 20),
-                      child: Text(
+                      child: AutoSizeText(
                         "titleLanguaje".tr,
                         style: TextStyle(
-                            fontSize: 24,
+                            fontSize: 24.0,
                             fontWeight: FontWeight.w700,
                             fontFamily: 'Archive'),
                       ),
@@ -84,7 +87,7 @@ class _LanguageSelectionWidgetState extends State<LanguageSelectionWidget> {
   Widget _buildLanguageButton(String language) {
     // Obtén la información de escalabilidad actual del dispositivo
     final mediaQueryData =
-        MediaQueryData.fromWindow(WidgetsBinding.instance!.window);
+        MediaQueryData.fromWindow(WidgetsBinding.instance.window);
 
     // Establece la información de escalabilidad manualmente para deshabilitarla
     final fixedMediaQueryData = mediaQueryData.copyWith(
@@ -159,10 +162,10 @@ class _LanguageSelectionWidgetState extends State<LanguageSelectionWidget> {
                     onCancelBtnTap: () => {Navigator.pop(context)});
               }
             },
-            child: Text(
+            child: AutoSizeText(
               language,
               style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 16.0,
                   fontWeight: FontWeight.w700,
                   fontFamily: 'Archive'),
             ),
