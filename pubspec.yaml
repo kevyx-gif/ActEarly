@@ -53,3 +53,18 @@ flutter:
       style: normal
     - asset: lib/assets/fonts/Archivo/Archivo-Light.ttf
       weight: 300
+  - family: Work_Sans
+    fonts:
+    - asset: lib/assets/fonts/Work_Sans/WorkSans-ExtraBold.ttf
+      weight: 800
+    - asset: lib/assets/fonts/Work_Sans/WorkSans-Bold.ttf
+      weight: 700
+    - asset: lib/assets/fonts/Work_Sans/WorkSans-SemiBold.ttf
+      weight: 600
+    - asset: lib/assets/fonts/Work_Sans/WorkSans-Medium.ttf
+      weight: 500
+    - asset: lib/assets/fonts/Work_Sans/WorkSans-Regular.ttf
+      weight: 400
+      style: normal
+    - asset: lib/assets/fonts/Work_Sans/WorkSans-Light.ttf
+      weight: 300
