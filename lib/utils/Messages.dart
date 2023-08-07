@@ -17,6 +17,8 @@ Map<String, Map<String, String>> Messages() {
       'greeting': 'Welcome Back,',
       'tittleLogin': 'Login',
       'subtittleLogin': 'to ActEarly',
+      'textInputEmail': 'Email',
+      'textInputPassw': 'Password',
     },
     'es_MX': {
       'termsAndCond':
@@ -34,6 +36,8 @@ Map<String, Map<String, String>> Messages() {
       'greeting': 'Bienvenido,',
       'tittleLogin': 'Ingresa a tu Cuenta',
       'subtittleLogin': 'a ActEarly',
+      'textInputEmail': 'Correo electrónico',
+      'textInputPassw': 'Contraseña',
     },
     'fr_CA': {
       'termsAndCond':
@@ -51,6 +55,8 @@ Map<String, Map<String, String>> Messages() {
       'greeting': 'Bienvenue,',
       'tittleLogin': 'login',
       'subtittleLogin': 'à ActEarly',
+      'textInputEmail': 'Courriel',
+      'textInputPassw': 'Mot de passe',
     },
   };
 
