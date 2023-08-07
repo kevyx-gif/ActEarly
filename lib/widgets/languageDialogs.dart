@@ -60,6 +60,7 @@ class _LanguageSelectionWidgetState extends State<LanguageSelectionWidget> {
                       padding: EdgeInsets.fromLTRB(10, 60, 10, 20),
                       child: AutoSizeText(
                         "titleLanguaje".tr,
+                        maxLines: 1,
                         style: TextStyle(
                             fontSize: 24.0,
                             fontWeight: FontWeight.w700,
@@ -168,6 +169,7 @@ class _LanguageSelectionWidgetState extends State<LanguageSelectionWidget> {
                   fontSize: 16.0,
                   fontWeight: FontWeight.w700,
                   fontFamily: 'Archive'),
+              maxLines: 1,
             ),
           ),
         ));
