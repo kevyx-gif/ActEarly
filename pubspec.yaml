@@ -24,7 +24,8 @@ dependencies:
   flutter_svg: 2.0.7 #icons
   google_nav_bar: ^5.0.6 #navbar
   fluttertoast: ^8.0.8 #toast ios
-  
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

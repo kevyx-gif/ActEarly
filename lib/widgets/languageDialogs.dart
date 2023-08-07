@@ -18,6 +18,10 @@ class LanguageSelectionWidget extends StatefulWidget {
 class _LanguageSelectionWidgetState extends State<LanguageSelectionWidget> {
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize =
+        screenWidth * 0.04; // Ajusta el valor según tus preferencias
+
     return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -47,7 +51,7 @@ class _LanguageSelectionWidgetState extends State<LanguageSelectionWidget> {
                   child: Text(
                     "titleLanguaje".tr,
                     style: TextStyle(
-                        fontSize: 24,
+                        fontSize: fontSize,
                         fontWeight: FontWeight.w700,
                         fontFamily: 'Archive'),
                   ),
@@ -71,6 +75,9 @@ class _LanguageSelectionWidgetState extends State<LanguageSelectionWidget> {
   }
 
   Widget _buildLanguageButton(String language) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize =
+        screenWidth * 0.04; // Ajusta el valor según tus preferencias
     return SizedBox(
       width: MediaQuery.of(context).size.width / 4,
       height: 45.0,
@@ -139,7 +146,9 @@ class _LanguageSelectionWidgetState extends State<LanguageSelectionWidget> {
         child: Text(
           language,
           style: TextStyle(
-              fontSize: 15, fontWeight: FontWeight.w700, fontFamily: 'Archive'),
+              fontSize: fontSize,
+              fontWeight: FontWeight.w700,
+              fontFamily: 'Archive'),
         ),
       ),
     );
