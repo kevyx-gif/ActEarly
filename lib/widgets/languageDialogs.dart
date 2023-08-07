@@ -80,7 +80,7 @@ class _LanguageSelectionWidgetState extends State<LanguageSelectionWidget> {
         onPressed: () {
           if (language == 'English') {
             QuickAlert.show(
-                customAsset: 'lib/assets/img/accept_bg_b.png',
+                customAsset: 'lib/assets/img/accept_bg.png',
                 context: context,
                 type: QuickAlertType.confirm,
                 title: 'Are you sure you should choose this language?',
@@ -98,7 +98,7 @@ class _LanguageSelectionWidgetState extends State<LanguageSelectionWidget> {
                 onCancelBtnTap: () => {Navigator.pop(context)});
           } else if (language == 'Español') {
             QuickAlert.show(
-                customAsset: 'lib/assets/img/accept_bg_g.png',
+                customAsset: 'lib/assets/img/accept_bg.png',
                 context: context,
                 backgroundColor: ColorConstants.white,
                 type: QuickAlertType.confirm,

@@ -1,3 +1,4 @@
+import 'package:actearly/pages/another_pages/login.dart';
 import 'package:flutter/material.dart';
 
 //Checar plataforma
@@ -129,7 +130,7 @@ class TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
             acceptTermsAndConditionsAccepted();
             //setState(() => state = ButtonState.init);
             //Mandar al login
-            Navigator.pushReplacementNamed(context, '/login');
+            Navigator.pushNamed(context, '/login');
           },
           child: FittedBox(
             child: Text('textAccept'.tr,

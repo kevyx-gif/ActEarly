@@ -19,6 +19,10 @@ Map<String, Map<String, String>> Messages() {
       'subtittleLogin': 'to ActEarly',
       'textInputEmail': 'Email',
       'textInputPassw': 'Password',
+      'forgotPass': 'Forgot Password?',
+      'textRegister_1': 'Don\´t have an account?',
+      'textRegister_2': ' Register',
+      //Options
       'Alberta': 'Alberta',
       'British Columbia': 'British Columbia',
       'Manitoba': 'Manitoba',
@@ -51,6 +55,10 @@ Map<String, Map<String, String>> Messages() {
       'subtittleLogin': 'a ActEarly',
       'textInputEmail': 'Correo electrónico',
       'textInputPassw': 'Contraseña',
+      'forgotPass': '¿Olvidaste tu contraseña?',
+      'textRegister_1': '¿No tienes una cuenta?',
+      'textRegister_2': ' Regístrate',
+      //Options
       'Alberta': 'Alberta',
       'British Columbia': 'Columbia Británica',
       'Manitoba': 'Manitoba',
@@ -83,6 +91,10 @@ Map<String, Map<String, String>> Messages() {
       'subtittleLogin': 'à ActEarly',
       'textInputEmail': 'Courriel',
       'textInputPassw': 'Mot de passe',
+      'forgotPass': 'Forgot Password?',
+      'textRegister_1': 'Vous n\'avez pas de compte?',
+      'textRegister_2': ' Inscrivez-vous',
+      //Options
       'Alberta': 'Alberta',
       'British Columbia': 'Colombie Britannique',
       'Manitoba': 'Manitoba',

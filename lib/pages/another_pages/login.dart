@@ -5,6 +5,9 @@ import 'package:actearly/utils/functions.dart';
 import 'package:get/get.dart';
 //colors import
 import 'package:actearly/utils/colors.dart';
+//widgets
+import 'package:actearly/widgets/tools/tools.dart';
+import 'package:actearly/widgets/buttons/buttons.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -287,7 +290,7 @@ class _LoginPageState extends State<LoginPage> {
                                                         ),
                                                         onPressed: () {},
                                                         child: Text(
-                                                            'Olvidaste la contraseña',
+                                                            'forgotPass'.tr,
                                                             style: TextStyle(
                                                                 decoration:
                                                                     TextDecoration
@@ -305,22 +308,105 @@ class _LoginPageState extends State<LoginPage> {
 
                                               //-----------------------Input botons----------------------------//
                                               Center(
+                                                  child: SizedBox(
+                                                width: 200,
                                                 child: ElevatedButton(
+                                                    style: ElevatedButton.styleFrom(
+                                                        shape: StadiumBorder(),
+                                                        side: BorderSide(
+                                                            width: 2,
+                                                            color: ColorConstants
+                                                                .borderBtnColor),
+                                                        backgroundColor:
+                                                            ColorConstants
+                                                                .btnColor),
                                                     onPressed: () => login(
                                                         context,
                                                         email,
                                                         password),
-                                                    child: const Text('main')),
-                                              ),
-                                              Center(
-                                                child: ElevatedButton(
-                                                  onPressed: () async {
-                                                    Navigator.pushNamed(
-                                                        context, '/register');
-                                                  },
-                                                  child: const Text('Register'),
+                                                    child:
+                                                        Text('textAccept'.tr)),
+                                              )),
+                                              Container(
+                                                margin: EdgeInsets.fromLTRB(
+                                                    0, 40, 0, 0),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                    Center(
+                                                      child: TextButton(
+                                                        onPressed: () async {
+                                                          Navigator.pushNamed(
+                                                              context,
+                                                              '/register');
+                                                        },
+                                                        child: RichText(
+                                                          text: TextSpan(
+                                                            children: [
+                                                              TextSpan(
+                                                                text:
+                                                                    'textRegister_1'
+                                                                        .tr,
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontFamily:
+                                                                      'Archive',
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w700,
+                                                                ),
+                                                              ),
+                                                              TextSpan(
+                                                                text:
+                                                                    'textRegister_2'
+                                                                        .tr,
+                                                                style:
+                                                                    TextStyle(
+                                                                  color:
+                                                                      ColorConstants
+                                                                          .blue,
+                                                                  fontFamily:
+                                                                      'Archive',
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w700,
+                                                                  decoration:
+                                                                      TextDecoration
+                                                                          .underline,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    buildOrSeparator(),
+                                                    Container(
+                                                      margin:
+                                                          EdgeInsets.fromLTRB(
+                                                              0, 20, 0, 10),
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceAround,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          btnGoogle(),
+                                                          btnApple(),
+                                                          btnInstagram(),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
-                                              ),
+                                              )
                                             ],
                                           ))))),
                         ],
