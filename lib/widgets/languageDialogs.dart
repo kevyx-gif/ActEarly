@@ -172,15 +172,16 @@ class _LanguageSelectionWidgetState extends State<LanguageSelectionWidget> {
                 }
               },
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 0.018 * width),
-                child: AutoSizeText(
-                  language,
-                  style: TextStyle(
-                      fontWeight: FontWeight.w700, fontFamily: 'Archive'),
-                  maxLines: 1,
-                  textAlign: TextAlign.center,
-                ),
-              ),
+                  padding: EdgeInsets.symmetric(horizontal: 0.018 * width),
+                  child: FittedBox(
+                    child: AutoSizeText(
+                      language,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w700, fontFamily: 'Archive'),
+                      maxLines: 1,
+                      textAlign: TextAlign.center,
+                    ),
+                  )),
             )));
   }
 }
