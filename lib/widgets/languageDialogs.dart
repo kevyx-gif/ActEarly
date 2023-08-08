@@ -106,7 +106,7 @@ class _LanguageSelectionWidgetState extends State<LanguageSelectionWidget> {
     return MediaQuery(
         data: fixedMediaQueryData,
         child: SizedBox(
-          width: width * 0.20,
+          width: width * 0.23,
           height: 45.0,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -174,7 +174,7 @@ class _LanguageSelectionWidgetState extends State<LanguageSelectionWidget> {
             child: AutoSizeText(
               language,
               style: TextStyle(
-                  fontSize: 16.0,
+                  fontSize: 0.016 * width,
                   fontWeight: FontWeight.w700,
                   fontFamily: 'Archive'),
               maxLines: 1,
