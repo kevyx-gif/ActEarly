@@ -103,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               SizedBox(
                                   width: width,
-                                  height: height * 0.87,
+                                  height: height * 0.85,
                                   child: Card(
                                       margin: const EdgeInsets.symmetric(
                                           vertical: 10, horizontal: 30),
