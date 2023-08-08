@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:actearly/widgets/child.dart';
+import 'package:actearly/widgets/children.dart';
+
 class ShowChildWidget extends StatefulWidget {
   final String userType;
 
@@ -14,27 +17,9 @@ class _ShowChild extends State<ShowChildWidget> {
   Widget build(BuildContext context) {
     if (widget.userType == 'simple') {
       // Access userType using widget property
-      return Scaffold(
-        body: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          child: Column(
-            children: [
-              Center(child: Text('Hola')),
-            ],
-          ),
-        ),
-      );
+      return child(context);
     } else {
-      return Scaffold(
-        body: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          child: Column(
-            children: [Text("show childs")],
-          ),
-        ),
-      );
+      return children(context);
     }
   }
 }

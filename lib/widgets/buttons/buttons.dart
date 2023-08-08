@@ -93,3 +93,17 @@ Widget btnInstagram() {
     ),
   );
 }
+
+//------------------------------------//
+
+Widget btnLogOut() {
+  return IconButton(
+    onPressed: () {},
+    icon: Image.asset(
+      'lib/assets/img/instagram.png', // Ruta de la imagen PNG
+      width: 30, // Ancho de la imagen
+      height: 30, // Alto de la imagen
+      fit: BoxFit.cover, // Ajusta la imagen para cubrir el espacio
+    ),
+  );
+}
