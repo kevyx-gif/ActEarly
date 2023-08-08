@@ -106,81 +106,81 @@ class _LanguageSelectionWidgetState extends State<LanguageSelectionWidget> {
     return MediaQuery(
         data: fixedMediaQueryData,
         child: SizedBox(
-          width: width * 0.23,
-          height: 45.0,
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-                shape: StadiumBorder(),
-                backgroundColor: ColorConstants.btnColor),
-            onPressed: () {
-              if (language == 'English') {
-                QuickAlert.show(
-                    customAsset: 'lib/assets/img/accept_bg.png',
-                    context: context,
-                    type: QuickAlertType.confirm,
-                    title: 'Are you sure you should choose this language?',
-                    confirmBtnText: 'Yes',
-                    cancelBtnText: 'No',
-                    confirmBtnColor: ColorConstants.blue,
-                    cancelBtnTextStyle: TextStyle(
-                      color: ColorConstants.blueGray,
-                    ),
-                    onConfirmBtnTap: () {
-                      Get.updateLocale(Locale('en', 'CAN'));
-                      chooseLanguaje();
-                      Navigator.pop(context);
-                    },
-                    onCancelBtnTap: () => {Navigator.pop(context)});
-              } else if (language == 'Español') {
-                QuickAlert.show(
-                    customAsset: 'lib/assets/img/accept_bg.png',
-                    context: context,
-                    backgroundColor: ColorConstants.white,
-                    type: QuickAlertType.confirm,
-                    title: '¿Está seguro de que debe elegir este idioma?',
-                    confirmBtnText: 'Sí',
-                    cancelBtnText: 'No',
-                    titleColor: ColorConstants.black,
-                    confirmBtnColor: ColorConstants.blue,
-                    cancelBtnTextStyle: TextStyle(
-                      color: ColorConstants.blueGray,
-                    ),
-                    onConfirmBtnTap: () {
-                      Get.updateLocale(Locale('es', 'MX'));
-                      chooseLanguaje();
-                      Navigator.pop(context);
-                    },
-                    onCancelBtnTap: () => {Navigator.pop(context)});
-              } else {
-                QuickAlert.show(
-                    customAsset: 'lib/assets/img/accept_bg.png',
-                    context: context,
-                    type: QuickAlertType.confirm,
-                    title: 'Êtes-vous sûr de choisir cette langue?',
-                    confirmBtnText: 'oui',
-                    cancelBtnText: 'Non',
-                    confirmBtnColor: ColorConstants.blue,
-                    cancelBtnTextStyle: TextStyle(
-                      color: ColorConstants.blueGray,
-                    ),
-                    onConfirmBtnTap: () {
-                      Get.updateLocale(Locale('fr', 'CA'));
-                      chooseLanguaje();
-                      Navigator.pop(context);
-                    },
-                    onCancelBtnTap: () => {Navigator.pop(context)});
-              }
-            },
-            child: AutoSizeText(
-              language,
-              style: TextStyle(
-                  fontSize: 0.016 * width,
-                  fontWeight: FontWeight.w700,
-                  fontFamily: 'Archive'),
-              maxLines: 1,
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ));
+            width: width * 0.23,
+            height: 45.0,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  shape: StadiumBorder(),
+                  backgroundColor: ColorConstants.btnColor),
+              onPressed: () {
+                if (language == 'English') {
+                  QuickAlert.show(
+                      customAsset: 'lib/assets/img/accept_bg.png',
+                      context: context,
+                      type: QuickAlertType.confirm,
+                      title: 'Are you sure you should choose this language?',
+                      confirmBtnText: 'Yes',
+                      cancelBtnText: 'No',
+                      confirmBtnColor: ColorConstants.blue,
+                      cancelBtnTextStyle: TextStyle(
+                        color: ColorConstants.blueGray,
+                      ),
+                      onConfirmBtnTap: () {
+                        Get.updateLocale(Locale('en', 'CAN'));
+                        chooseLanguaje();
+                        Navigator.pop(context);
+                      },
+                      onCancelBtnTap: () => {Navigator.pop(context)});
+                } else if (language == 'Español') {
+                  QuickAlert.show(
+                      customAsset: 'lib/assets/img/accept_bg.png',
+                      context: context,
+                      backgroundColor: ColorConstants.white,
+                      type: QuickAlertType.confirm,
+                      title: '¿Está seguro de que debe elegir este idioma?',
+                      confirmBtnText: 'Sí',
+                      cancelBtnText: 'No',
+                      titleColor: ColorConstants.black,
+                      confirmBtnColor: ColorConstants.blue,
+                      cancelBtnTextStyle: TextStyle(
+                        color: ColorConstants.blueGray,
+                      ),
+                      onConfirmBtnTap: () {
+                        Get.updateLocale(Locale('es', 'MX'));
+                        chooseLanguaje();
+                        Navigator.pop(context);
+                      },
+                      onCancelBtnTap: () => {Navigator.pop(context)});
+                } else {
+                  QuickAlert.show(
+                      customAsset: 'lib/assets/img/accept_bg.png',
+                      context: context,
+                      type: QuickAlertType.confirm,
+                      title: 'Êtes-vous sûr de choisir cette langue?',
+                      confirmBtnText: 'oui',
+                      cancelBtnText: 'Non',
+                      confirmBtnColor: ColorConstants.blue,
+                      cancelBtnTextStyle: TextStyle(
+                        color: ColorConstants.blueGray,
+                      ),
+                      onConfirmBtnTap: () {
+                        Get.updateLocale(Locale('fr', 'CA'));
+                        chooseLanguaje();
+                        Navigator.pop(context);
+                      },
+                      onCancelBtnTap: () => {Navigator.pop(context)});
+                }
+              },
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 0.018 * width),
+                child: AutoSizeText(
+                  language,
+                  style: TextStyle(
+                      fontWeight: FontWeight.w700, fontFamily: 'Archive'),
+                  maxLines: 1,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            )));
   }
 }
