@@ -30,12 +30,15 @@ class _LanguageSelectionWidgetState extends State<LanguageSelectionWidget> {
       textScaleFactor: 1.0, // Establece un factor de escala fijo
     );
 
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+
     return MediaQuery(
         data: fixedMediaQueryData,
         child: Scaffold(
           body: Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
+            width: width,
+            height: height,
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage("lib/assets/img/bg_lenguajes.png"),
@@ -47,17 +50,20 @@ class _LanguageSelectionWidgetState extends State<LanguageSelectionWidget> {
               widthFactor: null,
               child: Card(
                 elevation: 36,
-                margin: EdgeInsets.symmetric(vertical: 0, horizontal: 30),
+                margin:
+                    EdgeInsets.symmetric(vertical: 0, horizontal: width * 0.10),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),
                 ),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Container(
-                      padding: EdgeInsets.fromLTRB(10, 60, 10, 20),
+                      padding: EdgeInsets.fromLTRB(0, 60, 0, 0),
+                      margin:
+                          EdgeInsets.fromLTRB(width * 0.08, 0, width * 0.08, 0),
                       child: AutoSizeText(
                         "titleLanguaje".tr,
                         maxLines: 1,
@@ -68,7 +74,7 @@ class _LanguageSelectionWidgetState extends State<LanguageSelectionWidget> {
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.fromLTRB(10, 20, 10, 60),
+                      padding: EdgeInsets.fromLTRB(10, 30, 10, 60),
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
@@ -95,10 +101,12 @@ class _LanguageSelectionWidgetState extends State<LanguageSelectionWidget> {
       textScaleFactor: 1.0, // Establece un factor de escala fijo
     );
 
+    final width = MediaQuery.of(context).size.width;
+
     return MediaQuery(
         data: fixedMediaQueryData,
         child: SizedBox(
-          width: MediaQuery.of(context).size.width / 4,
+          width: width * 0.20,
           height: 45.0,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -170,6 +178,7 @@ class _LanguageSelectionWidgetState extends State<LanguageSelectionWidget> {
                   fontWeight: FontWeight.w700,
                   fontFamily: 'Archive'),
               maxLines: 1,
+              textAlign: TextAlign.center,
             ),
           ),
         ));
