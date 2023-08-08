@@ -63,3 +63,21 @@ void login(BuildContext context, TextEditingController email,
 }
 
 //----------------------------------------------//
+void messageToast(String msg, BuildContext context){
+  if (Platform.isAndroid) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(
+          'wrongPassword'.tr,
+          textAlign: TextAlign.center,
+        )));
+      } else {
+        Fluttertoast.showToast(
+          msg: 'wrongPassword'.tr,
+          toastLength: Toast.LENGTH_SHORT,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.black,
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
+      }
+}
