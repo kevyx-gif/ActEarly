@@ -62,30 +62,34 @@ class _LoginPageState extends State<LoginPage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                            margin: EdgeInsets.fromLTRB(0, height * 0.05, 0, 0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                          padding:
+                              EdgeInsets.symmetric(horizontal: width * 0.10),
+                          margin: EdgeInsets.fromLTRB(0, height * 0.05, 0, 0),
+                          child: RichText(
+                            textAlign: TextAlign.center,
+                            text: TextSpan(
                               children: [
-                                AutoSizeText(
-                                  maxLines: 1,
-                                  'greeting'.tr,
+                                TextSpan(
+                                  text: 'greeting'.tr,
                                   style: TextStyle(
-                                    fontSize: 28,
+                                    color: Colors.white,
                                     fontFamily: 'Archive',
-                                    color: ColorConstants.white,
+                                    fontSize: 0.050 * width,
                                   ),
                                 ),
-                                AutoSizeText(
-                                  maxLines: 1,
-                                  'tittleLogin'.tr,
+                                TextSpan(
+                                  text: 'tittleLogin'.tr,
                                   style: TextStyle(
-                                      color: ColorConstants.white,
-                                      fontSize: 28,
-                                      fontWeight: FontWeight.w700,
-                                      fontFamily: 'Archive'),
+                                    color: ColorConstants.white,
+                                    fontFamily: 'Archive',
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 0.050 * width,
+                                  ),
                                 ),
                               ],
-                            )),
+                            ),
+                          ),
+                        ),
                         Expanded(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -97,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
                                     maxLines: 1,
                                     'subtittleLogin'.tr,
                                     style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 0.045 * width,
                                       fontFamily: 'Archive',
                                       color: ColorConstants.white,
                                     ),
@@ -131,43 +135,45 @@ class _LoginPageState extends State<LoginPage> {
                                                         0, 0, 0, 20),
                                                     child: Column(children: [
                                                       Center(
-                                                        child: Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
+                                                        child: RichText(
+                                                          maxLines: 1,
+                                                          text: TextSpan(
                                                             children: [
-                                                              AutoSizeText(
-                                                                  'Act',
-                                                                  maxLines: 1,
-                                                                  style:
-                                                                      TextStyle(
-                                                                    color:
-                                                                        ColorConstants
-                                                                            .blue,
-                                                                    fontFamily:
-                                                                        'Work_Sans',
-                                                                    fontSize:
-                                                                        40,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w700,
-                                                                  )),
-                                                              AutoSizeText(
-                                                                  'Early',
-                                                                  maxLines: 1,
-                                                                  style:
-                                                                      TextStyle(
-                                                                    color: ColorConstants
-                                                                        .purpleGray,
-                                                                    fontFamily:
-                                                                        'Work_Sans',
-                                                                    fontSize:
-                                                                        40,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w700,
-                                                                  ))
-                                                            ]),
+                                                              TextSpan(
+                                                                text: 'Act',
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: Colors
+                                                                      .blue,
+                                                                  fontFamily:
+                                                                      'Work_Sans',
+                                                                  fontSize:
+                                                                      0.095 *
+                                                                          width,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w700,
+                                                                ),
+                                                              ),
+                                                              TextSpan(
+                                                                text: 'Early',
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: ColorConstants
+                                                                      .purpleGray,
+                                                                  fontFamily:
+                                                                      'Work_Sans',
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w700,
+                                                                  fontSize:
+                                                                      0.095 *
+                                                                          width,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
                                                       ),
                                                       Center(
                                                           child: AutoSizeText(
@@ -179,7 +185,8 @@ class _LoginPageState extends State<LoginPage> {
                                                                     .purple,
                                                             fontFamily:
                                                                 'Work_Sans',
-                                                            fontSize: 18,
+                                                            fontSize:
+                                                                0.045 * width,
                                                             fontWeight:
                                                                 FontWeight
                                                                     .w700),
@@ -326,6 +333,9 @@ class _LoginPageState extends State<LoginPage> {
                                                                 maxLines: 1,
                                                                 'forgotPass'.tr,
                                                                 style: TextStyle(
+                                                                    fontSize:
+                                                                        0.010 *
+                                                                            width,
                                                                     decoration:
                                                                         TextDecoration
                                                                             .underline,
@@ -391,6 +401,9 @@ class _LoginPageState extends State<LoginPage> {
                                                                             .tr,
                                                                     style:
                                                                         TextStyle(
+                                                                      fontSize:
+                                                                          0.03 *
+                                                                              width,
                                                                       color: Colors
                                                                           .black,
                                                                       fontFamily:
@@ -406,6 +419,9 @@ class _LoginPageState extends State<LoginPage> {
                                                                             .tr,
                                                                     style:
                                                                         TextStyle(
+                                                                      fontSize:
+                                                                          0.03 *
+                                                                              width,
                                                                       color: ColorConstants
                                                                           .blue,
                                                                       fontFamily:
