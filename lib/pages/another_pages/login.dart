@@ -66,7 +66,8 @@ class _LoginPageState extends State<LoginPage> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
+                                AutoSizeText(
+                                  maxLines: 1,
                                   'greeting'.tr,
                                   style: TextStyle(
                                     fontSize: 28,
@@ -74,7 +75,8 @@ class _LoginPageState extends State<LoginPage> {
                                     color: ColorConstants.white,
                                   ),
                                 ),
-                                Text(
+                                AutoSizeText(
+                                  maxLines: 1,
                                   'tittleLogin'.tr,
                                   style: TextStyle(
                                       color: ColorConstants.white,
@@ -91,7 +93,8 @@ class _LoginPageState extends State<LoginPage> {
                             children: [
                               Center(
                                 child: Container(
-                                  child: Text(
+                                  child: AutoSizeText(
+                                    maxLines: 1,
                                     'subtittleLogin'.tr,
                                     style: TextStyle(
                                       fontSize: 18,
@@ -133,7 +136,9 @@ class _LoginPageState extends State<LoginPage> {
                                                                 MainAxisAlignment
                                                                     .center,
                                                             children: [
-                                                              Text('Act',
+                                                              AutoSizeText(
+                                                                  'Act',
+                                                                  maxLines: 1,
                                                                   style:
                                                                       TextStyle(
                                                                     color:
@@ -147,7 +152,9 @@ class _LoginPageState extends State<LoginPage> {
                                                                         FontWeight
                                                                             .w700,
                                                                   )),
-                                                              Text('Early',
+                                                              AutoSizeText(
+                                                                  'Early',
+                                                                  maxLines: 1,
                                                                   style:
                                                                       TextStyle(
                                                                     color: ColorConstants
@@ -163,7 +170,8 @@ class _LoginPageState extends State<LoginPage> {
                                                             ]),
                                                       ),
                                                       Center(
-                                                          child: Text(
+                                                          child: AutoSizeText(
+                                                        maxLines: 1,
                                                         'Learn the signs.',
                                                         style: TextStyle(
                                                             color:
@@ -314,7 +322,8 @@ class _LoginPageState extends State<LoginPage> {
                                                                   Colors.black,
                                                             ),
                                                             onPressed: () {},
-                                                            child: Text(
+                                                            child: AutoSizeText(
+                                                                maxLines: 1,
                                                                 'forgotPass'.tr,
                                                                 style: TextStyle(
                                                                     decoration:
@@ -350,7 +359,8 @@ class _LoginPageState extends State<LoginPage> {
                                                             context,
                                                             email,
                                                             password),
-                                                        child: Text(
+                                                        child: AutoSizeText(
+                                                            maxLines: 1,
                                                             'textAccept'.tr)),
                                                   )),
                                                   Container(
