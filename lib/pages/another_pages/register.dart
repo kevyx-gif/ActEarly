@@ -22,11 +22,13 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
 
+  final nameUser = TextEditingController();
   final email = TextEditingController();
   final password = TextEditingController();
   final userType = TextEditingController();
   final provinceTerritory = TextEditingController();
   final firebase = FirebaseFirestore.instance;
+  final nameUserKey = GlobalKey<FormState>();
   final emailKey = GlobalKey<FormState>();
   final passKey = GlobalKey<FormState>();  //
 
@@ -41,6 +43,7 @@ class _RegisterPageState extends State<RegisterPage> {
   registerUser() async{
     try{
       await firebase.collection('users').doc().set({
+        "nameUser": nameUser.text,
         "email": email.text,
         "password": password.text,
         }
@@ -62,6 +65,26 @@ class _RegisterPageState extends State<RegisterPage> {
       ),  
       body: Column(
         children: [
+          Center(
+            child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                child: Form(key: nameUserKey,child: TextFormField(
+                  controller: nameUser,
+                  obscureText: false,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'name',
+                  ),   
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
+                ),
+                ),
+            ),
+          ),
           Center(
             child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
@@ -111,7 +134,7 @@ class _RegisterPageState extends State<RegisterPage> {
           Center( 
             child: ElevatedButton(
               onPressed: () async {
-                if (emailKey.currentState!.validate() && passKey.currentState!.validate()) {
+                if (nameUserKey.currentState!.validate() && emailKey.currentState!.validate() && passKey.currentState!.validate()) {
                   print('Enviando datos...');
                   registerUser();
                   messageToast(context, "HECHO", ColorConstants.green, ColorConstants.white);
