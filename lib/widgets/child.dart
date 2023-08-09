@@ -1,3 +1,4 @@
+import 'package:actearly/services/firebase_service.dart';
 import 'package:flutter/material.dart';
 //Just One Child
 
@@ -7,6 +8,9 @@ import 'package:actearly/widgets/buttons/buttons.dart';
 Widget child(BuildContext context) {
   final width = MediaQuery.of(context).size.width;
   final height = MediaQuery.of(context).size.height;
+
+  final emailUser = getUser();
+
   return Scaffold(
     body: Container(
       width: width,
@@ -14,9 +18,9 @@ Widget child(BuildContext context) {
       child: Column(
         children: [
           Row(
-            children: [btnLogOut()],
+            children: [btnLogOut(context)],
           ),
-          Center(child: Text('Hola')),
+          Center(child: Text('Hola $emailUser')),
         ],
       ),
     ),

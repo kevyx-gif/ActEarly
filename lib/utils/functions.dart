@@ -15,8 +15,9 @@ void login(BuildContext context, TextEditingController email,
     //found password
     if (await searchByFieldInCollection('users', 'password', password.text)) {
       loggedIn();
+      setUserData(email.text);
       Fluttertoast.showToast(
-        msg: "Welcome User",
+        msg: "Welcome $email.text",
         toastLength: Toast.LENGTH_SHORT,
         timeInSecForIosWeb: 1,
         backgroundColor: Colors.black,
@@ -62,22 +63,29 @@ void login(BuildContext context, TextEditingController email,
   }
 }
 
-//----------------------------------------------//
-void messageToast(String msg, BuildContext context){
+//-----------------Menssage Toast Per-----------------//
+void messageToast(String msg, BuildContext context) {
   if (Platform.isAndroid) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text(
-          'wrongPassword'.tr,
-          textAlign: TextAlign.center,
-        )));
-      } else {
-        Fluttertoast.showToast(
-          msg: 'wrongPassword'.tr,
-          toastLength: Toast.LENGTH_SHORT,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0,
-        );
-      }
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(
+      'wrongPassword'.tr,
+      textAlign: TextAlign.center,
+    )));
+  } else {
+    Fluttertoast.showToast(
+      msg: 'wrongPassword'.tr,
+      toastLength: Toast.LENGTH_SHORT,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.black,
+      textColor: Colors.white,
+      fontSize: 16.0,
+    );
+  }
+}
+
+//-----------------------------LogOut-------------------------//
+void logOut(BuildContext context) {
+  loggedOut();
+  cleanUserData();
+  Navigator.pushNamed(context, '/login');
 }

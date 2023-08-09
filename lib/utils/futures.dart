@@ -39,6 +39,26 @@ void loggedIn() async {
   await prefs.setBool('account_initiated', true);
 }
 
+void loggedOut() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setBool('account_initiated', false);
+}
+
+void setUserData(String email) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setString('userEmail', email);
+}
+
+void cleanUserData() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setString('userEmail', '');
+}
+
+Future<String> getUserData() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String? email = prefs.getString('userEmail');
+  return email ?? 'null';
+}
 /////////
 ///
 /////login

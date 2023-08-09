@@ -1,3 +1,4 @@
+import 'package:actearly/utils/functions.dart';
 import 'package:flutter/material.dart';
 //colors import
 import 'package:actearly/utils/colors.dart';
@@ -102,10 +103,10 @@ Widget btnInstagram() {
 
 //-----------------------botones auxiliares--------------------//
 
-Widget btnLogOut() {
+Widget btnLogOut(BuildContext context) {
   return ElevatedButton.icon(
     onPressed: () {
-      // Tu código de acción cuando se presiona el botón
+      logOut(context);
     },
     style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
