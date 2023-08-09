@@ -9,6 +9,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:io' show Platform;
 //Text Imports
 import 'package:get/get.dart';
+//colores
+import 'package:actearly/utils/colors.dart';
+
 class RegisterPage extends StatefulWidget {
   const RegisterPage({ super.key });
 
@@ -44,7 +47,7 @@ class _RegisterPageState extends State<RegisterPage> {
       );
     }catch(e){
       //print('ERROR '+e.toString());
-      messageToast("ERROR...", context);
+      messageToast(context, "ERROR", ColorConstants.red, ColorConstants.white);
     }
   }
  
@@ -109,20 +112,14 @@ class _RegisterPageState extends State<RegisterPage> {
             child: ElevatedButton(
               onPressed: () async {
                 if (emailKey.currentState!.validate() && passKey.currentState!.validate()) {
-                  // If the form is valid, display a snackbar. In the real world,
-                  // you'd often call a server or save the information in a database.
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Processing Data')),
-                  );
-
                   print('Enviando datos...');
                   registerUser();
-                  messageToast("Hecho", context);
+                  messageToast(context, "HECHO", ColorConstants.green, ColorConstants.white);
                   Navigator.pushNamed(context, '/login');
                   
                 }
                 else{
-                  messageToast("Error poner mas texto", context);
+                  messageToast(context, "ERROR", ColorConstants.red, ColorConstants.white);
                 }
               },
               child: Text('Registrarse'),

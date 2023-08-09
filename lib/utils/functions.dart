@@ -18,8 +18,8 @@ void messageToast(
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(
       msg,
-      textAlign: TextAlign.center,
-    )));
+      textAlign: TextAlign.center, style: TextStyle(color: color),
+    ),backgroundColor: backgroundC,));
   } else {
     Fluttertoast.showToast(
       msg: msg,
