@@ -42,6 +42,7 @@ flutter:
     - lib/assets/img/google.png
     - lib/assets/img/apple.png
     - lib/assets/img/instagram.png
+    - lib/assets/icons/salida.svg
     
   fonts:
   - family: Archive

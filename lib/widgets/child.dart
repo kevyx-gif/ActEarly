@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 //Just One Child
 
+//buttons
+import 'package:actearly/widgets/buttons/buttons.dart';
+
 Widget child(BuildContext context) {
   final width = MediaQuery.of(context).size.width;
   final height = MediaQuery.of(context).size.height;
@@ -11,7 +14,7 @@ Widget child(BuildContext context) {
       child: Column(
         children: [
           Row(
-            children: [],
+            children: [btnLogOut()],
           ),
           Center(child: Text('Hola')),
         ],
