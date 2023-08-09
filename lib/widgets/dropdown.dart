@@ -20,7 +20,8 @@ class MyApp extends StatelessWidget {
 
 class DropdownButtonExample extends StatefulWidget {
   final List<String> list;
-  DropdownButtonExample(this.list);
+  final TextEditingController controller;
+  DropdownButtonExample(this.list, TextEditingController this.controller);
 
   @override
   State<DropdownButtonExample> createState() => _DropdownButtonExampleState();
@@ -50,6 +51,7 @@ class _DropdownButtonExampleState extends State<DropdownButtonExample> {
         // This is called when the user selects an item.
         setState(() {
           selectedValue = value!;
+        widget.controller.text = value;
         });
       },
       items: widget.list.map<DropdownMenuItem<String>>((String value) {

@@ -27,10 +27,17 @@ class _RegisterPageState extends State<RegisterPage> {
   final password = TextEditingController();
   final userType = TextEditingController();
   final provinceTerritory = TextEditingController();
+  final question = TextEditingController();
+
   final firebase = FirebaseFirestore.instance;
+
   final nameUserKey = GlobalKey<FormState>();
   final emailKey = GlobalKey<FormState>();
-  final passKey = GlobalKey<FormState>();  //
+  final passKey = GlobalKey<FormState>();
+  final userTypeKey = GlobalKey<FormState>();
+  final provinceTerritoryKey = GlobalKey<FormState>();
+  final questionKey = GlobalKey<FormState>();
+   
 
   @override
   void dispose() {
@@ -46,6 +53,9 @@ class _RegisterPageState extends State<RegisterPage> {
         "nameUser": nameUser.text,
         "email": email.text,
         "password": password.text,
+        "userType": userType.text,
+        "provinceTerritory": provinceTerritory.text,
+        "question": question.text,
         }
       );
     }catch(e){
@@ -125,16 +135,36 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                ),
               ),
-          Center( 
-            child: DropdownButtonExample(listUser),  
+          Center(
+            child: DropdownButtonExample(listUser, userType),  
           ),
           Center( 
-            child: DropdownButtonExample(listProvincesTerritory),   
+            child: DropdownButtonExample(listProvincesTerritory, provinceTerritory),   
+          ),
+          Center(
+            child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                child: Form(key: questionKey,child: TextFormField(
+                  controller: question,
+                  obscureText: false,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'password recovery question',
+                  ),   
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
+                ),
+                ),
+            ),
           ),
           Center( 
             child: ElevatedButton(
               onPressed: () async {
-                if (nameUserKey.currentState!.validate() && emailKey.currentState!.validate() && passKey.currentState!.validate()) {
+                if (emailKey.currentState!.validate() && passKey.currentState!.validate() &&nameUserKey.currentState!.validate() && questionKey.currentState!.validate()) {
                   print('Enviando datos...');
                   registerUser();
                   messageToast(context, "HECHO", ColorConstants.green, ColorConstants.white);
