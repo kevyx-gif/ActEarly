@@ -9,7 +9,7 @@ class Screen1 extends StatelessWidget {
     return Scaffold(
       //  child: Text('Contenido de la pantalla 1'),
       body: FutureBuilder(
-          future: getUser(),
+          future: getUsers(),
           builder: ((context, snapshot) {
             if (snapshot.hasData) {
               return ListView.builder(
