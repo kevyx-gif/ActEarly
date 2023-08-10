@@ -46,14 +46,14 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
         bottomNavigationBar: Container(
-          color: Color.fromARGB(255, 235, 235, 235),
+          color: ColorConstants.blueNavbar,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 25),
             child: GNav(
-              backgroundColor: Color.fromARGB(255, 235, 235, 235),
-              color: ColorConstants.borderBtnColor,
+              backgroundColor: ColorConstants.blueNavbar,
+              color: ColorConstants.white,
               activeColor: Colors.white,
-              tabBackgroundColor: ColorConstants.btnColor,
+              tabBackgroundColor: ColorConstants.TextGrayF,
               padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
               gap: 9,
               onTabChange: (index) {
@@ -64,19 +64,15 @@ class _MyHomePageState extends State<MyHomePage> {
               tabs: [
                 GButton(
                   icon: Icons.home,
-                  text: 'btnHome'.tr,
                 ),
                 GButton(
                   icon: Icons.bookmark,
-                  text: 'btnTips'.tr,
                 ),
                 GButton(
                   icon: Icons.help,
-                  text: 'btnHelp'.tr,
                 ),
                 GButton(
                   icon: Icons.settings,
-                  text: 'btnSettings'.tr,
                 ),
               ],
             ),

@@ -18,5 +18,6 @@ class ColorConstants {
   static const greenGray = Color.fromARGB(255, 94, 165, 119);
   static const blue = Color(0xFF48C5FB);
   static const blueGray = Color.fromARGB(255, 78, 148, 179);
+  static const blueNavbar = Color(0xFF4865FB);
   static const whiteGray = Color.fromARGB(255, 206, 206, 206);
 }
