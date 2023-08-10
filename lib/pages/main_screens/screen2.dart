@@ -11,7 +11,6 @@ class Screen2 extends StatelessWidget {
   }
 }
 
-
 /*
 import 'package:actearly/services/firebase_service.dart';
 import 'package:flutter/material.dart';
