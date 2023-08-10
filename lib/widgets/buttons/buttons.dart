@@ -6,8 +6,8 @@ import 'package:actearly/utils/colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 //Text Imports
 import 'package:get/get.dart';
-//colors import
-import 'package:actearly/utils/colors.dart';
+//text size adapable
+import 'package:auto_size_text/auto_size_text.dart';
 
 //-------------------------botones flotantes------------------------------//
 
@@ -103,8 +103,8 @@ Widget btnInstagram() {
 
 //-----------------------botones auxiliares--------------------//
 
-Widget btnLogOut(BuildContext context) {
-  return ElevatedButton.icon(
+Widget btnLogOut(BuildContext context, width) {
+  return ElevatedButton(
     onPressed: () {
       logOut(context);
     },
@@ -115,12 +115,40 @@ Widget btnLogOut(BuildContext context) {
         primary: ColorConstants.red
             .withOpacity(0.62) //elevated btton background color
         ),
-    icon: SvgPicture.asset(
-      'lib/assets/icons/salida.svg',
-      width: 24, // Ancho del SVG
-      height: 24, // Alto del SVG
-      color: Colors.white, // Color del SVG
+    child: AutoSizeText(
+      'logOut'.tr,
+      maxLines: 1,
+      style: TextStyle(
+          fontFamily: 'Archive',
+          fontSize: 0.025 * width,
+          fontWeight: FontWeight.w700),
     ),
-    label: Text('logOut'.tr),
   );
+}
+
+Widget btnInfo(BuildContext context, width) {
+  return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        shape: BoxShape.circle,
+        boxShadow: [
+          BoxShadow(
+              blurRadius: 2,
+              color: Color.fromARGB(225, 134, 134, 134),
+              spreadRadius: 0.5)
+        ],
+      ),
+      child: CircleAvatar(
+        radius: 0.05 * width,
+        backgroundColor: Color.fromARGB(255, 29, 202, 255),
+        child: IconButton(
+            color: Colors.white,
+            iconSize: 0.05 * width,
+            icon: SvgPicture.asset(
+              'lib/assets/icons/info.svg',
+              width: 0.05 * width, // Ancho del SVG
+              height: 0.05 * width, // Alto del SVG
+            ),
+            onPressed: () {}),
+      ));
 }

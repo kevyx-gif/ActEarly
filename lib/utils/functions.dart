@@ -21,6 +21,7 @@ void messageToast(
         textAlign: TextAlign.center,
         style: TextStyle(color: color),
       ),
+      duration: const Duration(milliseconds: 800),
       backgroundColor: backgroundC,
     ));
   } else {
@@ -38,7 +39,7 @@ void messageToast(
 void login(BuildContext context, TextEditingController email,
     TextEditingController password) async {
   final emailUser = email.text;
-  Color negro = ColorConstants.black;
+  Color negro = ColorConstants.green;
   Color white = ColorConstants.white;
   Color red = ColorConstants.red;
 
@@ -92,7 +93,7 @@ void register(
       questionKey.currentState!.validate()) {
     print('Enviando datos...');
     registerUser();
-    messageToast(context, "HECHO", ColorConstants.green, ColorConstants.white);
+    messageToast(context, "HECHO", ColorConstants.blue, ColorConstants.white);
     Navigator.pushNamed(context, '/login');
   } else {
     messageToast(context, "ERROR", ColorConstants.red, ColorConstants.white);
@@ -104,6 +105,6 @@ void logOut(BuildContext context) {
   loggedOut();
   cleanUserData();
   messageToast(
-      context, 'Cuenta cerrada', ColorConstants.red, ColorConstants.white);
+      context, 'Cuenta cerrada', ColorConstants.black, ColorConstants.white);
   Navigator.pushNamed(context, '/login');
 }
