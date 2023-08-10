@@ -13,6 +13,8 @@ import 'package:get/get.dart';
 import 'package:actearly/widgets/addChild.dart';
 import 'package:actearly/widgets/showChild.dart';
 
+import '../../utils/class.dart';
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
@@ -22,6 +24,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final user = userActual();
   int _currentIndex = 0;
   //Tipos de usuario , nuevo(primer registro de hijo(s)) / simple(1 hijo añadido) / grande(más de 1 hijo registrado)
   String _userType = 'simple';
