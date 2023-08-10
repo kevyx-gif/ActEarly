@@ -8,18 +8,21 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:io' show Platform;
 //Text Imports
 import 'package:get/get.dart';
-//colores
-import 'package:actearly/utils/colors.dart';
+//firebase
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 //-----------------Menssage Toast Per-----------------//
 void messageToast(
     BuildContext context, String msg, Color backgroundC, Color color) {
   if (Platform.isAndroid) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(
-      msg,
-      textAlign: TextAlign.center, style: TextStyle(color: color),
-    ),backgroundColor: backgroundC,));
+      content: Text(
+        msg,
+        textAlign: TextAlign.center,
+        style: TextStyle(color: color),
+      ),
+      backgroundColor: backgroundC,
+    ));
   } else {
     Fluttertoast.showToast(
       msg: msg,
@@ -32,7 +35,6 @@ void messageToast(
   }
 }
 
-//login
 void login(BuildContext context, TextEditingController email,
     TextEditingController password) async {
   final emailUser = email.text;
@@ -52,6 +54,48 @@ void login(BuildContext context, TextEditingController email,
     }
   } else {
     messageToast(context, 'wrongEmail'.tr, red, white);
+  }
+}
+
+void register(
+    BuildContext context,
+    GlobalKey<FormState> emailKey,
+    GlobalKey<FormState> passKey,
+    GlobalKey<FormState> nameUserKey,
+    GlobalKey<FormState> questionKey,
+    TextEditingController nameUser,
+    TextEditingController email,
+    TextEditingController password,
+    TextEditingController userType,
+    TextEditingController provinceTerritory,
+    TextEditingController question) {
+  registerUser() async {
+    final firebase = FirebaseFirestore.instance;
+    try {
+      await firebase.collection('users').doc().set({
+        "nameUser": nameUser.text,
+        "email": email.text,
+        "password": password.text,
+        "userType": userType.text,
+        "provinceTerritory": provinceTerritory.text,
+        "question": question.text,
+      });
+    } catch (e) {
+      //print('ERROR '+e.toString());
+      messageToast(context, "ERROR", ColorConstants.red, ColorConstants.white);
+    }
+  }
+
+  if (nameUserKey.currentState!.validate() &&
+      emailKey.currentState!.validate() &&
+      passKey.currentState!.validate() &&
+      questionKey.currentState!.validate()) {
+    print('Enviando datos...');
+    registerUser();
+    messageToast(context, "HECHO", ColorConstants.green, ColorConstants.white);
+    Navigator.pushNamed(context, '/login');
+  } else {
+    messageToast(context, "ERROR", ColorConstants.red, ColorConstants.white);
   }
 }
 
