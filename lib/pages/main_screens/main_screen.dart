@@ -9,6 +9,9 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 //Text Imports
 import 'package:get/get.dart';
 
+//Futures
+import 'package:actearly/utils/futures.dart';
+
 //Pages
 import 'package:actearly/widgets/addChild.dart';
 import 'package:actearly/widgets/showChild.dart';
@@ -24,6 +27,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final userLog = getUserData();
+  //base de dats
   final user = userActual();
   int _currentIndex = 0;
   //Tipos de usuario , nuevo(primer registro de hijo(s)) / simple(1 hijo añadido) / grande(más de 1 hijo registrado)
