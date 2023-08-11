@@ -24,9 +24,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final userLog = getUserData();
+  final userLogin = getUserData();
+  final userActual = UserActual();
   //base de dats
-  final user = userActual();
+
+
   int _currentIndex = 0;
   //Tipos de usuario , nuevo(primer registro de hijo(s)) / simple(1 hijo añadido) / grande(más de 1 hijo registrado)
   String _userType = 'simple';

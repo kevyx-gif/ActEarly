@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class userActual {
+class UserActual {
   final String? nameUser;
   final String? email;
   final String? password;
@@ -8,7 +8,7 @@ class userActual {
   final String? question;
   final String? userType;
 
-  userActual({
+  UserActual({
     this.nameUser,
     this.email,
     this.password,
@@ -17,12 +17,12 @@ class userActual {
     this.userType,
   });
 
-  factory userActual.fromFirestore(
+  factory UserActual.fromFirestore(
     DocumentSnapshot<Map<String, dynamic>> snapshot,
     SnapshotOptions? options,
   ) {
     final data = snapshot.data();
-      return userActual(
+      return UserActual(
         nameUser: data?['nameUser'],
         email: data?['email'],
         password: data?['password'],

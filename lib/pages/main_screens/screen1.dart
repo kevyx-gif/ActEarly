@@ -1,8 +1,10 @@
 import 'package:actearly/services/firebase_service.dart';
+import 'package:actearly/utils/class.dart';
 import 'package:flutter/material.dart';
 
-//import 'package:crud_firebase/services/firebase_service.dart';
+//final user = userActual();
 
+//import 'package:crud_firebase/services/firebase_service.dart'
 class Screen1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -20,6 +22,7 @@ class Screen1 extends StatelessWidget {
                   return Text(snapshot.data?[index]['email']);
                 },
               );
+    
             } else {
               return const Center(
                 child: CircularProgressIndicator(),

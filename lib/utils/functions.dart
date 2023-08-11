@@ -73,7 +73,7 @@ void register(
   registerUser() async {
     final firebase = FirebaseFirestore.instance;
     try {
-      await firebase.collection('users').doc().set({
+      await firebase.collection('users').doc(email.text).set({
         "nameUser": nameUser.text,
         "email": email.text,
         "password": password.text,
