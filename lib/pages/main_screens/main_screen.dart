@@ -33,14 +33,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // Obtén la información de escalabilidad actual del dispositivo
-    final mediaQueryData =
-        MediaQueryData.fromWindow(WidgetsBinding.instance.window);
-
-    // Establece la información de escalabilidad manualmente para deshabilitarla
-    final fixedMediaQueryData = mediaQueryData.copyWith(
-      textScaleFactor: 1.0, // Establece un factor de escala fijo
-    );
     final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
