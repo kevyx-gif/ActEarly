@@ -107,7 +107,7 @@ Widget child(BuildContext context) {
               Container(
                   margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.02),
                   width: width,
-                  height: height * 0.25,
+                  height: height * 0.28,
                   child: Card(
                       elevation: 5,
                       margin: const EdgeInsets.symmetric(
@@ -157,8 +157,9 @@ Widget child(BuildContext context) {
                                 ],
                               )),
                           //---------Buttons----------//
-                          Center(
-                              child: SizedBox(
+
+                          Container(
+                            margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.02),
                             width: width * 0.3,
                             child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
@@ -172,7 +173,7 @@ Widget child(BuildContext context) {
                                     style: TextStyle(fontSize: width * 0.2),
                                     maxLines: 1,
                                     'Ver sugerencias')),
-                          )),
+                          ),
                         ],
                       ))),
               Container(

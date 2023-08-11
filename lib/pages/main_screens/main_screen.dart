@@ -41,6 +41,8 @@ class _MyHomePageState extends State<MyHomePage> {
     final fixedMediaQueryData = mediaQueryData.copyWith(
       textScaleFactor: 1.0, // Establece un factor de escala fijo
     );
+    final height = MediaQuery.of(context).size.height;
+
     return Scaffold(
         body: IndexedStack(
           index: _currentIndex,
@@ -51,6 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
         bottomNavigationBar: Container(
+          height: 0.065 * height,
           color: ColorConstants.blueNavbar,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 25),
