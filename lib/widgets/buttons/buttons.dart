@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:actearly/utils/functions.dart';
 import 'package:flutter/material.dart';
 //colors import
@@ -8,6 +10,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 //text size adapable
 import 'package:auto_size_text/auto_size_text.dart';
+//porcentaje
+import 'package:percent_indicator/circular_percent_indicator.dart';
 
 //-------------------------botones flotantes------------------------------//
 
@@ -151,4 +155,60 @@ Widget btnInfo(BuildContext context, width) {
             ),
             onPressed: () {}),
       ));
+}
+
+//----------Indicadores---------------//
+Widget indicador(BuildContext context, width, height, porcentaje, tittle) {
+  String porc = (porcentaje * 100).round().toString();
+  Color progressC = ProgressColor(porcentaje);
+  Color backgrC = ProgressColorShadow(porcentaje);
+
+  return Container(
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+        Container(
+          margin: EdgeInsets.symmetric(vertical: 0.05 * height),
+          child: AutoSizeText(
+            maxLines: 1,
+            '$tittle',
+            style: TextStyle(
+              fontSize: 0.025 * width,
+              fontFamily: 'Archive',
+              fontWeight: FontWeight.w700,
+              color: ColorConstants.black,
+            ),
+          ),
+        ),
+        CircularPercentIndicator(
+          animation: true,
+          animationDuration: 2000,
+          radius: width * 0.1,
+          lineWidth: width * 0.025,
+          percent: porcentaje,
+          progressColor: progressC,
+          backgroundColor: backgrC,
+          circularStrokeCap: CircularStrokeCap.round,
+          center: Text(
+            '$porc %',
+            style: TextStyle(
+                color: ColorConstants.black,
+                fontFamily: 'Archive',
+                fontWeight: FontWeight.w700),
+          ),
+        ),
+      ]));
+}
+
+Widget btnYears(BuildContext context, index) {
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Container(
+      height: 50,
+      width: 50,
+      decoration:
+          BoxDecoration(shape: BoxShape.circle, color: ColorConstants.purple),
+    ),
+  );
 }

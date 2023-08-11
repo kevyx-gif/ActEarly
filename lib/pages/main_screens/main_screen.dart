@@ -6,9 +6,6 @@ import 'package:flutter/material.dart';
 //NabBar import
 import 'package:google_nav_bar/google_nav_bar.dart';
 
-//Text Imports
-import 'package:get/get.dart';
-
 //Futures
 import 'package:actearly/utils/futures.dart';
 
@@ -36,48 +33,61 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: IndexedStack(
-          index: _currentIndex,
-          children: <Widget>[
-            _buildPage(),
-            Screen1(),
-            Screen2(),
-          ],
-        ),
-        bottomNavigationBar: Container(
-          color: ColorConstants.blueNavbar,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 25),
-            child: GNav(
-              backgroundColor: ColorConstants.blueNavbar,
-              color: ColorConstants.white,
-              activeColor: Colors.white,
-              tabBackgroundColor: ColorConstants.TextGrayF,
-              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-              gap: 9,
-              onTabChange: (index) {
-                setState(() {
-                  _currentIndex = index;
-                });
-              },
-              tabs: [
-                GButton(
-                  icon: Icons.home,
+    // Obtén la información de escalabilidad actual del dispositivo
+    final mediaQueryData =
+        MediaQueryData.fromWindow(WidgetsBinding.instance.window);
+
+    // Establece la información de escalabilidad manualmente para deshabilitarla
+    final fixedMediaQueryData = mediaQueryData.copyWith(
+      textScaleFactor: 1.0, // Establece un factor de escala fijo
+    );
+    return MediaQuery(
+        data: fixedMediaQueryData,
+        child: Scaffold(
+            body: Scaffold(
+                body: IndexedStack(
+                  index: _currentIndex,
+                  children: <Widget>[
+                    _buildPage(),
+                    Screen1(),
+                    Screen2(),
+                  ],
                 ),
-                GButton(
-                  icon: Icons.bookmark,
-                ),
-                GButton(
-                  icon: Icons.help,
-                ),
-                GButton(
-                  icon: Icons.settings,
-                ),
-              ],
-            ),
-          ),
-        ));
+                bottomNavigationBar: Container(
+                  color: ColorConstants.blueNavbar,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 12, horizontal: 25),
+                    child: GNav(
+                      backgroundColor: ColorConstants.blueNavbar,
+                      color: ColorConstants.white,
+                      activeColor: Colors.white,
+                      tabBackgroundColor: ColorConstants.TextGrayF,
+                      padding:
+                          EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                      gap: 9,
+                      onTabChange: (index) {
+                        setState(() {
+                          _currentIndex = index;
+                        });
+                      },
+                      tabs: [
+                        GButton(
+                          icon: Icons.home,
+                        ),
+                        GButton(
+                          icon: Icons.bookmark,
+                        ),
+                        GButton(
+                          icon: Icons.help,
+                        ),
+                        GButton(
+                          icon: Icons.settings,
+                        ),
+                      ],
+                    ),
+                  ),
+                ))));
   }
 
   Widget _buildPage() {

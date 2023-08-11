@@ -108,3 +108,26 @@ void logOut(BuildContext context) {
       context, 'Cuenta cerrada', ColorConstants.black, ColorConstants.white);
   Navigator.pushNamed(context, '/login');
 }
+
+//----------------------------Determinar Color-----------------//
+Color ProgressColor(porcentaje) {
+  switch (porcentaje) {
+    case < 0.8 && > 0.6:
+      return ColorConstants.yellow;
+    case <= 0.6:
+      return ColorConstants.redProgress;
+    default:
+      return ColorConstants.green;
+  }
+}
+
+Color ProgressColorShadow(porcentaje) {
+  switch (porcentaje) {
+    case < 0.8 && > 0.6:
+      return ColorConstants.yellowShadow;
+    case <= 0.6:
+      return ColorConstants.redShadow;
+    default:
+      return ColorConstants.greenShadow;
+  }
+}
