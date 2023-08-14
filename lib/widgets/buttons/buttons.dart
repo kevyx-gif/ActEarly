@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:actearly/utils/functions.dart';
 import 'package:flutter/material.dart';
 //colors import

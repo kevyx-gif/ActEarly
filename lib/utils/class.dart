@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 class UserActual {
   final String? nameUser;
@@ -22,14 +23,14 @@ class UserActual {
     SnapshotOptions? options,
   ) {
     final data = snapshot.data();
-      return UserActual(
-        nameUser: data?['nameUser'],
-        email: data?['email'],
-        password: data?['password'],
-        provinceTerritory: data?['provinceTerritory'],
-        question: data?['question'],
-        userType: data?['userType'],
-      );
+    return UserActual(
+      nameUser: data?['nameUser'],
+      email: data?['email'],
+      password: data?['password'],
+      provinceTerritory: data?['provinceTerritory'],
+      question: data?['question'],
+      userType: data?['userType'],
+    );
   }
 
   Map<String, dynamic> toFirestore() {
@@ -42,4 +43,11 @@ class UserActual {
       if (userType != null) "userType": userType,
     };
   }
+}
+
+//----------------ITEMS CLASS----------------//
+class ListItem {
+  final Widget Function(BuildContext) widgetBuilder;
+
+  ListItem({required this.widgetBuilder});
 }

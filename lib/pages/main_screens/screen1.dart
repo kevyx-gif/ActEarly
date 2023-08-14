@@ -11,7 +11,7 @@ class Screen1 extends StatelessWidget {
     return Scaffold(
       //  child: Text('Contenido de la pantalla 1'),
       body: FutureBuilder(
-          future: getUsers(), 
+          future: getUsers(),
           builder: ((context, snapshot) {
             if (snapshot.hasData) {
               return ListView.builder(
@@ -19,10 +19,13 @@ class Screen1 extends StatelessWidget {
                     ?.length, //data? show full or empty list, number of iterations
                 itemBuilder: (context, index) {
                   //bucle show
-                  return Text(snapshot.data?[index]['email']);
+                  try {
+                    return Text(snapshot.data?[index]['email']);
+                  } catch (e) {
+                    print('error ');
+                  }
                 },
               );
-    
             } else {
               return const Center(
                 child: CircularProgressIndicator(),

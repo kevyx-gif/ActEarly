@@ -28,24 +28,29 @@ class _MyHomePageState extends State<MyHomePage> {
   final userActual = UserActual();
   //base de dats
 
-
   int _currentIndex = 0;
   //Tipos de usuario , nuevo(primer registro de hijo(s)) / simple(1 hijo añadido) / grande(más de 1 hijo registrado)
   String _userType = 'simple';
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-        body: IndexedStack(
-          index: _currentIndex,
-          children: <Widget>[
-            _buildPage(),
-            Screen1(),
-            Screen2(),
-          ],
-        ),
+        body: SingleChildScrollView(
+            child: Container(
+          width: width,
+          height: 0.940 * height,
+          child: IndexedStack(
+            index: _currentIndex,
+            children: <Widget>[
+              _buildPage(),
+              Screen1(),
+              Screen2(),
+            ],
+          ),
+        )),
         bottomNavigationBar: Container(
           height: 0.065 * height,
           color: ColorConstants.blueNavbar,

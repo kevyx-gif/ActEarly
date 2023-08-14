@@ -38,6 +38,7 @@ flutter:
     - lib/assets/img/bg.png
     - lib/assets/img/bg_lenguajes.png
     - lib/assets/img/bg_login.png
+    - lib/assets/img/register_child.png
     - lib/assets/img/bg_main.png
     - lib/assets/img/accept_bg.png
     - lib/assets/img/google.png
