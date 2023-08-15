@@ -30,7 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   int _currentIndex = 0;
   //Tipos de usuario , nuevo(primer registro de hijo(s)) / simple(1 hijo añadido) / grande(más de 1 hijo registrado)
-  String _userType = 'simple';
+  String _userType = 'nuevo';
 
   @override
   Widget build(BuildContext context) {

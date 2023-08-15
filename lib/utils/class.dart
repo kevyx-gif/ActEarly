@@ -48,6 +48,11 @@ class UserActual {
 //----------------ITEMS CLASS----------------//
 class ListItem {
   final Widget Function(BuildContext) widgetBuilder;
+  final bool switchState;
+  final bool decisionPrem;
 
-  ListItem({required this.widgetBuilder});
+  ListItem(
+      {required this.widgetBuilder,
+      this.switchState = true,
+      this.decisionPrem = false});
 }

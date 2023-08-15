@@ -15,6 +15,7 @@ class ColorConstants {
   static const yellow = Color.fromARGB(255, 238, 209, 81);
   static const yellowShadow = Color.fromARGB(255, 231, 217, 163);
   static const red = Color(0xFFB25D59);
+  static const pinkCard = Color(0xFFFF8FC5);
   static const redProgress = Color.fromARGB(255, 202, 72, 65);
   static const redShadow = Color.fromARGB(255, 194, 141, 138);
   static const TextGray = Color.fromARGB(255, 121, 121, 121);
@@ -23,6 +24,7 @@ class ColorConstants {
   static const BackgroundGrayImages = Color.fromARGB(255, 235, 235, 235);
   static const greenGray = Color.fromARGB(255, 94, 165, 119);
   static const blue = Color(0xFF48C5FB);
+  static const blueCard = Color(0xFF6394F3);
   static const blueGray = Color.fromARGB(255, 78, 148, 179);
   static const blueNavbar = Color(0xFF4865FB);
   static const whiteGray = Color.fromARGB(255, 206, 206, 206);

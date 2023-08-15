@@ -30,7 +30,7 @@ class _addChild extends State<addChildWidget> {
         child: Container(
             width: width,
             height: 0.940 * height,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage("lib/assets/img/register_child.png"),
                 fit: BoxFit.cover,
@@ -64,14 +64,25 @@ class _addChild extends State<addChildWidget> {
                                 child: Text('Add'),
                                 onPressed: () {
                                   setState(() {
-                                    // Variables para almacenar kidName y date
+                                    // Variables para almacenar
                                     final kidName = TextEditingController();
                                     final date = TextEditingController();
-                                    final formKey = GlobalKey<FormState>();
+                                    final formKeyName = GlobalKey<FormState>();
+                                    final formKeyDate = GlobalKey<FormState>();
+                                    final valSwitch = true;
+                                    final decisionPrem = false;
+
                                     items.addAll({
                                       ListItem(
                                           widgetBuilder: (context) => ChildW(
-                                              context, kidName, date, formKey))
+                                                context: context,
+                                                kidName: kidName,
+                                                date: date,
+                                                formKeyName: formKeyName,
+                                                formKeyDate: formKeyDate,
+                                                switchState: valSwitch,
+                                                decisionState: decisionPrem,
+                                              ))
                                     });
                                     indexList++;
                                   });
