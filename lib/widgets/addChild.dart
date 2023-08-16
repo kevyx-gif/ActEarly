@@ -46,7 +46,6 @@ class _addChild extends State<addChildWidget> {
                   margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
                   height: (0.935 * height) * 0.92,
                   child: Scrollbar(
-                      isAlwaysShown: items.length > 3 ? true : false,
                       child: ListView.builder(
                           itemCount: items.length,
                           itemBuilder: (context, index) {
@@ -91,7 +90,7 @@ class _addChild extends State<addChildWidget> {
                                   ValueNotifier<bool> decisionBtnNotifier =
                                       ValueNotifier<bool>(true);
                                   ValueNotifier<String> imageKid =
-                                      ValueNotifier<String>('');
+                                      ValueNotifier<String>('null');
 
                                   items.add(ListItem(
                                     widgetBuilder: (

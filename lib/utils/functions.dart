@@ -49,7 +49,7 @@ void login(BuildContext context, TextEditingController email,
       loggedIn();
       setUserData(emailUser);
       messageToast(context, 'hola $emailUser ', negro, white);
-      Navigator.pushNamed(context, '/main');
+      Navigator.pushNamed(context, '/mainPage');
     } else {
       messageToast(context, 'wrongPassword'.tr, red, white);
     }

@@ -1,3 +1,4 @@
+import 'package:actearly/utils/functions.dart';
 import 'package:flutter/material.dart';
 import 'package:actearly/utils/colors.dart';
 
@@ -77,9 +78,9 @@ class cardWidget extends State<ChildW>
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Ink(
-                                width: width * 0.20,
-                                height: width * 0.20,
-                                decoration: widget.img.value != ''
+                                width: width * 0.26,
+                                height: width * 0.26,
+                                decoration: widget.img.value != 'null'
                                     ? BoxDecoration(
                                         image: DecorationImage(
                                           image: AssetImage(widget.img.value),
@@ -95,18 +96,14 @@ class cardWidget extends State<ChildW>
                                         shape: BoxShape.rectangle,
                                         borderRadius: BorderRadius.circular(20),
                                       ),
-                                child: widget.img.value == ''
+                                child: widget.img.value == 'null'
                                     ? IconButton(
                                         iconSize: width * 0.09,
                                         color: ColorConstants.white,
                                         onPressed: () {
                                           setState(() {
-                                            if (widget.img.value == '') {
-                                              widget.img.value =
-                                                  'lib/assets/img/pred.jpg';
-                                            } else {
-                                              widget.img.value = '';
-                                            }
+                                            widget.img.value =
+                                                'lib/assets/img/pred.jpg';
                                           });
                                         },
                                         icon: Icon(Icons.add))
@@ -114,7 +111,11 @@ class cardWidget extends State<ChildW>
                                         iconSize: width * 0.09,
                                         color: ColorConstants.white
                                             .withOpacity(0.50),
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          setState(() {
+                                            widget.img.value = 'null';
+                                          });
+                                        },
                                         icon: Icon(Icons.remove)),
                               ),
                             ],
@@ -144,7 +145,7 @@ class cardWidget extends State<ChildW>
                                       fillColor: ColorConstants.BackgroundGray,
                                       filled: true,
                                       contentPadding: const EdgeInsets.fromLTRB(
-                                          20, 10, 0, 10),
+                                          20, 10, 20, 10),
                                       enabledBorder: OutlineInputBorder(
                                         borderSide: const BorderSide(
                                             color: Colors.transparent),
@@ -255,7 +256,7 @@ class cardWidget extends State<ChildW>
                                     Container(
                                       margin: EdgeInsets.fromLTRB(
                                           0, 0, 0, height * 0.01),
-                                      child: Text('Nació Prematuro',
+                                      child: Text('Nacio Prematuro',
                                           style: TextStyle(
                                               color: ColorConstants.TextGray,
                                               fontFamily: 'Archive',
