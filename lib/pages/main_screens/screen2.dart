@@ -1,15 +1,36 @@
+import 'package:actearly/services/firebase_service.dart';
+import 'package:actearly/utils/class.dart';
 import 'package:flutter/material.dart';
 
 class Screen2 extends StatelessWidget {
-
   Screen2({super.key});
 
-  
   @override
   Widget build(BuildContext context) {
-
-    return const Center(
-      child: Text('data'),
+    return Scaffold(
+      //  child: Text('Contenido de la pantalla 1'),
+      body: FutureBuilder(
+          future: getUsers(),
+          builder: ((context, snapshot) {
+            if (snapshot.hasData) {
+              return ListView.builder(
+                itemCount: snapshot.data
+                    ?.length, //data? show full or empty list, number of iterations
+                itemBuilder: (context, index) {
+                  //bucle show
+                  try {
+                    return Text(snapshot.data?[index]['email']);
+                  } catch (e) {
+                    print('error ');
+                  }
+                },
+              );
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          })),
     );
   }
 }

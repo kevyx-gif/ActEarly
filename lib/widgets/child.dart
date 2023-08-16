@@ -107,7 +107,7 @@ Widget child(BuildContext context) {
               Container(
                   margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.02),
                   width: width,
-                  height: height * 0.28,
+                  height: height * 0.3,
                   child: Card(
                       elevation: 5,
                       margin: const EdgeInsets.symmetric(
@@ -139,7 +139,7 @@ Widget child(BuildContext context) {
                           //-----Indicadores------//
                           Container(
                               width: width - 60 - 20,
-                              height: height * 0.105,
+                              height: height * 0.15,
                               margin:
                                   EdgeInsets.symmetric(vertical: 0.01 * height),
                               child: Row(
@@ -159,8 +159,8 @@ Widget child(BuildContext context) {
                           //---------Buttons----------//
 
                           Container(
-                            margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.02),
-                            width: width * 0.3,
+                            width: width * 0.25,
+                            height: height * 0.03,
                             child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                     shape: StadiumBorder(),

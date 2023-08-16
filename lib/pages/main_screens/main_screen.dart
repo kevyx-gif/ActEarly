@@ -18,6 +18,7 @@ import '../../utils/class.dart';
 
 class MyHomePage extends StatefulWidget {
   final String documentId;
+  final userType = 'simple';
   MyHomePage({required this.documentId, super.key});
 
   @override
@@ -27,11 +28,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0;
+
   //Tipos de usuario , nuevo(primer registro de hijo(s)) / simple(1 hijo añadido) / grande(más de 1 hijo registrado)
-  String _userType = 'simple';
 
   @override
   Widget build(BuildContext context) {
+    widget.userType == 'nuevo' ? 1 : 0;
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
 
@@ -43,8 +45,8 @@ class _MyHomePageState extends State<MyHomePage> {
           child: IndexedStack(
             index: _currentIndex,
             children: <Widget>[
-              _buildPage(),
-              Screen1(),
+              ShowChildWidget(widget.userType),
+              addChildWidget(),
               Screen2(),
               Screen3(documentId: widget.documentId),
             ],
@@ -72,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   icon: Icons.home,
                 ),
                 GButton(
-                  icon: Icons.bookmark,
+                  icon: Icons.add_reaction,
                 ),
                 GButton(
                   icon: Icons.help,
@@ -84,13 +86,5 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
         ));
-  }
-
-  Widget _buildPage() {
-    if (_userType == 'nuevo') {
-      return addChildWidget();
-    } else {
-      return ShowChildWidget(_userType);
-    }
   }
 }
