@@ -30,12 +30,14 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  final userLogin = await getUserData();
   Get.put(Messages());
-  runApp(const MyApp());
+  runApp(MyApp(userLogin: userLogin));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  String userLogin;
+  MyApp({required this.userLogin, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +75,7 @@ class MyApp extends StatelessWidget {
                           } else {
                             // si ya esta logueado
                             if (snapshot.data == true) {
-                              return const MyHomePage();
+                              return MyHomePage(documentId: userLogin);
                             } else {
                               return LoginPage();
                             }
@@ -93,8 +95,7 @@ class MyApp extends StatelessWidget {
         },
       ),
       routes: {
-        '/mainPage': (context) => const MyApp(),
-        '/main': (context) => const MyHomePage(),
+        '/main': (context) => MyHomePage(documentId: userLogin),
         '/login': (context) => const LoginPage(),
         '/register': (context) => const RegisterPage(),
         '/registerFirst': (context) => const RegisterFirstPage(),

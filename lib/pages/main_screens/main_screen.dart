@@ -1,5 +1,6 @@
 import 'package:actearly/pages/main_screens/screen1.dart';
 import 'package:actearly/pages/main_screens/screen2.dart';
+import 'package:actearly/pages/main_screens/Screen3.dart';
 import 'package:actearly/utils/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,8 @@ import 'package:actearly/widgets/showChild.dart';
 import '../../utils/class.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+  final String documentId;
+  MyHomePage({required this.documentId, super.key});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -24,10 +26,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final userLogin = getUserData();
-  final userActual = UserActual();
-  //base de dats
-
   int _currentIndex = 0;
   //Tipos de usuario , nuevo(primer registro de hijo(s)) / simple(1 hijo añadido) / grande(más de 1 hijo registrado)
   String _userType = 'simple';
@@ -48,6 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
               _buildPage(),
               Screen1(),
               Screen2(),
+              Screen3(documentId: widget.documentId),
             ],
           ),
         )),
