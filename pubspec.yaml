@@ -26,6 +26,7 @@ dependencies:
   fluttertoast: ^8.0.8 #toast ios
   auto_size_text: ^3.0.0 #adaptable text
   percent_indicator: ^4.2.3 #Indicador de porcentaje
+  provider: ^6.0.5 # manejo de estructura compleja para estados 
 
 dev_dependencies:
   flutter_test:

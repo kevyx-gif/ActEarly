@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
+import 'package:actearly/provider.dart';
 
 class UserActual {
   final String? nameUser;
@@ -47,12 +49,9 @@ class UserActual {
 
 //----------------ITEMS CLASS----------------//
 class ListItem {
-  final Widget Function(BuildContext) widgetBuilder;
-  final bool switchState;
-  final bool decisionPrem;
+  final Widget Function(
+    BuildContext context,
+  ) widgetBuilder;
 
-  ListItem(
-      {required this.widgetBuilder,
-      this.switchState = true,
-      this.decisionPrem = false});
+  ListItem({required this.widgetBuilder});
 }

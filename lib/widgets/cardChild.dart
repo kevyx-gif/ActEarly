@@ -8,8 +8,11 @@ class ChildW extends StatefulWidget {
   TextEditingController date;
   GlobalKey<FormState> formKeyName;
   GlobalKey<FormState> formKeyDate;
-  bool switchState;
-  bool decisionState;
+  GlobalKey<FormState> formKeySwitch;
+  GlobalKey<FormState> formKeyDecision;
+  ValueNotifier<bool> switchValue;
+  ValueNotifier<bool> decisionValue;
+  ValueNotifier<String> img;
 
   ChildW({
     required this.context,
@@ -17,18 +20,27 @@ class ChildW extends StatefulWidget {
     required this.date,
     required this.formKeyName,
     required this.formKeyDate,
+    required this.formKeySwitch,
+    required this.formKeyDecision,
+    required this.switchValue,
+    required this.decisionValue,
+    required this.img,
     super.key,
-    required this.switchState,
-    required this.decisionState,
   });
 
   @override
   State<ChildW> createState() => cardWidget();
 }
 
-class cardWidget extends State<ChildW> {
+class cardWidget extends State<ChildW>
+    with AutomaticKeepAliveClientMixin<ChildW> {
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   Widget build(BuildContext context) {
+    super.build(
+        context); // Importante para habilitar la funcionalidad de mantener el estado
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
 
@@ -67,18 +79,43 @@ class cardWidget extends State<ChildW> {
                               Ink(
                                 width: width * 0.20,
                                 height: width * 0.20,
-                                decoration: BoxDecoration(
-                                  color: widget.switchState
-                                      ? ColorConstants.pinkCard
-                                      : ColorConstants.blueCard,
-                                  shape: BoxShape.rectangle,
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: IconButton(
-                                    iconSize: width * 0.09,
-                                    color: ColorConstants.white,
-                                    onPressed: () {},
-                                    icon: Icon(Icons.add)),
+                                decoration: widget.img.value != ''
+                                    ? BoxDecoration(
+                                        image: DecorationImage(
+                                          image: AssetImage(widget.img.value),
+                                          fit: BoxFit.cover,
+                                        ),
+                                        shape: BoxShape.rectangle,
+                                        borderRadius: BorderRadius.circular(20),
+                                      )
+                                    : BoxDecoration(
+                                        color: widget.switchValue.value
+                                            ? ColorConstants.pinkCard
+                                            : ColorConstants.blueCard,
+                                        shape: BoxShape.rectangle,
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                child: widget.img.value == ''
+                                    ? IconButton(
+                                        iconSize: width * 0.09,
+                                        color: ColorConstants.white,
+                                        onPressed: () {
+                                          setState(() {
+                                            if (widget.img.value == '') {
+                                              widget.img.value =
+                                                  'lib/assets/img/pred.jpg';
+                                            } else {
+                                              widget.img.value = '';
+                                            }
+                                          });
+                                        },
+                                        icon: Icon(Icons.add))
+                                    : IconButton(
+                                        iconSize: width * 0.09,
+                                        color: ColorConstants.white
+                                            .withOpacity(0.50),
+                                        onPressed: () {},
+                                        icon: Icon(Icons.remove)),
                               ),
                             ],
                           ),
@@ -91,7 +128,9 @@ class cardWidget extends State<ChildW> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
+                              //-------------------Inputs ---------------//
                               Container(
+                                margin: EdgeInsets.fromLTRB(0, 5, 0, 5),
                                 padding:
                                     EdgeInsets.fromLTRB(width * 0.05, 0, 10, 0),
                                 child: Form(
@@ -178,24 +217,23 @@ class cardWidget extends State<ChildW> {
                                             fontWeight: FontWeight.w700),
                                       ),
                                       //-------------------------Switch-------------------//
-                                      Form(
-                                        child: Switch(
-                                          // This bool value toggles the switch.
-                                          value: widget.switchState,
-                                          activeTrackColor:
-                                              ColorConstants.pinkCard,
-                                          activeColor: ColorConstants.white,
-                                          inactiveThumbColor:
-                                              ColorConstants.white,
-                                          inactiveTrackColor:
-                                              ColorConstants.blueCard,
+                                      Switch(
+                                        key: ValueKey(widget.formKeySwitch),
+                                        // This bool value toggles the switch.
+                                        value: widget.switchValue.value,
+                                        activeTrackColor:
+                                            ColorConstants.pinkCard,
+                                        activeColor: ColorConstants.white,
+                                        inactiveThumbColor:
+                                            ColorConstants.white,
+                                        inactiveTrackColor:
+                                            ColorConstants.blueCard,
 
-                                          onChanged: (bool value) {
-                                            setState(() {
-                                              widget.switchState = value;
-                                            });
-                                          },
-                                        ),
+                                        onChanged: (bool value) {
+                                          setState(() {
+                                            widget.switchValue.value = value;
+                                          });
+                                        },
                                       ),
 
                                       //------------------------Text-----------------------//
@@ -217,7 +255,7 @@ class cardWidget extends State<ChildW> {
                                     Container(
                                       margin: EdgeInsets.fromLTRB(
                                           0, 0, 0, height * 0.01),
-                                      child: Text('Nació Prematuro?',
+                                      child: Text('Nació Prematuro',
                                           style: TextStyle(
                                               color: ColorConstants.TextGray,
                                               fontFamily: 'Archive',
@@ -233,19 +271,27 @@ class cardWidget extends State<ChildW> {
                                             CrossAxisAlignment.center,
                                         children: [
                                           InkWell(
+                                            key: ValueKey(
+                                                widget.formKeyDecision),
                                             onTap: () {
                                               setState(() {
-                                                widget.decisionState =
-                                                    !widget.decisionState;
+                                                if (widget
+                                                        .decisionValue.value ==
+                                                    false) {
+                                                  widget.decisionValue.value =
+                                                      !widget
+                                                          .decisionValue.value;
+                                                }
                                               });
                                             },
                                             child: Container(
-                                                width: width * 0.05,
-                                                height: width * 0.05,
+                                                width: width * 0.06,
+                                                height: width * 0.06,
                                                 decoration: BoxDecoration(
                                                   shape: BoxShape.circle,
-                                                  color: widget.decisionState
-                                                      ? widget.switchState
+                                                  color: widget
+                                                          .decisionValue.value
+                                                      ? widget.switchValue.value
                                                           ? ColorConstants
                                                               .pinkCard
                                                           : ColorConstants
@@ -271,17 +317,23 @@ class cardWidget extends State<ChildW> {
                                           InkWell(
                                             onTap: () {
                                               setState(() {
-                                                widget.decisionState =
-                                                    !widget.decisionState;
+                                                if (widget
+                                                        .decisionValue.value ==
+                                                    true) {
+                                                  widget.decisionValue.value =
+                                                      !widget
+                                                          .decisionValue.value;
+                                                }
                                               });
                                             },
                                             child: Container(
-                                                width: width * 0.05,
-                                                height: width * 0.05,
+                                                width: width * 0.06,
+                                                height: width * 0.06,
                                                 decoration: BoxDecoration(
                                                   shape: BoxShape.circle,
-                                                  color: !widget.decisionState
-                                                      ? widget.switchState
+                                                  color: !widget
+                                                          .decisionValue.value
+                                                      ? widget.switchValue.value
                                                           ? ColorConstants
                                                               .pinkCard
                                                           : ColorConstants
