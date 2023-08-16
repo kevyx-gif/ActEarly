@@ -5,7 +5,6 @@ class Screen3 extends StatefulWidget {
   final String documentId; // El ID del documento que deseas obtener
   Screen3({required this.documentId, super.key});
   @override
-  // ignore: library_private_types_in_public_api
   _Screen3 createState() => _Screen3();
 }
 
@@ -38,17 +37,24 @@ class _Screen3 extends State<Screen3> {
           Map<String, dynamic> data =
               snapshot.data!.data() as Map<String, dynamic>;
 
-          // Accede a los campos del documento utilizando la variable 'data'
-          String nombre = data['nameUser'];
-          String correo = data['email'];
+          // Atributos del documento/usuario logueado
+          String email = data['email'];
+          String nameUser = data['nameUser'];
+          String password = data['password'];
+          String provinceTerritory = data['provinceTerritory'];
+          String question = data['question'];
+          String userType = data['userType'];
 
           return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Nombre: $nombre'),
-                Text('Correo: $correo'),
-                // Agrega más widgets para mostrar otros campos del documento
+                Text('email: $email'),
+                Text('nameUser: $nameUser'),
+                Text('password: $password'),
+                Text('provinceTerritory: $provinceTerritory'),
+                Text('question: $question'),
+                Text('userType: $userType'),                
               ],
             ),
           );
@@ -57,3 +63,47 @@ class _Screen3 extends State<Screen3> {
     );
   }
 }
+
+
+/* CODIGO screen1.dart
+import 'package:actearly/services/firebase_service.dart';
+import 'package:actearly/utils/class.dart';
+import 'package:flutter/material.dart';
+
+//final user = userActual();
+
+//import 'package:crud_firebase/services/firebase_service.dart'
+class Screen1 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      //  child: Text('Contenido de la pantalla 1'),
+      body: FutureBuilder(
+          future: getUsers(),
+          builder: ((context, snapshot) {
+            if (snapshot.hasData) {
+              return ListView.builder(
+                itemCount: snapshot.data
+                    ?.length, //data? show full or empty list, number of iterations
+                itemBuilder: (context, index) {
+                  //bucle show
+                  try {
+                    return Text(snapshot.data?[index]['email']);
+                  } catch (e) {
+                    print('error ');
+                  }
+                },
+              );
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          })),
+    );
+  }
+}
+
+
+
+*/ 
