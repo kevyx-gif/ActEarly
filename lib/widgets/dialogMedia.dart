@@ -7,13 +7,13 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mime/mime.dart';
 import 'package:video_player/video_player.dart';
 
-class Screen2 extends StatefulWidget {
-  Screen2({super.key});
+class dialogMedia extends StatefulWidget {
+  dialogMedia({super.key});
 
-  State<Screen2> createState() => _Screen2();
+  State<dialogMedia> createState() => _dialogMedia();
 }
 
-class _Screen2 extends State<Screen2> {
+class _dialogMedia extends State<dialogMedia> {
   List<XFile>? _mediaFileList;
 
   void _setImageFileListFromFile(XFile? value) {
@@ -277,92 +277,125 @@ class _Screen2 extends State<Screen2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: !kIsWeb && defaultTargetPlatform == TargetPlatform.android
-            ? FutureBuilder<void>(
-                future: retrieveLostData(),
-                builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
-                  switch (snapshot.connectionState) {
-                    case ConnectionState.none:
-                    case ConnectionState.waiting:
-                      return const Text(
-                        'You have not yet picked an image.',
-                        textAlign: TextAlign.center,
-                      );
-                    case ConnectionState.done:
-                      return _handlePreview();
-                    case ConnectionState.active:
-                      if (snapshot.hasError) {
-                        return Text(
-                          'Pick image/video error: ${snapshot.error}}',
-                          textAlign: TextAlign.center,
-                        );
-                      } else {
-                        return const Text(
-                          'You have not yet picked an image.',
-                          textAlign: TextAlign.center,
-                        );
+      body: Column(
+        children: [
+          Container(
+            color: Colors.amber,
+            height: 500,
+            child: !kIsWeb && defaultTargetPlatform == TargetPlatform.android
+                ? FutureBuilder<void>(
+                    future: retrieveLostData(),
+                    builder:
+                        (BuildContext context, AsyncSnapshot<void> snapshot) {
+                      switch (snapshot.connectionState) {
+                        case ConnectionState.none:
+                        case ConnectionState.waiting:
+                          return const Text(
+                            'You have not yet picked an image.',
+                            textAlign: TextAlign.center,
+                          );
+                        case ConnectionState.done:
+                          return _handlePreview();
+                        case ConnectionState.active:
+                          if (snapshot.hasError) {
+                            return Text(
+                              'Pick image/video error: ${snapshot.error}}',
+                              textAlign: TextAlign.center,
+                            );
+                          } else {
+                            return const Text(
+                              'You have not yet picked an image.',
+                              textAlign: TextAlign.center,
+                            );
+                          }
                       }
-                  }
-                },
-              )
-            : _handlePreview(),
-      ),
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          Semantics(
-            label: 'image_picker_example_from_gallery',
-            child: FloatingActionButton(
-              onPressed: () {
-                isVideo = false;
-                _onImageButtonPressed(ImageSource.gallery, context: context);
-              },
-              heroTag: 'image0',
-              tooltip: 'Pick Image from gallery',
-              child: const Icon(Icons.photo),
-            ),
+                    },
+                  )
+                : _handlePreview(),
           ),
-          if (_picker.supportsImageSource(ImageSource.camera))
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0),
-              child: FloatingActionButton(
-                onPressed: () {
-                  isVideo = false;
-                  _onImageButtonPressed(ImageSource.camera, context: context);
-                },
-                heroTag: 'image2',
-                tooltip: 'Take a Photo',
-                child: const Icon(Icons.camera_alt),
-              ),
+          Expanded(
+              child: Container(
+            color: Colors.blueAccent,
+            child: GridView.count(
+              scrollDirection: Axis.vertical,
+              primary: false,
+              crossAxisSpacing: 5,
+              mainAxisSpacing: 5,
+              crossAxisCount: 2,
+              children: [
+                Container(
+                  width: 10,
+                  height: 10,
+                  child: Semantics(
+                    label: 'image_picker_example_from_gallery',
+                    child: FloatingActionButton(
+                      onPressed: () {
+                        isVideo = false;
+                        _onImageButtonPressed(ImageSource.gallery,
+                            context: context);
+                      },
+                      heroTag: 'image0',
+                      tooltip: 'Pick Image from gallery',
+                      child: const Icon(Icons.photo),
+                    ),
+                  ),
+                ),
+                if (_picker.supportsImageSource(ImageSource.camera))
+                  Container(
+                    width: 10,
+                    height: 10,
+                    child: FloatingActionButton(
+                      onPressed: () {
+                        isVideo = false;
+                        _onImageButtonPressed(ImageSource.camera,
+                            context: context);
+                      },
+                      heroTag: 'image2',
+                      tooltip: 'Take a Photo',
+                      child: const Icon(Icons.camera_alt),
+                    ),
+                  ),
+                Container(
+                  width: 10,
+                  height: 10,
+                  child: FloatingActionButton(
+                    backgroundColor: Colors.red,
+                    onPressed: () {
+                      isVideo = true;
+                      _onImageButtonPressed(ImageSource.gallery,
+                          context: context);
+                    },
+                    heroTag: 'video0',
+                    tooltip: 'Pick Video from gallery',
+                    child: const Icon(Icons.video_library),
+                  ),
+                ),
+                if (_picker.supportsImageSource(ImageSource.camera))
+                  Container(
+                    width: 10,
+                    height: 10,
+                    child: FloatingActionButton(
+                      backgroundColor: Colors.red,
+                      onPressed: () {
+                        isVideo = true;
+                        _onImageButtonPressed(ImageSource.camera,
+                            context: context);
+                      },
+                      heroTag: 'video1',
+                      tooltip: 'Take a Video',
+                      child: const Icon(Icons.videocam),
+                    ),
+                  ),
+              ],
             ),
-          Padding(
-            padding: const EdgeInsets.only(top: 16.0),
-            child: FloatingActionButton(
-              backgroundColor: Colors.red,
-              onPressed: () {
-                isVideo = true;
-                _onImageButtonPressed(ImageSource.gallery, context: context);
-              },
-              heroTag: 'video0',
-              tooltip: 'Pick Video from gallery',
-              child: const Icon(Icons.video_library),
-            ),
-          ),
-          if (_picker.supportsImageSource(ImageSource.camera))
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0),
-              child: FloatingActionButton(
-                backgroundColor: Colors.red,
-                onPressed: () {
-                  isVideo = true;
-                  _onImageButtonPressed(ImageSource.camera, context: context);
-                },
-                heroTag: 'video1',
-                tooltip: 'Take a Video',
-                child: const Icon(Icons.videocam),
-              ),
-            ),
+          )),
+          Expanded(
+            child: ElevatedButton(
+                onPressed: () => Navigator.pop(
+                    context, isVideo ? _controller : _mediaFileList),
+                child: Text('confirm')),
+          )
+          //----------------------------//
         ],
       ),
     );

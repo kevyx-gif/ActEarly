@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:actearly/utils/class.dart';
 import 'package:actearly/widgets/cardChild.dart';
+import 'package:video_player/video_player.dart';
+import 'package:image_picker/image_picker.dart';
 
 //import to toastMessage
 import 'package:actearly/utils/functions.dart';
@@ -91,6 +93,12 @@ class _addChild extends State<addChildWidget> {
                                       ValueNotifier<bool>(true);
                                   ValueNotifier<String> imageKid =
                                       ValueNotifier<String>('null');
+                                  ValueNotifier<VideoPlayerController?>
+                                      controller =
+                                      ValueNotifier<VideoPlayerController?>(
+                                          null);
+                                  ValueNotifier<List<XFile>?> mediaFileList =
+                                      ValueNotifier<List<XFile>?>(null);
 
                                   items.add(ListItem(
                                     widgetBuilder: (
@@ -107,6 +115,8 @@ class _addChild extends State<addChildWidget> {
                                         formKeyDecision: formKeyDecision,
                                         switchValue: switchValueNotifier,
                                         decisionValue: decisionBtnNotifier,
+                                        controller: controller,
+                                        mediaFileList: mediaFileList,
                                       );
                                     },
                                   ));

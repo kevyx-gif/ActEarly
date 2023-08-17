@@ -27,6 +27,11 @@ dependencies:
   auto_size_text: ^3.0.0 #adaptable text
   percent_indicator: ^4.2.3 #Indicador de porcentaje
   provider: ^6.0.5 # manejo de estructura compleja para estados 
+  path_provider: ^2.1.0 # path Img
+  image_picker: ^1.0.2 # local Img
+  video_player: ^2.7.0 #local video
+  permission_handler: ^10.4.3 #permiss manager
+  
 
 dev_dependencies:
   flutter_test:
