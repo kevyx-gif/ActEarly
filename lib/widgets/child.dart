@@ -160,7 +160,7 @@ Widget child(BuildContext context) {
 
                           Container(
                             width: width * 0.25,
-                            height: height * 0.03,
+                            height: height * 0.035,
                             child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                     shape: StadiumBorder(),
@@ -170,7 +170,7 @@ Widget child(BuildContext context) {
                                     backgroundColor: ColorConstants.btnColor),
                                 onPressed: () {},
                                 child: AutoSizeText(
-                                    style: TextStyle(fontSize: width * 0.2),
+                                    style: TextStyle(fontSize: width * 0.18),
                                     maxLines: 1,
                                     'Ver sugerencias')),
                           ),
@@ -195,22 +195,14 @@ Widget child(BuildContext context) {
                               borderRadius: BorderRadius.circular(30)),
                           margin:
                               EdgeInsets.symmetric(horizontal: width * 0.04),
-                          child: RawScrollbar(
-                              controller: _scrollController,
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: width * 0.03),
-                              thumbColor: ColorConstants.TextGray,
-                              thickness:
-                                  height * 0.005, //According to your choice
-                              thumbVisibility: true, //
-                              radius: Radius.circular(5),
+                          child: Scrollbar(
                               child: ListView.builder(
-                                itemCount: 7,
-                                scrollDirection: Axis.horizontal,
-                                itemBuilder: (context, index) {
-                                  return btnYears(context, 1);
-                                },
-                              )))))
+                            itemCount: 7,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              return btnYears(context, 1);
+                            },
+                          )))))
             ],
           ),
         ],
