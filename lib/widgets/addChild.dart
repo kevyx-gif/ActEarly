@@ -91,8 +91,6 @@ class _addChild extends State<addChildWidget> {
                                       ValueNotifier<bool>(false);
                                   ValueNotifier<bool> decisionBtnNotifier =
                                       ValueNotifier<bool>(true);
-                                  ValueNotifier<String> imageKid =
-                                      ValueNotifier<String>('null');
                                   ValueNotifier<VideoPlayerController?>
                                       controller =
                                       ValueNotifier<VideoPlayerController?>(
@@ -108,7 +106,6 @@ class _addChild extends State<addChildWidget> {
                                         context: context,
                                         kidName: kidName,
                                         date: date,
-                                        img: imageKid,
                                         formKeyName: formKeyName,
                                         formKeyDate: formKeyDate,
                                         formKeySwitch: formKeySwitch,

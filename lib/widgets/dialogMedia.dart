@@ -72,70 +72,61 @@ class _dialogMedia extends State<dialogMedia> {
             source: source, maxDuration: const Duration(seconds: 10));
         await _playVideo(file);
       } else if (isMultiImage) {
-        await _displayPickImageDialog(context,
-            (double? maxWidth, double? maxHeight, int? quality) async {
-          try {
-            final List<XFile> pickedFileList = isMedia
-                ? await _picker.pickMultipleMedia(
-                    maxWidth: maxWidth,
-                    maxHeight: maxHeight,
-                    imageQuality: quality,
-                  )
-                : await _picker.pickMultiImage(
-                    maxWidth: maxWidth,
-                    maxHeight: maxHeight,
-                    imageQuality: quality,
-                  );
+        try {
+          final List<XFile> pickedFileList = isMedia
+              ? await _picker.pickMultipleMedia(
+                  maxWidth: 1080,
+                  maxHeight: 1920,
+                  imageQuality: 100,
+                )
+              : await _picker.pickMultiImage(
+                  maxWidth: 1080,
+                  maxHeight: 1920,
+                  imageQuality: 100,
+                );
+          setState(() {
+            _mediaFileList = pickedFileList;
+          });
+        } catch (e) {
+          setState(() {
+            _pickImageError = e;
+          });
+        }
+      } else if (isMedia) {
+        try {
+          final List<XFile> pickedFileList = <XFile>[];
+          final XFile? media = await _picker.pickMedia(
+            maxWidth: 1080,
+            maxHeight: 1920,
+            imageQuality: 100,
+          );
+          if (media != null) {
+            pickedFileList.add(media);
             setState(() {
               _mediaFileList = pickedFileList;
             });
-          } catch (e) {
-            setState(() {
-              _pickImageError = e;
-            });
           }
-        });
-      } else if (isMedia) {
-        await _displayPickImageDialog(context,
-            (double? maxWidth, double? maxHeight, int? quality) async {
-          try {
-            final List<XFile> pickedFileList = <XFile>[];
-            final XFile? media = await _picker.pickMedia(
-              maxWidth: maxWidth,
-              maxHeight: maxHeight,
-              imageQuality: quality,
-            );
-            if (media != null) {
-              pickedFileList.add(media);
-              setState(() {
-                _mediaFileList = pickedFileList;
-              });
-            }
-          } catch (e) {
-            setState(() {
-              _pickImageError = e;
-            });
-          }
-        });
+        } catch (e) {
+          setState(() {
+            _pickImageError = e;
+          });
+        }
       } else {
-        await _displayPickImageDialog(context,
-            (double? maxWidth, double? maxHeight, int? quality) async {
-          try {
-            final XFile? pickedFile = await _picker.pickImage(
-              source: source,
-              maxWidth: maxWidth,
-              maxHeight: maxHeight,
-              imageQuality: quality,
-            );
-            setState(() {
-              _setImageFileListFromFile(pickedFile);
-            });
-          } catch (e) {
-            setState(() {
-              _pickImageError = e;
-            });
-          }
-        });
+        try {
+          final XFile? pickedFile = await _picker.pickImage(
+            source: source,
+            maxWidth: 1080,
+            maxHeight: 1920,
+            imageQuality: 100,
+          );
+          setState(() {
+            _setImageFileListFromFile(pickedFile);
+          });
+        } catch (e) {
+          setState(() {
+            _pickImageError = e;
+          });
+        }
       }
     }
   }
@@ -410,7 +401,7 @@ class _dialogMedia extends State<dialogMedia> {
     return null;
   }
 
-  Future<void> _displayPickImageDialog(
+/*  Future<void> _displayPickImageDialog(
       BuildContext context, OnPickImageCallback onPick) async {
     return showDialog(
         context: context,
@@ -466,7 +457,7 @@ class _dialogMedia extends State<dialogMedia> {
             ],
           );
         });
-  }
+  }*/
 }
 
 typedef OnPickImageCallback = void Function(
