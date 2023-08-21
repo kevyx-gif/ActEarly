@@ -281,14 +281,14 @@ class _dialogMedia extends State<dialogMedia> {
         backgroundColor: Colors.transparent,
         body: Container(
           color: Colors.transparent,
-          height: height * 0.65,
+          height: height * 0.6,
           width: width * 0.8,
           padding: EdgeInsets.all(0),
           margin: EdgeInsets.all(0),
           child: Column(
             children: [
               Container(
-                height: (height * 0.65) * 0.8,
+                height: (height * 0.6) * 0.8,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(50),
@@ -342,7 +342,7 @@ class _dialogMedia extends State<dialogMedia> {
                         : _handlePreview(),
               ),
               Container(
-                height: (height * 0.65) * 0.20,
+                height: (height * 0.6) * 0.20,
                 width: (width * 0.8),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
@@ -354,7 +354,7 @@ class _dialogMedia extends State<dialogMedia> {
                 child: Column(
                   children: [
                     Container(
-                      height: (height * 0.65) * 0.20,
+                      height: (height * 0.6) * 0.20,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -379,8 +379,8 @@ class _dialogMedia extends State<dialogMedia> {
                           ),
                           if (_picker.supportsImageSource(ImageSource.camera))
                             Container(
-                              width: ((height * 0.65) * 0.20) * 0.40,
-                              height: ((height * 0.65) * 0.20) * 0.40,
+                              width: ((height * 0.6) * 0.20) * 0.40,
+                              height: ((height * 0.6) * 0.20) * 0.40,
                               child: FloatingActionButton(
                                 backgroundColor: ColorConstants.TextGrayF,
                                 onPressed: () {
@@ -394,8 +394,8 @@ class _dialogMedia extends State<dialogMedia> {
                               ),
                             ),
                           Container(
-                            width: ((height * 0.65) * 0.20) * 0.70,
-                            height: ((height * 0.65) * 0.20) * 0.40,
+                            width: ((height * 0.6) * 0.20) * 0.70,
+                            height: ((height * 0.6) * 0.20) * 0.40,
                             child: FloatingActionButton(
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(50)),

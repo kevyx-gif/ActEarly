@@ -6,6 +6,7 @@ import 'package:video_player/video_player.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:actearly/widgets/toolsMedia.dart';
+import 'package:intl/intl.dart';
 
 import 'dart:io';
 
@@ -152,7 +153,7 @@ class cardWidget extends State<ChildW>
                                                   child: Container(
                                                     color: Colors.transparent,
                                                     width: width * 0.8,
-                                                    height: height * 0.65,
+                                                    height: height * 0.6,
                                                     child: dialogMedia(),
                                                   ),
                                                 );
@@ -252,6 +253,22 @@ class cardWidget extends State<ChildW>
                                           fontFamily: 'Archive',
                                           color: ColorConstants.TextGray),
                                     ),
+                                    onTap: () async {
+                                      DateTime? pickedDate =
+                                          await showDatePicker(
+                                              context: context,
+                                              initialDate: DateTime.now(),
+                                              firstDate: DateTime(2019),
+                                              lastDate: DateTime(2101));
+
+                                      if (pickedDate != null) {
+                                        setState(() {
+                                          widget.date.text =
+                                              DateFormat('yyyy-MM-dd')
+                                                  .format(pickedDate);
+                                        });
+                                      }
+                                    },
                                   ),
                                 ),
                               ),

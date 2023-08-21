@@ -13,19 +13,19 @@ Widget child(BuildContext context) {
   final height = MediaQuery.of(context).size.height;
 
   List yearsOld = [
-    '2\nmeses',
-    '4\nmeses',
-    '6\nmeses',
-    '2\nmeses',
-    '9\nmeses',
-    '1\naño',
-    '15\nmeses',
-    '18\nmeses',
-    '2\naños',
-    '30\nmeses',
-    '3\naños',
-    '4\naños',
-    '5\naños'
+    '2 meses',
+    '4 meses',
+    '6 meses',
+    '2 meses',
+    '9 meses',
+    '1 año',
+    '15 meses',
+    '18 meses',
+    '2 años',
+    '30 meses',
+    '3 años',
+    '4 años',
+    '5 años'
   ];
 
   return Scaffold(
@@ -205,7 +205,8 @@ Widget child(BuildContext context) {
                             itemCount: yearsOld.length,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
-                              return btnYears(context, yearsOld[index]);
+                              return btnYears(
+                                  context, yearsOld[index], width * 0.80);
                             },
                           )))))
             ],
