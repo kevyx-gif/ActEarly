@@ -9,24 +9,30 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:actearly/utils/colors.dart';
 
 Widget child(BuildContext context) {
-  ScrollController _scrollController = ScrollController();
-  // Obtén la información de escalabilidad actual del dispositivo
-  final mediaQueryData =
-      MediaQueryData.fromWindow(WidgetsBinding.instance.window);
-
-  // Establece la información de escalabilidad manualmente para deshabilitarla
-  final fixedMediaQueryData = mediaQueryData.copyWith(
-    textScaleFactor: 1.0, // Establece un factor de escala fijo
-  );
-
   final width = MediaQuery.of(context).size.width;
   final height = MediaQuery.of(context).size.height;
+
+  List yearsOld = [
+    '2\nmeses',
+    '4\nmeses',
+    '6\nmeses',
+    '2\nmeses',
+    '9\nmeses',
+    '1\naño',
+    '15\nmeses',
+    '18\nmeses',
+    '2\naños',
+    '30\nmeses',
+    '3\naños',
+    '4\naños',
+    '5\naños'
+  ];
 
   return Scaffold(
       body: SingleChildScrollView(
     child: Container(
       width: width,
-      height: 0.935 * height,
+      height: 0.94 * height,
       decoration: BoxDecoration(
         image: DecorationImage(
           image: AssetImage("lib/assets/img/bg_main.png"),
@@ -159,7 +165,6 @@ Widget child(BuildContext context) {
                           //---------Buttons----------//
 
                           Container(
-                            width: width * 0.25,
                             height: height * 0.035,
                             child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
@@ -170,7 +175,7 @@ Widget child(BuildContext context) {
                                     backgroundColor: ColorConstants.btnColor),
                                 onPressed: () {},
                                 child: AutoSizeText(
-                                    style: TextStyle(fontSize: width * 0.18),
+                                    style: TextStyle(fontSize: width * 0.02),
                                     maxLines: 1,
                                     'Ver sugerencias')),
                           ),
@@ -194,13 +199,13 @@ Widget child(BuildContext context) {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(30)),
                           margin:
-                              EdgeInsets.symmetric(horizontal: width * 0.04),
+                              EdgeInsets.symmetric(horizontal: width * 0.035),
                           child: Scrollbar(
                               child: ListView.builder(
-                            itemCount: 7,
+                            itemCount: yearsOld.length,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
-                              return btnYears(context, 1);
+                              return btnYears(context, yearsOld[index]);
                             },
                           )))))
             ],

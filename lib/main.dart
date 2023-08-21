@@ -35,6 +35,7 @@ void main() async {
   runApp(MyApp(userLogin: userLogin));
 }
 
+// ignore: must_be_immutable
 class MyApp extends StatelessWidget {
   String userLogin;
   MyApp({required this.userLogin, Key? key}) : super(key: key);

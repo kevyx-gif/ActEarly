@@ -199,15 +199,33 @@ Widget indicador(BuildContext context, width, height, porcentaje, tittle) {
       ]));
 }
 
-Widget btnYears(BuildContext context, index) {
+Widget btnYears(BuildContext context, textInfo) {
   return Padding(
-    padding: const EdgeInsets.all(8.0),
+    padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
     child: Container(
-      height: 50,
-      width: 50,
-      decoration:
-          BoxDecoration(shape: BoxShape.circle, color: ColorConstants.purple),
-      child: Text(index.toString()),
-    ),
+        decoration:
+            BoxDecoration(shape: BoxShape.circle, color: ColorConstants.purple),
+        child: Center(
+          child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  shape: CircleBorder(),
+                  side: BorderSide(width: 2, color: ColorConstants.purpleGray),
+                  backgroundColor: ColorConstants.btnColor),
+              onPressed: () {},
+              child: Center(
+                child: Padding(
+                  padding: EdgeInsets.all(13),
+                  child: AutoSizeText(
+                    '$textInfo',
+                    maxLines: 2,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: 'Archive',
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+              )),
+        )),
   );
 }

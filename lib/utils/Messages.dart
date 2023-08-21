@@ -32,6 +32,7 @@ Map<String, Map<String, String>> Messages() {
       'titleTerri': 'Territory/Region',
       'titleQuestion': 'Recovery question',
       'ErrorNoneText': 'Please enter some text',
+      'btnAdd': '+ add child',
       //Options
       'Alberta': 'Alberta',
       'British Columbia': 'British Columbia',
@@ -78,6 +79,7 @@ Map<String, Map<String, String>> Messages() {
       'titleTerri': 'Territorio',
       'titleQuestion': 'Pregunta de recuperacion',
       'ErrorNoneText': 'Por favor ingresa un texto',
+      'btnAdd': '+ Agregar niño',
       //Options
       'Alberta': 'Alberta',
       'British Columbia': 'Columbia Británica',
@@ -124,6 +126,7 @@ Map<String, Map<String, String>> Messages() {
       'titleTerri': 'Territoire',
       'titleQuestion': 'Question de récupération',
       'ErrorNoneText': 'Veuillez entrer du texte',
+      'btnAdd': '+ ajouter un enfant',
       //Options
       'Alberta': 'Alberta',
       'British Columbia': 'Colombie Britannique',

@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:video_player/video_player.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:actearly/widgets/toolsMedia.dart';
 
 import 'dart:io';
 
@@ -77,77 +78,102 @@ class cardWidget extends State<ChildW>
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        //------------------------------Btn Add-------------------//
+                        //------------------------------Btn Add-------------------//widget.controller.value?.play();
                         Container(
                           width: width * 0.25,
-                          height: height * 0.24,
+                          height: height * 0.15,
                           decoration: BoxDecoration(
-                            shape: BoxShape.circle,
+                            color: Colors.transparent,
                           ),
                           child: widget.mediaFileList.value != null
-                              ? Image.file(
-                                  alignment: Alignment.center,
-                                  fit: BoxFit.cover,
-                                  File(widget.mediaFileList.value![0].path),
-                                  errorBuilder: (BuildContext context,
-                                      Object error, StackTrace? stackTrace) {
-                                    return const Center(
-                                        child: Text(
-                                            'This image type is not supported'));
-                                  },
+                              ? Container(
+                                  decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                            //offset: Offset(0, 4),
+                                            color: Color.fromARGB(
+                                                209, 65, 65, 65), //edited
+                                            spreadRadius: 1,
+                                            offset: Offset.fromDirection(1.0),
+                                            blurRadius: 2 //edited
+                                            )
+                                      ],
+                                      borderRadius: BorderRadius.circular(20),
+                                      shape: BoxShape.rectangle),
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(15),
+                                      child: Image.file(
+                                        gaplessPlayback: true,
+                                        alignment: Alignment.center,
+                                        fit: BoxFit.cover,
+                                        File(widget
+                                            .mediaFileList.value![0].path),
+                                        errorBuilder: (BuildContext context,
+                                            Object error,
+                                            StackTrace? stackTrace) {
+                                          return const Center(
+                                              child: Text(
+                                                  'This image type is not supported'));
+                                        },
+                                      )),
                                 )
                               : widget.controller.value != null
-                                  ? AspectRatio(
-                                      aspectRatio: widget
-                                          .controller.value!.value.aspectRatio,
-                                      child:
-                                          VideoPlayer(widget.controller.value!),
-                                    )
-                                  : Ink(
-                                      width: width * 0.20,
-                                      height: width * 0.20,
-                                      decoration: BoxDecoration(
-                                        color: widget.switchValue.value
-                                            ? ColorConstants.pinkCard
-                                            : ColorConstants.blueCard,
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: ElevatedButton(
-                                        onPressed: () async {
-                                          var status =
-                                              await Permission.camera.request();
+                                  ? MyVideoWidget(controller: widget.controller)
+                                  : ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                          ),
+                                          primary: widget.switchValue.value
+                                              ? ColorConstants.pinkCard
+                                              : ColorConstants.blueCard),
+                                      onPressed: () async {
+                                        var status =
+                                            await Permission.camera.request();
 
-                                          if (status.isGranted) {
-                                            showDialog(
+                                        if (status.isGranted) {
+                                          // ignore: use_build_context_synchronously
+                                          showDialog(
                                               context: context,
-                                              builder: (context) =>
-                                                  SimpleDialog(
-                                                children: [
-                                                  Container(
+                                              builder: (BuildContext context) {
+                                                return Dialog(
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  shape:
+                                                      const RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius.only(
+                                                    bottomRight:
+                                                        Radius.circular(50),
+                                                    bottomLeft:
+                                                        Radius.circular(50),
+                                                  )),
+                                                  child: Container(
+                                                    color: Colors.transparent,
                                                     width: width * 0.8,
-                                                    height: height * 0.7,
+                                                    height: height * 0.65,
                                                     child: dialogMedia(),
                                                   ),
-                                                ],
-                                              ),
-                                            ).then((value) {
-                                              if (value != null) {
-                                                setState(() {
-                                                  value is List<XFile>
-                                                      ? widget.mediaFileList
-                                                          .value = value
-                                                      : widget.controller
-                                                          .value = value;
-                                                });
-                                              }
-                                            });
-                                          } else {
-                                            // El permiso no ha sido concedido, podrías mostrar un mensaje o realizar alguna acción alternativa
-                                            print('Permiso de cámara denegado');
-                                          }
-                                        },
-                                        child: Icon(Icons.add),
-                                      )),
+                                                );
+                                              }).then((value) {
+                                            if (value != null) {
+                                              setState(() {
+                                                value is List<XFile>
+                                                    ? widget.mediaFileList
+                                                        .value = value
+                                                    : widget.controller.value =
+                                                        value;
+                                              });
+                                            }
+                                          });
+                                        } else {
+                                          // El permiso no ha sido concedido, podrías mostrar un mensaje o realizar alguna acción alternativa
+                                          print('Permiso de cámara denegado');
+                                        }
+                                      },
+                                      child: Icon(Icons.add),
+                                    ),
                         ),
                         //------------------------Forms--------------------------//
                         Container(

@@ -52,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         )),
         bottomNavigationBar: Container(
-          height: 0.065 * height,
+          height: 0.06 * height,
           color: ColorConstants.blueNavbar,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 25),

@@ -1,8 +1,19 @@
+import 'package:actearly/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:actearly/utils/class.dart';
+
+//Card Child
 import 'package:actearly/widgets/cardChild.dart';
+
+//Multimedia
 import 'package:video_player/video_player.dart';
 import 'package:image_picker/image_picker.dart';
+
+//Text
+import 'package:get/get.dart';
+
+//text size adapable
+import 'package:auto_size_text/auto_size_text.dart';
 
 //import to toastMessage
 import 'package:actearly/utils/functions.dart';
@@ -76,7 +87,17 @@ class _addChild extends State<addChildWidget> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           ElevatedButton(
-                              child: Text('Add'),
+                              style: ElevatedButton.styleFrom(
+                                  elevation: 7,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  primary: ColorConstants.white),
+                              child: AutoSizeText('btnAdd'.tr,
+                                  style: TextStyle(
+                                      color: ColorConstants.TextGrayF,
+                                      fontFamily: 'Archive',
+                                      fontWeight: FontWeight.w600)),
                               onPressed: () {
                                 setState(() {
                                   // Variables para almacenar
@@ -120,8 +141,14 @@ class _addChild extends State<addChildWidget> {
                                 });
                               }),
                           ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  elevation: 7,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  primary: ColorConstants.white),
                               onPressed: () {
-                                String text = 'no cargo xd ';
+                                String text = 'Card not found';
                                 if (items.isNotEmpty) {
                                   final firstItemController = (items[0]
                                           .widgetBuilder(context) as ChildW)
@@ -131,7 +158,13 @@ class _addChild extends State<addChildWidget> {
                                 messageToast(context, text, Colors.black26,
                                     Colors.white);
                               },
-                              child: Text('Accept'))
+                              child: AutoSizeText(
+                                'textAccept'.tr,
+                                style: TextStyle(
+                                    color: ColorConstants.TextGrayF,
+                                    fontFamily: 'Archive',
+                                    fontWeight: FontWeight.w700),
+                              ))
                         ])),
               ])),
     );
