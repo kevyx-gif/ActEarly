@@ -7,6 +7,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:actearly/widgets/toolsMedia.dart';
 import 'package:intl/intl.dart';
+import 'package:get/get.dart';
 
 import 'dart:io';
 
@@ -57,7 +58,7 @@ class cardWidget extends State<ChildW>
 
     return Container(
         width: width * 0.85,
-        height: height * 0.28,
+        height: height * 0.35,
         margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.01),
         child: Card(
             margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
@@ -71,7 +72,7 @@ class cardWidget extends State<ChildW>
               children: [
                 Container(
                   width: width * 0.84,
-                  height: height * 0.25,
+                  height: height * 0.32,
                   decoration:
                       BoxDecoration(borderRadius: BorderRadius.circular(30)),
                   margin: EdgeInsets.symmetric(horizontal: width * 0.04),
@@ -126,9 +127,7 @@ class cardWidget extends State<ChildW>
                                             borderRadius:
                                                 BorderRadius.circular(20),
                                           ),
-                                          primary: widget.switchValue.value
-                                              ? ColorConstants.pinkCard
-                                              : ColorConstants.blueCard),
+                                          primary: ColorConstants.blue),
                                       onPressed: () async {
                                         var status =
                                             await Permission.camera.request();
@@ -179,14 +178,13 @@ class cardWidget extends State<ChildW>
                         //------------------------Forms--------------------------//
                         Container(
                           width: width * 0.52,
-                          height: height * 0.24,
+                          height: height * 0.33,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               //-------------------Inputs ---------------//
                               Container(
-                                margin: EdgeInsets.fromLTRB(0, 5, 0, 5),
                                 padding:
                                     EdgeInsets.fromLTRB(width * 0.05, 0, 10, 0),
                                 child: Form(
@@ -204,8 +202,14 @@ class cardWidget extends State<ChildW>
                                       enabledBorder: OutlineInputBorder(
                                         borderSide: const BorderSide(
                                             color: Colors.transparent),
-                                        borderRadius: BorderRadius.circular(
-                                            24.0), // Adjust the radius as needed
+                                        borderRadius:
+                                            BorderRadius.circular(24.0),
+                                      ),
+                                      border: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: Colors.transparent),
+                                        borderRadius:
+                                            BorderRadius.circular(24.0),
                                       ),
                                       focusedBorder: OutlineInputBorder(
                                         borderSide: const BorderSide(
@@ -217,7 +221,16 @@ class cardWidget extends State<ChildW>
                                       hintStyle: const TextStyle(
                                           fontFamily: 'Archive',
                                           color: ColorConstants.TextGray),
+                                      errorStyle: TextStyle(
+                                        fontSize: height * 0.015,
+                                      ),
                                     ),
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'ErrorNoneText'.tr;
+                                      }
+                                      return null;
+                                    },
                                   ),
                                 ),
                               ),
@@ -228,6 +241,7 @@ class cardWidget extends State<ChildW>
                                   key: widget.formKeyDate,
                                   child: TextFormField(
                                     controller: widget.date,
+                                    readOnly: true, // none desktop
                                     obscureText: false,
                                     style: const TextStyle(
                                         color: ColorConstants.black),
@@ -239,8 +253,14 @@ class cardWidget extends State<ChildW>
                                       enabledBorder: OutlineInputBorder(
                                         borderSide: const BorderSide(
                                             color: Colors.transparent),
-                                        borderRadius: BorderRadius.circular(
-                                            24.0), // Adjust the radius as needed
+                                        borderRadius:
+                                            BorderRadius.circular(24.0),
+                                      ),
+                                      border: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: Colors.transparent),
+                                        borderRadius:
+                                            BorderRadius.circular(24.0),
                                       ),
                                       focusedBorder: OutlineInputBorder(
                                         borderSide: const BorderSide(
@@ -269,6 +289,12 @@ class cardWidget extends State<ChildW>
                                         });
                                       }
                                     },
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'ErrorNoneDate'.tr;
+                                      }
+                                      return null;
+                                    },
                                   ),
                                 ),
                               ),
@@ -293,13 +319,11 @@ class cardWidget extends State<ChildW>
                                         key: ValueKey(widget.formKeySwitch),
                                         // This bool value toggles the switch.
                                         value: widget.switchValue.value,
-                                        activeTrackColor:
-                                            ColorConstants.pinkCard,
+                                        activeTrackColor: ColorConstants.blue,
                                         activeColor: ColorConstants.white,
                                         inactiveThumbColor:
                                             ColorConstants.white,
-                                        inactiveTrackColor:
-                                            ColorConstants.blueCard,
+                                        inactiveTrackColor: ColorConstants.blue,
 
                                         onChanged: (bool value) {
                                           setState(() {
@@ -363,11 +387,7 @@ class cardWidget extends State<ChildW>
                                                   shape: BoxShape.circle,
                                                   color: widget
                                                           .decisionValue.value
-                                                      ? widget.switchValue.value
-                                                          ? ColorConstants
-                                                              .pinkCard
-                                                          : ColorConstants
-                                                              .blueCard
+                                                      ? ColorConstants.blue
                                                       : ColorConstants.TextGray,
                                                 ),
                                                 child: Container(
@@ -405,11 +425,7 @@ class cardWidget extends State<ChildW>
                                                   shape: BoxShape.circle,
                                                   color: !widget
                                                           .decisionValue.value
-                                                      ? widget.switchValue.value
-                                                          ? ColorConstants
-                                                              .pinkCard
-                                                          : ColorConstants
-                                                              .blueCard
+                                                      ? ColorConstants.blue
                                                       : ColorConstants.TextGray,
                                                 ),
                                                 child: Container(

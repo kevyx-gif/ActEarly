@@ -22,7 +22,7 @@ dependencies:
   get:  #translate
   quickalert:   # add this line #dialogs
   flutter_svg: 2.0.7 #icons
-  google_nav_bar: ^5.0.6 #navbar
+  curved_navigation_bar: ^1.0.3
   fluttertoast: ^8.0.8 #toast ios
   auto_size_text: ^3.0.0 #adaptable text
   percent_indicator: ^4.2.3 #Indicador de porcentaje
@@ -32,6 +32,7 @@ dependencies:
   video_player: ^2.7.0 #local video
   permission_handler: ^10.4.3 #permiss manager
   intl: ^0.18.1 #date format
+  firebase_storage: ^11.2.6 #firestoreDatabase
   
 
 dev_dependencies:

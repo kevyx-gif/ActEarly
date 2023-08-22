@@ -5,16 +5,11 @@ import 'package:actearly/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 //NabBar import
-import 'package:google_nav_bar/google_nav_bar.dart';
-
-//Futures
-import 'package:actearly/utils/futures.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 //Pages
 import 'package:actearly/widgets/addChild.dart';
 import 'package:actearly/widgets/showChild.dart';
-
-import '../../utils/class.dart';
 
 class MyHomePage extends StatefulWidget {
   final String documentId;
@@ -45,45 +40,43 @@ class _MyHomePageState extends State<MyHomePage> {
             index: _currentIndex,
             children: <Widget>[
               ShowChildWidget(userType),
-              addChildWidget(),
+              addChildWidget(documentId: widget.documentId),
               Screen2(),
               Screen3(documentId: widget.documentId),
             ],
           ),
         )),
-        bottomNavigationBar: Container(
-          height: 0.06 * height,
+        bottomNavigationBar: CurvedNavigationBar(
+          height: 0.060 * height,
+          backgroundColor: _currentIndex == 1
+              ? Color.fromARGB(255, 129, 129, 245)
+              : ColorConstants.white,
           color: ColorConstants.blueNavbar,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 25),
-            child: GNav(
-              backgroundColor: ColorConstants.blueNavbar,
+          animationDuration: Duration(milliseconds: 300),
+          onTap: (index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+          items: [
+            Icon(Icons.home, color: ColorConstants.white),
+            Icon(
+              Icons.calendar_month,
               color: ColorConstants.white,
-              activeColor: Colors.white,
-              tabBackgroundColor: ColorConstants.TextGrayF,
-              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-              gap: 9,
-              onTabChange: (index) {
-                setState(() {
-                  _currentIndex = index;
-                });
-              },
-              tabs: [
-                GButton(
-                  icon: Icons.home,
-                ),
-                GButton(
-                  icon: Icons.add_reaction,
-                ),
-                GButton(
-                  icon: Icons.help,
-                ),
-                GButton(
-                  icon: Icons.settings,
-                ),
-              ],
             ),
-          ),
+            Icon(
+              Icons.add_circle,
+              color: ColorConstants.white,
+            ),
+            Icon(
+              Icons.star_outlined,
+              color: ColorConstants.white,
+            ),
+            Icon(
+              Icons.settings,
+              color: ColorConstants.white,
+            ),
+          ],
         ));
   }
 }

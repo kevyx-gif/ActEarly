@@ -19,6 +19,10 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:actearly/utils/functions.dart';
 
 class addChildWidget extends StatefulWidget {
+  final String documentId;
+
+  addChildWidget({required this.documentId, super.key});
+
   @override
   _addChild createState() => _addChild();
 }
@@ -147,16 +151,15 @@ class _addChild extends State<addChildWidget> {
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                   primary: ColorConstants.white),
-                              onPressed: () {
-                                String text = 'Card not found';
-                                if (items.isNotEmpty) {
-                                  final firstItemController = (items[0]
-                                          .widgetBuilder(context) as ChildW)
-                                      .kidName;
-                                  text = firstItemController.text;
-                                }
-                                messageToast(context, text, Colors.black26,
-                                    Colors.white);
+                              onPressed: () async {
+                                final error = await addChildDatabase(
+                                    context, items, widget.documentId);
+                                setState(() {
+                                  if (error) {
+                                    itemKeys.clear();
+                                    items.clear();
+                                  }
+                                });
                               },
                               child: AutoSizeText(
                                 'textAccept'.tr,
