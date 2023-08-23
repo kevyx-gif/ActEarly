@@ -116,10 +116,6 @@ class _addChild extends State<addChildWidget> {
                                       ValueNotifier<bool>(false);
                                   ValueNotifier<bool> decisionBtnNotifier =
                                       ValueNotifier<bool>(true);
-                                  ValueNotifier<VideoPlayerController?>
-                                      controller =
-                                      ValueNotifier<VideoPlayerController?>(
-                                          null);
                                   ValueNotifier<List<XFile>?> mediaFileList =
                                       ValueNotifier<List<XFile>?>(null);
 
@@ -137,7 +133,6 @@ class _addChild extends State<addChildWidget> {
                                         formKeyDecision: formKeyDecision,
                                         switchValue: switchValueNotifier,
                                         decisionValue: decisionBtnNotifier,
-                                        controller: controller,
                                         mediaFileList: mediaFileList,
                                       );
                                     },

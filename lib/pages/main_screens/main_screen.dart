@@ -40,6 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
             index: _currentIndex,
             children: <Widget>[
               ShowChildWidget(userType),
+              Screen1(),
               addChildWidget(documentId: widget.documentId),
               Screen2(),
               Screen3(documentId: widget.documentId),
@@ -48,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
         )),
         bottomNavigationBar: CurvedNavigationBar(
           height: 0.060 * height,
-          backgroundColor: _currentIndex == 1
+          backgroundColor: _currentIndex == 2
               ? Color.fromARGB(255, 129, 129, 245)
               : ColorConstants.white,
           color: ColorConstants.blueNavbar,

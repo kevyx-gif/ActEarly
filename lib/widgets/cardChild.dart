@@ -22,7 +22,6 @@ class ChildW extends StatefulWidget {
   GlobalKey<FormState> formKeyDecision;
   ValueNotifier<bool> switchValue;
   ValueNotifier<bool> decisionValue;
-  ValueNotifier<VideoPlayerController?> controller;
   ValueNotifier<List<XFile>?> mediaFileList;
 
   ChildW({
@@ -35,7 +34,6 @@ class ChildW extends StatefulWidget {
     required this.formKeyDecision,
     required this.switchValue,
     required this.decisionValue,
-    required this.controller,
     required this.mediaFileList,
     super.key,
   });
@@ -119,61 +117,53 @@ class cardWidget extends State<ChildW>
                                         },
                                       )),
                                 )
-                              : widget.controller.value != null
-                                  ? MyVideoWidget(controller: widget.controller)
-                                  : ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                          ),
-                                          primary: ColorConstants.blue),
-                                      onPressed: () async {
-                                        var status =
-                                            await Permission.camera.request();
+                              : ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      primary: ColorConstants.blue),
+                                  onPressed: () async {
+                                    var status =
+                                        await Permission.camera.request();
 
-                                        if (status.isGranted) {
-                                          // ignore: use_build_context_synchronously
-                                          showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return Dialog(
-                                                  backgroundColor:
-                                                      Colors.transparent,
-                                                  shape:
-                                                      const RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius.only(
-                                                    bottomRight:
-                                                        Radius.circular(50),
-                                                    bottomLeft:
-                                                        Radius.circular(50),
-                                                  )),
-                                                  child: Container(
-                                                    color: Colors.transparent,
-                                                    width: width * 0.8,
-                                                    height: height * 0.6,
-                                                    child: dialogMedia(),
-                                                  ),
-                                                );
-                                              }).then((value) {
-                                            if (value != null) {
-                                              setState(() {
-                                                value is List<XFile>
-                                                    ? widget.mediaFileList
-                                                        .value = value
-                                                    : widget.controller.value =
-                                                        value;
-                                              });
-                                            }
+                                    if (status.isGranted) {
+                                      // ignore: use_build_context_synchronously
+                                      showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return Dialog(
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              shape:
+                                                  const RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                bottomRight:
+                                                    Radius.circular(50),
+                                                bottomLeft: Radius.circular(50),
+                                              )),
+                                              child: Container(
+                                                color: Colors.transparent,
+                                                width: width * 0.8,
+                                                height: height * 0.6,
+                                                child: DialogMedia(),
+                                              ),
+                                            );
+                                          }).then((value) {
+                                        if (value != null) {
+                                          setState(() {
+                                            widget.mediaFileList.value = value;
                                           });
-                                        } else {
-                                          // El permiso no ha sido concedido, podrías mostrar un mensaje o realizar alguna acción alternativa
-                                          print('Permiso de cámara denegado');
                                         }
-                                      },
-                                      child: Icon(Icons.add),
-                                    ),
+                                      });
+                                    } else {
+                                      // El permiso no ha sido concedido, podrías mostrar un mensaje o realizar alguna acción alternativa
+                                      print('Permiso de cámara denegado');
+                                    }
+                                  },
+                                  child: Icon(Icons.add),
+                                ),
                         ),
                         //------------------------Forms--------------------------//
                         Container(
