@@ -1,15 +1,18 @@
 import 'package:actearly/utils/colors.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import "package:flutter/material.dart";
 import 'package:actearly/utils/futures.dart';
+import 'package:actearly/widgets/cardChild.dart';
+import 'package:flutter/services.dart';
 
 //toast
 import 'package:fluttertoast/fluttertoast.dart';
-//platforms
-import 'dart:io' show Platform;
 //Text Imports
 import 'package:get/get.dart';
 //firebase
 import 'package:cloud_firestore/cloud_firestore.dart';
+//multiMedia
+import 'dart:io';
 
 //-----------------Menssage Toast Per-----------------//
 void messageToast(
@@ -109,7 +112,7 @@ void logOut(BuildContext context) {
   Navigator.pushNamed(context, '/login');
 }
 
-//----------------------------Determinar Color-----------------//
+//----------------------------Color progress bar-----------------//
 Color ProgressColor(porcentaje) {
   switch (porcentaje) {
     case < 0.8 && > 0.6:
@@ -130,4 +133,129 @@ Color ProgressColorShadow(porcentaje) {
     default:
       return ColorConstants.greenShadow;
   }
+}
+
+//------------------------ ADD Child---------------------------//
+Future<bool> addChildDatabase(BuildContext context, items, email) async {
+  String imgPred =
+      'https://firebasestorage.googleapis.com/v0/b/actearly-db.appspot.com/o/pred.jpg?alt=media&token=4bca616d-a874-41ad-a310-1f4ab0ddbfbc';
+  bool upData = true;
+  if (items.isNotEmpty) {
+    List<Map<String, dynamic>> children = [];
+
+    for (int i = 0; i < items.length; i++) {
+      final child = (items[i].widgetBuilder(context) as ChildW);
+      if (!child.formKeyName.currentState!.validate() &&
+          !child.formKeyDate.currentState!.validate()) {
+        upData = false;
+        break;
+      }
+    }
+    if (upData) {
+      for (int i = 0; i < items.length; i++) {
+        final child = (items[i].widgetBuilder(context) as ChildW);
+
+        if (child.mediaFileList.value != null) {
+          final imageFile = File(child.mediaFileList.value![0].path);
+          final imgReference = await uploadImage(imageFile, email);
+
+          children.add({
+            'NameChild': child.kidName.text,
+            'Date': child.date.text,
+            'Genre': child.switchValue.value,
+            'Premature': child.decisionValue.value,
+            'Picture': imgReference
+          });
+        } else {
+          children.add({
+            'NameChild': child.kidName.text,
+            'Date': child.date.text,
+            'Genre': child.switchValue.value,
+            'Premature': child.decisionValue.value,
+            'Picture': imgPred
+          });
+        }
+      }
+
+      final update = await add(context, children, email);
+      if (update) {
+        return true;
+      }
+    }
+    return false;
+  } else {
+    return false;
+  }
+}
+
+Future<bool> add(
+    BuildContext context, List<Map<String, dynamic>> childrenList, em) async {
+  final firebase = FirebaseFirestore.instance;
+  try {
+    final data = await firebase.collection('users').doc(em).get();
+
+    final user = data.data() as Map<String, dynamic>;
+
+    // Atributos del documento/usuario logueado
+    String email = user['email'];
+    String userName = user['nameUser'];
+    String pass = user['password'];
+    String province = user['provinceTerritory'];
+    String question = user['question'];
+    String userType = user['userType'];
+    List<dynamic> children =
+        user.containsKey('children') ? data['children'] : [];
+
+    if (children.isEmpty) {
+      children = childrenList;
+    } else {
+      for (int i = 0; i < childrenList.length; i++) {
+        children.add(childrenList[i]);
+      }
+    }
+
+    try {
+      await firebase.collection('users').doc(em).set({
+        "nameUser": userName,
+        "email": email,
+        "password": pass,
+        "userType": userType,
+        "provinceTerritory": province,
+        "question": question,
+        "children": children
+      });
+
+      messageToast(context, 'Hijos agregados con exito', ColorConstants.green,
+          ColorConstants.white);
+      return true;
+    } catch (e) {
+      print('ERROR ' + e.toString());
+      messageToast(
+          context, 'Error al subir', ColorConstants.red, ColorConstants.white);
+      return false;
+    }
+  } catch (e) {
+    print('ERROR ' + e.toString());
+    messageToast(
+        context, 'Error al cargar', ColorConstants.red, ColorConstants.white);
+    return false;
+  }
+}
+
+Future<String> uploadImage(File image, imgReference) async {
+  final nameFile = image.path.split("/").last;
+
+  final storage = FirebaseStorage.instance;
+
+  Reference ref = storage.ref().child(imgReference).child(nameFile);
+
+  final UploadTask uploadtask = ref.putFile(image);
+
+  final TaskSnapshot snapshot = await uploadtask.whenComplete(() => true);
+  if (snapshot.state != TaskState.success) {
+    return '';
+  }
+
+  final String url = await snapshot.ref.getDownloadURL();
+  return url;
 }

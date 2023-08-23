@@ -199,33 +199,30 @@ Widget indicador(BuildContext context, width, height, porcentaje, tittle) {
       ]));
 }
 
-Widget btnYears(BuildContext context, textInfo) {
-  return Padding(
-    padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-    child: Container(
-        decoration:
-            BoxDecoration(shape: BoxShape.circle, color: ColorConstants.purple),
+Widget btnYears(BuildContext context, textInfo, width) {
+  return Container(
+    margin: EdgeInsets.symmetric(vertical: width * 0.02),
+    width: width * 0.2,
+    decoration:
+        BoxDecoration(shape: BoxShape.circle, color: ColorConstants.purple),
+    child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            elevation: 7,
+            shape: CircleBorder(),
+            side: BorderSide(width: 2, color: ColorConstants.purpleGray),
+            backgroundColor: ColorConstants.btnColor),
+        onPressed: () {},
         child: Center(
-          child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  shape: CircleBorder(),
-                  side: BorderSide(width: 2, color: ColorConstants.purpleGray),
-                  backgroundColor: ColorConstants.btnColor),
-              onPressed: () {},
-              child: Center(
-                child: Padding(
-                  padding: EdgeInsets.all(13),
-                  child: AutoSizeText(
-                    '$textInfo',
-                    maxLines: 2,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontFamily: 'Archive',
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-              )),
+          child: Text(
+            maxLines: 2,
+            '$textInfo',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: width * 0.035,
+              fontFamily: 'Archive',
+              fontWeight: FontWeight.w700,
+            ),
+          ),
         )),
   );
 }

@@ -31,7 +31,8 @@ Map<String, Map<String, String>> Messages() {
       'titleIdent': 'How do you identify yourself?',
       'titleTerri': 'Territory/Region',
       'titleQuestion': 'Recovery question',
-      'ErrorNoneText': 'Please enter some text',
+      'ErrorNoneText': 'Enter some text',
+      'ErrorNoneDate': 'Enter some Date',
       'btnAdd': '+ add child',
       //Options
       'Alberta': 'Alberta',
@@ -78,7 +79,8 @@ Map<String, Map<String, String>> Messages() {
       'titleIdent': '¿Cómo se identifica?',
       'titleTerri': 'Territorio',
       'titleQuestion': 'Pregunta de recuperacion',
-      'ErrorNoneText': 'Por favor ingresa un texto',
+      'ErrorNoneText': 'Ingresa un texto',
+      'ErrorNoneDate': 'Ingresa una fecha',
       'btnAdd': '+ Agregar niño',
       //Options
       'Alberta': 'Alberta',
@@ -126,6 +128,7 @@ Map<String, Map<String, String>> Messages() {
       'titleTerri': 'Territoire',
       'titleQuestion': 'Question de récupération',
       'ErrorNoneText': 'Veuillez entrer du texte',
+      'ErrorNoneDate': 'entrez une date',
       'btnAdd': '+ ajouter un enfant',
       //Options
       'Alberta': 'Alberta',

@@ -6,6 +6,8 @@ import 'package:video_player/video_player.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:actearly/widgets/toolsMedia.dart';
+import 'package:intl/intl.dart';
+import 'package:get/get.dart';
 
 import 'dart:io';
 
@@ -20,7 +22,6 @@ class ChildW extends StatefulWidget {
   GlobalKey<FormState> formKeyDecision;
   ValueNotifier<bool> switchValue;
   ValueNotifier<bool> decisionValue;
-  ValueNotifier<VideoPlayerController?> controller;
   ValueNotifier<List<XFile>?> mediaFileList;
 
   ChildW({
@@ -33,7 +34,6 @@ class ChildW extends StatefulWidget {
     required this.formKeyDecision,
     required this.switchValue,
     required this.decisionValue,
-    required this.controller,
     required this.mediaFileList,
     super.key,
   });
@@ -56,7 +56,7 @@ class cardWidget extends State<ChildW>
 
     return Container(
         width: width * 0.85,
-        height: height * 0.28,
+        height: height * 0.35,
         margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.01),
         child: Card(
             margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
@@ -70,7 +70,7 @@ class cardWidget extends State<ChildW>
               children: [
                 Container(
                   width: width * 0.84,
-                  height: height * 0.25,
+                  height: height * 0.32,
                   decoration:
                       BoxDecoration(borderRadius: BorderRadius.circular(30)),
                   margin: EdgeInsets.symmetric(horizontal: width * 0.04),
@@ -117,75 +117,64 @@ class cardWidget extends State<ChildW>
                                         },
                                       )),
                                 )
-                              : widget.controller.value != null
-                                  ? MyVideoWidget(controller: widget.controller)
-                                  : ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                          ),
-                                          primary: widget.switchValue.value
-                                              ? ColorConstants.pinkCard
-                                              : ColorConstants.blueCard),
-                                      onPressed: () async {
-                                        var status =
-                                            await Permission.camera.request();
+                              : ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      primary: ColorConstants.blue),
+                                  onPressed: () async {
+                                    var status =
+                                        await Permission.camera.request();
 
-                                        if (status.isGranted) {
-                                          // ignore: use_build_context_synchronously
-                                          showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return Dialog(
-                                                  backgroundColor:
-                                                      Colors.transparent,
-                                                  shape:
-                                                      const RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius.only(
-                                                    bottomRight:
-                                                        Radius.circular(50),
-                                                    bottomLeft:
-                                                        Radius.circular(50),
-                                                  )),
-                                                  child: Container(
-                                                    color: Colors.transparent,
-                                                    width: width * 0.8,
-                                                    height: height * 0.65,
-                                                    child: dialogMedia(),
-                                                  ),
-                                                );
-                                              }).then((value) {
-                                            if (value != null) {
-                                              setState(() {
-                                                value is List<XFile>
-                                                    ? widget.mediaFileList
-                                                        .value = value
-                                                    : widget.controller.value =
-                                                        value;
-                                              });
-                                            }
+                                    if (status.isGranted) {
+                                      // ignore: use_build_context_synchronously
+                                      showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return Dialog(
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              shape:
+                                                  const RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                bottomRight:
+                                                    Radius.circular(50),
+                                                bottomLeft: Radius.circular(50),
+                                              )),
+                                              child: Container(
+                                                color: Colors.transparent,
+                                                width: width * 0.8,
+                                                height: height * 0.6,
+                                                child: DialogMedia(),
+                                              ),
+                                            );
+                                          }).then((value) {
+                                        if (value != null) {
+                                          setState(() {
+                                            widget.mediaFileList.value = value;
                                           });
-                                        } else {
-                                          // El permiso no ha sido concedido, podrías mostrar un mensaje o realizar alguna acción alternativa
-                                          print('Permiso de cámara denegado');
                                         }
-                                      },
-                                      child: Icon(Icons.add),
-                                    ),
+                                      });
+                                    } else {
+                                      // El permiso no ha sido concedido, podrías mostrar un mensaje o realizar alguna acción alternativa
+                                      print('Permiso de cámara denegado');
+                                    }
+                                  },
+                                  child: Icon(Icons.add),
+                                ),
                         ),
                         //------------------------Forms--------------------------//
                         Container(
                           width: width * 0.52,
-                          height: height * 0.24,
+                          height: height * 0.33,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               //-------------------Inputs ---------------//
                               Container(
-                                margin: EdgeInsets.fromLTRB(0, 5, 0, 5),
                                 padding:
                                     EdgeInsets.fromLTRB(width * 0.05, 0, 10, 0),
                                 child: Form(
@@ -203,8 +192,14 @@ class cardWidget extends State<ChildW>
                                       enabledBorder: OutlineInputBorder(
                                         borderSide: const BorderSide(
                                             color: Colors.transparent),
-                                        borderRadius: BorderRadius.circular(
-                                            24.0), // Adjust the radius as needed
+                                        borderRadius:
+                                            BorderRadius.circular(24.0),
+                                      ),
+                                      border: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: Colors.transparent),
+                                        borderRadius:
+                                            BorderRadius.circular(24.0),
                                       ),
                                       focusedBorder: OutlineInputBorder(
                                         borderSide: const BorderSide(
@@ -216,7 +211,16 @@ class cardWidget extends State<ChildW>
                                       hintStyle: const TextStyle(
                                           fontFamily: 'Archive',
                                           color: ColorConstants.TextGray),
+                                      errorStyle: TextStyle(
+                                        fontSize: height * 0.015,
+                                      ),
                                     ),
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'ErrorNoneText'.tr;
+                                      }
+                                      return null;
+                                    },
                                   ),
                                 ),
                               ),
@@ -227,6 +231,7 @@ class cardWidget extends State<ChildW>
                                   key: widget.formKeyDate,
                                   child: TextFormField(
                                     controller: widget.date,
+                                    readOnly: true, // none desktop
                                     obscureText: false,
                                     style: const TextStyle(
                                         color: ColorConstants.black),
@@ -238,8 +243,14 @@ class cardWidget extends State<ChildW>
                                       enabledBorder: OutlineInputBorder(
                                         borderSide: const BorderSide(
                                             color: Colors.transparent),
-                                        borderRadius: BorderRadius.circular(
-                                            24.0), // Adjust the radius as needed
+                                        borderRadius:
+                                            BorderRadius.circular(24.0),
+                                      ),
+                                      border: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: Colors.transparent),
+                                        borderRadius:
+                                            BorderRadius.circular(24.0),
                                       ),
                                       focusedBorder: OutlineInputBorder(
                                         borderSide: const BorderSide(
@@ -252,6 +263,28 @@ class cardWidget extends State<ChildW>
                                           fontFamily: 'Archive',
                                           color: ColorConstants.TextGray),
                                     ),
+                                    onTap: () async {
+                                      DateTime? pickedDate =
+                                          await showDatePicker(
+                                              context: context,
+                                              initialDate: DateTime.now(),
+                                              firstDate: DateTime(2019),
+                                              lastDate: DateTime(2101));
+
+                                      if (pickedDate != null) {
+                                        setState(() {
+                                          widget.date.text =
+                                              DateFormat('yyyy-MM-dd')
+                                                  .format(pickedDate);
+                                        });
+                                      }
+                                    },
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'ErrorNoneDate'.tr;
+                                      }
+                                      return null;
+                                    },
                                   ),
                                 ),
                               ),
@@ -276,13 +309,11 @@ class cardWidget extends State<ChildW>
                                         key: ValueKey(widget.formKeySwitch),
                                         // This bool value toggles the switch.
                                         value: widget.switchValue.value,
-                                        activeTrackColor:
-                                            ColorConstants.pinkCard,
+                                        activeTrackColor: ColorConstants.blue,
                                         activeColor: ColorConstants.white,
                                         inactiveThumbColor:
                                             ColorConstants.white,
-                                        inactiveTrackColor:
-                                            ColorConstants.blueCard,
+                                        inactiveTrackColor: ColorConstants.blue,
 
                                         onChanged: (bool value) {
                                           setState(() {
@@ -346,11 +377,7 @@ class cardWidget extends State<ChildW>
                                                   shape: BoxShape.circle,
                                                   color: widget
                                                           .decisionValue.value
-                                                      ? widget.switchValue.value
-                                                          ? ColorConstants
-                                                              .pinkCard
-                                                          : ColorConstants
-                                                              .blueCard
+                                                      ? ColorConstants.blue
                                                       : ColorConstants.TextGray,
                                                 ),
                                                 child: Container(
@@ -388,11 +415,7 @@ class cardWidget extends State<ChildW>
                                                   shape: BoxShape.circle,
                                                   color: !widget
                                                           .decisionValue.value
-                                                      ? widget.switchValue.value
-                                                          ? ColorConstants
-                                                              .pinkCard
-                                                          : ColorConstants
-                                                              .blueCard
+                                                      ? ColorConstants.blue
                                                       : ColorConstants.TextGray,
                                                 ),
                                                 child: Container(

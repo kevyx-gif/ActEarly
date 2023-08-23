@@ -19,6 +19,10 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:actearly/utils/functions.dart';
 
 class addChildWidget extends StatefulWidget {
+  final String documentId;
+
+  addChildWidget({required this.documentId, super.key});
+
   @override
   _addChild createState() => _addChild();
 }
@@ -45,7 +49,7 @@ class _addChild extends State<addChildWidget> {
       data: fixedMediaQueryData,
       child: Container(
           width: width,
-          height: 0.940 * height,
+          height: 0.94 * height,
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage("lib/assets/img/register_child.png"),
@@ -57,7 +61,7 @@ class _addChild extends State<addChildWidget> {
               children: [
                 Container(
                   margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                  height: (0.935 * height) * 0.92,
+                  height: (0.94 * height) * 0.9,
                   child: Scrollbar(
                       child: ListView.builder(
                           itemCount: items.length,
@@ -81,7 +85,7 @@ class _addChild extends State<addChildWidget> {
                           })),
                 ),
                 Container(
-                    height: (0.935 * height) * 0.07,
+                    height: (0.94 * height) * 0.08,
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -112,10 +116,6 @@ class _addChild extends State<addChildWidget> {
                                       ValueNotifier<bool>(false);
                                   ValueNotifier<bool> decisionBtnNotifier =
                                       ValueNotifier<bool>(true);
-                                  ValueNotifier<VideoPlayerController?>
-                                      controller =
-                                      ValueNotifier<VideoPlayerController?>(
-                                          null);
                                   ValueNotifier<List<XFile>?> mediaFileList =
                                       ValueNotifier<List<XFile>?>(null);
 
@@ -133,7 +133,6 @@ class _addChild extends State<addChildWidget> {
                                         formKeyDecision: formKeyDecision,
                                         switchValue: switchValueNotifier,
                                         decisionValue: decisionBtnNotifier,
-                                        controller: controller,
                                         mediaFileList: mediaFileList,
                                       );
                                     },
@@ -147,16 +146,15 @@ class _addChild extends State<addChildWidget> {
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                   primary: ColorConstants.white),
-                              onPressed: () {
-                                String text = 'Card not found';
-                                if (items.isNotEmpty) {
-                                  final firstItemController = (items[0]
-                                          .widgetBuilder(context) as ChildW)
-                                      .kidName;
-                                  text = firstItemController.text;
-                                }
-                                messageToast(context, text, Colors.black26,
-                                    Colors.white);
+                              onPressed: () async {
+                                final error = await addChildDatabase(
+                                    context, items, widget.documentId);
+                                setState(() {
+                                  if (error) {
+                                    itemKeys.clear();
+                                    items.clear();
+                                  }
+                                });
                               },
                               child: AutoSizeText(
                                 'textAccept'.tr,
