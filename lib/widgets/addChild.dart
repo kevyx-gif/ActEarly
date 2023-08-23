@@ -32,7 +32,7 @@ class _addChild extends State<addChildWidget> with TickerProviderStateMixin {
   bool isButtonEnabled = true;
 
   late final AnimationController _controller = AnimationController(
-    duration: const Duration(seconds: 2),
+    duration: const Duration(seconds: 4),
     vsync: this,
   );
   late final Animation<double> _animation =
@@ -58,7 +58,7 @@ class _addChild extends State<addChildWidget> with TickerProviderStateMixin {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
 
-    _controller.forward(from: 0.0);
+    _controller.forward(from: 1.0);
 
     return MediaQuery(
       data: fixedMediaQueryData,
@@ -106,59 +106,68 @@ class _addChild extends State<addChildWidget> with TickerProviderStateMixin {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                              ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      elevation: 7,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      primary: ColorConstants.white),
-                                  child: AutoSizeText('btnAdd'.tr,
-                                      style: TextStyle(
-                                          color: ColorConstants.TextGrayF,
-                                          fontFamily: 'Archive',
-                                          fontWeight: FontWeight.w600)),
-                                  onPressed: () {
-                                    setState(() {
-                                      // Variables para almacenar
-                                      final kidName = TextEditingController();
-                                      final date = TextEditingController();
-                                      final formKeyName =
-                                          GlobalKey<FormState>();
-                                      final formKeyDate =
-                                          GlobalKey<FormState>();
-                                      final formKeySwitch =
-                                          GlobalKey<FormState>();
-                                      final formKeyDecision =
-                                          GlobalKey<FormState>();
-                                      ValueNotifier<bool> switchValueNotifier =
-                                          ValueNotifier<bool>(false);
-                                      ValueNotifier<bool> decisionBtnNotifier =
-                                          ValueNotifier<bool>(true);
-                                      ValueNotifier<List<XFile>?>
-                                          mediaFileList =
-                                          ValueNotifier<List<XFile>?>(null);
+                              FadeTransition(
+                                  opacity: _animation,
+                                  child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          elevation: 7,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                          ),
+                                          primary: ColorConstants.white),
+                                      child: AutoSizeText('btnAdd'.tr,
+                                          style: TextStyle(
+                                              color: ColorConstants.TextGrayF,
+                                              fontFamily: 'Archive',
+                                              fontWeight: FontWeight.w600)),
+                                      onPressed: () {
+                                        setState(() {
+                                          // Variables para almacenar
+                                          final kidName =
+                                              TextEditingController();
+                                          final date = TextEditingController();
+                                          final formKeyName =
+                                              GlobalKey<FormState>();
+                                          final formKeyDate =
+                                              GlobalKey<FormState>();
+                                          final formKeySwitch =
+                                              GlobalKey<FormState>();
+                                          final formKeyDecision =
+                                              GlobalKey<FormState>();
+                                          ValueNotifier<bool>
+                                              switchValueNotifier =
+                                              ValueNotifier<bool>(false);
+                                          ValueNotifier<bool>
+                                              decisionBtnNotifier =
+                                              ValueNotifier<bool>(true);
+                                          ValueNotifier<List<XFile>?>
+                                              mediaFileList =
+                                              ValueNotifier<List<XFile>?>(null);
 
-                                      items.add(ListItem(
-                                        widgetBuilder: (
-                                          context,
-                                        ) {
-                                          return ChildW(
-                                            context: context,
-                                            kidName: kidName,
-                                            date: date,
-                                            formKeyName: formKeyName,
-                                            formKeyDate: formKeyDate,
-                                            formKeySwitch: formKeySwitch,
-                                            formKeyDecision: formKeyDecision,
-                                            switchValue: switchValueNotifier,
-                                            decisionValue: decisionBtnNotifier,
-                                            mediaFileList: mediaFileList,
-                                          );
-                                        },
-                                      ));
-                                    });
-                                  }),
+                                          items.add(ListItem(
+                                            widgetBuilder: (
+                                              context,
+                                            ) {
+                                              return ChildW(
+                                                context: context,
+                                                kidName: kidName,
+                                                date: date,
+                                                formKeyName: formKeyName,
+                                                formKeyDate: formKeyDate,
+                                                formKeySwitch: formKeySwitch,
+                                                formKeyDecision:
+                                                    formKeyDecision,
+                                                switchValue:
+                                                    switchValueNotifier,
+                                                decisionValue:
+                                                    decisionBtnNotifier,
+                                                mediaFileList: mediaFileList,
+                                              );
+                                            },
+                                          ));
+                                        });
+                                      })),
                               FadeTransition(
                                 opacity: _animation,
                                 child: ElevatedButton(
