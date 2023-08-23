@@ -203,16 +203,11 @@ Future<bool> add(
     String province = user['provinceTerritory'];
     String question = user['question'];
     String userType = user['userType'];
-    List<dynamic> children =
-        user.containsKey('children') ? data['children'] : [];
+    List<dynamic> children = user['children'];
 
-    if (children.isEmpty) {
-      children = childrenList;
-    } else {
-      for (int i = 0; i < childrenList.length; i++) {
-        children.add(childrenList[i]);
-      }
-    }
+    childrenList.forEach((element) {
+      children.add(element);
+    });
 
     try {
       await firebase.collection('users').doc(em).set({
@@ -225,8 +220,6 @@ Future<bool> add(
         "children": children
       });
 
-      messageToast(context, 'Hijos agregados con exito', ColorConstants.green,
-          ColorConstants.white);
       return true;
     } catch (e) {
       print('ERROR ' + e.toString());

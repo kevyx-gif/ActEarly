@@ -70,17 +70,23 @@ class _DialogMediaState extends State<DialogMedia> {
                   ? Container(
                       width: width * 0.8,
                       height: (height * 0.6) * 0.8,
-                      child: Image.file(
-                        repeat: ImageRepeat.noRepeat,
-                        scale: BorderSide.strokeAlignCenter,
-                        fit: BoxFit.cover,
-                        File(_mediaFileList![0].path),
-                        errorBuilder: (BuildContext context, Object error,
-                            StackTrace? stackTrace) {
-                          return const Center(
-                              child: Text('This image type is not supported'));
-                        },
-                      ),
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(50),
+                            topRight: Radius.circular(50),
+                          ),
+                          child: Image.file(
+                            gaplessPlayback: true,
+                            alignment: Alignment.center,
+                            fit: BoxFit.cover,
+                            File(_mediaFileList![0].path),
+                            errorBuilder: (BuildContext context, Object error,
+                                StackTrace? stackTrace) {
+                              return const Center(
+                                  child:
+                                      Text('This image type is not supported'));
+                            },
+                          )),
                     )
                   : const Center(
                       child: Text(
