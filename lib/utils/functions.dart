@@ -1,4 +1,5 @@
 import 'package:actearly/utils/colors.dart';
+import 'package:actearly/widgets/child.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import "package:flutter/material.dart";
 import 'package:actearly/utils/futures.dart';
@@ -72,7 +73,9 @@ void register(
     TextEditingController password,
     TextEditingController userType,
     TextEditingController provinceTerritory,
-    TextEditingController question) {
+    TextEditingController question,
+    List children,
+    ) {
   registerUser() async {
     final firebase = FirebaseFirestore.instance;
     try {
@@ -83,6 +86,7 @@ void register(
         "userType": userType.text,
         "provinceTerritory": provinceTerritory.text,
         "question": question.text,
+        "children": children,
       });
     } catch (e) {
       //print('ERROR '+e.toString());

@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
-import 'package:actearly/provider.dart';
 
 class UserActual {
   final String? nameUser;
@@ -10,6 +8,7 @@ class UserActual {
   final String? provinceTerritory;
   final String? question;
   final String? userType;
+  final List? children;
 
   UserActual({
     this.nameUser,
@@ -18,6 +17,7 @@ class UserActual {
     this.provinceTerritory,
     this.question,
     this.userType,
+    this.children,
   });
 
   factory UserActual.fromFirestore(
@@ -32,6 +32,7 @@ class UserActual {
       provinceTerritory: data?['provinceTerritory'],
       question: data?['question'],
       userType: data?['userType'],
+      children: data?['children'],
     );
   }
 
@@ -43,6 +44,7 @@ class UserActual {
       if (provinceTerritory != null) "provinceTerritory": provinceTerritory,
       if (question != null) "question": question,
       if (userType != null) "userType": userType,
+      if (children != null) "children": children,
     };
   }
 }

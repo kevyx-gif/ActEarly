@@ -30,6 +30,8 @@ class _RegisterPageState extends State<RegisterPage> {
   final provinceTerritoryKey = GlobalKey<FormState>();
   final questionKey = GlobalKey<FormState>();
 
+  final children = [];
+
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
@@ -479,7 +481,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                                       password,
                                                       userType,
                                                       provinceTerritory,
-                                                      question);
+                                                      question,
+                                                      children);
                                                 },
                                                 style: ElevatedButton.styleFrom(
                                                     shape: StadiumBorder(),
