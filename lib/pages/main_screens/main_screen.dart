@@ -12,6 +12,8 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:actearly/widgets/addChild.dart';
 import 'package:actearly/widgets/showChild.dart';
 
+import '../another_pages/dateChildren.dart';
+
 class MyHomePage extends StatefulWidget {
   final String documentId;
 
@@ -53,7 +55,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   index: _currentIndex,
                   children: <Widget>[
                     ShowChildWidget(userData),
-                    Screen1(),
+                    //Screen1(),
+                    DateChildren(),
                     addChildWidget(documentId: widget.documentId),
                     Screen2(),
                     Screen3(documentId: widget.documentId),

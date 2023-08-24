@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:actearly/utils/colors.dart';
 //text size adapable
 import 'package:auto_size_text/auto_size_text.dart';
-
+ 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
@@ -31,6 +31,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final questionKey = GlobalKey<FormState>();
 
   final children = [];
+  final date = [];
 
   @override
   void dispose() {
@@ -482,7 +483,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                                       userType,
                                                       provinceTerritory,
                                                       question,
-                                                      children);
+                                                      children,
+                                                      date,
+                                                      );
                                                 },
                                                 style: ElevatedButton.styleFrom(
                                                     shape: StadiumBorder(),

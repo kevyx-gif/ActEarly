@@ -75,6 +75,7 @@ void register(
     TextEditingController provinceTerritory,
     TextEditingController question,
     List children,
+    List date,
     ) {
   registerUser() async {
     final firebase = FirebaseFirestore.instance;
@@ -87,6 +88,7 @@ void register(
         "provinceTerritory": provinceTerritory.text,
         "question": question.text,
         "children": children,
+        "date": date,
       });
     } catch (e) {
       //print('ERROR '+e.toString());
