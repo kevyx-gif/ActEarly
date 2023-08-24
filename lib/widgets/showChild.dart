@@ -16,8 +16,6 @@ class ShowChildWidget extends StatefulWidget {
 class _ShowChild extends State<ShowChildWidget> {
   @override
   Widget build(BuildContext context) {
-    print('Aquii user data');
-    print(widget.userData!.data()!['children']);
     return widget.userData!.data()!['children'].length == 1
         ? child(context)
         : children(context);
