@@ -103,58 +103,6 @@ Widget btnInstagram() {
   );
 }
 
-//-----------------------botones auxiliares--------------------//
-
-Widget btnLogOut(BuildContext context, width) {
-  return ElevatedButton(
-    onPressed: () {
-      logOut(context);
-    },
-    style: ElevatedButton.styleFrom(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0),
-        ),
-        primary: ColorConstants.red
-            .withOpacity(0.62) //elevated btton background color
-        ),
-    child: AutoSizeText(
-      'logOut'.tr,
-      maxLines: 1,
-      style: TextStyle(
-          fontFamily: 'Archive',
-          fontSize: 0.025 * width,
-          fontWeight: FontWeight.w700),
-    ),
-  );
-}
-
-Widget btnInfo(BuildContext context, width) {
-  return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        shape: BoxShape.circle,
-        boxShadow: [
-          BoxShadow(
-              blurRadius: 2,
-              color: Color.fromARGB(225, 134, 134, 134),
-              spreadRadius: 0.5)
-        ],
-      ),
-      child: CircleAvatar(
-        radius: 0.05 * width,
-        backgroundColor: Color.fromARGB(255, 29, 202, 255),
-        child: IconButton(
-            color: Colors.white,
-            iconSize: 0.05 * width,
-            icon: SvgPicture.asset(
-              'lib/assets/icons/info.svg',
-              width: 0.05 * width, // Ancho del SVG
-              height: 0.05 * width, // Alto del SVG
-            ),
-            onPressed: () {}),
-      ));
-}
-
 //----------Indicadores---------------//
 Widget indicador(BuildContext context, width, height, porcentaje, tittle) {
   String porc = (porcentaje * 100).round().toString();

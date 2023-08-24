@@ -2,6 +2,7 @@ import 'package:actearly/pages/main_screens/screen1.dart';
 import 'package:actearly/pages/main_screens/screen2.dart';
 import 'package:actearly/pages/main_screens/Screen3.dart';
 import 'package:actearly/utils/colors.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 //NabBar import
@@ -24,29 +25,42 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0;
 
-  //Tipos de usuario , nuevo(primer registro de hijo(s)) / simple(1 hijo añadido) / grande(más de 1 hijo registrado)
-  final userType = 'simple';
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-        body: SingleChildScrollView(
-            child: Container(
-          width: width,
-          height: 0.940 * height,
-          child: IndexedStack(
-            index: _currentIndex,
-            children: <Widget>[
-              ShowChildWidget(userType),
-              Screen1(),
-              addChildWidget(documentId: widget.documentId),
-              Screen2(),
-              Screen3(documentId: widget.documentId),
-            ],
-          ),
-        )),
+        body: StreamBuilder(
+            stream: FirebaseFirestore.instance
+                .collection('users')
+                .doc(widget.documentId)
+                .snapshots(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+
+              var userData = snapshot.data;
+
+              return SingleChildScrollView(
+                  child: Container(
+                width: width,
+                height: 0.940 * height,
+                child: IndexedStack(
+                  index: _currentIndex,
+                  children: <Widget>[
+                    ShowChildWidget(userData),
+                    Screen1(),
+                    addChildWidget(documentId: widget.documentId),
+                    Screen2(),
+                    Screen3(documentId: widget.documentId),
+                  ],
+                ),
+              ));
+            }),
         bottomNavigationBar: CurvedNavigationBar(
           height: 0.060 * height,
           backgroundColor: _currentIndex == 2

@@ -1,12 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:actearly/widgets/child.dart';
 import 'package:actearly/widgets/children.dart';
 
 class ShowChildWidget extends StatefulWidget {
-  final String userType;
+  DocumentSnapshot<Map<String, dynamic>>? userData;
 
-  ShowChildWidget(this.userType);
+  ShowChildWidget(this.userData);
 
   @override
   _ShowChild createState() => _ShowChild();
@@ -15,11 +16,10 @@ class ShowChildWidget extends StatefulWidget {
 class _ShowChild extends State<ShowChildWidget> {
   @override
   Widget build(BuildContext context) {
-    if (widget.userType == 'simple') {
-      // Access userType using widget property
-      return child(context);
-    } else {
-      return children(context);
-    }
+    print('Aquii user data');
+    print(widget.userData!.data()!['children']);
+    return widget.userData!.data()!['children'].length == 1
+        ? child(context)
+        : children(context);
   }
 }

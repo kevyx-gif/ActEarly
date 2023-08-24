@@ -49,37 +49,45 @@ Widget child(BuildContext context) {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                  margin:
-                      EdgeInsets.fromLTRB(0.03 * width, 0.022 * width, 0, 0),
-                  child: btnLogOut(context, width)),
+                  color: Colors.amber,
+                  width: width * 0.5,
+                  height: height * 0.1,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      //picture
+                      Container(
+                          width: width * 0.2,
+                          height: width * 0.2,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                  blurRadius: 2,
+                                  color: Color.fromARGB(225, 134, 134, 134),
+                                  spreadRadius: 0.5)
+                            ],
+                          ),
+                          child: CircleAvatar(
+                            radius: 0.05 * width,
+                            backgroundImage:
+                                ExactAssetImage('lib/assets/img/pred.jpg'),
+                          )),
+                    ],
+                  )),
               Container(
-                  margin:
-                      EdgeInsets.fromLTRB(0, 0.022 * width, 0.03 * width, 0),
-                  child: btnInfo(context, width)),
+                  color: Colors.blue,
+                  width: width * 0.5,
+                  height: height * 0.1,
+                  child: Text('hol')),
             ],
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              //picture
-              Container(
-                  width: 0.4 * width,
-                  height: 0.4 * width,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                          blurRadius: 2,
-                          color: Color.fromARGB(225, 134, 134, 134),
-                          spreadRadius: 0.5)
-                    ],
-                  ),
-                  child: CircleAvatar(
-                    radius: 0.05 * width,
-                    backgroundImage: ExactAssetImage('lib/assets/img/pred.jpg'),
-                  )),
               //Textos
               //-------Name Baby--------//
               Container(
