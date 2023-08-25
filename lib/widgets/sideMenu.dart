@@ -1,3 +1,4 @@
+import 'package:actearly/widgets/cardSideMenu.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -18,34 +19,27 @@ class _SideMenuState extends State<SideMenu> {
           height: double.infinity,
           color: Color(0xFF17203A),
           child: SafeArea(
-            child: Column(children: [InfoCard()]),
+            child: Column(children: [
+              Padding(
+                  padding: const EdgeInsets.only(left: 24),
+                  child: Divider(
+                    color: Colors.white24,
+                    height: 1,
+                  )),
+              InfoCard(name: 'perfil', about: 'cuidador'),
+              ListTile(
+                leading: SizedBox(
+                  height: 34,
+                  width: 34,
+                  child: Icon(Icons.send),
+                ),
+                title:
+                    Text('Send info.', style: TextStyle(color: Colors.white)),
+              )
+            ]),
           ),
         ),
       ),
-    );
-  }
-}
-
-class InfoCard extends StatelessWidget {
-  const InfoCard({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      leading: CircleAvatar(
-        backgroundColor: Colors.white24,
-        child: Icon(
-          CupertinoIcons.person,
-          color: Colors.white,
-        ),
-      ),
-      title: Text(
-        "Holi",
-        style: TextStyle(color: Colors.white),
-      ),
-      subtitle: Text("Cuidador", style: TextStyle(color: Colors.white)),
     );
   }
 }
