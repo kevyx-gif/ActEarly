@@ -18,6 +18,6 @@ class _ShowChild extends State<ShowChildWidget> {
   Widget build(BuildContext context) {
     return widget.userData!.data()!['children'].length == 1
         ? child(context)
-        : children(context);
+        : children();
   }
 }
