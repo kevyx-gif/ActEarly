@@ -27,7 +27,7 @@ class _childrenState extends State<children> {
       width: width,
       height: 0.94 * height,
       decoration: BoxDecoration(
-        color: Color(0xFFD9E3FC),
+        color: Color.fromARGB(65, 217, 227, 252),
       ),
       child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -42,20 +42,23 @@ class _childrenState extends State<children> {
                   fontWeight: FontWeight.w600),
             ),
             Container(
-              margin: EdgeInsets.only(top: height * 0.02),
-              color: ColorConstants.BackgroundGray,
-              width: width * 0.9,
-              height: height * 0.6,
-              child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                  ),
-                  itemCount: children.length,
-                  itemBuilder: (BuildContext ctxt, int index) {
-                    return cardChildList(
-                        children[index], width * 0.9, height * 0.6);
-                  }),
-            )
+                margin: EdgeInsets.only(top: height * 0.05),
+                width: width * 0.9,
+                height: height * 0.6,
+                child: RawScrollbar(
+                    child: GridView.builder(
+                        padding: EdgeInsets.symmetric(vertical: height * 0.01),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: width * 0.07,
+                            mainAxisSpacing: 25),
+                        itemCount: children.length,
+                        itemBuilder: (BuildContext ctxt, int index) {
+                          return Container(
+                            child: cardChildList(
+                                children[index], width * 0.9, height * 0.6),
+                          );
+                        })))
           ]),
     ));
   }

@@ -68,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: _currentIndex == 2
             ? Color.fromARGB(255, 129, 129, 245)
             : _currentIndex == 0
-                ? Color(0xFFD9E3FC)
+                ? Color.fromARGB(65, 217, 227, 252)
                 : ColorConstants.white,
         color: ColorConstants.blueNavbar,
         animationDuration: Duration(milliseconds: 300),
