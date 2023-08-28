@@ -1,5 +1,4 @@
 import 'package:actearly/utils/colors.dart';
-import 'package:actearly/widgets/child.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import "package:flutter/material.dart";
 import 'package:actearly/utils/futures.dart';
@@ -63,20 +62,20 @@ void login(BuildContext context, TextEditingController email,
 }
 
 void register(
-    BuildContext context,
-    GlobalKey<FormState> emailKey,
-    GlobalKey<FormState> passKey,
-    GlobalKey<FormState> nameUserKey,
-    GlobalKey<FormState> questionKey,
-    TextEditingController nameUser,
-    TextEditingController email,
-    TextEditingController password,
-    TextEditingController userType,
-    TextEditingController provinceTerritory,
-    TextEditingController question,
-    List children,
-    List date,
-    ) {
+  BuildContext context,
+  GlobalKey<FormState> emailKey,
+  GlobalKey<FormState> passKey,
+  GlobalKey<FormState> nameUserKey,
+  GlobalKey<FormState> questionKey,
+  TextEditingController nameUser,
+  TextEditingController email,
+  TextEditingController password,
+  TextEditingController userType,
+  TextEditingController provinceTerritory,
+  TextEditingController question,
+  List children,
+  List date,
+) {
   registerUser() async {
     final firebase = FirebaseFirestore.instance;
     try {
@@ -146,97 +145,92 @@ Future<bool> addChildDatabase(BuildContext context, items, email) async {
   String imgPred =
       'https://firebasestorage.googleapis.com/v0/b/actearly-db.appspot.com/o/pred.jpg?alt=media&token=4bca616d-a874-41ad-a310-1f4ab0ddbfbc';
   bool upData = true;
+  String em = email;
   if (items.isNotEmpty) {
-    List<Map<String, dynamic>> children = [];
-
     for (int i = 0; i < items.length; i++) {
       final child = (items[i].widgetBuilder(context) as ChildW);
-      if (!child.formKeyName.currentState!.validate() &&
-          !child.formKeyDate.currentState!.validate()) {
+
+      if (!child.formKeyName.currentState!.validate()) {
+        upData = false;
+        break;
+      }
+      if (!child.formKeyDate.currentState!.validate()) {
         upData = false;
         break;
       }
     }
+
     if (upData) {
-      for (int i = 0; i < items.length; i++) {
-        final child = (items[i].widgetBuilder(context) as ChildW);
+      final firebase = FirebaseFirestore.instance;
+      try {
+        final data = await firebase.collection('users').doc(em).get();
 
-        if (child.mediaFileList.value != null) {
-          final imageFile = File(child.mediaFileList.value![0].path);
-          final imgReference = await uploadImage(imageFile, email);
+        final user = data.data() as Map<String, dynamic>;
 
-          children.add({
-            'NameChild': child.kidName.text,
-            'Date': child.date.text,
-            'Genre': child.switchValue.value,
-            'Premature': child.decisionValue.value,
-            'Picture': imgReference
-          });
-        } else {
-          children.add({
-            'NameChild': child.kidName.text,
-            'Date': child.date.text,
-            'Genre': child.switchValue.value,
-            'Premature': child.decisionValue.value,
-            'Picture': imgPred
-          });
+        // Atributos del documento/usuario logueado
+        String email = user['email'];
+        String userName = user['nameUser'];
+        String pass = user['password'];
+        String province = user['provinceTerritory'];
+        String question = user['question'];
+        String userType = user['userType'];
+        List<dynamic> children = user['children'];
+
+        //---------------------------upload IMG-------------------------------------------//
+        for (int i = 0; i < items.length; i++) {
+          final child = (items[i].widgetBuilder(context) as ChildW);
+
+          if (child.mediaFileList.value != null) {
+            final imageFile = File(child.mediaFileList.value![0].path);
+            final imgReference = await uploadImage(imageFile, email);
+
+            children.add({
+              'NameChild': child.kidName.text,
+              'Date': child.date.text,
+              'Genre': child.switchValue.value,
+              'Premature': child.decisionValue.value,
+              'Picture': imgReference
+            });
+          } else {
+            children.add({
+              'NameChild': child.kidName.text,
+              'Date': child.date.text,
+              'Genre': child.switchValue.value,
+              'Premature': child.decisionValue.value,
+              'Picture': imgPred
+            });
+          }
         }
-      }
+        //---------------------------------------------------------------//
+        try {
+          await firebase.collection('users').doc(em).set({
+            "nameUser": userName,
+            "email": email,
+            "password": pass,
+            "userType": userType,
+            "provinceTerritory": province,
+            "question": question,
+            "children": children
+          });
 
-      final update = await add(context, children, email);
-      if (update) {
-        return true;
+          return true;
+        } catch (e) {
+          print('ERROR ' + e.toString());
+          messageToast(context, 'Error al subir', ColorConstants.red,
+              ColorConstants.white);
+          return false;
+        }
+      } catch (e) {
+        print('ERROR ' + e.toString());
+        messageToast(context, 'Error al cargar', ColorConstants.red,
+            ColorConstants.white);
+        return false;
       }
     }
+    messageToast(context, 'llene los textos porfavor', ColorConstants.red,
+        ColorConstants.white);
     return false;
   } else {
-    return false;
-  }
-}
-
-Future<bool> add(
-    BuildContext context, List<Map<String, dynamic>> childrenList, em) async {
-  final firebase = FirebaseFirestore.instance;
-  try {
-    final data = await firebase.collection('users').doc(em).get();
-
-    final user = data.data() as Map<String, dynamic>;
-
-    // Atributos del documento/usuario logueado
-    String email = user['email'];
-    String userName = user['nameUser'];
-    String pass = user['password'];
-    String province = user['provinceTerritory'];
-    String question = user['question'];
-    String userType = user['userType'];
-    List<dynamic> children = user['children'];
-
-    childrenList.forEach((element) {
-      children.add(element);
-    });
-
-    try {
-      await firebase.collection('users').doc(em).set({
-        "nameUser": userName,
-        "email": email,
-        "password": pass,
-        "userType": userType,
-        "provinceTerritory": province,
-        "question": question,
-        "children": children
-      });
-
-      return true;
-    } catch (e) {
-      print('ERROR ' + e.toString());
-      messageToast(
-          context, 'Error al subir', ColorConstants.red, ColorConstants.white);
-      return false;
-    }
-  } catch (e) {
-    print('ERROR ' + e.toString());
-    messageToast(
-        context, 'Error al cargar', ColorConstants.red, ColorConstants.white);
     return false;
   }
 }

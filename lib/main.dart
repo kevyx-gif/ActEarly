@@ -97,9 +97,9 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         '/main': (context) => MyHomePage(documentId: userLogin),
-        '/login': (context) => const LoginPage(),
-        '/register': (context) => const RegisterPage(),
-        '/registerFirst': (context) => const RegisterFirstPage(),
+        '/login': (context) => LoginPage(),
+        '/register': (context) => RegisterPage(),
+        '/registerFirst': (context) => RegisterFirstPage(),
       },
       onGenerateRoute: (settings) {
         return MaterialPageRoute(
