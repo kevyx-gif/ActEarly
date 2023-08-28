@@ -8,6 +8,12 @@ class DateChildren extends StatefulWidget {
 }
 
 class _DateChildrenState extends State<DateChildren> {
+
+  final titleDate = TextEditingController();
+  final date = TextEditingController();
+  final timeDate = TextEditingController();
+  final descriptionDate = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
