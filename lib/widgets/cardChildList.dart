@@ -1,21 +1,24 @@
-import 'package:actearly/widgets/children.dart';
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 
 //Colors
 import 'package:actearly/utils/colors.dart';
 
 class cardChildList extends StatefulWidget {
-  var children;
+  Map<String, dynamic> child;
+  ValueNotifier<Map<String, dynamic>> selectChild;
   final width;
   final height;
 
-  cardChildList(this.children, double this.width, double this.height,
-      {super.key});
+  cardChildList(this.child, double this.width, double this.height,
+      {required this.selectChild, super.key});
 
   @override
   State<cardChildList> createState() => _cardChildList();
 }
 
+//widget.userData!.data()?['children']
 class _cardChildList extends State<cardChildList> {
   @override
   Widget build(BuildContext context) {
@@ -50,7 +53,7 @@ class _cardChildList extends State<cardChildList> {
                             height: widget.height * 0.04,
                             alignment: Alignment.center,
                             child: Text(
-                              widget.children['NameChild'],
+                              widget.child['NameChild'],
                               style: TextStyle(
                                   color: ColorConstants.purple,
                                   fontFamily: 'Arcive',
@@ -59,7 +62,7 @@ class _cardChildList extends State<cardChildList> {
                             ),
                           ),
                           Text(
-                            widget.children['Date'],
+                            widget.child['Date'],
                             style: TextStyle(
                                 color: ColorConstants.black,
                                 fontFamily: 'Arcive',
@@ -69,6 +72,7 @@ class _cardChildList extends State<cardChildList> {
                         ]),
                   ),
                   Container(
+                    margin: EdgeInsets.only(top: widget.height * 0.014),
                     width: widget.width * 0.38,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -108,7 +112,13 @@ class _cardChildList extends State<cardChildList> {
                                 child: InkWell(
                                   splashColor:
                                       ColorConstants.blueCard, // Splash color
-                                  onTap: () {},
+                                  onTap: () {
+                                    print(widget.selectChild.toString());
+                                    setState(() {
+                                      widget.selectChild.value = widget.child;
+                                    });
+                                    print(widget.selectChild.toString());
+                                  },
                                   child: SizedBox(
                                       width: widget.width * 0.09,
                                       height: widget.width * 0.09,
@@ -151,7 +161,7 @@ class _cardChildList extends State<cardChildList> {
         ),
         Positioned(
             top: 0,
-            left: widget.width * 0.13,
+            left: widget.width * 0.1,
             child: Container(
                 width: widget.width * 0.22,
                 height: widget.width * 0.22,
@@ -168,7 +178,7 @@ class _cardChildList extends State<cardChildList> {
                 ),
                 child: CircleAvatar(
                   radius: 0.05 * widget.width,
-                  backgroundImage: NetworkImage(widget.children['Picture']),
+                  backgroundImage: NetworkImage(widget.child['Picture']),
                 )))
       ]),
     );
