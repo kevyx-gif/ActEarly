@@ -1,10 +1,13 @@
+import 'dart:math';
+
+import 'package:actearly/pages/main_screens/main_screen.dart';
 import 'package:actearly/utils/colors.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import "package:flutter/material.dart";
 import 'package:actearly/utils/futures.dart';
 import 'package:actearly/widgets/cardChild.dart';
 import 'package:flutter/services.dart';
-
+import 'package:http/http.dart' as http;
 //toast
 import 'package:fluttertoast/fluttertoast.dart';
 //Text Imports
@@ -146,6 +149,8 @@ Future<bool> addChildDatabase(BuildContext context, items, email) async {
       'https://firebasestorage.googleapis.com/v0/b/actearly-db.appspot.com/o/pred.jpg?alt=media&token=4bca616d-a874-41ad-a310-1f4ab0ddbfbc';
   bool upData = true;
   String em = email;
+  print("Hereeeee");
+  print(em);
   if (items.isNotEmpty) {
     for (int i = 0; i < items.length; i++) {
       final child = (items[i].widgetBuilder(context) as ChildW);
@@ -174,30 +179,41 @@ Future<bool> addChildDatabase(BuildContext context, items, email) async {
         String province = user['provinceTerritory'];
         String question = user['question'];
         String userType = user['userType'];
-        List<dynamic> children = user['children'];
+        List<dynamic> children = user['children'] ?? [];
+        List<dynamic> dates = [];
 
         //---------------------------upload IMG-------------------------------------------//
         for (int i = 0; i < items.length; i++) {
           final child = (items[i].widgetBuilder(context) as ChildW);
+
+          int uuid = Random().nextInt(100);
+          do {
+            uuid = Random().nextInt(100);
+            print(uuid);
+          } while (idFound(uuid, children) == true);
 
           if (child.mediaFileList.value != null) {
             final imageFile = File(child.mediaFileList.value![0].path);
             final imgReference = await uploadImage(imageFile, email);
 
             children.add({
+              'Id': uuid,
               'NameChild': child.kidName.text,
               'Date': child.date.text,
               'Genre': child.switchValue.value,
               'Premature': child.decisionValue.value,
-              'Picture': imgReference
+              'Picture': imgReference,
+              'Dates': dates,
             });
           } else {
             children.add({
+              'Id': uuid,
               'NameChild': child.kidName.text,
               'Date': child.date.text,
               'Genre': child.switchValue.value,
               'Premature': child.decisionValue.value,
-              'Picture': imgPred
+              'Picture': imgPred,
+              'Dates': dates,
             });
           }
         }
@@ -235,6 +251,24 @@ Future<bool> addChildDatabase(BuildContext context, items, email) async {
   }
 }
 
+bool idFound(id, children) {
+  print("entro a la fun");
+  print(id);
+  if (children.length == 0) {
+    print("lista vacia regresa");
+    return false;
+  } else {
+    children.forEach((element) {
+      if (element == id) {
+        print("encontro el id");
+        return true;
+      }
+    });
+    print("no lo encontro, regresa a ponerlo");
+    return false;
+  }
+}
+
 Future<String> uploadImage(File image, imgReference) async {
   final nameFile = image.path.split("/").last;
 
@@ -251,4 +285,52 @@ Future<String> uploadImage(File image, imgReference) async {
 
   final String url = await snapshot.ref.getDownloadURL();
   return url;
+}
+
+//----------------------Upload User Children------------------------------//
+Future<void> updateChildDatabase(BuildContext context, email, userData) async {
+  String em = email;
+
+  final firebase = FirebaseFirestore.instance;
+
+  //---------------------------------------------------------------//
+  try {
+    await firebase.collection('users').doc(em).update({"children": userData});
+  } catch (e) {
+    print('ERROR ' + e.toString());
+    messageToast(context, 'Error al hacer el cambio', ColorConstants.red,
+        ColorConstants.white);
+  }
+}
+
+//-----------------image offline------------------//
+Future<bool> checkImage(urlImage) async {
+  bool _imageLoadingFailed = false;
+  try {
+    final response = await http.get(Uri.parse(urlImage));
+    if (response.statusCode == 200) {
+      _imageLoadingFailed = false;
+    } else {
+      _imageLoadingFailed = true;
+    }
+    return _imageLoadingFailed;
+  } catch (error) {
+    _imageLoadingFailed = true;
+    print("Error checking image: $error");
+    return _imageLoadingFailed;
+  }
+}
+
+//---------------------User in BD-------------------------------//
+Future<bool> userExist(BuildContext context, email) async {
+  String em = email;
+  final firebase = FirebaseFirestore.instance;
+  try {
+    if ((await firebase.collection('users').doc(em).get()).exists) {
+      return true;
+    }
+  } catch (e) {
+    return false;
+  }
+  return false;
 }

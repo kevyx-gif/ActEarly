@@ -1,18 +1,24 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:actearly/pages/main_screens/main_screen.dart';
+import 'package:actearly/utils/functions.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 //Colors
 import 'package:actearly/utils/colors.dart';
+import 'package:get/get.dart';
 
 class cardChildList extends StatefulWidget {
+  DocumentSnapshot<Map<String, dynamic>>? userData;
   Map<String, dynamic> child;
   ValueNotifier<Map<String, dynamic>> selectChild;
+  String email;
   final width;
   final height;
 
-  cardChildList(this.child, double this.width, double this.height,
-      {required this.selectChild, super.key});
+  cardChildList(this.email, this.child, double this.width, double this.height,
+      {this.userData, required this.selectChild, super.key});
 
   @override
   State<cardChildList> createState() => _cardChildList();
@@ -20,8 +26,24 @@ class cardChildList extends StatefulWidget {
 
 //widget.userData!.data()?['children']
 class _cardChildList extends State<cardChildList> {
+  bool _imageLoadingFailed = false;
+
+  @override
+  void initState() {
+    super.initState();
+    checkImage(widget.child['Picture']);
+  }
+
+  @override
+  void dispose() {
+    // Dispose logic if needed
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    List<Map<String, dynamic>> auxList =
+        List.from(widget.userData?['children']);
     return Container(
       child: Stack(children: [
         Card(
@@ -113,11 +135,9 @@ class _cardChildList extends State<cardChildList> {
                                   splashColor:
                                       ColorConstants.blueCard, // Splash color
                                   onTap: () {
-                                    print(widget.selectChild.toString());
                                     setState(() {
                                       widget.selectChild.value = widget.child;
                                     });
-                                    print(widget.selectChild.toString());
                                   },
                                   child: SizedBox(
                                       width: widget.width * 0.09,
@@ -141,7 +161,18 @@ class _cardChildList extends State<cardChildList> {
                                 child: InkWell(
                                   splashColor:
                                       ColorConstants.blueCard, // Splash color
-                                  onTap: () {},
+                                  onTap: () async {
+                                    setState(() {
+                                      auxList.removeWhere((map) =>
+                                          map['Id'] == widget.child['Id']);
+
+                                      widget.userData!.data()?['children'] =
+                                          auxList;
+                                    });
+                                    // Assuming updateChildDatabase is an asynchronous function
+                                    await updateChildDatabase(
+                                        context, widget.email, auxList);
+                                  },
                                   child: SizedBox(
                                       width: widget.width * 0.09,
                                       height: widget.width * 0.09,
@@ -176,10 +207,17 @@ class _cardChildList extends State<cardChildList> {
                         offset: Offset.fromDirection(-10))
                   ],
                 ),
-                child: CircleAvatar(
-                  radius: 0.05 * widget.width,
-                  backgroundImage: NetworkImage(widget.child['Picture']),
-                )))
+                child: _imageLoadingFailed
+                    ? CircleAvatar(
+                        radius: 0.05 * widget.width,
+                        backgroundImage: AssetImage('lib/assets/img/pred.jpg'),
+                      )
+                    : CircleAvatar(
+                        radius: 0.05 * widget.width,
+                        backgroundImage: NetworkImage(
+                          widget.child['Picture'],
+                        ),
+                      )))
       ]),
     );
   }
