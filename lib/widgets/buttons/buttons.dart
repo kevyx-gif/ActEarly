@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 //porcentaje
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 
 //-------------------------botones flotantes------------------------------//
 
@@ -110,41 +111,55 @@ Widget indicador(BuildContext context, width, height, porcentaje, tittle) {
   Color backgrC = ProgressColorShadow(porcentaje);
 
   return Container(
+    child: Card(
+      margin: EdgeInsets.only(top: height * 0.5),
+      color: ColorConstants.white,
+      shadowColor: ColorConstants.black,
+      elevation: 5,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(25.0),
+      ),
       child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-        Container(
-          margin: EdgeInsets.symmetric(vertical: 0.05 * height),
-          child: AutoSizeText(
-            maxLines: 1,
-            '$tittle',
-            style: TextStyle(
-              fontSize: 0.025 * width,
-              fontFamily: 'Archive',
-              fontWeight: FontWeight.w700,
-              color: ColorConstants.black,
+            Container(
+              margin: EdgeInsets.only(bottom: height * 0.2),
+              child: AutoSizeText(
+                maxLines: 1,
+                '$tittle',
+                style: TextStyle(
+                  fontSize: 0.05 * width,
+                  fontFamily: 'Archive',
+                  fontWeight: FontWeight.w700,
+                  color: ColorConstants.black,
+                ),
+              ),
             ),
-          ),
-        ),
-        CircularPercentIndicator(
-          animation: true,
-          animationDuration: 2000,
-          radius: width * 0.1,
-          lineWidth: width * 0.025,
-          percent: porcentaje,
-          progressColor: progressC,
-          backgroundColor: backgrC,
-          circularStrokeCap: CircularStrokeCap.round,
-          center: Text(
-            '$porc %',
-            style: TextStyle(
-                color: ColorConstants.black,
-                fontFamily: 'Archive',
-                fontWeight: FontWeight.w700),
-          ),
-        ),
-      ]));
+            Container(
+              width: width * 0.4,
+              height: height * 0.5,
+              child: LinearPercentIndicator(
+                lineHeight: height * 0.3,
+                barRadius: Radius.circular(25),
+                width: width * 0.4,
+                animation: true,
+                animationDuration: 2000,
+                percent: porcentaje,
+                progressColor: progressC,
+                backgroundColor: backgrC,
+                center: Text(
+                  '$porc %',
+                  style: TextStyle(
+                      color: ColorConstants.white,
+                      fontFamily: 'Archive',
+                      fontWeight: FontWeight.w700),
+                ),
+              ),
+            )
+          ]),
+    ),
+  );
 }
 
 Widget btnYears(BuildContext context, textInfo, width) {

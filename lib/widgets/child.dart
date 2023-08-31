@@ -6,7 +6,8 @@ import 'package:actearly/widgets/buttons/buttons.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 //Colors
 import 'package:actearly/utils/colors.dart';
-//
+//Carousel
+import 'package:carousel_slider/carousel_slider.dart';
 
 class child extends StatefulWidget {
   ValueNotifier<Map<String, dynamic>> childData;
@@ -22,6 +23,7 @@ class _child extends State<child> {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
+    final CarouselController _carouselController = CarouselController();
 
     List yearsOld = [
       '2 meses',
@@ -139,115 +141,131 @@ class _child extends State<child> {
               ],
             ),
             Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  //--------Data------------//
-                  Container(
-                      color: Colors.amber,
-                      margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.02),
-                      width: width,
-                      height: height * 0.6,
-                      child: Card(
-                          elevation: 5,
-                          margin: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 30),
-                          color: ColorConstants.colorCard,
-                          shadowColor: ColorConstants.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              //-------Text Indicadr--------//
-                              Container(
-                                margin: EdgeInsets.symmetric(
-                                    vertical: 0.01 * height),
-                                child: AutoSizeText(
-                                  maxLines: 1,
-                                  'Indicadores',
-                                  style: TextStyle(
-                                    fontSize: 0.08 * width,
-                                    fontFamily: 'Archive',
-                                    fontWeight: FontWeight.w700,
-                                    color: ColorConstants.borderBtnColor,
-                                  ),
+              child: Container(
+                color: Colors.black,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    //--------Data------------//
+                    Container(
+                        margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.02),
+                        width: width,
+                        height: height * 0.65,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            //-------Text Indicadr--------//
+                            Container(
+                              margin:
+                                  EdgeInsets.symmetric(vertical: 0.01 * height),
+                              child: AutoSizeText(
+                                maxLines: 1,
+                                'Indicadores',
+                                style: TextStyle(
+                                  fontSize: 0.08 * width,
+                                  fontFamily: 'Archive',
+                                  fontWeight: FontWeight.w700,
+                                  color: ColorConstants.borderBtnColor,
                                 ),
                               ),
-                              //-----Indicadores------//
-                              Container(
-                                  width: width - 60 - 20,
-                                  height: height * 0.15,
-                                  margin: EdgeInsets.symmetric(
-                                      vertical: 0.01 * height),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      indicador(context, width - 60 - 20,
-                                          height * 0.10, 0.6, 'Sociales'),
-                                      indicador(context, width - 60 - 20,
-                                          height * 0.10, 0.7, 'Lenguaje'),
-                                      indicador(context, width - 60 - 20,
-                                          height * 0.10, 0.8, 'Cognitivas'),
-                                      indicador(context, width - 60 - 20,
-                                          height * 0.10, 0.2, 'Movimiento'),
-                                    ],
-                                  )),
-                              //---------Buttons----------//
-
-                              Container(
-                                height: height * 0.035,
-                                child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                        shape: StadiumBorder(),
-                                        side: BorderSide(
-                                            width: 2,
-                                            color:
-                                                ColorConstants.borderBtnColor),
-                                        backgroundColor:
-                                            ColorConstants.btnColor),
-                                    onPressed: () {},
-                                    child: AutoSizeText(
-                                        style:
-                                            TextStyle(fontSize: width * 0.02),
-                                        maxLines: 1,
-                                        'Ver sugerencias')),
+                            ),
+                            //-----Indicadores------//
+                            Container(
+                                width: width * 0.86,
+                                height: height * 0.5,
+                                margin: EdgeInsets.symmetric(
+                                    vertical: 0.01 * height),
+                                child: GridView(
+                                  physics: NeverScrollableScrollPhysics(),
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: height * 0.01),
+                                  gridDelegate:
+                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 2,
+                                          crossAxisSpacing: width * 0.05,
+                                          mainAxisSpacing: 25,
+                                          childAspectRatio: 2 / 2.3),
+                                  children: [
+                                    indicador(context, width - 60 - 20,
+                                        height * 0.10, 0.6, 'Sociales'),
+                                    indicador(context, width - 60 - 20,
+                                        height * 0.10, 0.7, 'Lenguaje'),
+                                    indicador(context, width - 60 - 20,
+                                        height * 0.10, 0.8, 'Cognitivas'),
+                                    indicador(context, width - 60 - 20,
+                                        height * 0.10, 0.2, 'Movimiento'),
+                                  ],
+                                )),
+                          ],
+                        )),
+                    Container(
+                      color: Colors.amber,
+                      width: width * 0.85,
+                      height: height * 0.12,
+                      margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.05),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          CarouselSlider(
+                            carouselController: _carouselController,
+                            options: CarouselOptions(
+                              scrollDirection: Axis.horizontal,
+                              height: 150,
+                              aspectRatio: 16 / 9,
+                              viewportFraction: 1.0,
+                              enableInfiniteScroll: true,
+                              onPageChanged: (index, reason) {
+                                // Actualizar el estado cuando cambie la página
+                                setState(() {});
+                              },
+                            ),
+                            items: List.generate(
+                              3, // Cantidad de páginas
+                              (pageIndex) {
+                                return Row(
+                                  children: List.generate(
+                                    3, // Botones por página
+                                    (buttonIndex) {
+                                      final totalIndex =
+                                          pageIndex * 3 + buttonIndex;
+                                      return ElevatedButton(
+                                        onPressed: () {
+                                          // Acción del botón
+                                        },
+                                        child: Text(yearsOld[totalIndex]),
+                                      );
+                                    },
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  _carouselController.previousPage();
+                                },
+                                icon: Icon(Icons.arrow_back),
+                              ),
+                              SizedBox(width: 10),
+                              IconButton(
+                                onPressed: () {
+                                  _carouselController.nextPage();
+                                },
+                                icon: Icon(Icons.arrow_forward),
                               ),
                             ],
-                          ))),
-                  Container(
-                      width: width * 0.85,
-                      height: height * 0.10,
-                      margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.05),
-                      child: Card(
-                          margin: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 30),
-                          color: ColorConstants.white,
-                          shadowColor: ColorConstants.black,
-                          elevation: 5,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30.0),
                           ),
-                          child: Container(
-                              width: width * 0.80,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(30)),
-                              margin: EdgeInsets.symmetric(
-                                  horizontal: width * 0.035),
-                              child: Scrollbar(
-                                  child: ListView.builder(
-                                itemCount: yearsOld.length,
-                                scrollDirection: Axis.horizontal,
-                                itemBuilder: (context, index) {
-                                  return btnYears(
-                                      context, yearsOld[index], width * 0.80);
-                                },
-                              )))))
-                ],
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ],
