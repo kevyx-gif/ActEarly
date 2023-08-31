@@ -1,3 +1,4 @@
+import 'package:actearly/utils/functions.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -48,13 +49,21 @@ class _Screen3 extends State<Screen3> {
           return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text('email: $email'),
                 Text('nameUser: $nameUser'),
                 Text('password: $password'),
                 Text('provinceTerritory: $provinceTerritory'),
                 Text('question: $question'),
-                Text('userType: $userType'),                
+                Text('userType: $userType'),
+                Container(
+                  width: 300,
+                  height: 400,
+                  child: IconButton(
+                      onPressed: () => {logOut(context)},
+                      icon: Icon(Icons.exit_to_app)),
+                )
               ],
             ),
           );

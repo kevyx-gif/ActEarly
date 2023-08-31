@@ -33,7 +33,7 @@ dependencies:
   permission_handler: ^10.4.3 #permiss manager
   intl: ^0.18.1 #date format
   firebase_storage: ^11.2.6 #firestoreDatabase
-  rive: ^0.11.14 #animation side menu
+  http: ^1.1.0 #image offline
 
 
 dev_dependencies:

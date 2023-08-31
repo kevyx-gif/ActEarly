@@ -53,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: IndexedStack(
                 index: _currentIndex,
                 children: <Widget>[
-                  ShowChildWidget(userData),
+                  ShowChildWidget(userData, widget.documentId),
                   //Screen1(),
                   DateChildren(),
                   addChildWidget(documentId: widget.documentId),
