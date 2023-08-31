@@ -44,7 +44,7 @@ void loggedOut() async {
   await prefs.setBool('account_initiated', false);
 }
 
-void setUserData(String email) async {
+Future<void> setUserData(String email) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   await prefs.setString('userEmail', email);
 }

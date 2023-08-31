@@ -2,6 +2,7 @@
 
 import 'package:actearly/pages/main_screens/main_screen.dart';
 import 'package:actearly/utils/functions.dart';
+import 'package:actearly/widgets/dialogEditChild.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -44,6 +45,8 @@ class _cardChildList extends State<cardChildList> {
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> auxList =
         List.from(widget.userData?['children']);
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
     return Container(
       child: Stack(children: [
         Card(
@@ -111,7 +114,30 @@ class _cardChildList extends State<cardChildList> {
                                 child: InkWell(
                                   splashColor:
                                       ColorConstants.blueCard, // Splash color
-                                  onTap: () {},
+                                  onTap: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return Dialog(
+                                            backgroundColor: Colors.transparent,
+                                            shape: const RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.only(
+                                              bottomRight: Radius.circular(50),
+                                              bottomLeft: Radius.circular(50),
+                                            )),
+                                            child: Container(
+                                              color: Colors.transparent,
+                                              width: width * 0.8,
+                                              height: height * 0.6,
+                                              child: dialogEditChild(
+                                                  widget.email,
+                                                  widget.child,
+                                                  widget.userData!
+                                                      .data()?['children']),
+                                            ),
+                                          );
+                                        });
+                                  },
                                   child: SizedBox(
                                       width: widget.width * 0.09,
                                       height: widget.width * 0.09,
@@ -201,9 +227,9 @@ class _cardChildList extends State<cardChildList> {
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
-                        blurRadius: 10,
+                        blurRadius: 5,
                         color: Color.fromARGB(190, 61, 61, 61),
-                        spreadRadius: 3,
+                        spreadRadius: 0.5,
                         offset: Offset.fromDirection(-10))
                   ],
                 ),
