@@ -89,20 +89,61 @@ class cardWidget extends State<ChildW>
                             ],
                             borderRadius: BorderRadius.circular(20),
                             shape: BoxShape.rectangle),
-                        child: ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
-                            child: Image.file(
-                              gaplessPlayback: true,
-                              alignment: Alignment.center,
-                              fit: BoxFit.cover,
-                              File(widget.mediaFileList.value![0].path),
-                              errorBuilder: (BuildContext context, Object error,
-                                  StackTrace? stackTrace) {
-                                return const Center(
-                                    child: Text(
-                                        'This image type is not supported'));
-                              },
-                            )),
+                        child: Stack(
+                          children: [
+                            Container(
+                              width: (width * 0.83) * 0.35,
+                              height: height * 0.15,
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(15),
+                                  child: Image.file(
+                                    gaplessPlayback: true,
+                                    alignment: Alignment.center,
+                                    fit: BoxFit.cover,
+                                    File(widget.mediaFileList.value![0].path),
+                                    errorBuilder: (BuildContext context,
+                                        Object error, StackTrace? stackTrace) {
+                                      return const Center(
+                                          child: Text(
+                                              'This image type is not supported'));
+                                    },
+                                  )),
+                            ),
+                            Positioned(
+                                left: width * 0.1,
+                                top: height * 0.05,
+                                child: IconButton(
+                                  icon: Icon(
+                                    Icons.edit,
+                                    color: Colors.white60,
+                                  ),
+                                  onPressed: () async {
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return Dialog(
+                                            backgroundColor: Colors.transparent,
+                                            shape: const RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.only(
+                                              bottomRight: Radius.circular(50),
+                                              bottomLeft: Radius.circular(50),
+                                            )),
+                                            child: Container(
+                                              color: Colors.transparent,
+                                              width: width * 0.8,
+                                              height: height * 0.6,
+                                              child: DialogMedia(),
+                                            ),
+                                          );
+                                        }).then((value) {
+                                      setState(() {
+                                        widget.mediaFileList.value = value;
+                                      });
+                                    });
+                                  },
+                                ))
+                          ],
+                        ),
                       )
                     : ElevatedButton(
                         style: ElevatedButton.styleFrom(

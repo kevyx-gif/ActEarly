@@ -2,11 +2,12 @@ import 'dart:math';
 
 import 'package:actearly/pages/main_screens/main_screen.dart';
 import 'package:actearly/utils/colors.dart';
+
 import 'package:firebase_storage/firebase_storage.dart';
 import "package:flutter/material.dart";
 import 'package:actearly/utils/futures.dart';
 import 'package:actearly/widgets/cardChild.dart';
-import 'package:flutter/services.dart';
+
 import 'package:http/http.dart' as http;
 //toast
 import 'package:fluttertoast/fluttertoast.dart';
@@ -16,6 +17,8 @@ import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 //multiMedia
 import 'dart:io';
+
+import 'package:image_picker/image_picker.dart';
 
 //-----------------Menssage Toast Per-----------------//
 void messageToast(
@@ -53,9 +56,12 @@ void login(BuildContext context, TextEditingController email,
     //found password
     if (await searchByFieldInCollection('users', 'password', password.text)) {
       loggedIn();
-      setUserData(emailUser);
+      await setUserData(emailUser);
       messageToast(context, 'hola $emailUser ', negro, white);
-      Navigator.pushNamed(context, '/main');
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => MyHomePage(documentId: emailUser)));
     } else {
       messageToast(context, 'wrongPassword'.tr, red, white);
     }
@@ -334,4 +340,61 @@ Future<bool> userExist(BuildContext context, email) async {
     return false;
   }
   return false;
+}
+
+Future<bool> changeChild(
+    BuildContext context,
+    String email,
+    var Id,
+    String kidName,
+    String date,
+    bool switchValue,
+    bool decisionValue,
+    ValueNotifier<List<XFile>?> mediaFileList,
+    List<dynamic> dates,
+    List<dynamic> childrenOrg) async {
+  Map<String, dynamic> newChild = {
+    'Id': Id,
+    'NameChild': kidName,
+    'Date': date,
+    'Genre': switchValue,
+    'Premature': decisionValue,
+    'Picture': '',
+    'Dates': dates,
+  };
+
+  print('lista que llega');
+  print(childrenOrg);
+  List<dynamic> aux = childrenOrg;
+
+  if (mediaFileList.value != null) {
+    final imageFile = File(mediaFileList.value![0].path);
+    final imgReference = await uploadImage(imageFile, email);
+    newChild['Picture'] = imgReference;
+  } else {
+    childrenOrg.forEach((element) {
+      if (element['Id'] == Id) {
+        newChild['Picture'] = element['Picture'];
+      }
+    });
+  }
+
+  aux.removeWhere((map) => map['Id'] == Id);
+
+  aux.add(newChild);
+
+  childrenOrg = aux;
+
+  String em = email;
+
+  final firebase = FirebaseFirestore.instance;
+
+  //---------------------------------------------------------------//
+  try {
+    await firebase.collection('users').doc(em).update({'children': aux});
+    return true;
+  } catch (e) {
+    print('ERROR ' + e.toString());
+    return false;
+  }
 }
