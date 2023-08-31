@@ -170,8 +170,8 @@ class _cardChildList extends State<cardChildList> {
                                           auxList;
                                     });
                                     // Assuming updateChildDatabase is an asynchronous function
-                                    await updateChildDatabase(
-                                        context, widget.email, auxList);
+                                    await updateChildDatabase(context,
+                                        widget.email, auxList, 'children');
                                   },
                                   child: SizedBox(
                                       width: widget.width * 0.09,

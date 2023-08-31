@@ -288,14 +288,15 @@ Future<String> uploadImage(File image, imgReference) async {
 }
 
 //----------------------Upload User Children------------------------------//
-Future<void> updateChildDatabase(BuildContext context, email, userData) async {
+Future<void> updateChildDatabase(
+    BuildContext context, email, data, String field) async {
   String em = email;
 
   final firebase = FirebaseFirestore.instance;
 
   //---------------------------------------------------------------//
   try {
-    await firebase.collection('users').doc(em).update({"children": userData});
+    await firebase.collection('users').doc(em).update({field: data});
   } catch (e) {
     print('ERROR ' + e.toString());
     messageToast(context, 'Error al hacer el cambio', ColorConstants.red,
