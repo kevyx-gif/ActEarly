@@ -29,11 +29,11 @@ dependencies:
   provider: ^6.0.5 # manejo de estructura compleja para estados 
   path_provider: ^2.1.0 # path Img
   image_picker: ^1.0.2 # local Img
-  video_player: ^2.7.0 #local video
   permission_handler: ^10.4.3 #permiss manager
   intl: ^0.18.1 #date format
   firebase_storage: ^11.2.6 #firestoreDatabase
   http: ^1.1.0 #image offline
+  carousel_slider: ^4.2.1 #Carousel
 
 
 dev_dependencies:
