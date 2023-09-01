@@ -55,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: <Widget>[
                   ShowChildWidget(userData, widget.documentId),
                   //Screen1(),
-                  DateChildren(),
+                  DateChildren(widget.documentId,userData),
                   addChildWidget(documentId: widget.documentId),
                   Screen2(),
                   Screen3(documentId: widget.documentId),
