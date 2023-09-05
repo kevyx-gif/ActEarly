@@ -1,26 +1,135 @@
-var general = {
-  'month3': month3,
-  'month8': month8,
-  'month12': month12,
-  'month18': month18,
-  'month24': month24,
-  'year3': year3,
-  'year4': year4,
-  };
+class indicadorClass {
+  Map<String, dynamic> general;
 
-var month3 = {
-  'motorGrueso1': motorGrueso1,
-  'motorFino1' : motorFino1,
-  'social1' : social1,
-  'cognitivo1' : cognitivo1,
-};
+  indicadorClass()
+      : general = {
+          'month3': {
+            'motorGrueso': motorGrueso1,
+            'motorFino': motorFino1,
+            'social': social1,
+            'cognitivo': cognitivo1,
+          },
+          'month8': {
+            'motorGrueso': motorGrueso2,
+            'motorFino': motorFino2,
+            'social': social2,
+            'cognitivo': cognitivo2,
+          },
+          'month12': {
+            'motorGrueso': motorGrueso3,
+            'motorFino': motorFino3,
+            'social': social3,
+            'cognitivo': cognitivo3,
+          },
+          'month18': {
+            'motorGrueso': motorGrueso4,
+            'motorFino': motorFino4,
+            'social': social4,
+            'cognitivo': cognitivo4,
+          },
+          'month24': {
+            'motorGrueso': motorGrueso24,
+            'motorFino': motorFino24,
+            'social': social24,
+            'cognitivo': cognitivo24,
+          },
+          'year3': {
+            'motorGrueso': motorGrueso3y,
+            'motorFino': motorFino3y,
+            'social': social3y,
+            'cognitivo': cognitivo3y,
+          },
+          'year4': {
+            'motorGrueso': motorGrueso4y,
+            'motorFino': motorFino4y,
+            'social': social4y,
+            'cognitivo': cognitivo4y,
+          }
+        };
+
+  void setData(Map<String, dynamic> newData) {
+    general = newData;
+  }
+
+  dynamic getMont(int numberMont) {
+    print('llego a la func con este number' + numberMont.toString());
+    switch (numberMont) {
+      case < 0:
+        {
+          print('entro al case 0');
+          return {};
+        }
+      case >= 0 && < 8:
+        {
+          print('entro al primero');
+          print(general['month3']);
+          return general['month3'];
+        }
+      case >= 8 && < 12:
+        {
+          return general['month8'];
+        }
+      case >= 12 && < 18:
+        {
+          return general['month12'];
+        }
+      case >= 18 && < 24:
+        {
+          return general['month18'];
+        }
+      case >= 24 && < 36:
+        {
+          return general['year3'];
+        }
+      default:
+        {
+          return general['year4'];
+        }
+    }
+  }
+
+  void setMont(dynamic newMonth, int numberMont) {
+    switch (numberMont) {
+      case < 0:
+        {
+          print('no hay ese año');
+        }
+      case >= 0 && < 8:
+        {
+          general['month3'] = newMonth;
+        }
+      case >= 8 && < 12:
+        {
+          general['month8'] = newMonth;
+        }
+      case >= 12 && < 18:
+        {
+          general['month12'] = newMonth;
+        }
+      case >= 18 && < 24:
+        {
+          general['month18'] = newMonth;
+        }
+      case >= 24 && < 36:
+        {
+          general['year3'] = newMonth;
+        }
+      default:
+        {
+          general['year4'] = newMonth;
+        }
+    }
+  }
+}
 
 var motorGrueso1 = {
   'Rueda de adelante hacia atrás': '',
   'Controlar el movimiento de la cabeza y el cuello al sentarse': '',
   'Levantar la cabeza y el pecho cuando se acuesta boca abajo': '',
-  'Estirar y patear las piernas cuando están acostados boca abajo o boca arriba': '',
-  'empujar hacia abajo con las piernas cuando los pies están sobre una superficie firme': '',
+  'Estirar y patear las piernas cuando están acostados boca abajo o boca arriba':
+      '',
+  'empujar hacia abajo con las piernas cuando los pies están sobre una superficie firme':
+      '',
 };
 
 var motorFino1 = {
@@ -42,15 +151,11 @@ var cognitivo1 = {
   'Reconocer objetos y personas que conocen': '',
 };
 
-var month8 = {
-  'motorGrueso2': motorGrueso2,
-  'motorFino2' : motorFino2,
-  'social2' : social2,
-  'cognitivo2' : cognitivo2,
-};
+//-------------------------//
 
 var motorGrueso2 = {
-  'Rueda en ambos sentidos (de adelante hacia atrás, de atrás hacia adelante)': '',
+  'Rueda en ambos sentidos (de adelante hacia atrás, de atrás hacia adelante)':
+      '',
   'Siéntate solo': '',
   'Apoyar todo su peso sobre sus piernas': '',
   'Controlar la parte superior del cuerpo y los brazos': '',
@@ -70,28 +175,26 @@ var social2 = {
 };
 
 var cognitivo2 = {
-  'Rastrear un objeto en movimiento y encontrar uno que esté parcialmente oculto': '',
+  'Rastrear un objeto en movimiento y encontrar uno que esté parcialmente oculto':
+      '',
   'Explora con las manos y la boca': '',
   'Lucha para conseguir objetos que están fuera de su alcance': '',
   'Mirar de un objeto a otro': '',
   'Ver un objeto que cae': '',
 };
 
-var month12 = {
-  'motorGrueso3': motorGrueso3,
-  'motorFino3' : motorFino3,
-  'social3' : social3,
-  'cognitivo3' : cognitivo3,
-};
+//----------------month12------------------//
 
 var motorGrueso3 = {
   'Alcanzar una posición sentada sin ayuda': '',
   'Gatear sobre las manos y las rodillas, o deslizarse sobre su trasero': '',
-  'Pasar de una posición sentada a una posición de gateo o boca abajo (boca abajo)': '',
+  'Pasar de una posición sentada a una posición de gateo o boca abajo (boca abajo)':
+      '',
   'Tire hacia arriba a una posición de pie': '',
   'Crucero, aferrarse a los muebles': '',
   'Párese brevemente sin apoyo': '',
-  'Camina sosteniendo la mano de un adulto, y tal vez da 2 o 3 pasos por su cuenta': '',
+  'Camina sosteniendo la mano de un adulto, y tal vez da 2 o 3 pasos por su cuenta':
+      '',
   'Empieza a subir escaleras con ayuda': '',
 };
 
@@ -116,22 +219,18 @@ var social3 = {
   'Ven cuando se te llama (responde al nombre)': '',
   'Diga "mamá" o "papá" con al menos otra palabra con significado': '',
   'Comunicar una necesidad sin llorar': '',
-  'Detén una acción si dices "No"': '', 
+  'Detén una acción si dices "No"': '',
 };
 
 var cognitivo3 = {
-  'Explorar objetos de diferentes maneras (temblando, golpeando, lanzando, dejándose caer)': '',
+  'Explorar objetos de diferentes maneras (temblando, golpeando, lanzando, dejándose caer)':
+      '',
   'Conocer los nombres de objetos familiares': '',
   'Responder a la música': '',
   'Comience a explorar la causa y el efecto': '',
 };
 
-var month18 = {
-  'motorGrueso4': motorGrueso4,
-  'motorFino4' : motorFino4,
-  'social4' : social4,
-  'cognitivo4' : cognitivo4,
-};
+//-------------month18-------------//
 
 var motorGrueso4 = {
   'Súbete a las sillas': '',
@@ -158,16 +257,11 @@ var social4 = {
 
 var cognitivo4 = {
   'Usar objetos como herramientas': '',
-  'Encajar objetos relacionados (por ejemplo, en un clasificador de formas)': '',
+  'Encajar objetos relacionados (por ejemplo, en un clasificador de formas)':
+      '',
 };
 
-var month24 = {
-  'motorGrueso24': motorGrueso24,
-  'motorFino24' : motorFino24,
-  'social24' : social24,
-  'cognitivo24' : cognitivo24,
-};
-
+//----------------month24--------------//
 var motorGrueso24 = {
   'Tira de un juguete mientras caminas': '',
   'Lleve un juguete grande o más de un juguete mientras camina': '',
@@ -196,13 +290,7 @@ var cognitivo24 = {
   'Comienza el juego "imaginario"': '',
 };
 
-var year3 = {
-  'motorGrueso3y': motorGrueso3y,
-  'motorFino3y' : motorFino3y,
-  'social3y' : social3y,
-  'cognitivo3y' : cognitivo3y,
-};
-
+//----------------------Year 3--------------------//
 var motorGrueso3y = {
   'Subir y bajar escaleras, alternando pies (un pie por escalera)': '',
   'Corre fácilmente': '',
@@ -211,7 +299,8 @@ var motorGrueso3y = {
 };
 
 var motorFino3y = {
-  'Hacer líneas hacia arriba y hacia abajo, de lado a lado y circulares con un lápiz o crayón': '',
+  'Hacer líneas hacia arriba y hacia abajo, de lado a lado y circulares con un lápiz o crayón':
+      '',
   'Construye una torre de más de 6 bloques': '',
   'Sostenga un lápiz en una posición de escritura': '',
   'Atornillar y desenroscar tapas de frascos o tuercas y pernos grandes': '',
@@ -233,7 +322,8 @@ var social3y = {
 };
 
 var cognitivo3y = {
-  'Hacer coincidir un objeto en su mano o la habitación con una imagen en un libro': '',
+  'Hacer coincidir un objeto en su mano o la habitación con una imagen en un libro':
+      '',
   'Incluye animales, muñecas y personas en juegos de fantasía': '',
   'Ordenar fácilmente por forma y color': '',
   'Completa un rompecabezas con 3 o 4 piezas': '',
@@ -241,12 +331,7 @@ var cognitivo3y = {
   'Nombre de las partes del cuerpo y colores': '',
 };
 
-var year4 = {
-  'motorGrueso4y': motorGrueso4y,
-  'motorFino4y' : motorFino4y,
-  'social4y' : social4y,
-  'cognitivo4y' : cognitivo4y,
-};
+//--------------------year 4----------------//
 
 var motorGrueso4y = {
   'Salta y párate en 1 pie durante un máximo de 4 segundos': '',

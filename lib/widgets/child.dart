@@ -1,4 +1,5 @@
 // ignore_for_file: must_be_immutable
+import 'package:actearly/widgets/indactorSphere.dart';
 import 'package:flutter/material.dart';
 //buttons
 import 'package:actearly/widgets/buttons/buttons.dart';
@@ -19,6 +20,8 @@ class child extends StatefulWidget {
 }
 
 class _child extends State<child> {
+  var currentPageIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -26,19 +29,13 @@ class _child extends State<child> {
     final CarouselController _carouselController = CarouselController();
 
     List yearsOld = [
-      '2 meses',
-      '4 meses',
-      '6 meses',
-      '2 meses',
-      '9 meses',
-      '1 año',
-      '15 meses',
-      '18 meses',
-      '2 años',
-      '30 meses',
-      '3 años',
-      '4 años',
-      '5 años'
+      '3\nmeses',
+      '8\nmeses',
+      '12\nmeses',
+      '18\nmeses',
+      '24\nmeses',
+      '3\naños',
+      '4\naños',
     ];
 
     return Scaffold(
@@ -85,7 +82,7 @@ class _child extends State<child> {
                             child: CircleAvatar(
                               radius: 0.05 * width,
                               backgroundImage: NetworkImage(
-                                  widget.childData.value['Picture']),
+                                  widget.childData.value['picture']),
                             )),
                         Container(
                           width: width * 0.28,
@@ -97,7 +94,7 @@ class _child extends State<child> {
                               text: TextSpan(
                                 children: [
                                   TextSpan(
-                                    text: 'Cinthya\n',
+                                    text: widget.childData.value['nameChild'],
                                     style: TextStyle(
                                         color: ColorConstants.purple,
                                         fontFamily: 'Archive',
@@ -105,7 +102,7 @@ class _child extends State<child> {
                                         fontWeight: FontWeight.w700),
                                   ),
                                   TextSpan(
-                                    text: '5 Meses',
+                                    text: '\n5 Meses',
                                     style: TextStyle(
                                       color: ColorConstants.black,
                                       fontFamily: 'Archive',
@@ -142,7 +139,6 @@ class _child extends State<child> {
             ),
             Expanded(
               child: Container(
-                color: Colors.black,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -201,65 +197,123 @@ class _child extends State<child> {
                           ],
                         )),
                     Container(
-                      color: Colors.amber,
                       width: width * 0.85,
                       height: height * 0.12,
-                      margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.05),
-                      child: Column(
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          CarouselSlider(
-                            carouselController: _carouselController,
-                            options: CarouselOptions(
-                              scrollDirection: Axis.horizontal,
-                              height: 150,
-                              aspectRatio: 16 / 9,
-                              viewportFraction: 1.0,
-                              enableInfiniteScroll: true,
-                              onPageChanged: (index, reason) {
-                                // Actualizar el estado cuando cambie la página
-                                setState(() {});
-                              },
-                            ),
-                            items: List.generate(
-                              3, // Cantidad de páginas
-                              (pageIndex) {
-                                return Row(
-                                  children: List.generate(
-                                    3, // Botones por página
-                                    (buttonIndex) {
-                                      final totalIndex =
-                                          pageIndex * 3 + buttonIndex;
-                                      return ElevatedButton(
-                                        onPressed: () {
-                                          // Acción del botón
-                                        },
-                                        child: Text(yearsOld[totalIndex]),
-                                      );
-                                    },
-                                  ),
-                                );
-                              },
+                          Container(
+                            width: width * 0.77,
+                            height: height * 0.10,
+                            child: CarouselSlider(
+                              carouselController: _carouselController,
+                              options: CarouselOptions(
+                                scrollDirection: Axis.vertical,
+                                height: 140,
+                                aspectRatio: 16 / 9,
+                                viewportFraction: 1.0,
+                                enableInfiniteScroll: true,
+                                onPageChanged: (index, reason) {
+                                  // Actualizar el estado cuando cambie la página
+
+                                  setState(() {
+                                    currentPageIndex = index;
+                                  });
+                                },
+                              ),
+                              items: List.generate(
+                                3, // Cantidad de páginas
+                                (pageIndex) {
+                                  return Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: List.generate(
+                                      pageIndex == 2
+                                          ? 1
+                                          : 3, // Botones por página
+                                      (buttonIndex) {
+                                        final totalIndex =
+                                            pageIndex * 3 + buttonIndex;
+                                        return sphereIndicator(widget.childData,
+                                            yearsOld, totalIndex, width);
+                                      },
+                                    ),
+                                  );
+                                },
+                              ),
                             ),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              IconButton(
-                                onPressed: () {
-                                  _carouselController.previousPage();
-                                },
-                                icon: Icon(Icons.arrow_back),
-                              ),
-                              SizedBox(width: 10),
-                              IconButton(
-                                onPressed: () {
-                                  _carouselController.nextPage();
-                                },
-                                icon: Icon(Icons.arrow_forward),
-                              ),
-                            ],
+                          Container(
+                            width: width * 0.07,
+                            height: height * 0.10,
+                            child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    width: 10.0,
+                                    height: 10.0,
+                                    margin:
+                                        EdgeInsets.only(bottom: height * 0.005),
+                                    decoration: BoxDecoration(
+                                      color: (currentPageIndex == 0)
+                                          ? ColorConstants.purple
+                                          : ColorConstants.white,
+                                      shape: BoxShape.circle,
+                                      boxShadow: [
+                                        BoxShadow(
+                                            blurRadius: 2,
+                                            color:
+                                                Color.fromARGB(186, 22, 22, 15),
+                                            spreadRadius: 0.005,
+                                            offset: Offset.fromDirection(-30))
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 10.0,
+                                    height: 10.0,
+                                    margin:
+                                        EdgeInsets.only(bottom: height * 0.005),
+                                    decoration: BoxDecoration(
+                                      color: (currentPageIndex == 1)
+                                          ? ColorConstants.purple
+                                          : ColorConstants.white,
+                                      shape: BoxShape.circle,
+                                      boxShadow: [
+                                        BoxShadow(
+                                            blurRadius: 2,
+                                            color:
+                                                Color.fromARGB(186, 22, 22, 15),
+                                            spreadRadius: 0.005,
+                                            offset: Offset.fromDirection(-30))
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 10.0,
+                                    height: 10.0,
+                                    margin:
+                                        EdgeInsets.symmetric(horizontal: 4.0),
+                                    decoration: BoxDecoration(
+                                      color: (currentPageIndex == 2)
+                                          ? ColorConstants.purple
+                                          : ColorConstants.white,
+                                      shape: BoxShape.circle,
+                                      boxShadow: [
+                                        BoxShadow(
+                                            blurRadius: 2,
+                                            color:
+                                                Color.fromARGB(186, 22, 22, 15),
+                                            spreadRadius: 0.005,
+                                            offset: Offset.fromDirection(-30))
+                                      ],
+                                    ),
+                                  ),
+                                ]),
                           ),
                         ],
                       ),
@@ -273,4 +327,22 @@ class _child extends State<child> {
       ),
     ));
   }
+}
+
+List<Widget> buildPageIndicator(int pageIndex, int pageCount) {
+  List<Widget> indicators = [];
+
+  for (int i = 0; i < pageCount; i++) {
+    indicators.add(Container(
+      width: 10.0,
+      height: 10.0,
+      margin: EdgeInsets.symmetric(horizontal: 4.0),
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: (i == pageIndex) ? Colors.blue : Colors.grey,
+      ),
+    ));
+  }
+
+  return indicators;
 }

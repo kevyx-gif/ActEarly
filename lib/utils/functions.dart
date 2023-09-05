@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:actearly/pages/main_screens/main_screen.dart';
+import 'package:actearly/utils/allMaps.dart';
 import 'package:actearly/utils/colors.dart';
 
 import 'package:firebase_storage/firebase_storage.dart';
@@ -187,6 +188,7 @@ Future<bool> addChildDatabase(BuildContext context, items, email) async {
         String userType = user['userType'];
         List<dynamic> children = user['children'] ?? [];
         List<dynamic> dates = [];
+        indicadorClass indicador = indicadorClass();
 
         //---------------------------upload IMG-------------------------------------------//
         for (int i = 0; i < items.length; i++) {
@@ -195,7 +197,6 @@ Future<bool> addChildDatabase(BuildContext context, items, email) async {
           int uuid = Random().nextInt(100);
           do {
             uuid = Random().nextInt(100);
-            print(uuid);
           } while (idFound(uuid, children) == true);
 
           if (child.mediaFileList.value != null) {
@@ -203,23 +204,25 @@ Future<bool> addChildDatabase(BuildContext context, items, email) async {
             final imgReference = await uploadImage(imageFile, email);
 
             children.add({
-              'Id': uuid,
-              'NameChild': child.kidName.text,
-              'Date': child.date.text,
-              'Genre': child.switchValue.value,
-              'Premature': child.decisionValue.value,
-              'Picture': imgReference,
-              'Dates': dates,
+              'id': uuid,
+              'nameChild': child.kidName.text,
+              'date': child.date.text,
+              'genre': child.switchValue.value,
+              'premature': child.decisionValue.value,
+              'picture': imgReference,
+              'dates': dates,
+              'indicador': indicador.general,
             });
           } else {
             children.add({
-              'Id': uuid,
-              'NameChild': child.kidName.text,
-              'Date': child.date.text,
-              'Genre': child.switchValue.value,
-              'Premature': child.decisionValue.value,
-              'Picture': imgPred,
-              'Dates': dates,
+              'id': uuid,
+              'nameChild': child.kidName.text,
+              'date': child.date.text,
+              'genre': child.switchValue.value,
+              'premature': child.decisionValue.value,
+              'picture': imgPred,
+              'dates': dates,
+              'indicador': indicador.general,
             });
           }
         }

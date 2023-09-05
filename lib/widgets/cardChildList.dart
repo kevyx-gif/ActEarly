@@ -32,7 +32,7 @@ class _cardChildList extends State<cardChildList> {
   @override
   void initState() {
     super.initState();
-    checkImage(widget.child['Picture']);
+    checkImage(widget.child['picture']);
   }
 
   @override
@@ -78,19 +78,19 @@ class _cardChildList extends State<cardChildList> {
                             height: widget.height * 0.04,
                             alignment: Alignment.center,
                             child: Text(
-                              widget.child['NameChild'],
+                              widget.child['nameChild'],
                               style: TextStyle(
                                   color: ColorConstants.purple,
-                                  fontFamily: 'Arcive',
+                                  fontFamily: 'Archive',
                                   fontWeight: FontWeight.w700,
                                   fontSize: widget.width * 0.05),
                             ),
                           ),
                           Text(
-                            widget.child['Date'],
+                            widget.child['date'],
                             style: TextStyle(
                                 color: ColorConstants.black,
-                                fontFamily: 'Arcive',
+                                fontFamily: 'Archive',
                                 fontWeight: FontWeight.w700,
                                 fontSize: widget.width * 0.03),
                           ),
@@ -190,7 +190,7 @@ class _cardChildList extends State<cardChildList> {
                                   onTap: () async {
                                     setState(() {
                                       auxList.removeWhere((map) =>
-                                          map['Id'] == widget.child['Id']);
+                                          map['id'] == widget.child['id']);
 
                                       widget.userData!.data()?['children'] =
                                           auxList;
@@ -241,7 +241,7 @@ class _cardChildList extends State<cardChildList> {
                     : CircleAvatar(
                         radius: 0.05 * widget.width,
                         backgroundImage: NetworkImage(
-                          widget.child['Picture'],
+                          widget.child['picture'],
                         ),
                       )))
       ]),
