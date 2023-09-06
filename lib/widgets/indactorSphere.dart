@@ -15,13 +15,23 @@ class sphereIndicator extends StatefulWidget {
 }
 
 class _sphereIndicator extends State<sphereIndicator> {
+  int yearsOldNum = 0;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => indicatorMain(widget.child)),
+          MaterialPageRoute(
+              builder: (context) =>
+                  indicatorMain(widget.child, widget.totalIndex)),
         );
       },
       child: Text(

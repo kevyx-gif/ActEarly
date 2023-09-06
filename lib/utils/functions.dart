@@ -355,15 +355,17 @@ Future<bool> changeChild(
     bool decisionValue,
     ValueNotifier<List<XFile>?> mediaFileList,
     List<dynamic> dates,
+    Map<dynamic, dynamic> indicador,
     List<dynamic> childrenOrg) async {
   Map<String, dynamic> newChild = {
-    'Id': Id,
-    'NameChild': kidName,
-    'Date': date,
-    'Genre': switchValue,
-    'Premature': decisionValue,
-    'Picture': '',
-    'Dates': dates,
+    'id': Id,
+    'nameChild': kidName,
+    'date': date,
+    'genre': switchValue,
+    'premature': decisionValue,
+    'picture': '',
+    'dates': dates,
+    'indicador': indicador,
   };
 
   print('lista que llega');
@@ -373,16 +375,16 @@ Future<bool> changeChild(
   if (mediaFileList.value != null) {
     final imageFile = File(mediaFileList.value![0].path);
     final imgReference = await uploadImage(imageFile, email);
-    newChild['Picture'] = imgReference;
+    newChild['picture'] = imgReference;
   } else {
     childrenOrg.forEach((element) {
-      if (element['Id'] == Id) {
-        newChild['Picture'] = element['Picture'];
+      if (element['id'] == Id) {
+        newChild['picture'] = element['picture'];
       }
     });
   }
 
-  aux.removeWhere((map) => map['Id'] == Id);
+  aux.removeWhere((map) => map['id'] == Id);
 
   aux.add(newChild);
 

@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 
 class indicatorMain extends StatefulWidget {
   ValueNotifier<Map<String, dynamic>> child;
-  indicatorMain(this.child, {super.key});
+  int indicatorSelect;
+  indicatorMain(this.child, this.indicatorSelect, {super.key});
 
   @override
   State<indicatorMain> createState() => _indicatorMain();
@@ -21,26 +22,16 @@ class _indicatorMain extends State<indicatorMain> {
   bool mov = false;
   bool cogn = false;
   int indexMap = 0;
-  int yearsOld = 0;
   int sizeMap = 0;
-
-  int getYears(String date) {
-    DateTime fechaNacimientoDateTime = DateTime.parse(date);
-    DateTime fechaActual = DateTime.now();
-    int monthDiff = fechaActual.month - fechaNacimientoDateTime.month;
-    if (monthDiff < 0) {
-      monthDiff += 12;
-    }
-
-    return monthDiff;
-  }
 
   @override
   void initState() {
     super.initState();
     indicadores.value.setData(widget.child.value['indicador']);
-    yearsOld = getYears(widget.child.value['date'].toString());
-    sizeMap = indicadores.value.getMont(yearsOld)[selectMap(indexMap)].length;
+
+    sizeMap = indicadores.value
+        .getMont(widget.indicatorSelect)[selectMap(indexMap)]
+        .length;
   }
 
   @override
@@ -122,8 +113,8 @@ class _indicatorMain extends State<indicatorMain> {
                                       itemBuilder:
                                           (BuildContext context, int index) {
                                         var key = indicadores.value
-                                            .getMont(
-                                                yearsOld)[selectMap(indexMap)]
+                                            .getMont(widget.indicatorSelect)[
+                                                selectMap(indexMap)]
                                             .keys
                                             .elementAt(index);
 
@@ -131,12 +122,13 @@ class _indicatorMain extends State<indicatorMain> {
                                           key,
                                           (width * 0.8),
                                           (height * 0.9),
-                                          indicadores.value.getMont(yearsOld)[
+                                          indicadores.value.getMont(
+                                                  widget.indicatorSelect)[
                                               selectMap(indexMap)][key],
                                           onAnswerChanged: (newAnswer) {
                                             setState(() {
-                                              indicadores.value
-                                                          .getMont(yearsOld)[
+                                              indicadores.value.getMont(widget
+                                                          .indicatorSelect)[
                                                       selectMap(indexMap)]
                                                   [key] = newAnswer;
                                             });
@@ -355,7 +347,7 @@ class _indicatorMain extends State<indicatorMain> {
               height: height * 0.08,
               child: Center(
                   child: Text(indicadores.value
-                      .getMont(yearsOld)[selectMap(indexMap)]
+                      .getMont(widget.indicatorSelect)[selectMap(indexMap)]
                       .toString())),
             )
           ],

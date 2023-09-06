@@ -54,30 +54,27 @@ class indicadorClass {
   dynamic getMont(int numberMont) {
     print('llego a la func con este number' + numberMont.toString());
     switch (numberMont) {
-      case < 0:
+      case == 0:
         {
-          print('entro al case 0');
-          return {};
-        }
-      case >= 0 && < 8:
-        {
-          print('entro al primero');
-          print(general['month3']);
           return general['month3'];
         }
-      case >= 8 && < 12:
+      case == 1:
         {
           return general['month8'];
         }
-      case >= 12 && < 18:
+      case == 2:
         {
           return general['month12'];
         }
-      case >= 18 && < 24:
+      case == 3:
         {
           return general['month18'];
         }
-      case >= 24 && < 36:
+      case == 4:
+        {
+          return general['month24'];
+        }
+      case == 5:
         {
           return general['year3'];
         }

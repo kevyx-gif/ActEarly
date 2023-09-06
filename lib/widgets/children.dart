@@ -103,7 +103,7 @@ class _childrenState extends State<children> {
                                       })))
                         ]),
                   ))
-              : child(selectChild, indicador);
+              : child(selectChild, indicador, widget.email, widget.userData);
         });
   }
 }

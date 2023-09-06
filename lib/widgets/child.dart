@@ -1,5 +1,8 @@
 // ignore_for_file: must_be_immutable
+import 'package:actearly/utils/functions.dart';
+import 'package:actearly/widgets/dialogEditChild.dart';
 import 'package:actearly/widgets/indactorSphere.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 //buttons
 import 'package:actearly/widgets/buttons/buttons.dart';
@@ -12,8 +15,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 class child extends StatefulWidget {
   ValueNotifier<Map<String, dynamic>> childData;
+  DocumentSnapshot<Map<String, dynamic>>? userData;
   bool indicador;
-  child(this.childData, this.indicador, {super.key});
+  String email;
+  child(this.childData, this.indicador, this.email, this.userData, {super.key});
 
   @override
   State<child> createState() => _child();
@@ -22,11 +27,38 @@ class child extends StatefulWidget {
 class _child extends State<child> {
   var currentPageIndex = 0;
 
+  ValueNotifier<String> months = ValueNotifier<String>('');
+
+  int getYears(String date) {
+    DateTime fechaNacimientoDateTime = DateTime.parse(date);
+    DateTime fechaActual = DateTime.now();
+    int monthDiff = fechaActual.month - fechaNacimientoDateTime.month;
+    if (monthDiff < 0) {
+      monthDiff += 12;
+    }
+
+    return monthDiff;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     final CarouselController _carouselController = CarouselController();
+    months.value =
+        '\n' + getYears(widget.childData.value['date']).toString() + ' months';
 
     List yearsOld = [
       '3\nmeses',
@@ -102,7 +134,7 @@ class _child extends State<child> {
                                         fontWeight: FontWeight.w700),
                                   ),
                                   TextSpan(
-                                    text: '\n5 Meses',
+                                    text: months.value,
                                     style: TextStyle(
                                       color: ColorConstants.black,
                                       fontFamily: 'Archive',
@@ -121,20 +153,136 @@ class _child extends State<child> {
                     width: width * 0.5,
                     height: height * 0.1,
                     child: widget.indicador != false
-                        ? Positioned(
-                            top: height * 0.06,
-                            left: 0.06,
-                            child: Container(
-                              child: ElevatedButton(
-                                child: Text('regresar'),
-                                onPressed: () => {
-                                  setState(() {
-                                    widget.childData.value = {};
-                                  })
-                                },
+                        ? Container(
+                            alignment: Alignment.centerRight,
+                            margin: EdgeInsets.only(
+                                right: width * 0.02, top: height * 0.025),
+                            child: ElevatedButton(
+                              style: ButtonStyle(
+                                shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(50),
+                                )),
+
+                                backgroundColor: MaterialStateProperty.all(
+                                    ColorConstants
+                                        .borderBtnColor), // <-- Button color
+                                overlayColor:
+                                    MaterialStateProperty.resolveWith<Color?>(
+                                        (states) {
+                                  if (states.contains(MaterialState.pressed))
+                                    return ColorConstants.btnColor;
+                                  return null; // <-- Splash color
+                                }),
                               ),
-                            ))
-                        : SizedBox()),
+                              child: Text(
+                                'regresar',
+                                style: TextStyle(
+                                    fontFamily: 'Archive',
+                                    fontSize: width * 0.03),
+                              ),
+                              onPressed: () => {
+                                setState(() {
+                                  widget.childData.value = {};
+                                })
+                              },
+                            ),
+                          )
+                        : Container(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                    margin: EdgeInsets.symmetric(
+                                        horizontal: width * 0.02),
+                                    alignment: Alignment.center,
+                                    width: width * 0.08,
+                                    height: width * 0.08,
+                                    child: ClipOval(
+                                      child: Material(
+                                        color: ColorConstants
+                                            .blueNavbar, // Button color
+                                        child: InkWell(
+                                          splashColor: ColorConstants
+                                              .blueCard, // Splash color
+                                          onTap: () {
+                                            showDialog(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return Dialog(
+                                                    backgroundColor:
+                                                        Colors.transparent,
+                                                    shape:
+                                                        const RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .only(
+                                                      bottomRight:
+                                                          Radius.circular(50),
+                                                      bottomLeft:
+                                                          Radius.circular(50),
+                                                    )),
+                                                    child: Container(
+                                                      color: Colors.transparent,
+                                                      width: width * 0.8,
+                                                      height: height * 0.6,
+                                                      child: dialogEditChild(
+                                                          widget.email,
+                                                          widget
+                                                              .childData.value,
+                                                          widget.userData!
+                                                                  .data()?[
+                                                              'children']),
+                                                    ),
+                                                  );
+                                                });
+                                          },
+                                          child: SizedBox(
+                                              width: width * 0.09,
+                                              height: width * 0.09,
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorConstants.white,
+                                                size: width * 0.04,
+                                              )),
+                                        ),
+                                      ),
+                                    )),
+                                Container(
+                                    margin: EdgeInsets.symmetric(
+                                        horizontal: width * 0.02),
+                                    alignment: Alignment.center,
+                                    width: width * 0.08,
+                                    height: width * 0.08,
+                                    child: ClipOval(
+                                      child: Material(
+                                        color: ColorConstants
+                                            .blueNavbar, // Button color
+                                        child: InkWell(
+                                          splashColor: ColorConstants
+                                              .blueCard, // Splash color
+                                          onTap: () async {
+                                            // Assuming updateChildDatabase is an asynchronous function
+                                            await updateChildDatabase(context,
+                                                widget.email, [], 'children');
+                                          },
+                                          child: SizedBox(
+                                              width: width * 0.09,
+                                              height: width * 0.09,
+                                              child: Icon(
+                                                Icons.delete,
+                                                color: ColorConstants.white,
+                                                size: width * 0.04,
+                                              )),
+                                        ),
+                                      ),
+                                    )),
+                              ],
+                            ),
+                          )),
               ],
             ),
             Expanded(
