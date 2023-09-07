@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:actearly/pages/main_screens/main_screen.dart';
+import 'package:actearly/utils/allMaps.dart';
 import 'package:actearly/utils/colors.dart';
 
 import 'package:firebase_storage/firebase_storage.dart';
@@ -187,6 +188,7 @@ Future<bool> addChildDatabase(BuildContext context, items, email) async {
         String userType = user['userType'];
         List<dynamic> children = user['children'] ?? [];
         List<dynamic> dates = [];
+        indicadorClass indicador = indicadorClass();
 
         //---------------------------upload IMG-------------------------------------------//
         for (int i = 0; i < items.length; i++) {
@@ -195,7 +197,6 @@ Future<bool> addChildDatabase(BuildContext context, items, email) async {
           int uuid = Random().nextInt(100);
           do {
             uuid = Random().nextInt(100);
-            print(uuid);
           } while (idFound(uuid, children) == true);
 
           if (child.mediaFileList.value != null) {
@@ -203,23 +204,25 @@ Future<bool> addChildDatabase(BuildContext context, items, email) async {
             final imgReference = await uploadImage(imageFile, email);
 
             children.add({
-              'Id': uuid,
-              'NameChild': child.kidName.text,
-              'Date': child.date.text,
-              'Genre': child.switchValue.value,
-              'Premature': child.decisionValue.value,
-              'Picture': imgReference,
-              'Dates': dates,
+              'id': uuid,
+              'nameChild': child.kidName.text,
+              'date': child.date.text,
+              'genre': child.switchValue.value,
+              'premature': child.decisionValue.value,
+              'picture': imgReference,
+              'dates': dates,
+              'indicador': indicador.general,
             });
           } else {
             children.add({
-              'Id': uuid,
-              'NameChild': child.kidName.text,
-              'Date': child.date.text,
-              'Genre': child.switchValue.value,
-              'Premature': child.decisionValue.value,
-              'Picture': imgPred,
-              'Dates': dates,
+              'id': uuid,
+              'nameChild': child.kidName.text,
+              'date': child.date.text,
+              'genre': child.switchValue.value,
+              'premature': child.decisionValue.value,
+              'picture': imgPred,
+              'dates': dates,
+              'indicador': indicador.general,
             });
           }
         }
@@ -352,15 +355,17 @@ Future<bool> changeChild(
     bool decisionValue,
     ValueNotifier<List<XFile>?> mediaFileList,
     List<dynamic> dates,
+    Map<dynamic, dynamic> indicador,
     List<dynamic> childrenOrg) async {
   Map<String, dynamic> newChild = {
-    'Id': Id,
-    'NameChild': kidName,
-    'Date': date,
-    'Genre': switchValue,
-    'Premature': decisionValue,
-    'Picture': '',
-    'Dates': dates,
+    'id': Id,
+    'nameChild': kidName,
+    'date': date,
+    'genre': switchValue,
+    'premature': decisionValue,
+    'picture': '',
+    'dates': dates,
+    'indicador': indicador,
   };
 
   print('lista que llega');
@@ -370,21 +375,45 @@ Future<bool> changeChild(
   if (mediaFileList.value != null) {
     final imageFile = File(mediaFileList.value![0].path);
     final imgReference = await uploadImage(imageFile, email);
-    newChild['Picture'] = imgReference;
+    newChild['picture'] = imgReference;
   } else {
     childrenOrg.forEach((element) {
-      if (element['Id'] == Id) {
-        newChild['Picture'] = element['Picture'];
+      if (element['id'] == Id) {
+        newChild['picture'] = element['picture'];
       }
     });
   }
 
-  aux.removeWhere((map) => map['Id'] == Id);
+  aux.removeWhere((map) => map['id'] == Id);
 
   aux.add(newChild);
 
   childrenOrg = aux;
 
+  String em = email;
+
+  final firebase = FirebaseFirestore.instance;
+
+  //---------------------------------------------------------------//
+  try {
+    await firebase.collection('users').doc(em).update({'children': aux});
+    return true;
+  } catch (e) {
+    print('ERROR ' + e.toString());
+    return false;
+  }
+}
+
+Future<bool> updateIndicator(
+    Map<String, dynamic> child, List<dynamic> childrenOrg, String email) async {
+  print('Entro a la fun con esto');
+  print(child);
+  print(childrenOrg);
+  print(email);
+  List<dynamic> aux = childrenOrg;
+  Map<String, dynamic> newChild = child;
+  aux.removeWhere((map) => map['id'] == child['id']);
+  aux.add(newChild);
   String em = email;
 
   final firebase = FirebaseFirestore.instance;

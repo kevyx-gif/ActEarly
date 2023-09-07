@@ -18,10 +18,10 @@ class children extends StatefulWidget {
 }
 
 class _childrenState extends State<children> {
-  final ScrollController controller = ScrollController();
   ValueNotifier<Map<String, dynamic>> selectChild =
       ValueNotifier<Map<String, dynamic>>({});
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  ScrollController rawController = ScrollController();
   bool indicador = true;
 
   @override
@@ -74,36 +74,55 @@ class _childrenState extends State<children> {
                               padding: EdgeInsets.symmetric(
                                   horizontal: width * 0.03),
                               width: width * 0.93,
-                              height: height * 0.5,
-                              child: Scrollbar(
-                                  controller: controller,
-                                  child: GridView.builder(
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: height * 0.01),
-                                      gridDelegate:
-                                          SliverGridDelegateWithFixedCrossAxisCount(
-                                              crossAxisCount: 2,
-                                              crossAxisSpacing: width * 0.07,
-                                              mainAxisSpacing: 25,
-                                              childAspectRatio: 3 / 3.5),
-                                      itemCount: listChildren?.length,
-                                      itemBuilder:
-                                          (BuildContext ctxt, int index) {
-                                        return Padding(
-                                            padding: const EdgeInsets.fromLTRB(
-                                                0, 5, 15, 5),
-                                            child: cardChildList(
-                                              widget.email,
-                                              listChildren?[index],
-                                              width * 0.9,
-                                              height * 0.6,
-                                              selectChild: selectChild,
-                                              userData: widget.userData,
-                                            ));
-                                      })))
+                              height: height * 0.69,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Colors.transparent,
+                                    Colors.transparent,
+                                    Colors.white.withOpacity(0.02),
+                                  ],
+                                  stops: [0.8, 0.95, 1],
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                ),
+                              ),
+                              child: RawScrollbar(
+                                isAlwaysShown: true,
+                                controller: rawController,
+                                thumbColor: ColorConstants.bgColor,
+                                thickness: 7,
+                                radius: Radius.circular(50),
+                                child: GridView.builder(
+                                    controller: rawController,
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: height * 0.01),
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 2,
+                                            crossAxisSpacing: width * 0.07,
+                                            mainAxisSpacing: 25,
+                                            childAspectRatio: 3 / 3.5),
+                                    itemCount: listChildren?.length,
+                                    itemBuilder:
+                                        (BuildContext ctxt, int index) {
+                                      return Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              0, 5, 15, 5),
+                                          child: cardChildList(
+                                            widget.email,
+                                            listChildren?[index],
+                                            width * 0.9,
+                                            height * 0.6,
+                                            selectChild: selectChild,
+                                            userData: widget.userData,
+                                          ));
+                                    }),
+                              ))
                         ]),
                   ))
-              : child(selectChild, indicador);
+              : child(selectChild, indicador, widget.email, widget.userData);
         });
   }
 }

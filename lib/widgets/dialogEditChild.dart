@@ -48,9 +48,9 @@ class _dialogEditChild extends State<dialogEditChild>
   @override
   void initState() {
     super.initState();
-    checkImage(widget.dataChild['Picture']);
-    switchValue = widget.dataChild['Genre'];
-    decisionValue = widget.dataChild['Premature'];
+    checkImage(widget.dataChild['picture']);
+    switchValue = widget.dataChild['genre'];
+    decisionValue = widget.dataChild['premature'];
   }
 
   @override
@@ -188,7 +188,7 @@ class _dialogEditChild extends State<dialogEditChild>
                                       : CircleAvatar(
                                           radius: 0.05 * width,
                                           backgroundImage: NetworkImage(
-                                            widget.dataChild['Picture'],
+                                            widget.dataChild['picture'],
                                           ),
                                           child: Center(
                                             child: IconButton(
@@ -271,7 +271,7 @@ class _dialogEditChild extends State<dialogEditChild>
                                 borderRadius: BorderRadius.circular(
                                     24.0), // Adjust the radius as needed
                               ),
-                              hintText: widget.dataChild['NameChild'],
+                              hintText: widget.dataChild['nameChild'],
                               hintStyle: const TextStyle(
                                   fontFamily: 'Archive',
                                   color: ColorConstants.TextGray),
@@ -320,7 +320,7 @@ class _dialogEditChild extends State<dialogEditChild>
                                 borderRadius: BorderRadius.circular(
                                     24.0), // Adjust the radius as needed
                               ),
-                              hintText: widget.dataChild['Date'],
+                              hintText: widget.dataChild['date'],
                               hintStyle: const TextStyle(
                                   fontFamily: 'Archive',
                                   color: ColorConstants.TextGray),
@@ -500,21 +500,23 @@ class _dialogEditChild extends State<dialogEditChild>
                                             });
 
                                             final upload = await changeChild(
-                                                context,
-                                                widget.email,
-                                                widget.dataChild['Id'],
-                                                kidName.text != ''
-                                                    ? kidName.text
-                                                    : widget
-                                                        .dataChild['NameChild'],
-                                                date.text != ''
-                                                    ? date.text
-                                                    : widget.dataChild['Date'],
-                                                switchValue,
-                                                decisionValue,
-                                                mediaFileList,
-                                                widget.dataChild['Dates'],
-                                                widget.children);
+                                              context,
+                                              widget.email,
+                                              widget.dataChild['id'],
+                                              kidName.text != ''
+                                                  ? kidName.text
+                                                  : widget
+                                                      .dataChild['nameChild'],
+                                              date.text != ''
+                                                  ? date.text
+                                                  : widget.dataChild['date'],
+                                              switchValue,
+                                              decisionValue,
+                                              mediaFileList,
+                                              widget.dataChild['dates'],
+                                              widget.dataChild['indicador'],
+                                              widget.children,
+                                            );
 
                                             setState(() {
                                               if (upload) {

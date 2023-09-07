@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import '../../utils/functions.dart';
-
 class DateChildren extends StatefulWidget {
   String email;
   DocumentSnapshot<Map<String, dynamic>>? userData;
@@ -14,8 +12,7 @@ class DateChildren extends StatefulWidget {
 }
 
 class _DateChildrenState extends State<DateChildren> {
-
-  final GlobalKey<FormState> titleDateKey= GlobalKey<FormState>();
+  final GlobalKey<FormState> titleDateKey = GlobalKey<FormState>();
 
   final _titleController = TextEditingController();
   final _dateController = TextEditingController();
@@ -24,7 +21,7 @@ class _DateChildrenState extends State<DateChildren> {
   List<dynamic>? childrenData = [];
 
   @override
-  void disposed(){
+  void disposed() {
     super.dispose;
   }
 
@@ -55,7 +52,10 @@ class _DateChildrenState extends State<DateChildren> {
               return null;
             },
           ),
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3aeadf29225bb48f6230aeefb1a3fc3d7af0995a
           TextFormField(
             controller: _dateController,
             decoration: const InputDecoration(
@@ -68,7 +68,6 @@ class _DateChildrenState extends State<DateChildren> {
               return null;
             },
           ),
-
           TextFormField(
             controller: _timeController,
             decoration: const InputDecoration(
@@ -81,7 +80,6 @@ class _DateChildrenState extends State<DateChildren> {
               return null;
             },
           ),
-
           TextFormField(
             controller: _descriptionController,
             decoration: const InputDecoration(
@@ -114,16 +112,15 @@ class _DateChildrenState extends State<DateChildren> {
               });
             },
           ),
-
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
-              onPressed: () { 
+              onPressed: () {
                 print(childrenData);
                 //if (titleDateKey.currentState!.validate()) {
-                  //updateChildDatabase(context, );
-                  // Process data.
-                },
+                //updateChildDatabase(context, );
+                // Process data.
+              },
               child: const Text('Submit'),
             ),
           ),

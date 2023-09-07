@@ -25,7 +25,7 @@ class _ShowChild extends State<ShowChildWidget> {
           ValueNotifier<Map<String, dynamic>>(childrenData[0]);
 
       return childrenData.length == 1
-          ? child(childData, indicador)
+          ? child(childData, indicador, widget.email, widget.userData)
           : children(widget.userData, widget.email);
     } else {
       return children(widget.userData, widget.email);

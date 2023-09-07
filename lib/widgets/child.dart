@@ -1,4 +1,8 @@
 // ignore_for_file: must_be_immutable
+import 'package:actearly/utils/functions.dart';
+import 'package:actearly/widgets/dialogEditChild.dart';
+import 'package:actearly/widgets/indactorSphere.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 //buttons
 import 'package:actearly/widgets/buttons/buttons.dart';
@@ -11,34 +15,59 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 class child extends StatefulWidget {
   ValueNotifier<Map<String, dynamic>> childData;
+  DocumentSnapshot<Map<String, dynamic>>? userData;
   bool indicador;
-  child(this.childData, this.indicador, {super.key});
+  String email;
+  child(this.childData, this.indicador, this.email, this.userData, {super.key});
 
   @override
   State<child> createState() => _child();
 }
 
 class _child extends State<child> {
+  var currentPageIndex = 0;
+
+  ValueNotifier<String> months = ValueNotifier<String>('');
+
+  int getYears(String date) {
+    DateTime fechaNacimientoDateTime = DateTime.parse(date);
+    DateTime fechaActual = DateTime.now();
+    int monthDiff = fechaActual.month - fechaNacimientoDateTime.month;
+    if (monthDiff < 0) {
+      monthDiff += 12;
+    }
+
+    return monthDiff;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     final CarouselController _carouselController = CarouselController();
+    months.value =
+        '\n' + getYears(widget.childData.value['date']).toString() + ' months';
 
     List yearsOld = [
-      '2 meses',
-      '4 meses',
-      '6 meses',
-      '2 meses',
-      '9 meses',
-      '1 año',
-      '15 meses',
-      '18 meses',
-      '2 años',
-      '30 meses',
-      '3 años',
-      '4 años',
-      '5 años'
+      '3\nmeses',
+      '8\nmeses',
+      '12\nmeses',
+      '18\nmeses',
+      '24\nmeses',
+      '3\naños',
+      '4\naños',
     ];
 
     return Scaffold(
@@ -85,7 +114,7 @@ class _child extends State<child> {
                             child: CircleAvatar(
                               radius: 0.05 * width,
                               backgroundImage: NetworkImage(
-                                  widget.childData.value['Picture']),
+                                  widget.childData.value['picture']),
                             )),
                         Container(
                           width: width * 0.28,
@@ -97,7 +126,7 @@ class _child extends State<child> {
                               text: TextSpan(
                                 children: [
                                   TextSpan(
-                                    text: 'Cinthya\n',
+                                    text: widget.childData.value['nameChild'],
                                     style: TextStyle(
                                         color: ColorConstants.purple,
                                         fontFamily: 'Archive',
@@ -105,7 +134,7 @@ class _child extends State<child> {
                                         fontWeight: FontWeight.w700),
                                   ),
                                   TextSpan(
-                                    text: '5 Meses',
+                                    text: months.value,
                                     style: TextStyle(
                                       color: ColorConstants.black,
                                       fontFamily: 'Archive',
@@ -124,25 +153,140 @@ class _child extends State<child> {
                     width: width * 0.5,
                     height: height * 0.1,
                     child: widget.indicador != false
-                        ? Positioned(
-                            top: height * 0.06,
-                            left: 0.06,
-                            child: Container(
-                              child: ElevatedButton(
-                                child: Text('regresar'),
-                                onPressed: () => {
-                                  setState(() {
-                                    widget.childData.value = {};
-                                  })
-                                },
+                        ? Container(
+                            alignment: Alignment.centerRight,
+                            margin: EdgeInsets.only(
+                                right: width * 0.02, top: height * 0.025),
+                            child: ElevatedButton(
+                              style: ButtonStyle(
+                                shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(50),
+                                )),
+
+                                backgroundColor: MaterialStateProperty.all(
+                                    ColorConstants
+                                        .borderBtnColor), // <-- Button color
+                                overlayColor:
+                                    MaterialStateProperty.resolveWith<Color?>(
+                                        (states) {
+                                  if (states.contains(MaterialState.pressed))
+                                    return ColorConstants.btnColor;
+                                  return null; // <-- Splash color
+                                }),
                               ),
-                            ))
-                        : SizedBox()),
+                              child: Text(
+                                'regresar',
+                                style: TextStyle(
+                                    fontFamily: 'Archive',
+                                    fontSize: width * 0.03),
+                              ),
+                              onPressed: () => {
+                                setState(() {
+                                  widget.childData.value = {};
+                                })
+                              },
+                            ),
+                          )
+                        : Container(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                    margin: EdgeInsets.symmetric(
+                                        horizontal: width * 0.02),
+                                    alignment: Alignment.center,
+                                    width: width * 0.08,
+                                    height: width * 0.08,
+                                    child: ClipOval(
+                                      child: Material(
+                                        color: ColorConstants
+                                            .blueNavbar, // Button color
+                                        child: InkWell(
+                                          splashColor: ColorConstants
+                                              .blueCard, // Splash color
+                                          onTap: () {
+                                            showDialog(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return Dialog(
+                                                    backgroundColor:
+                                                        Colors.transparent,
+                                                    shape:
+                                                        const RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .only(
+                                                      bottomRight:
+                                                          Radius.circular(50),
+                                                      bottomLeft:
+                                                          Radius.circular(50),
+                                                    )),
+                                                    child: Container(
+                                                      color: Colors.transparent,
+                                                      width: width * 0.8,
+                                                      height: height * 0.6,
+                                                      child: dialogEditChild(
+                                                          widget.email,
+                                                          widget
+                                                              .childData.value,
+                                                          widget.userData!
+                                                                  .data()?[
+                                                              'children']),
+                                                    ),
+                                                  );
+                                                });
+                                          },
+                                          child: SizedBox(
+                                              width: width * 0.09,
+                                              height: width * 0.09,
+                                              child: Icon(
+                                                Icons.edit,
+                                                color: ColorConstants.white,
+                                                size: width * 0.04,
+                                              )),
+                                        ),
+                                      ),
+                                    )),
+                                Container(
+                                    margin: EdgeInsets.symmetric(
+                                        horizontal: width * 0.02),
+                                    alignment: Alignment.center,
+                                    width: width * 0.08,
+                                    height: width * 0.08,
+                                    child: ClipOval(
+                                      child: Material(
+                                        color: ColorConstants
+                                            .blueNavbar, // Button color
+                                        child: InkWell(
+                                          splashColor: ColorConstants
+                                              .blueCard, // Splash color
+                                          onTap: () async {
+                                            // Assuming updateChildDatabase is an asynchronous function
+                                            await updateChildDatabase(context,
+                                                widget.email, [], 'children');
+                                          },
+                                          child: SizedBox(
+                                              width: width * 0.09,
+                                              height: width * 0.09,
+                                              child: Icon(
+                                                Icons.delete,
+                                                color: ColorConstants.white,
+                                                size: width * 0.04,
+                                              )),
+                                        ),
+                                      ),
+                                    )),
+                              ],
+                            ),
+                          )),
               ],
             ),
             Expanded(
               child: Container(
-                color: Colors.black,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -201,65 +345,128 @@ class _child extends State<child> {
                           ],
                         )),
                     Container(
-                      color: Colors.amber,
                       width: width * 0.85,
                       height: height * 0.12,
-                      margin: EdgeInsets.fromLTRB(0, 0, 0, height * 0.05),
-                      child: Column(
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          CarouselSlider(
-                            carouselController: _carouselController,
-                            options: CarouselOptions(
-                              scrollDirection: Axis.horizontal,
-                              height: 150,
-                              aspectRatio: 16 / 9,
-                              viewportFraction: 1.0,
-                              enableInfiniteScroll: true,
-                              onPageChanged: (index, reason) {
-                                // Actualizar el estado cuando cambie la página
-                                setState(() {});
-                              },
-                            ),
-                            items: List.generate(
-                              3, // Cantidad de páginas
-                              (pageIndex) {
-                                return Row(
-                                  children: List.generate(
-                                    3, // Botones por página
-                                    (buttonIndex) {
-                                      final totalIndex =
-                                          pageIndex * 3 + buttonIndex;
-                                      return ElevatedButton(
-                                        onPressed: () {
-                                          // Acción del botón
-                                        },
-                                        child: Text(yearsOld[totalIndex]),
-                                      );
-                                    },
-                                  ),
-                                );
-                              },
+                          Container(
+                            width: width * 0.77,
+                            height: height * 0.10,
+                            child: CarouselSlider(
+                              carouselController: _carouselController,
+                              options: CarouselOptions(
+                                scrollDirection: Axis.vertical,
+                                height: 140,
+                                aspectRatio: 16 / 9,
+                                viewportFraction: 1.0,
+                                enableInfiniteScroll: true,
+                                onPageChanged: (index, reason) {
+                                  // Actualizar el estado cuando cambie la página
+
+                                  setState(() {
+                                    currentPageIndex = index;
+                                  });
+                                },
+                              ),
+                              items: List.generate(
+                                3, // Cantidad de páginas
+                                (pageIndex) {
+                                  return Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: List.generate(
+                                      pageIndex == 2
+                                          ? 1
+                                          : 3, // Botones por página
+                                      (buttonIndex) {
+                                        final totalIndex =
+                                            pageIndex * 3 + buttonIndex;
+                                        return sphereIndicator(
+                                            widget.childData,
+                                            yearsOld,
+                                            totalIndex,
+                                            width,
+                                            widget.email,
+                                            widget.userData!['children']);
+                                      },
+                                    ),
+                                  );
+                                },
+                              ),
                             ),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              IconButton(
-                                onPressed: () {
-                                  _carouselController.previousPage();
-                                },
-                                icon: Icon(Icons.arrow_back),
-                              ),
-                              SizedBox(width: 10),
-                              IconButton(
-                                onPressed: () {
-                                  _carouselController.nextPage();
-                                },
-                                icon: Icon(Icons.arrow_forward),
-                              ),
-                            ],
+                          Container(
+                            width: width * 0.07,
+                            height: height * 0.10,
+                            child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    width: 10.0,
+                                    height: 10.0,
+                                    margin:
+                                        EdgeInsets.only(bottom: height * 0.005),
+                                    decoration: BoxDecoration(
+                                      color: (currentPageIndex == 0)
+                                          ? ColorConstants.purple
+                                          : ColorConstants.white,
+                                      shape: BoxShape.circle,
+                                      boxShadow: [
+                                        BoxShadow(
+                                            blurRadius: 2,
+                                            color:
+                                                Color.fromARGB(186, 22, 22, 15),
+                                            spreadRadius: 0.005,
+                                            offset: Offset.fromDirection(-30))
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 10.0,
+                                    height: 10.0,
+                                    margin:
+                                        EdgeInsets.only(bottom: height * 0.005),
+                                    decoration: BoxDecoration(
+                                      color: (currentPageIndex == 1)
+                                          ? ColorConstants.purple
+                                          : ColorConstants.white,
+                                      shape: BoxShape.circle,
+                                      boxShadow: [
+                                        BoxShadow(
+                                            blurRadius: 2,
+                                            color:
+                                                Color.fromARGB(186, 22, 22, 15),
+                                            spreadRadius: 0.005,
+                                            offset: Offset.fromDirection(-30))
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 10.0,
+                                    height: 10.0,
+                                    margin:
+                                        EdgeInsets.symmetric(horizontal: 4.0),
+                                    decoration: BoxDecoration(
+                                      color: (currentPageIndex == 2)
+                                          ? ColorConstants.purple
+                                          : ColorConstants.white,
+                                      shape: BoxShape.circle,
+                                      boxShadow: [
+                                        BoxShadow(
+                                            blurRadius: 2,
+                                            color:
+                                                Color.fromARGB(186, 22, 22, 15),
+                                            spreadRadius: 0.005,
+                                            offset: Offset.fromDirection(-30))
+                                      ],
+                                    ),
+                                  ),
+                                ]),
                           ),
                         ],
                       ),
@@ -273,4 +480,22 @@ class _child extends State<child> {
       ),
     ));
   }
+}
+
+List<Widget> buildPageIndicator(int pageIndex, int pageCount) {
+  List<Widget> indicators = [];
+
+  for (int i = 0; i < pageCount; i++) {
+    indicators.add(Container(
+      width: 10.0,
+      height: 10.0,
+      margin: EdgeInsets.symmetric(horizontal: 4.0),
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: (i == pageIndex) ? Colors.blue : Colors.grey,
+      ),
+    ));
+  }
+
+  return indicators;
 }
