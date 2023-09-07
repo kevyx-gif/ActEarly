@@ -31,9 +31,11 @@ class _DateChildrenState extends State<DateChildren> {
   @override
   void initState() {
     childrenData = widget.userData!.data()?['children'] ?? [];
+    //listNameChild = 
     super.initState();
   }
 
+  String dropdownValue = 'Select Child';
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -53,7 +55,7 @@ class _DateChildrenState extends State<DateChildren> {
               return null;
             },
           ),
-          
+
           TextFormField(
             controller: _dateController,
             decoration: const InputDecoration(
@@ -90,6 +92,26 @@ class _DateChildrenState extends State<DateChildren> {
                 return 'Please enter some text';
               }
               return null;
+            },
+          ),          
+
+          DropdownButton<String>(
+            value: dropdownValue,
+            items: <String>['Dog', 'Cat', 'Tiger', 'Lion']
+            //items: childrenData?[];
+                .map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(
+                  value,
+                  style: TextStyle(fontSize: 30),
+                ),
+              );
+            }).toList(),
+            onChanged: (String? newValue) {
+              setState(() {
+                dropdownValue = newValue!; //valor actual
+              });
             },
           ),
 
