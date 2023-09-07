@@ -74,7 +74,20 @@ class _childrenState extends State<children> {
                               padding: EdgeInsets.symmetric(
                                   horizontal: width * 0.03),
                               width: width * 0.93,
-                              height: height * 0.5,
+                              height: height * 0.69,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Colors.transparent,
+                                    Colors.transparent,
+                                    Colors.white.withOpacity(0.02),
+                                  ],
+                                  stops: [0.8, 0.95, 1],
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                ),
+                              ),
                               child: RawScrollbar(
                                 isAlwaysShown: true,
                                 controller: rawController,
