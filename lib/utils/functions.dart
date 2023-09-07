@@ -403,3 +403,27 @@ Future<bool> changeChild(
     return false;
   }
 }
+
+Future<bool> updateIndicator(
+    Map<String, dynamic> child, List<dynamic> childrenOrg, String email) async {
+  print('Entro a la fun con esto');
+  print(child);
+  print(childrenOrg);
+  print(email);
+  List<dynamic> aux = childrenOrg;
+  Map<String, dynamic> newChild = child;
+  aux.removeWhere((map) => map['id'] == child['id']);
+  aux.add(newChild);
+  String em = email;
+
+  final firebase = FirebaseFirestore.instance;
+
+  //---------------------------------------------------------------//
+  try {
+    await firebase.collection('users').doc(em).update({'children': aux});
+    return true;
+  } catch (e) {
+    print('ERROR ' + e.toString());
+    return false;
+  }
+}

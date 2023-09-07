@@ -385,8 +385,13 @@ class _child extends State<child> {
                                       (buttonIndex) {
                                         final totalIndex =
                                             pageIndex * 3 + buttonIndex;
-                                        return sphereIndicator(widget.childData,
-                                            yearsOld, totalIndex, width);
+                                        return sphereIndicator(
+                                            widget.childData,
+                                            yearsOld,
+                                            totalIndex,
+                                            width,
+                                            widget.email,
+                                            widget.userData!['children']);
                                       },
                                     ),
                                   );

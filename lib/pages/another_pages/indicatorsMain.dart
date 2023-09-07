@@ -1,14 +1,22 @@
-import 'dart:ffi';
-
 import 'package:actearly/utils/allMaps.dart';
 import 'package:actearly/utils/colors.dart';
+import 'package:actearly/utils/functions.dart';
+
 import 'package:actearly/widgets/indicatorCard.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+enum ButtonState { init, loading, done }
 
 class indicatorMain extends StatefulWidget {
   ValueNotifier<Map<String, dynamic>> child;
   int indicatorSelect;
-  indicatorMain(this.child, this.indicatorSelect, {super.key});
+  String email;
+  List<dynamic> children;
+  indicatorMain(this.child, this.indicatorSelect, this.email, this.children,
+      {super.key});
 
   @override
   State<indicatorMain> createState() => _indicatorMain();
@@ -23,6 +31,8 @@ class _indicatorMain extends State<indicatorMain> {
   bool cogn = false;
   int indexMap = 0;
   int sizeMap = 0;
+  bool isAnimating = true;
+  ButtonState state = ButtonState.init;
 
   @override
   void initState() {
@@ -67,6 +77,9 @@ class _indicatorMain extends State<indicatorMain> {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
+    final width2 = MediaQuery.of(context).size.width / 2.5;
+    final isStretched = isAnimating || state == ButtonState.init;
+    final isDone = state == ButtonState.done;
 
     return Scaffold(
       body: Container(
@@ -79,79 +92,115 @@ class _indicatorMain extends State<indicatorMain> {
             child: Column(
           children: [
             Container(
+              width: width,
+              height: height * 0.07,
+              child: Center(
+                child: Text(
+                  selectMap(indexMap).toUpperCase(),
+                  style: TextStyle(
+                      fontSize: width * 0.05,
+                      fontFamily: 'Archive',
+                      fontWeight: FontWeight.w600,
+                      color: ColorConstants.purple),
+                ),
+              ),
+            ),
+            Container(
                 width: width,
-                height: height * 0.92,
+                height: height * 0.85,
                 child: Row(
                   children: [
                     Container(
-                      width: width * 0.82,
-                      height: height * 0.92,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50)),
+                      width: width * 0.86,
+                      height: height * 0.85,
                       child: Center(
                         child: Container(
                           margin: EdgeInsets.only(left: width * 0.02),
-                          width: width * 0.8,
+                          width: width * 0.86,
                           height: height * 0.9,
-                          child: Card(
-                              color: ColorConstants.white,
-                              shadowColor: ColorConstants.black,
-                              elevation: 5,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(25.0),
-                              ),
-                              child: Container(
-                                margin: EdgeInsets.only(
-                                    right: width * 0.03,
-                                    top: height * 0.02,
-                                    bottom: height * 0.02),
-                                child: RawScrollbar(
-                                  isAlwaysShown: true,
-                                  thumbColor: ColorConstants.bgColor,
-                                  thickness: 7,
-                                  radius: Radius.circular(50),
-                                  child: ListView.builder(
-                                      itemCount: sizeMap,
-                                      itemBuilder:
-                                          (BuildContext context, int index) {
-                                        var key = indicadores.value
-                                            .getMont(widget.indicatorSelect)[
-                                                selectMap(indexMap)]
-                                            .keys
-                                            .elementAt(index);
+                          child: Container(
+                            padding: EdgeInsets.only(
+                                top: height * 0.02, bottom: height * 0.009),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50)),
+                            margin: EdgeInsets.only(
+                                right: width * 0.02,
+                                top: height * 0.02,
+                                bottom: height * 0.02),
+                            child: RawScrollbar(
+                              isAlwaysShown: true,
+                              thumbColor: ColorConstants.whiteGray,
+                              thickness: 5,
+                              radius: Radius.circular(50),
+                              child: ListView.builder(
+                                  itemCount: sizeMap,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    var key = indicadores.value
+                                        .getMont(widget.indicatorSelect)[
+                                            selectMap(indexMap)]
+                                        .keys
+                                        .elementAt(index);
+                                    final gradientOpacity =
+                                        0.5; // Ajusta el valor según tus preferencias
 
-                                        return IndicatorCard(
-                                          key,
-                                          (width * 0.8),
-                                          (height * 0.9),
-                                          indicadores.value.getMont(
-                                                  widget.indicatorSelect)[
-                                              selectMap(indexMap)][key],
-                                          onAnswerChanged: (newAnswer) {
-                                            setState(() {
-                                              indicadores.value.getMont(widget
-                                                          .indicatorSelect)[
-                                                      selectMap(indexMap)]
-                                                  [key] = newAnswer;
-                                            });
-                                          },
-                                        );
-                                      }),
-                                ),
-                              )),
+                                    return Container(
+                                      margin: EdgeInsets.only(
+                                          top: (width * 0.8) * 0.005,
+                                          bottom: (height * 0.9) * 0.02,
+                                          left: (width * 0.8) * 0.05,
+                                          right: (width * 0.8) * 0.04),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(30),
+                                        gradient: LinearGradient(
+                                          colors: [
+                                            Colors.transparent,
+                                            Colors.transparent,
+                                            Colors.white
+                                                .withOpacity(gradientOpacity),
+                                          ],
+                                          stops: [0, 0.95, 1],
+                                          begin: Alignment.topCenter,
+                                          end: Alignment.bottomCenter,
+                                        ),
+                                      ),
+                                      child: IndicatorCard(
+                                        key,
+                                        (width * 0.8),
+                                        (height * 0.9),
+                                        indicadores.value.getMont(
+                                                widget.indicatorSelect)[
+                                            selectMap(indexMap)][key],
+                                        onAnswerChanged: (newAnswer) {
+                                          setState(() {
+                                            indicadores.value.getMont(
+                                                        widget.indicatorSelect)[
+                                                    selectMap(indexMap)][key] =
+                                                newAnswer;
+                                          });
+                                        },
+                                      ),
+                                    );
+                                  }),
+                            ),
+                          ),
                         ),
                       ),
                     ),
                     Container(
-                      width: width * 0.18,
-                      height: height * 0.92,
+                      width: width * 0.14,
+                      height: height * 0.85,
                       child: SizedBox(
                         child: Stack(
                           children: [
                             AnimatedPositioned(
-                              width: width * 0.145,
-                              height: width * 0.145,
+                              width: width * 0.11,
+                              height: width * 0.11,
                               top: selectedSocial
                                   ? height * 0.01
-                                  : height * 0.59,
+                                  : height * 0.54,
                               left: width * 0.025,
                               duration: const Duration(seconds: 1),
                               curve: Curves.fastOutSlowIn,
@@ -165,6 +214,10 @@ class _indicatorMain extends State<indicatorMain> {
                                       indexMap = 0;
                                     }
                                     selectedSocial = !selectedSocial;
+                                    sizeMap = indicadores.value
+                                        .getMont(widget.indicatorSelect)[
+                                            selectMap(indexMap)]
+                                        .length;
                                   });
                                 },
                                 child: Container(
@@ -176,18 +229,19 @@ class _indicatorMain extends State<indicatorMain> {
                                     boxShadow: [
                                       BoxShadow(
                                           blurRadius: 2,
-                                          color: Color.fromARGB(
-                                              188, 197, 197, 197),
+                                          color:
+                                              Color.fromARGB(49, 105, 105, 105),
                                           spreadRadius: 0.5,
-                                          offset: Offset.fromDirection(-10))
+                                          offset: Offset.fromDirection(-5))
                                     ],
                                   ),
                                   child: Center(
                                       child: Text(
-                                    'Sociales',
+                                    'Soc',
                                     style: TextStyle(
                                         fontFamily: 'Archive',
                                         fontSize: width * 0.025,
+                                        fontWeight: FontWeight.w700,
                                         color: selectedSocial
                                             ? ColorConstants.white
                                             : ColorConstants.black),
@@ -196,9 +250,9 @@ class _indicatorMain extends State<indicatorMain> {
                               ),
                             ),
                             AnimatedPositioned(
-                              width: width * 0.145,
-                              height: width * 0.145,
-                              top: selectedLang ? height * 0.01 : height * 0.67,
+                              width: width * 0.11,
+                              height: width * 0.11,
+                              top: selectedLang ? height * 0.01 : height * 0.62,
                               left: width * 0.025,
                               duration: const Duration(seconds: 1),
                               curve: Curves.fastOutSlowIn,
@@ -212,6 +266,10 @@ class _indicatorMain extends State<indicatorMain> {
                                       indexMap = 1;
                                     }
                                     selectedLang = !selectedLang;
+                                    sizeMap = indicadores.value
+                                        .getMont(widget.indicatorSelect)[
+                                            selectMap(indexMap)]
+                                        .length;
                                   });
                                 },
                                 child: Container(
@@ -223,18 +281,19 @@ class _indicatorMain extends State<indicatorMain> {
                                     boxShadow: [
                                       BoxShadow(
                                           blurRadius: 2,
-                                          color: Color.fromARGB(
-                                              188, 197, 197, 197),
+                                          color:
+                                              Color.fromARGB(49, 105, 105, 105),
                                           spreadRadius: 0.5,
-                                          offset: Offset.fromDirection(-10))
+                                          offset: Offset.fromDirection(-5))
                                     ],
                                   ),
                                   child: Center(
                                       child: Text(
-                                    'Lenguaje',
+                                    'Leng',
                                     style: TextStyle(
                                         fontFamily: 'Archive',
                                         fontSize: width * 0.025,
+                                        fontWeight: FontWeight.w700,
                                         color: selectedLang
                                             ? ColorConstants.white
                                             : ColorConstants.black),
@@ -243,9 +302,9 @@ class _indicatorMain extends State<indicatorMain> {
                               ),
                             ),
                             AnimatedPositioned(
-                              width: width * 0.145,
-                              height: width * 0.145,
-                              top: mov ? height * 0.01 : height * 0.75,
+                              width: width * 0.11,
+                              height: width * 0.11,
+                              top: mov ? height * 0.01 : height * 0.7,
                               left: width * 0.025,
                               duration: const Duration(seconds: 1),
                               curve: Curves.fastOutSlowIn,
@@ -259,6 +318,10 @@ class _indicatorMain extends State<indicatorMain> {
                                       indexMap = 2;
                                     }
                                     mov = !mov;
+                                    sizeMap = indicadores.value
+                                        .getMont(widget.indicatorSelect)[
+                                            selectMap(indexMap)]
+                                        .length;
                                   });
                                 },
                                 child: Container(
@@ -270,18 +333,19 @@ class _indicatorMain extends State<indicatorMain> {
                                     boxShadow: [
                                       BoxShadow(
                                           blurRadius: 2,
-                                          color: Color.fromARGB(
-                                              188, 197, 197, 197),
+                                          color:
+                                              Color.fromARGB(49, 105, 105, 105),
                                           spreadRadius: 0.5,
-                                          offset: Offset.fromDirection(-10))
+                                          offset: Offset.fromDirection(-5))
                                     ],
                                   ),
                                   child: Center(
                                       child: Text(
-                                    'Movimiento',
+                                    'Mov',
                                     style: TextStyle(
                                         fontFamily: 'Archive',
                                         fontSize: width * 0.025,
+                                        fontWeight: FontWeight.w700,
                                         color: mov
                                             ? ColorConstants.white
                                             : ColorConstants.black),
@@ -290,9 +354,9 @@ class _indicatorMain extends State<indicatorMain> {
                               ),
                             ),
                             AnimatedPositioned(
-                              width: width * 0.145,
-                              height: width * 0.145,
-                              top: cogn ? height * 0.01 : height * 0.83,
+                              width: width * 0.11,
+                              height: width * 0.11,
+                              top: cogn ? height * 0.01 : height * 0.78,
                               left: width * 0.025,
                               duration: const Duration(seconds: 1),
                               curve: Curves.fastOutSlowIn,
@@ -306,6 +370,10 @@ class _indicatorMain extends State<indicatorMain> {
                                       indexMap = 3;
                                     }
                                     cogn = !cogn;
+                                    sizeMap = indicadores.value
+                                        .getMont(widget.indicatorSelect)[
+                                            selectMap(indexMap)]
+                                        .length;
                                   });
                                 },
                                 child: Container(
@@ -317,18 +385,19 @@ class _indicatorMain extends State<indicatorMain> {
                                     boxShadow: [
                                       BoxShadow(
                                           blurRadius: 2,
-                                          color: Color.fromARGB(
-                                              188, 197, 197, 197),
+                                          color:
+                                              Color.fromARGB(49, 105, 105, 105),
                                           spreadRadius: 0.5,
-                                          offset: Offset.fromDirection(-10))
+                                          offset: Offset.fromDirection(-5))
                                     ],
                                   ),
                                   child: Center(
                                       child: Text(
-                                    'Cognitivo',
+                                    'Cog',
                                     style: TextStyle(
                                         fontFamily: 'Archive',
                                         fontSize: width * 0.025,
+                                        fontWeight: FontWeight.w700,
                                         color: cogn
                                             ? ColorConstants.white
                                             : ColorConstants.black),
@@ -343,16 +412,110 @@ class _indicatorMain extends State<indicatorMain> {
                   ],
                 )),
             Container(
-              width: width,
+              width: width * 0.8,
               height: height * 0.08,
               child: Center(
-                  child: Text(indicadores.value
-                      .getMont(widget.indicatorSelect)[selectMap(indexMap)]
-                      .toString())),
+                  child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: isStretched
+                    ? MainAxisAlignment.spaceAround
+                    : MainAxisAlignment.center,
+                children: [
+                  isStretched
+                      ? Container(
+                          width: width * 0.25,
+                          child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  elevation: 7,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  primary: ColorConstants.btnColor),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: AutoSizeText(
+                                'return'.tr,
+                                style: TextStyle(
+                                    color: ColorConstants.white,
+                                    fontFamily: 'Archive',
+                                    fontWeight: FontWeight.w600),
+                              )))
+                      : SizedBox(),
+                  Container(
+                    width: width * 0.25,
+                    child: AnimatedContainer(
+                        duration: Duration(milliseconds: 100),
+                        curve: Curves.easeOut,
+                        width: state == ButtonState.init ? width2 : width * 0.9,
+                        onEnd: () => setState(() => isAnimating = !isAnimating),
+                        height: 35,
+                        child: isStretched
+                            ? buildButton()
+                            : buildSmallButton(isDone, width, height)),
+                  ),
+                ],
+              )),
             )
           ],
         )),
       ),
     );
   }
+
+  Widget buildButton() => Container(
+      child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              elevation: 7,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              primary: ColorConstants.btnColor),
+          onPressed: () async {
+            setState(() => state = ButtonState.loading);
+            setState(() {
+              widget.child.value['indicador'] = indicadores.value.general;
+            });
+            if (await updateIndicator(
+                widget.child.value, widget.children, widget.email)) {
+              setState(() => state = ButtonState.done);
+              await Future.delayed(Duration(milliseconds: 1200));
+            } else {
+              print('fallo');
+            }
+
+            setState(() => state = ButtonState.init);
+          },
+          child: AutoSizeText(
+            'textAccept'.tr,
+            style: TextStyle(
+                color: ColorConstants.white,
+                fontFamily: 'Archive',
+                fontWeight: FontWeight.w600),
+          )));
+
+  Widget buildSmallButton(bool isDone, double width, dynamic height) {
+    final color = isDone ? ColorConstants.btnColor : ColorConstants.btnColor;
+
+    return isDone
+        ? Container(
+            decoration: BoxDecoration(shape: BoxShape.circle, color: color),
+            child: Icon(Icons.done, size: 30, color: ColorConstants.white))
+        : Center(
+            child: Container(
+              height: height * 0.01,
+              width: width * 0.9,
+              child: LinearProgressIndicator(
+                backgroundColor: ColorConstants.white,
+                color: ColorConstants.purple,
+              ),
+            ),
+          );
+  }
 }
+
+/*
+indicadores.value
+                      .getMont(widget.indicatorSelect)[selectMap(indexMap)]
+                      .toString()
+*/

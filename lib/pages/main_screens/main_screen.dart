@@ -55,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: <Widget>[
                   ShowChildWidget(userData, widget.documentId),
                   //Screen1(),
-                  DateChildren(widget.documentId,userData),
+                  DateChildren(widget.documentId, userData),
                   addChildWidget(documentId: widget.documentId),
                   Screen2(),
                   Screen3(documentId: widget.documentId),
@@ -66,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
       bottomNavigationBar: CurvedNavigationBar(
         height: 0.060 * height,
         backgroundColor: _currentIndex == 2
-            ? Color.fromARGB(255, 129, 129, 245)
+            ? ColorConstants.purple
             : _currentIndex == 0
                 ? Color.fromARGB(65, 217, 227, 252)
                 : ColorConstants.white,

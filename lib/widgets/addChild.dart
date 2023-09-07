@@ -30,6 +30,7 @@ class _addChild extends State<addChildWidget> with TickerProviderStateMixin {
   final Map<ListItem, Key> itemKeys = {};
   final List<ListItem> items = [];
   bool isButtonEnabled = true;
+  ScrollController rawController = ScrollController();
 
   late final AnimationController _controller = AnimationController(
     duration: const Duration(seconds: 4),
@@ -66,21 +67,23 @@ class _addChild extends State<addChildWidget> with TickerProviderStateMixin {
           width: width,
           height: 0.94 * height,
           decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("lib/assets/img/register_child.png"),
-              fit: BoxFit.cover,
-            ),
+            color: ColorConstants.purple,
           ),
           child: Column(children: [
             Expanded(
-              child: Scrollbar(
+              child: RawScrollbar(
+                  isAlwaysShown: true,
+                  controller: rawController,
+                  thumbColor: ColorConstants.bgColor,
+                  thickness: 7,
+                  radius: Radius.circular(50),
                   child: ListView.builder(
+                      controller: rawController,
                       itemCount: items.length,
                       itemBuilder: (context, index) {
                         final item = items[index];
                         if (!itemKeys.containsKey(item)) {
-                          itemKeys[item] =
-                              UniqueKey(); // Generate a unique key for the item
+                          itemKeys[item] = UniqueKey();
                         }
                         final key = itemKeys[item];
 

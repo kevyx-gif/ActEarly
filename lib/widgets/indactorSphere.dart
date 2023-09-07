@@ -7,7 +7,10 @@ class sphereIndicator extends StatefulWidget {
   List yearsOld;
   int totalIndex;
   double width;
+  String email;
+  List<dynamic> children;
   sphereIndicator(this.child, this.yearsOld, this.totalIndex, this.width,
+      this.email, this.children,
       {super.key});
 
   @override
@@ -30,8 +33,8 @@ class _sphereIndicator extends State<sphereIndicator> {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) =>
-                  indicatorMain(widget.child, widget.totalIndex)),
+              builder: (context) => indicatorMain(widget.child,
+                  widget.totalIndex, widget.email, widget.children)),
         );
       },
       child: Text(
