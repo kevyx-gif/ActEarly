@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:actearly/pages/another_pages/indicatorsMain.dart';
 import 'package:actearly/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +56,8 @@ class _sphereIndicator extends State<sphereIndicator> {
             ColorConstants.borderBtnColor), // <-- Button color
         overlayColor: MaterialStateProperty.resolveWith<Color?>((states) {
           if (states.contains(MaterialState.pressed))
-            return ColorConstants.btnColor; // <-- Splash color
+            return ColorConstants.btnColor;
+          return null; // <-- Splash color
         }),
       ),
     );

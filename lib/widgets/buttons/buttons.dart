@@ -2,14 +2,10 @@ import 'package:actearly/utils/functions.dart';
 import 'package:flutter/material.dart';
 //colors import
 import 'package:actearly/utils/colors.dart';
-//svg per
-import 'package:flutter_svg/flutter_svg.dart';
-//Text Imports
-import 'package:get/get.dart';
+
 //text size adapable
 import 'package:auto_size_text/auto_size_text.dart';
 //porcentaje
-import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 //-------------------------botones flotantes------------------------------//

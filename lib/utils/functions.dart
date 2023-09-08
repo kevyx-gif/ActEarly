@@ -156,8 +156,7 @@ Future<bool> addChildDatabase(BuildContext context, items, email) async {
       'https://firebasestorage.googleapis.com/v0/b/actearly-db.appspot.com/o/pred.jpg?alt=media&token=4bca616d-a874-41ad-a310-1f4ab0ddbfbc';
   bool upData = true;
   String em = email;
-  print("Hereeeee");
-  print(em);
+
   if (items.isNotEmpty) {
     for (int i = 0; i < items.length; i++) {
       final child = (items[i].widgetBuilder(context) as ChildW);
@@ -368,8 +367,6 @@ Future<bool> changeChild(
     'indicador': indicador,
   };
 
-  print('lista que llega');
-  print(childrenOrg);
   List<dynamic> aux = childrenOrg;
 
   if (mediaFileList.value != null) {
@@ -406,10 +403,6 @@ Future<bool> changeChild(
 
 Future<bool> updateIndicator(
     Map<String, dynamic> child, List<dynamic> childrenOrg, String email) async {
-  print('Entro a la fun con esto');
-  print(child);
-  print(childrenOrg);
-  print(email);
   List<dynamic> aux = childrenOrg;
   Map<String, dynamic> newChild = child;
   aux.removeWhere((map) => map['id'] == child['id']);
@@ -421,6 +414,26 @@ Future<bool> updateIndicator(
   //---------------------------------------------------------------//
   try {
     await firebase.collection('users').doc(em).update({'children': aux});
+    return true;
+  } catch (e) {
+    print('ERROR ' + e.toString());
+    return false;
+  }
+}
+
+Future<bool> addDateChild(
+    Map<String, dynamic> date, listChildren, email) async {
+  List<dynamic> aux = listChildren;
+
+  final firebase = FirebaseFirestore.instance;
+  for (Map<String, dynamic> element in aux) {
+    if (element['nameChild'] == date['name']) {
+      element['dates'].add(date);
+    }
+  }
+
+  try {
+    await firebase.collection('users').doc(email).update({'children': aux});
     return true;
   } catch (e) {
     print('ERROR ' + e.toString());

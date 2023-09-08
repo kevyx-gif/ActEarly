@@ -1,3 +1,6 @@
+// ignore_for_file: must_be_immutable
+
+import 'package:actearly/widgets/dateCard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -12,119 +15,55 @@ class DateChildren extends StatefulWidget {
 }
 
 class _DateChildrenState extends State<DateChildren> {
-  final GlobalKey<FormState> titleDateKey = GlobalKey<FormState>();
-
-  final _titleController = TextEditingController();
-  final _dateController = TextEditingController();
-  final _timeController = TextEditingController();
-  final _descriptionController = TextEditingController();
-  List<dynamic>? childrenData = [];
-
-  @override
-  void disposed() {
-    super.dispose;
-  }
-
-  @override
-  void initState() {
-    childrenData = widget.userData!.data()?['children'] ?? [];
-    //listNameChild = 
-    super.initState();
-  }
-
-  String dropdownValue = 'Select Child';
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: titleDateKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          TextFormField(
-            controller: _titleController,
-            decoration: const InputDecoration(
-              hintText: 'Title:',
-            ),
-            validator: (String? value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
-          ),
-<<<<<<< HEAD
+    return StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+      stream: FirebaseFirestore.instance
+          .collection('users')
+          .doc(widget.email)
+          .snapshots(), // Reemplaza con la ruta de tu documento en Firestore
+      builder: (BuildContext context,
+          AsyncSnapshot<DocumentSnapshot<Map<String, dynamic>>> snapshot) {
+        if (!snapshot.hasData || snapshot.hasError) {
+          return Text(
+              'Error al cargar los datos'); // Maneja los errores o datos nulos aquí
+        }
 
-=======
->>>>>>> 3aeadf29225bb48f6230aeefb1a3fc3d7af0995a
-          TextFormField(
-            controller: _dateController,
-            decoration: const InputDecoration(
-              hintText: 'Date',
-            ),
-            validator: (String? value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
-          ),
-          TextFormField(
-            controller: _timeController,
-            decoration: const InputDecoration(
-              hintText: 'Time',
-            ),
-            validator: (String? value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
-          ),
-          TextFormField(
-            controller: _descriptionController,
-            decoration: const InputDecoration(
-              hintText: 'Description',
-            ),
-            validator: (String? value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
-          ),          
+        final userData = snapshot.data!.data();
+        List<Map<String, dynamic>> dates = [
+          {'id': 0}
+        ];
 
-          DropdownButton<String>(
-            value: dropdownValue,
-            items: <String>['Dog', 'Cat', 'Tiger', 'Lion']
-            //items: childrenData?[];
-                .map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(
-                  value,
-                  style: TextStyle(fontSize: 30),
-                ),
-              );
-            }).toList(),
-            onChanged: (String? newValue) {
-              setState(() {
-                dropdownValue = newValue!; //valor actual
-              });
-            },
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: ElevatedButton(
-              onPressed: () {
-                print(childrenData);
-                //if (titleDateKey.currentState!.validate()) {
-                //updateChildDatabase(context, );
-                // Process data.
-              },
-              child: const Text('Submit'),
-            ),
-          ),
-        ],
+        if (userData != null && userData['children'] != null) {
+          userData['children'].forEach((element) {
+            element['dates'].forEach((item) {
+              dates.insert(0, item);
+            });
+          });
+        }
+
+        return buildGridView(dates);
+      },
+    );
+  }
+
+  Widget buildGridView(List<Map<String, dynamic>> dates) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+
+    return Container(
+      child: GridView.builder(
+        itemCount: dates.length,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          crossAxisSpacing: width * 0.01,
+          mainAxisSpacing: 25,
+          childAspectRatio: 3 / 3.5,
+        ),
+        itemBuilder: (BuildContext ctxt, int index) {
+          return DateCard(
+              width, height, dates[index], widget.email, widget.userData);
+        },
       ),
     );
   }

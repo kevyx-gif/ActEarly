@@ -1,6 +1,4 @@
 // ignore_for_file: must_be_immutable
-
-import 'package:actearly/pages/main_screens/main_screen.dart';
 import 'package:actearly/utils/functions.dart';
 import 'package:actearly/widgets/dialogEditChild.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -8,7 +6,6 @@ import 'package:flutter/material.dart';
 
 //Colors
 import 'package:actearly/utils/colors.dart';
-import 'package:get/get.dart';
 
 class cardChildList extends StatefulWidget {
   DocumentSnapshot<Map<String, dynamic>>? userData;

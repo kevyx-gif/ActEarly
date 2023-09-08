@@ -1,5 +1,4 @@
 import 'package:actearly/utils/functions.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Screen3 extends StatefulWidget {
@@ -13,63 +12,21 @@ class _Screen3 extends State<Screen3> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Información del Documento'),
+        body: Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            width: 300,
+            height: 400,
+            child: IconButton(
+                onPressed: () => {logOut(context)},
+                icon: Icon(Icons.exit_to_app)),
+          )
+        ],
       ),
-      body: FutureBuilder<DocumentSnapshot>(
-        future: FirebaseFirestore.instance
-            .collection('users')
-            .doc(widget.documentId)
-            .get(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return CircularProgressIndicator();
-          }
-
-          if (snapshot.hasError) {
-            return Text('Error al obtener el documento');
-          }
-
-          if (!snapshot.hasData || !snapshot.data!.exists) {
-            return Text(widget.documentId);
-          }
-
-          // El documento existe y se obtuvo con éxito
-          Map<String, dynamic> data =
-              snapshot.data!.data() as Map<String, dynamic>;
-
-          // Atributos del documento/usuario logueado
-          String email = data['email'];
-          String nameUser = data['nameUser'];
-          String password = data['password'];
-          String provinceTerritory = data['provinceTerritory'];
-          String question = data['question'];
-          String userType = data['userType'];
-
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text('email: $email'),
-                Text('nameUser: $nameUser'),
-                Text('password: $password'),
-                Text('provinceTerritory: $provinceTerritory'),
-                Text('question: $question'),
-                Text('userType: $userType'),
-                Container(
-                  width: 300,
-                  height: 400,
-                  child: IconButton(
-                      onPressed: () => {logOut(context)},
-                      icon: Icon(Icons.exit_to_app)),
-                )
-              ],
-            ),
-          );
-        },
-      ),
-    );
+    ));
   }
 }
 
