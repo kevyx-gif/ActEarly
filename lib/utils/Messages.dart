@@ -49,6 +49,18 @@ Map<String, Map<String, String>> Messages() {
       'Quebec': 'Quebec',
       'Saskatchewan': 'Saskatchewan',
       'Yukon': 'Yukon',
+      //indicadores
+      'motorGrueso1_1' : 'Roll from front to back',
+      'motorGrueso1_2' : 'Control head and neck movement when sitting',
+      'motorGrueso1_3' : 'Raise their head and chest when lying on their stomach',
+      'motorGrueso1_4' : 'Stretch out and kick their legs when lying on their stomach or back',
+      'motorGrueso1_5' : 'Push down with their legs when feet are on a firm surface',
+      
+      'motorFino1_1' : 'Bring their hands together',
+      'motorFino1_2' : 'Open and shut their hands',
+      'motorFino1_3' : 'Bring their hands to their mouth',
+      'motorFino1_4' : 'Take swipes at a hanging object',
+      
     },
     'es_MX': {
       'termsAndCond':
@@ -98,6 +110,18 @@ Map<String, Map<String, String>> Messages() {
       'Quebec': 'Quebec',
       'Saskatchewan': 'Saskatchewan',
       'Yukon': 'Yukón',
+      // Indicadores
+      'motorGrueso1_1' : 'Rodar de adelante hacia atrás',
+      'motorGrueso1_2' : 'Controlar el movimiento de la cabeza y el cuello al sentarse',
+      'motorGrueso1_3' : 'Levantar la cabeza y el pecho cuando están boca abajo',
+      'motorGrueso1_4' : 'Estirar y patear las piernas cuando están boca abajo o boca arriba',
+      'motorGrueso1_5' : 'Empujar con las piernas cuando los pies están en una superficie firme',
+
+      'motorFino1_1' : 'Juntar sus manos',
+      'motorFino1_2' : 'Abrir y cerrar sus manos',
+      'motorFino1_3' : 'Llévese las manos a la boca',
+      'motorFino1_4' :'Golpea un objeto colgante',
+
     },
     'fr_CA': {
       'termsAndCond':
@@ -147,6 +171,18 @@ Map<String, Map<String, String>> Messages() {
       'Quebec': 'Québec',
       'Saskatchewan': 'Saskatchewan',
       'Yukon': 'Yukon',
+     // Indicateurs
+      'motorGrueso1_1' : 'Se retourner de l\'avant vers l\'arrière',
+      'motorGrueso1_2' : 'Contrôler le mouvement de la tête et du cou en position assise',
+      'motorGrueso1_3' : 'Relever la tête et la poitrine en position ventrale',
+      'motorGrueso1_4' : 'Étirer et donner des coups de pied avec les jambes en position ventrale ou dorsale',
+      'motorGrueso1_5' : 'Pousser avec les jambes lorsque les pieds sont sur une surface ferme',
+
+      'motorFino1_1' : 'Rapprocher leurs mains',
+      'motorFino1_2' : 'Ouvrir et fermer leurs mains',
+      'motorFino1_3' : 'Porter leurs mains à leur bouche',
+      'motorFino1_4' : 'Faire des gestes en direction d\'un objet suspendu',
+   
     },
   };
 

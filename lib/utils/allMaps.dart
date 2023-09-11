@@ -1,3 +1,5 @@
+import 'package:get/get.dart';
+
 class indicadorClass {
   Map<String, dynamic> general;
 
@@ -120,12 +122,12 @@ class indicadorClass {
 }
 
 var motorGrueso1 = {
-  'Rueda de adelante hacia atrás': '',
-  'Controlar el movimiento de la cabeza y el cuello al sentarse': '',
-  'Levantar la cabeza y el pecho cuando se acuesta boca abajo': '',
-  'Estirar y patear las piernas cuando están acostados boca abajo o boca arriba':
+  'Rueda de adelante hacia atrás'.tr: '',
+  'Controlar el movimiento de la cabeza y el cuello al sentarse'.tr: '',
+  'Levantar la cabeza y el pecho cuando se acuesta boca abajo'.tr: '',
+  'Estirar y patear las piernas cuando están acostados boca abajo o boca arriba'.tr:
       '',
-  'empujar hacia abajo con las piernas cuando los pies están sobre una superficie firme':
+  'Empujar hacia abajo con las piernas cuando los pies están sobre una superficie firme'.tr:
       '',
 };
 
