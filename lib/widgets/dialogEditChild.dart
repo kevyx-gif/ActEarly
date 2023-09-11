@@ -343,7 +343,7 @@ class _dialogEditChild extends State<dialogEditChild>
                                 DateTime? pickedDate = await showDatePicker(
                                     context: context,
                                     initialDate: DateTime.now(),
-                                    firstDate: DateTime(2019),
+                                    firstDate: DateTime(2018),
                                     lastDate: DateTime(2101));
 
                                 if (pickedDate != null) {

@@ -59,6 +59,10 @@ class _sphereIndicator extends State<sphereIndicator> {
       oldEnough = true;
     }
 
+    if (widget.totalIndex == 6 && widget.months >= 47) {
+      oldEnough = true;
+    }
+
     return ElevatedButton(
       onPressed: oldEnough
           ? () {
