@@ -316,33 +316,22 @@ class _LoginPageState extends State<LoginPage> {
                                                                   ),
                                                                 ),
                                                                 Positioned(
-                                                                    top: height *
-                                                                        0.005,
-                                                                    left:
-                                                                        width *
-                                                                            0.5,
+                                                                    top: 16,
+                                                                    right: 20,
                                                                     child:
-                                                                        Container(
-                                                                      width: width *
-                                                                          0.13,
-                                                                      height:
-                                                                          width *
-                                                                              0.13,
-                                                                      child:
-                                                                          GestureDetector(
-                                                                        onTap:
+                                                                        GestureDetector(
+                                                                      onTap:
+                                                                          () {
+                                                                        setState(
                                                                             () {
-                                                                          setState(
-                                                                              () {
-                                                                            seePass =
-                                                                                !seePass;
-                                                                          });
-                                                                        },
-                                                                        child:
-                                                                            Icon(
-                                                                          Icons
-                                                                              .remove_red_eye,
-                                                                        ),
+                                                                          seePass =
+                                                                              !seePass;
+                                                                        });
+                                                                      },
+                                                                      child:
+                                                                          Icon(
+                                                                        Icons
+                                                                            .remove_red_eye,
                                                                       ),
                                                                     ))
                                                               ]),
