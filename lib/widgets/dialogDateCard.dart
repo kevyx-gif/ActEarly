@@ -27,10 +27,7 @@ class _DateDialog extends State<DateDialog> {
   List<dynamic>? childrenData = [];
   List<String> dropdownList = ['select Child'];
   String dropdownValue = 'select Child';
-  String hrCounter = '00';
-  String minCounter = '00';
-  String secCounter = '00';
-  String temp = "";
+  TimeOfDay _time = TimeOfDay(hour: 7, minute: 15);
 
   void disposed() {
     super.dispose;
@@ -46,10 +43,23 @@ class _DateDialog extends State<DateDialog> {
     super.initState();
   }
 
+  void _selectTime() async {
+    final TimeOfDay? newTime = await showTimePicker(
+      context: context,
+      initialTime: _time,
+    );
+    if (newTime != null) {
+      setState(() {
+        _time = newTime;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
+
     return SingleChildScrollView(
       child: Center(
         child: Form(
@@ -208,11 +218,7 @@ class _DateDialog extends State<DateDialog> {
                   padding: EdgeInsets.fromLTRB(width * 0.05, 0, 10, 0),
                   child: TextFormField(
                     controller: _timeController,
-                    keyboardType:
-                        const TextInputType.numberWithOptions(decimal: false),
-                    inputFormatters: [
-                      LengthLimitingTextInputFormatter(9),
-                    ],
+                    readOnly: true, // none desktop
                     obscureText: false,
                     style: const TextStyle(color: ColorConstants.black),
                     decoration: InputDecoration(
@@ -241,57 +247,24 @@ class _DateDialog extends State<DateDialog> {
                         fontSize: height * 0.012,
                       ),
                     ),
-                    onChanged: (val) {
-                      String y = "";
-                      switch (val.length) {
-                        case 0:
-                          setState(() {
-                            hrCounter = "00";
-                            minCounter = "00";
-                            secCounter = "00";
-                          });
-                          break;
-                        case 1:
-                          setState(() {
-                            secCounter = "0" + val;
-                            temp = val;
-                            _timeController.value =
-                                _timeController.value.copyWith(
-                              text: hrCounter +
-                                  ":" +
-                                  minCounter +
-                                  ":" +
-                                  secCounter,
-                              selection:
-                                  const TextSelection.collapsed(offset: 8),
-                            );
-                          });
-                          break;
-                        default:
-                          setState(() {
-                            for (int i = 1; i <= val.length - 1; i++) {
-                              y = y + val.substring(i, i + 1);
-                            }
-                            y = y.replaceAll(":", "");
-                            val = y.substring(0, 2) +
-                                ":" +
-                                y.substring(2, 4) +
-                                ":" +
-                                y.substring(4, 6);
-                            temp = val;
-                            _timeController.value =
-                                _timeController.value.copyWith(
-                              text: val,
-                              selection:
-                                  const TextSelection.collapsed(offset: 8),
-                            );
-                          });
-                          break;
-                      }
+                    onTap: () async {
+                      TimeOfDay? newTime = await showTimePicker(
+                          context: context, initialTime: _time);
+
+                      if (newTime == null) return;
+
+                      setState(() {
+                        _time = newTime;
+                        final hours = newTime.hour.toString().padLeft(2, '0');
+                        final minutes =
+                            newTime.minute.toString().padLeft(2, '0');
+                        _timeController.text = ('${hours} : ${minutes}');
+                      });
                     },
-                    validator: (String? value) {
+
+                    validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter some text';
+                        return 'ErrorNoneDate'.tr;
                       }
                       return null;
                     },
@@ -354,6 +327,7 @@ class _DateDialog extends State<DateDialog> {
                           if (dropdownValue != 'select Child') {
                             Map<String, dynamic> cita = {
                               'title': _titleController.text,
+                              'id': '0',
                               'name': dropdownValue,
                               'date': _dateController.text,
                               'time': _timeController.text,

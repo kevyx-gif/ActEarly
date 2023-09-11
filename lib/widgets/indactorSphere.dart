@@ -11,8 +11,9 @@ class sphereIndicator extends StatefulWidget {
   double width;
   String email;
   List<dynamic> children;
+  int months;
   sphereIndicator(this.child, this.yearsOld, this.totalIndex, this.width,
-      this.email, this.children,
+      this.email, this.children, this.months,
       {super.key});
 
   @override
@@ -21,6 +22,7 @@ class sphereIndicator extends StatefulWidget {
 
 class _sphereIndicator extends State<sphereIndicator> {
   int yearsOldNum = 0;
+  bool oldEnough = false;
 
   @override
   void initState() {
@@ -30,15 +32,44 @@ class _sphereIndicator extends State<sphereIndicator> {
 
   @override
   Widget build(BuildContext context) {
+    print('meses en indicadorSphere');
+    print(widget.months);
+
+    if (widget.totalIndex == 0 && widget.months >= 0) {
+      oldEnough = true;
+    }
+
+    if (widget.totalIndex == 1 && widget.months >= 8) {
+      oldEnough = true;
+    }
+
+    if (widget.totalIndex == 2 && widget.months >= 12) {
+      oldEnough = true;
+    }
+
+    if (widget.totalIndex == 3 && widget.months >= 18) {
+      oldEnough = true;
+    }
+
+    if (widget.totalIndex == 4 && widget.months >= 24) {
+      oldEnough = true;
+    }
+
+    if (widget.totalIndex == 5 && widget.months >= 35) {
+      oldEnough = true;
+    }
+
     return ElevatedButton(
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => indicatorMain(widget.child,
-                  widget.totalIndex, widget.email, widget.children)),
-        );
-      },
+      onPressed: oldEnough
+          ? () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => indicatorMain(widget.child,
+                        widget.totalIndex, widget.email, widget.children, 0)),
+              );
+            }
+          : null,
       child: Text(
         widget.yearsOld[widget.totalIndex],
         maxLines: 2,
@@ -52,8 +83,9 @@ class _sphereIndicator extends State<sphereIndicator> {
         )),
         padding: MaterialStateProperty.all(
             EdgeInsets.symmetric(vertical: widget.width * 0.04)),
-        backgroundColor: MaterialStateProperty.all(
-            ColorConstants.borderBtnColor), // <-- Button color
+        backgroundColor: MaterialStateProperty.all(oldEnough
+            ? ColorConstants.borderBtnColor
+            : ColorConstants.BackgroundGray), // <-- Button color
         overlayColor: MaterialStateProperty.resolveWith<Color?>((states) {
           if (states.contains(MaterialState.pressed))
             return ColorConstants.btnColor;

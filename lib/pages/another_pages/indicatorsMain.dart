@@ -17,7 +17,9 @@ class indicatorMain extends StatefulWidget {
   int indicatorSelect;
   String email;
   List<dynamic> children;
+  int firstIndex;
   indicatorMain(this.child, this.indicatorSelect, this.email, this.children,
+      this.firstIndex,
       {super.key});
 
   @override
@@ -44,6 +46,10 @@ class _indicatorMain extends State<indicatorMain> {
     sizeMap = indicadores.value
         .getMont(widget.indicatorSelect)[selectMap(indexMap)]
         .length;
+
+    indexMap = widget.firstIndex;
+    print(indexMap);
+    print('es index');
   }
 
   @override
@@ -140,6 +146,13 @@ class _indicatorMain extends State<indicatorMain> {
                                   itemCount: sizeMap,
                                   itemBuilder:
                                       (BuildContext context, int index) {
+                                    print('que onda con el index');
+                                    print(indicadores.value
+                                        .getMont(widget.indicatorSelect)[
+                                            selectMap(indexMap)]
+                                        .keys);
+                                    print(sizeMap);
+                                    print(index);
                                     var key = indicadores.value
                                         .getMont(widget.indicatorSelect)[
                                             selectMap(indexMap)]

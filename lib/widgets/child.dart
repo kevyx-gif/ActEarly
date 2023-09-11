@@ -1,4 +1,5 @@
 // ignore_for_file: must_be_immutable
+import 'package:actearly/pages/another_pages/indicatorsMain.dart';
 import 'package:actearly/utils/functions.dart';
 import 'package:actearly/widgets/dialogEditChild.dart';
 import 'package:actearly/widgets/indactorSphere.dart';
@@ -26,6 +27,7 @@ class child extends StatefulWidget {
 
 class _child extends State<child> {
   var currentPageIndex = 0;
+  int oldYears = 0;
 
   ValueNotifier<String> months = ValueNotifier<String>('');
 
@@ -33,10 +35,14 @@ class _child extends State<child> {
     DateTime fechaNacimientoDateTime = DateTime.parse(date);
     DateTime fechaActual = DateTime.now();
     int monthDiff = fechaActual.month - fechaNacimientoDateTime.month;
-    if (monthDiff < 0) {
-      monthDiff += 12;
-    }
+    int year = fechaActual.year - fechaNacimientoDateTime.year;
 
+    if (year < 0) year = 0;
+
+    if (year > 0) {
+      monthDiff += 12 * year;
+    }
+    print(monthDiff);
     return monthDiff;
   }
 
@@ -57,8 +63,8 @@ class _child extends State<child> {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     final CarouselController _carouselController = CarouselController();
-    months.value =
-        '\n' + getYears(widget.childData.value['date']).toString() + ' months';
+    oldYears = getYears(widget.childData.value['date']);
+    months.value = '\n' + oldYears.toString() + ' months';
 
     List yearsOld = [
       '3\nmeses',
@@ -332,14 +338,98 @@ class _child extends State<child> {
                                           mainAxisSpacing: 25,
                                           childAspectRatio: 2 / 2.3),
                                   children: [
-                                    indicador(context, width - 60 - 20,
-                                        height * 0.10, 0.6, 'Sociales'),
-                                    indicador(context, width - 60 - 20,
-                                        height * 0.10, 0.7, 'Lenguaje'),
-                                    indicador(context, width - 60 - 20,
-                                        height * 0.10, 0.8, 'Cognitivas'),
-                                    indicador(context, width - 60 - 20,
-                                        height * 0.10, 0.2, 'Movimiento'),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  indicatorMain(
+                                                      widget.childData,
+                                                      lastYear(oldYears),
+                                                      widget.email,
+                                                      widget.userData![
+                                                          'children'],
+                                                      0)),
+                                        );
+                                      },
+                                      child: indicador(
+                                          context,
+                                          width - 60 - 20,
+                                          height * 0.10,
+                                          calcPorc(widget.childData.value,
+                                              'social', oldYears),
+                                          'Sociales'),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  indicatorMain(
+                                                      widget.childData,
+                                                      lastYear(oldYears),
+                                                      widget.email,
+                                                      widget.userData![
+                                                          'children'],
+                                                      1)),
+                                        );
+                                      },
+                                      child: indicador(
+                                          context,
+                                          width - 60 - 20,
+                                          height * 0.10,
+                                          calcPorc(widget.childData.value,
+                                              'motorFino', oldYears),
+                                          'Lenguaje'),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  indicatorMain(
+                                                      widget.childData,
+                                                      lastYear(oldYears),
+                                                      widget.email,
+                                                      widget.userData![
+                                                          'children'],
+                                                      2)),
+                                        );
+                                      },
+                                      child: indicador(
+                                          context,
+                                          width - 60 - 20,
+                                          height * 0.10,
+                                          calcPorc(widget.childData.value,
+                                              'cognitivo', oldYears),
+                                          'Cognitivas'),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  indicatorMain(
+                                                      widget.childData,
+                                                      lastYear(oldYears),
+                                                      widget.email,
+                                                      widget.userData![
+                                                          'children'],
+                                                      3)),
+                                        );
+                                      },
+                                      child: indicador(
+                                          context,
+                                          width - 60 - 20,
+                                          height * 0.10,
+                                          calcPorc(widget.childData.value,
+                                              'motorGrueso', oldYears),
+                                          'Movimiento'),
+                                    ),
                                   ],
                                 )),
                           ],
@@ -391,7 +481,8 @@ class _child extends State<child> {
                                             totalIndex,
                                             width,
                                             widget.email,
-                                            widget.userData!['children']);
+                                            widget.userData!['children'],
+                                            oldYears);
                                       },
                                     ),
                                   );
@@ -498,4 +589,36 @@ List<Widget> buildPageIndicator(int pageIndex, int pageCount) {
   }
 
   return indicators;
+}
+
+int lastYear(int age) {
+  int posicion = 0;
+  if (age >= 0) {
+    posicion = 0;
+  }
+
+  if (age >= 8) {
+    posicion = 1;
+  }
+
+  if (age >= 12) {
+    posicion = 2;
+  }
+
+  if (age >= 18) {
+    posicion = 3;
+  }
+
+  if (age >= 24) {
+    posicion = 4;
+  }
+
+  if (age >= 35) {
+    posicion = 5;
+  }
+
+  if (age >= 47) {
+    posicion = 6;
+  }
+  return posicion;
 }

@@ -260,19 +260,15 @@ Future<bool> addChildDatabase(BuildContext context, items, email) async {
 }
 
 bool idFound(id, children) {
-  print("entro a la fun");
-  print(id);
   if (children.length == 0) {
-    print("lista vacia regresa");
     return false;
   } else {
     children.forEach((element) {
       if (element == id) {
-        print("encontro el id");
         return true;
       }
     });
-    print("no lo encontro, regresa a ponerlo");
+
     return false;
   }
 }
@@ -424,6 +420,11 @@ Future<bool> updateIndicator(
 Future<bool> addDateChild(
     Map<String, dynamic> date, listChildren, email) async {
   List<dynamic> aux = listChildren;
+  int uuid = Random().nextInt(100);
+  do {
+    uuid = Random().nextInt(100);
+  } while (idFoundDate(uuid, listChildren) == true);
+  date['id'] = uuid;
 
   final firebase = FirebaseFirestore.instance;
   for (Map<String, dynamic> element in aux) {
@@ -439,4 +440,73 @@ Future<bool> addDateChild(
     print('ERROR ' + e.toString());
     return false;
   }
+}
+
+bool idFoundDate(id, children) {
+  if (children.length == 0) {
+    return false;
+  } else {
+    children.forEach((element) {
+      element['dates'].forEach((item) {
+        if (item['id'] == id || id == 1) {
+          return true;
+        }
+      });
+    });
+
+    return false;
+  }
+}
+
+Future<bool> deleteDateChild(id, listChildren, email) async {
+  List<dynamic> aux = listChildren;
+  aux.forEach((element) {
+    element['dates'].removeWhere((map) => map['id'] == id);
+  });
+
+  String em = email;
+
+  final firebase = FirebaseFirestore.instance;
+
+  //---------------------------------------------------------------//
+  try {
+    await firebase.collection('users').doc(em).update({'children': aux});
+    return true;
+  } catch (e) {
+    print('ERROR ' + e.toString());
+    return false;
+  }
+}
+
+double calcPorc(Map<String, dynamic> childData, String indicador, int meses) {
+  List<dynamic> indicadores = [];
+  double porcentaje = 0.0;
+  if (meses >= 0) indicadores.add(childData['indicador']['month3'][indicador]);
+  if (meses >= 8) indicadores.add(childData['indicador']['month8'][indicador]);
+  if (meses >= 12)
+    indicadores.add(childData['indicador']['month12'][indicador]);
+  if (meses >= 18)
+    indicadores.add(childData['indicador']['month18'][indicador]);
+  if (meses >= 24) indicadores.add(childData['indicador']['year3'][indicador]);
+  if (meses >= 36) indicadores.add(childData['indicador']['year4']);
+
+  indicadores.forEach((element) {
+    double aux = 0;
+    var keys = element.keys;
+    for (String i in keys) {
+      if (element[i] == 'yes') {
+        aux += 1;
+      } else if (element[i] == 'no') {
+        aux += 0.5;
+      } else {
+        aux += 0;
+      }
+    }
+    aux = aux / keys.length;
+    porcentaje += aux;
+  });
+
+  porcentaje = porcentaje / indicadores.length;
+
+  return porcentaje;
 }

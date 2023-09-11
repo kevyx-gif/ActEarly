@@ -1,14 +1,20 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:actearly/utils/functions.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class Screen3 extends StatefulWidget {
-  final String documentId; // El ID del documento que deseas obtener
-  Screen3({required this.documentId, super.key});
+class UserTools extends StatefulWidget {
+  DocumentSnapshot<Map<String, dynamic>>? userData;
+  String documentId;
+
+  UserTools(this.userData, this.documentId, {super.key});
+
   @override
-  _Screen3 createState() => _Screen3();
+  _UserTools createState() => _UserTools();
 }
 
-class _Screen3 extends State<Screen3> {
+class _UserTools extends State<UserTools> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,45 +35,3 @@ class _Screen3 extends State<Screen3> {
     ));
   }
 }
-
-
-/* CODIGO screen1.dart
-import 'package:actearly/services/firebase_service.dart';
-import 'package:actearly/utils/class.dart';
-import 'package:flutter/material.dart';
-
-//final user = userActual();
-
-//import 'package:crud_firebase/services/firebase_service.dart'
-class Screen1 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      //  child: Text('Contenido de la pantalla 1'),
-      body: FutureBuilder(
-          future: getUsers(),
-          builder: ((context, snapshot) {
-            if (snapshot.hasData) {
-              return ListView.builder(
-                itemCount: snapshot.data
-                    ?.length, //data? show full or empty list, number of iterations
-                itemBuilder: (context, index) {
-                  //bucle show
-                  try {
-                    return Text(snapshot.data?[index]['email']);
-                  } catch (e) {
-                    print('error ');
-                  }
-                },
-              );
-            } else {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-          })),
-    );
-  }
-}
-
-*/ 

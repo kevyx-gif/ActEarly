@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:actearly/utils/colors.dart';
 import 'package:actearly/widgets/dateCard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,8 @@ class DateChildren extends StatefulWidget {
 }
 
 class _DateChildrenState extends State<DateChildren> {
+  ScrollController rawController = ScrollController();
+  ScrollController gridController = ScrollController();
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
@@ -52,18 +55,31 @@ class _DateChildrenState extends State<DateChildren> {
     final height = MediaQuery.of(context).size.height;
 
     return Container(
-      child: GridView.builder(
-        itemCount: dates.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          crossAxisSpacing: width * 0.01,
-          mainAxisSpacing: 25,
-          childAspectRatio: 3 / 3.5,
+      width: width,
+      height: height * 0.9,
+      child: RawScrollbar(
+        isAlwaysShown: true,
+        controller: rawController,
+        thumbColor: ColorConstants.bgColor,
+        thickness: 7,
+        radius: Radius.circular(50),
+        child: Padding(
+          padding: EdgeInsets.only(right: (width * 0.03)),
+          child: GridView.builder(
+            controller: rawController,
+            itemCount: dates.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: width * 0.01,
+              mainAxisSpacing: 25,
+              childAspectRatio: 3 / 3.5,
+            ),
+            itemBuilder: (BuildContext ctxt, int index) {
+              return DateCard(
+                  width, height, dates[index], widget.email, widget.userData);
+            },
+          ),
         ),
-        itemBuilder: (BuildContext ctxt, int index) {
-          return DateCard(
-              width, height, dates[index], widget.email, widget.userData);
-        },
       ),
     );
   }
