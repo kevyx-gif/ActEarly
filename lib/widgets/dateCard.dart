@@ -23,6 +23,14 @@ class _DateCard extends State<DateCard> {
   ScrollController rawController = ScrollController();
   @override
   Widget build(BuildContext context) {
+    // Obtén la información de escalabilidad actual del dispositivo
+    final mediaQueryData =
+        MediaQueryData.fromWindow(WidgetsBinding.instance.window);
+
+    // Establece la información de escalabilidad manualmente para deshabilitarla
+    final fixedMediaQueryData = mediaQueryData.copyWith(
+      textScaleFactor: 1.0, // Establece un factor de escala fijo
+    );
     return (widget.date['id'] == 0)
         ? Center(
             child: Container(
@@ -77,136 +85,139 @@ class _DateCard extends State<DateCard> {
                             color: ColorConstants.white,
                           ),
                         )))))
-        : FlipCard(
-            direction: FlipDirection.HORIZONTAL, // Dirección de volteo
-            front: Center(
-                child: Stack(children: [
-              Container(
+        : MediaQuery(
+            data: fixedMediaQueryData,
+            child: FlipCard(
+              direction: FlipDirection.HORIZONTAL, // Dirección de volteo
+              front: Center(
+                  child: Stack(children: [
+                Container(
+                    child: Card(
+                        elevation: 4,
+                        child: Container(
+                            color: ColorConstants.yellow,
+                            width: widget.width * 0.45,
+                            height: widget.height * 0.2,
+                            child: Center(
+                              child: Container(
+                                  width: widget.width * 0.38,
+                                  height: widget.height * 0.16,
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                          margin: EdgeInsets.only(
+                                              left: widget.width * 0.03),
+                                          width: widget.width * 0.3,
+                                          height: widget.height * 0.04,
+                                          child: Center(
+                                              child: Text(
+                                            widget.date['title'],
+                                            maxLines: 1,
+                                            textAlign: TextAlign.center,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              fontFamily: 'Work_Sans',
+                                              color: ColorConstants.black,
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: widget.width * 0.05,
+                                            ),
+                                          ))),
+                                      Container(
+                                          width: widget.width * 0.2,
+                                          height: widget.height * 0.035,
+                                          child: Center(
+                                              child: Text(
+                                            widget.date['name'],
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                                fontFamily: 'Work_Sans',
+                                                color: ColorConstants.black,
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: widget.width * 0.04),
+                                          ))),
+                                      Container(
+                                          width: widget.width * 0.2,
+                                          height: widget.height * 0.032,
+                                          child: Center(
+                                              child: Text(
+                                            widget.date['date'],
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                                fontFamily: 'Work_Sans',
+                                                color: ColorConstants.black,
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: widget.width * 0.03),
+                                          ))),
+                                      Container(
+                                          width: widget.width * 0.2,
+                                          height: widget.height * 0.035,
+                                          child: Center(
+                                              child: Text(
+                                            widget.date['time'],
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                                fontFamily: 'Work_Sans',
+                                                color: ColorConstants.black,
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: widget.width * 0.03),
+                                          )))
+                                    ],
+                                  )),
+                            )))),
+                Positioned(
+                  top: -2,
+                  left: -2,
+                  child: IconButton(
+                      onPressed: () async {
+                        await deleteDateChild(widget.date['id'],
+                            widget.userData!.data()?['children'], widget.email);
+                      },
+                      icon: Icon(
+                        Icons.cancel_outlined,
+                        size: widget.width * 0.09,
+                        color: ColorConstants.red,
+                      )),
+                )
+              ])),
+              back: Center(
+                child: Container(
                   child: Card(
                       elevation: 4,
                       child: Container(
                           color: ColorConstants.yellow,
                           width: widget.width * 0.45,
-                          height: widget.height * 0.2,
+                          height: widget.height * 0.22,
                           child: Center(
                             child: Container(
-                                width: widget.width * 0.38,
-                                height: widget.height * 0.16,
-                                child: Column(
-                                  children: [
-                                    Container(
-                                        margin: EdgeInsets.only(
-                                            left: widget.width * 0.03),
-                                        width: widget.width * 0.3,
-                                        height: widget.height * 0.04,
-                                        child: Center(
-                                            child: Text(
-                                          widget.date['title'],
-                                          maxLines: 1,
-                                          textAlign: TextAlign.center,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            fontFamily: 'Work_Sans',
-                                            color: ColorConstants.black,
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: widget.width * 0.05,
-                                          ),
-                                        ))),
-                                    Container(
-                                        width: widget.width * 0.2,
-                                        height: widget.height * 0.035,
-                                        child: Center(
-                                            child: Text(
-                                          widget.date['name'],
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                              fontFamily: 'Work_Sans',
-                                              color: ColorConstants.black,
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: widget.width * 0.04),
-                                        ))),
-                                    Container(
-                                        width: widget.width * 0.2,
-                                        height: widget.height * 0.032,
-                                        child: Center(
-                                            child: Text(
-                                          widget.date['date'],
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                              fontFamily: 'Work_Sans',
-                                              color: ColorConstants.black,
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: widget.width * 0.03),
-                                        ))),
-                                    Container(
-                                        width: widget.width * 0.2,
-                                        height: widget.height * 0.035,
-                                        child: Center(
-                                            child: Text(
-                                          widget.date['time'],
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                              fontFamily: 'Work_Sans',
-                                              color: ColorConstants.black,
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: widget.width * 0.03),
-                                        )))
-                                  ],
-                                )),
-                          )))),
-              Positioned(
-                top: -2,
-                left: -2,
-                child: IconButton(
-                    onPressed: () async {
-                      await deleteDateChild(widget.date['id'],
-                          widget.userData!.data()?['children'], widget.email);
-                    },
-                    icon: Icon(
-                      Icons.cancel_outlined,
-                      size: widget.width * 0.09,
-                      color: ColorConstants.red,
-                    )),
-              )
-            ])),
-            back: Center(
-              child: Container(
-                child: Card(
-                    elevation: 4,
-                    child: Container(
-                        color: ColorConstants.yellow,
-                        width: widget.width * 0.45,
-                        height: widget.height * 0.22,
-                        child: Center(
-                          child: Container(
-                              width: widget.width * 0.4,
-                              height: widget.height * 0.14,
-                              child: Center(
-                                child: RawScrollbar(
-                                    controller: rawController,
-                                    isAlwaysShown: true,
-                                    thumbColor: ColorConstants.bgColor,
-                                    thickness: 7,
-                                    radius: Radius.circular(50),
-                                    child: SingleChildScrollView(
+                                width: widget.width * 0.4,
+                                height: widget.height * 0.14,
+                                child: Center(
+                                  child: RawScrollbar(
                                       controller: rawController,
-                                      physics: ClampingScrollPhysics(),
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: 4, horizontal: 5),
-                                      scrollDirection: Axis.vertical,
-                                      child: Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              0, 5, 15, 5),
-                                          child: Text(
-                                            widget.date['description'],
-                                            style: TextStyle(
-                                                fontSize: 17,
-                                                fontWeight: FontWeight.w400),
-                                            textAlign: TextAlign.justify,
-                                          )),
-                                    )),
-                              )),
-                        ))),
+                                      isAlwaysShown: true,
+                                      thumbColor: ColorConstants.bgColor,
+                                      thickness: 7,
+                                      radius: Radius.circular(50),
+                                      child: SingleChildScrollView(
+                                        controller: rawController,
+                                        physics: ClampingScrollPhysics(),
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 4, horizontal: 5),
+                                        scrollDirection: Axis.vertical,
+                                        child: Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                0, 5, 15, 5),
+                                            child: Text(
+                                              widget.date['description'],
+                                              style: TextStyle(
+                                                  fontSize: 17,
+                                                  fontWeight: FontWeight.w400),
+                                              textAlign: TextAlign.justify,
+                                            )),
+                                      )),
+                                )),
+                          ))),
+                ),
               ),
             ),
           );

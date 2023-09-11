@@ -17,6 +17,8 @@ class UserTools extends StatefulWidget {
 class _UserTools extends State<UserTools> {
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
     return Scaffold(
         body: Center(
       child: Column(
@@ -24,8 +26,9 @@ class _UserTools extends State<UserTools> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            width: 300,
-            height: 400,
+            color: Colors.amber,
+            width: width,
+            height: height * 0.3,
             child: IconButton(
                 onPressed: () => {logOut(context)},
                 icon: Icon(Icons.exit_to_app)),

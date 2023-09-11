@@ -1,5 +1,5 @@
 import 'package:actearly/pages/main_screens/screen2.dart';
-import 'package:actearly/pages/main_screens/screen3.dart';
+import 'package:actearly/pages/main_screens/userTools.dart';
 import 'package:actearly/utils/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +54,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 index: _currentIndex,
                 children: <Widget>[
                   ShowChildWidget(userData, widget.documentId),
-                  //Screen1(),
                   DateChildren(widget.documentId, userData),
                   addChildWidget(documentId: widget.documentId),
                   Screen2(),

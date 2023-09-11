@@ -53,31 +53,42 @@ class _DateChildrenState extends State<DateChildren> {
   Widget buildGridView(List<Map<String, dynamic>> dates) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
+    // Obtén la información de escalabilidad actual del dispositivo
+    final mediaQueryData =
+        MediaQueryData.fromWindow(WidgetsBinding.instance.window);
 
-    return Container(
-      width: width,
-      height: height * 0.9,
-      child: RawScrollbar(
-        isAlwaysShown: true,
-        controller: rawController,
-        thumbColor: ColorConstants.bgColor,
-        thickness: 7,
-        radius: Radius.circular(50),
-        child: Padding(
-          padding: EdgeInsets.only(right: (width * 0.03)),
-          child: GridView.builder(
-            controller: rawController,
-            itemCount: dates.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: width * 0.01,
-              mainAxisSpacing: 25,
-              childAspectRatio: 3 / 3.5,
+    // Establece la información de escalabilidad manualmente para deshabilitarla
+    final fixedMediaQueryData = mediaQueryData.copyWith(
+      textScaleFactor: 1.0, // Establece un factor de escala fijo
+    );
+
+    return MediaQuery(
+      data: fixedMediaQueryData,
+      child: Container(
+        width: width,
+        height: height * 0.9,
+        child: RawScrollbar(
+          isAlwaysShown: true,
+          controller: rawController,
+          thumbColor: ColorConstants.bgColor,
+          thickness: 7,
+          radius: Radius.circular(50),
+          child: Padding(
+            padding: EdgeInsets.only(right: (width * 0.03)),
+            child: GridView.builder(
+              controller: rawController,
+              itemCount: dates.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: width * 0.01,
+                mainAxisSpacing: 25,
+                childAspectRatio: 3 / 3.5,
+              ),
+              itemBuilder: (BuildContext ctxt, int index) {
+                return DateCard(
+                    width, height, dates[index], widget.email, widget.userData);
+              },
             ),
-            itemBuilder: (BuildContext ctxt, int index) {
-              return DateCard(
-                  width, height, dates[index], widget.email, widget.userData);
-            },
           ),
         ),
       ),

@@ -176,7 +176,7 @@ class _addChild extends State<addChildWidget> with TickerProviderStateMixin {
                                 opacity: _animation,
                                 child: Container(
                                   margin:
-                                      EdgeInsets.fromLTRB(0, 0, width * 0.2, 0),
+                                      EdgeInsets.fromLTRB(0, 0, width * 0.1, 0),
                                   child: ElevatedButton(
                                       style: ElevatedButton.styleFrom(
                                           elevation: 7,

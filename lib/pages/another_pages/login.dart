@@ -21,6 +21,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final email = TextEditingController();
   final password = TextEditingController();
+  bool seePass = false;
 
   @override
   void dispose() {
@@ -263,55 +264,88 @@ class _LoginPageState extends State<LoginPage> {
                                                                   horizontal:
                                                                       12,
                                                                   vertical: 16),
-                                                          child: TextFormField(
-                                                            controller:
-                                                                password,
-                                                            obscureText: true,
-                                                            style: const TextStyle(
-                                                                color: ColorConstants
-                                                                    .TextGray),
-                                                            decoration:
-                                                                InputDecoration(
-                                                              fillColor:
-                                                                  ColorConstants
-                                                                      .BackgroundGray,
-                                                              filled: true,
-                                                              contentPadding:
-                                                                  const EdgeInsets
-                                                                          .symmetric(
-                                                                      horizontal:
-                                                                          20,
-                                                                      vertical:
-                                                                          18),
-                                                              enabledBorder:
-                                                                  OutlineInputBorder(
-                                                                borderSide: const BorderSide(
-                                                                    color: Colors
-                                                                        .transparent),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            24.0), // Adjust the radius as needed
-                                                              ),
-                                                              focusedBorder:
-                                                                  OutlineInputBorder(
-                                                                borderSide: const BorderSide(
-                                                                    color: Colors
-                                                                        .transparent),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            24.0), // Adjust the radius as needed
-                                                              ),
-                                                              hintText:
-                                                                  'textInputPassw'
-                                                                      .tr,
-                                                              hintStyle:
-                                                                  const TextStyle(
-                                                                      fontFamily:
-                                                                          'Archive'),
-                                                            ),
-                                                          ),
+                                                          child: Stack(
+                                                              children: [
+                                                                TextFormField(
+                                                                  controller:
+                                                                      password,
+                                                                  obscureText:
+                                                                      seePass
+                                                                          ? false
+                                                                          : true,
+                                                                  style: const TextStyle(
+                                                                      color: ColorConstants
+                                                                          .TextGray),
+                                                                  decoration:
+                                                                      InputDecoration(
+                                                                    fillColor:
+                                                                        ColorConstants
+                                                                            .BackgroundGray,
+                                                                    filled:
+                                                                        true,
+                                                                    contentPadding: const EdgeInsets
+                                                                            .symmetric(
+                                                                        horizontal:
+                                                                            20,
+                                                                        vertical:
+                                                                            18),
+                                                                    enabledBorder:
+                                                                        OutlineInputBorder(
+                                                                      borderSide:
+                                                                          const BorderSide(
+                                                                              color: Colors.transparent),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              24.0), // Adjust the radius as needed
+                                                                    ),
+                                                                    focusedBorder:
+                                                                        OutlineInputBorder(
+                                                                      borderSide:
+                                                                          const BorderSide(
+                                                                              color: Colors.transparent),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              24.0), // Adjust the radius as needed
+                                                                    ),
+                                                                    hintText:
+                                                                        'textInputPassw'
+                                                                            .tr,
+                                                                    hintStyle: const TextStyle(
+                                                                        fontFamily:
+                                                                            'Archive'),
+                                                                  ),
+                                                                ),
+                                                                Positioned(
+                                                                    top: height *
+                                                                        0.005,
+                                                                    left:
+                                                                        width *
+                                                                            0.5,
+                                                                    child:
+                                                                        Container(
+                                                                      width: width *
+                                                                          0.13,
+                                                                      height:
+                                                                          width *
+                                                                              0.13,
+                                                                      child:
+                                                                          GestureDetector(
+                                                                        onTap:
+                                                                            () {
+                                                                          setState(
+                                                                              () {
+                                                                            seePass =
+                                                                                !seePass;
+                                                                          });
+                                                                        },
+                                                                        child:
+                                                                            Icon(
+                                                                          Icons
+                                                                              .remove_red_eye,
+                                                                        ),
+                                                                      ),
+                                                                    ))
+                                                              ]),
                                                         ),
                                                       ),
                                                       Row(

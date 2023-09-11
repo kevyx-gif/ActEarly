@@ -129,10 +129,9 @@ class _DateDialog extends State<DateDialog> {
                   ),
                   child: Center(
                     child: DropdownButton<String>(
-                      menuMaxHeight: height * 0.12,
                       isDense: true,
                       isExpanded: true,
-                      itemHeight: height * 0.06,
+                      itemHeight: height * 0.1,
                       value: dropdownValue,
                       items: dropdownList
                           .map<DropdownMenuItem<String>>((String value) {
