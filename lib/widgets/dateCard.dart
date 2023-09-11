@@ -32,6 +32,12 @@ class _DateCard extends State<DateCard> {
                         width: widget.width * 0.45,
                         height: widget.height * 0.2,
                         child: ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            primary: ColorConstants.blue,
+                            side: BorderSide(
+                              color: Colors.transparent, // Color del borde
+                            ),
+                          ),
                           onPressed: () {
                             showDialog(
                                 context: context,
@@ -63,9 +69,13 @@ class _DateCard extends State<DateCard> {
                             'Add date',
                             style: TextStyle(
                                 fontFamily: 'Archive',
-                                fontSize: widget.width * 0.04),
+                                fontSize: widget.width * 0.04,
+                                color: ColorConstants.white),
                           ),
-                          icon: Icon(Icons.add),
+                          icon: Icon(
+                            Icons.add,
+                            color: ColorConstants.white,
+                          ),
                         )))))
         : FlipCard(
             direction: FlipDirection.HORIZONTAL, // Dirección de volteo
@@ -75,11 +85,12 @@ class _DateCard extends State<DateCard> {
                   child: Card(
                       elevation: 4,
                       child: Container(
+                          color: ColorConstants.yellow,
                           width: widget.width * 0.45,
                           height: widget.height * 0.2,
                           child: Center(
                             child: Container(
-                                width: widget.width * 0.3,
+                                width: widget.width * 0.38,
                                 height: widget.height * 0.16,
                                 child: Column(
                                   children: [
@@ -144,31 +155,26 @@ class _DateCard extends State<DateCard> {
                                 )),
                           )))),
               Positioned(
-                  top: 5,
-                  left: 5,
-                  child: Container(
-                    alignment: Alignment.center,
-                    width: widget.width * 0.12,
-                    height: widget.width * 0.12,
-                    child: IconButton(
-                        onPressed: () async {
-                          await deleteDateChild(
-                              widget.date['id'],
-                              widget.userData!.data()?['children'],
-                              widget.email);
-                        },
-                        icon: Icon(
-                          Icons.cancel_outlined,
-                          size: widget.width * 0.07,
-                          color: ColorConstants.red,
-                        )),
-                  )),
+                top: -2,
+                left: -2,
+                child: IconButton(
+                    onPressed: () async {
+                      await deleteDateChild(widget.date['id'],
+                          widget.userData!.data()?['children'], widget.email);
+                    },
+                    icon: Icon(
+                      Icons.cancel_outlined,
+                      size: widget.width * 0.09,
+                      color: ColorConstants.red,
+                    )),
+              )
             ])),
             back: Center(
               child: Container(
                 child: Card(
                     elevation: 4,
                     child: Container(
+                        color: ColorConstants.yellow,
                         width: widget.width * 0.45,
                         height: widget.height * 0.22,
                         child: Center(
