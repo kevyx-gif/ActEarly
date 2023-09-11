@@ -404,8 +404,8 @@ class _child extends State<child> {
                                           width - 60 - 20,
                                           height * 0.10,
                                           calcPorc(widget.childData.value,
-                                              'cognitivo', oldYears),
-                                          'Cognitivas'),
+                                              'motorGrueso', oldYears),
+                                          'Movimiento'),
                                     ),
                                     GestureDetector(
                                       onTap: () {
@@ -427,8 +427,8 @@ class _child extends State<child> {
                                           width - 60 - 20,
                                           height * 0.10,
                                           calcPorc(widget.childData.value,
-                                              'motorGrueso', oldYears),
-                                          'Movimiento'),
+                                              'cognitivo', oldYears),
+                                          'Cognitivas'),
                                     ),
                                   ],
                                 )),

@@ -42,6 +42,45 @@ class _indicatorMain extends State<indicatorMain> {
   void initState() {
     super.initState();
     indicadores.value.setData(widget.child.value['indicador']);
+    indexMap = widget.firstIndex;
+    sizeMap = indicadores.value
+        .getMont(widget.indicatorSelect)[selectMap(indexMap)]
+        .keys
+        .length;
+    switch (indexMap) {
+      case == 0:
+        {
+          selectedSocial = true;
+          selectedLang = false;
+          mov = false;
+          cogn = false;
+        }
+        break;
+      case == 1:
+        {
+          selectedSocial = false;
+          selectedLang = true;
+          mov = false;
+          cogn = false;
+        }
+        break;
+      case == 2:
+        {
+          selectedSocial = false;
+          selectedLang = false;
+          mov = true;
+          cogn = false;
+        }
+        break;
+      case == 3:
+        {
+          selectedSocial = false;
+          selectedLang = false;
+          mov = false;
+          cogn = true;
+        }
+        break;
+    }
   }
 
   @override
@@ -80,47 +119,6 @@ class _indicatorMain extends State<indicatorMain> {
     final width2 = MediaQuery.of(context).size.width / 2.5;
     final isStretched = isAnimating || state == ButtonState.init;
     final isDone = state == ButtonState.done;
-
-    indexMap = widget.firstIndex;
-    sizeMap = indicadores.value
-        .getMont(widget.indicatorSelect)[selectMap(indexMap)]
-        .keys
-        .length;
-
-    switch (indexMap) {
-      case == 0:
-        {
-          selectedSocial = true;
-          selectedLang = false;
-          mov = false;
-          cogn = false;
-        }
-        break;
-      case == 1:
-        {
-          selectedSocial = false;
-          selectedLang = true;
-          mov = false;
-          cogn = false;
-        }
-        break;
-      case == 2:
-        {
-          selectedSocial = false;
-          selectedLang = false;
-          mov = false;
-          cogn = true;
-        }
-        break;
-      case == 3:
-        {
-          selectedSocial = false;
-          selectedLang = false;
-          mov = true;
-          cogn = false;
-        }
-        break;
-    }
 
     return Scaffold(
       body: Container(
@@ -528,6 +526,7 @@ class _indicatorMain extends State<indicatorMain> {
                 widget.child.value, widget.children, widget.email)) {
               setState(() => state = ButtonState.done);
               await Future.delayed(Duration(milliseconds: 1200));
+              Navigator.pop(context);
             } else {
               print('fallo');
             }
