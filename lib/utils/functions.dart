@@ -510,3 +510,24 @@ double calcPorc(Map<String, dynamic> childData, String indicador, int meses) {
 
   return porcentaje;
 }
+
+Future<bool> changeUser(userData, email, nameUser, emailUser, passwordUser,
+    userType, province, question) async {
+  Map<String, dynamic> user = userData.data();
+  if (user['nameUser'] != nameUser.text) user['nombre'] = nameUser.text;
+  if (user['email'] != nameUser.text) user['email'] = emailUser.text;
+  if (user['password'] != nameUser.text) user['password'] = passwordUser.text;
+  if (user['provinceTerritory'] != nameUser.text)
+    user['provinceTerritory'] = province.text;
+  if (user['question'] != nameUser.text) user['question'] = question.text;
+  if (user['userType'] != nameUser.text) user['userType'] = userType.text;
+
+  final firebase = FirebaseFirestore.instance;
+  try {
+    await firebase.collection('users').doc(email).update(user);
+    return true;
+  } catch (e) {
+    print('ERROR ' + e.toString());
+    return false;
+  }
+}
