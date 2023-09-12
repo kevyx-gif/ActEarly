@@ -1,3 +1,4 @@
+//Text Imports
 import 'package:get/get.dart';
 
 class indicadorClass {
@@ -121,247 +122,238 @@ class indicadorClass {
   }
 }
 
+
 var motorGrueso1 = {
-  'Rueda de adelante hacia atrás'.tr: '',
-  'Controlar el movimiento de la cabeza y el cuello al sentarse'.tr: '',
-  'Levantar la cabeza y el pecho cuando se acuesta boca abajo'.tr: '',
-  'Estirar y patear las piernas cuando están acostados boca abajo o boca arriba'.tr:
-      '',
-  'Empujar hacia abajo con las piernas cuando los pies están sobre una superficie firme'.tr:
-      '',
+  'motorGrueso1_1'.tr: '',
+  'motorGrueso1_2'.tr: '',
+  'otorGrueso1_3'.tr: '',
+  'motorGrueso1_4'.tr: '',
+  'motorGrueso1_5'.tr: '',
 };
 
 var motorFino1 = {
-  'Juntar sus manos': '',
-  'Abrir y cerrar sus manos': '',
-  'Llévese las manos a la boca': '',
-  'Golpea un objeto colgante': '',
+  'motorFino1_1'.tr : '',
+  'motorFino1_2'.tr : '',
+  'motorFino1_3'.tr : '',
+  'motorFino1_4'.tr : '',
 };
 
 var social1 = {
-  'Sonríe cuando sonríes y por su cuenta': '',
-  'Ser expresivo y comunicarse con su rostro y cuerpo': '',
-  'Copiar algunos movimientos corporales y expresiones faciales': '',
+  'social1_1'.tr : '',
+  'social1_2'.tr : '',
+  'social1_3'.tr : '',
 };
 
 var cognitivo1 = {
-  'Mira las caras de cerca': '',
-  'Seguir objetos en movimiento': '',
-  'Reconocer objetos y personas que conocen': '',
+  'cognitivo1_1'.tr : '',
+  'cognitivo1_2'.tr : '',
+  'cognitivo1_3'.tr : '',
 };
 
 //-------------------------//
 
 var motorGrueso2 = {
-  'Rueda en ambos sentidos (de adelante hacia atrás, de atrás hacia adelante)':
-      '',
-  'Siéntate solo': '',
-  'Apoyar todo su peso sobre sus piernas': '',
-  'Controlar la parte superior del cuerpo y los brazos': '',
+  'motorGrueso2_1'.tr : '',
+  'motorGrueso2_2'.tr : '',
+  'motorGrueso2_3'.tr : '',
+  'motorGrueso2_4'.tr : '',
 };
 
 var motorFino2 = {
-  'Sostenga y agite un juguete de mano': '',
-  'Mover un objeto de una mano a otra': '',
-  'Usar sus manos para explorar un objeto': '',
+  'motorFino2_1'.tr : '',
+  'motorFino2_2'.tr : '',
+  'motorFino2_3'.tr : '',
 };
 
 var social2 = {
-  'Alcanzar a una persona que conocen': '',
-  'Sonreírse a sí mismos en un espejo': '',
-  'Responder cuando otros expresan emociones': '',
-  'Copiar sonidos de voz': '',
+  'social2_1'.tr : '',
+  'social2_2'.tr : '',
+  'social2_3'.tr : '',
+  'social2_4'.tr : '',
 };
 
 var cognitivo2 = {
-  'Rastrear un objeto en movimiento y encontrar uno que esté parcialmente oculto':
-      '',
-  'Explora con las manos y la boca': '',
-  'Lucha para conseguir objetos que están fuera de su alcance': '',
-  'Mirar de un objeto a otro': '',
-  'Ver un objeto que cae': '',
+  'cognitivo2_1'.tr : '',
+  'cognitivo2_2'.tr : '',
+  'cognitivo2_3'.tr : '',
+  'cognitivo2_4'.tr : '',
+  'cognitivo2_5'.tr : '',
 };
 
 //----------------month12------------------//
 
 var motorGrueso3 = {
-  'Alcanzar una posición sentada sin ayuda': '',
-  'Gatear sobre las manos y las rodillas, o deslizarse sobre su trasero': '',
-  'Pasar de una posición sentada a una posición de gateo o boca abajo (boca abajo)':
-      '',
-  'Tire hacia arriba a una posición de pie': '',
-  'Crucero, aferrarse a los muebles': '',
-  'Párese brevemente sin apoyo': '',
-  'Camina sosteniendo la mano de un adulto, y tal vez da 2 o 3 pasos por su cuenta':
-      '',
-  'Empieza a subir escaleras con ayuda': '',
+  'motorGrueso3_1'.tr : '',
+  'motorGrueso3_2'.tr : '',
+  'motorGrueso3_3'.tr : '',
+  'motorGrueso3_4'.tr : '',
+  'motorGrueso3_5'.tr : '',
+  'motorGrueso3_6'.tr : '',
+  'motorGrueso3_7'.tr : '',
+  'motorGrueso3_8'.tr : '',
 };
 
 var motorFino3 = {
-  'Alimentación con el dedo con el pulgar y el índice (agarre de pinza)': '',
-  'Poner objetos en un recipiente (y sacarlos de nuevo)': '',
-  'Liberar objetos voluntariamente': '',
-  'Pinchar con un dedo índice': '',
-  'Empuja un juguete': '',
-  'Comenzar a beber de una taza': '',
-  'Garabatear con un crayón': '',
-  'Comience a usar una cuchara': '',
+  'motorFino3_1'.tr : '',
+  'motorFino3_2'.tr : '',
+  'motorFino3_3'.tr : '',
+  'motorFino3_4'.tr : '',
+  'motorFino3_5'.tr : '',
+  'motorFino3_6'.tr : '',
+  'motorFino3_7'.tr : '',
+  'motorFino3_8'.tr : '',
 };
 
 var social3 = {
-  'Ser tímido o ansioso con extraños': '',
-  'Copiar durante la reproducción': '',
-  'Tener juguetes y personas favoritas': '',
-  'Probar los límites de las acciones y comportamientos': '',
-  'Coloque un brazo o una pierna para ayudar al vestirse': '',
-  'Quítate los calcetines': '',
-  'Ven cuando se te llama (responde al nombre)': '',
-  'Diga "mamá" o "papá" con al menos otra palabra con significado': '',
-  'Comunicar una necesidad sin llorar': '',
-  'Detén una acción si dices "No"': '',
+  'social3_1'.tr : '',
+  'social3_2'.tr : '',
+  'social3_3'.tr : '',
+  'social3_4'.tr : '',
+  'social3_5'.tr : '',
+  'social3_6'.tr : '',
+  'social3_7'.tr : '',
+  'social3_8'.tr : '',
+  'social3_9'.tr : '',
+  'social3_10'.tr : '',
 };
 
 var cognitivo3 = {
-  'Explorar objetos de diferentes maneras (temblando, golpeando, lanzando, dejándose caer)':
-      '',
-  'Conocer los nombres de objetos familiares': '',
-  'Responder a la música': '',
-  'Comience a explorar la causa y el efecto': '',
+  'cognitivo3_1'.tr : '',
+  'cognitivo3_2'.tr : '',
+  'cognitivo3_3'.tr : '',
+  'cognitivo3_4'.tr : '',
 };
 
 //-------------month18-------------//
 
 var motorGrueso4 = {
-  'Súbete a las sillas': '',
-  'Camina sin ayuda': '',
-  'Sube escaleras de una en una con ayuda': '',
+  'motorGrueso4_1'.tr : '',
+  'motorGrueso4_2'.tr : '',
+  'motorGrueso4_3'.tr : '',
 };
 
 var motorFino4 = {
-  'Construye una torre de 3 bloques': '',
-  'Use bien una cuchara': '',
-  'Pasar algunas páginas de libros de cartón a la vez': '',
-  'Voltee un recipiente para verter el contenido': '',
-  'Bebe fácilmente de una taza': '',
+  'motorFino4_1'.tr : '',
+  'motorFino4_2'.tr : '',
+  'motorFino4_3'.tr : '',
+  'motorFino4_4'.tr : '',
+  'motorFino4_5'.tr : '',
 };
 
 var social4 = {
-  'Decir 20 o más palabras': '',
-  'Siga una instrucción simple': '',
-  'Quítense algo de ropa por su cuenta': '',
-  'Apuntar a una parte del cuerpo con nombre': '',
-  'Señale objetos familiares cuando se le pregunte': '',
-  'Ayuda con tareas sencillas': '',
+  'social4_1'.tr : '',
+  'social4_2'.tr : '',
+  'social4_3'.tr : '',
+  'social4_4'.tr : '',
+  'social4_5'.tr : '',
+  'social4_6'.tr : '',
 };
 
 var cognitivo4 = {
-  'Usar objetos como herramientas': '',
-  'Encajar objetos relacionados (por ejemplo, en un clasificador de formas)':
-      '',
+  'cognitivo4_1'.tr : '',
+  'cognitivo4_2'.tr : '',
 };
 
 //----------------month24--------------//
 var motorGrueso24 = {
-  'Tira de un juguete mientras caminas': '',
-  'Lleve un juguete grande o más de un juguete mientras camina': '',
-  'Comience a correr': '',
-  'Patear o lanzar una pelota': '',
-  'Subir y bajar de las sillas sin ayuda': '',
-  'Sube y baja escaleras con ayuda': '',
+  'motorGrueso24_1'.tr : '',
+  'motorGrueso24_2'.tr : '',
+  'motorGrueso24_3'.tr : '',
+  'motorGrueso24_4'.tr : '',
+  'motorGrueso24_5'.tr : '',
+  'motorGrueso24_6'.tr : '',
 };
 
 var motorFino24 = {
-  'Construye una torre de 4 bloques o más': '',
-  'Completa un rompecabezas simple que combina formas': '',
-  'Pase las páginas del libro de cartón fácilmente, una a la vez': '',
+  'motorFino24_1'.tr : '',
+  'motorFino24_2'.tr : '',
+  'motorFino24_3'.tr : '',
 };
 
 var social24 = {
-  'Empieza a juntar 2 palabras': '',
-  'Copiar el comportamiento de los adultos y otros niños': '',
-  'Emocionarse por estar con otros niños': '',
-  'Jugar junto a otros niños': '',
-  'Mostrar una independencia creciente': '',
-  'Mostrar un comportamiento desafiante': '',
+  'social24_1'.tr : '',
+  'social24_2'.tr : '',
+  'social24_3'.tr : '',
+  'social24_4'.tr : '',
+  'social24_5'.tr : '',
+  'social24_6'.tr : '',
 };
 
 var cognitivo24 = {
-  'Comienza el juego "imaginario"': '',
+  'cognitivo24_1'.tr : '',
 };
 
 //----------------------Year 3--------------------//
 var motorGrueso3y = {
-  'Subir y bajar escaleras, alternando pies (un pie por escalera)': '',
-  'Corre fácilmente': '',
-  'Saltar en su lugar': '',
-  'Lanzar una pelota por encima de la cabeza': '',
+  'motorGrueso3y_1'.tr : '',
+  'motorGrueso3y_2'.tr : '',
+  'motorGrueso3y_3'.tr : '',
+  'motorGrueso3y_4'.tr : '',
 };
 
 var motorFino3y = {
-  'Hacer líneas hacia arriba y hacia abajo, de lado a lado y circulares con un lápiz o crayón':
-      '',
-  'Construye una torre de más de 6 bloques': '',
-  'Sostenga un lápiz en una posición de escritura': '',
-  'Atornillar y desenroscar tapas de frascos o tuercas y pernos grandes': '',
-  'Cuerdas de cuentas grandes': '',
-  'Pestillos y ganchos de trabajo': '',
-  'Recortar con tijeras para niños': '',
+  'motorFino3y_1'.tr : '',
+  'motorFino3y_2'.tr : '',
+  'motorFino3y_3'.tr : '',
+  'motorFino3y_4'.tr : '',
+  'motorFino3y_5'.tr : '',
+  'motorFino3y_6'.tr : '',
+  'motorFino3y_7'.tr : '',
 };
 
 var social3y = {
-  'mostrar afecto espontáneo por los compañeros de juego que conocen': '',
-  'Comience a turnarse': '',
-  'Entender el concepto de "mío" vs. "de otra persona"': '',
-  'Objetar cambios en la rutina': '',
-  'Anticipar las actividades diarias': '',
-  'Habla en oraciones y haz muchas preguntas': '',
-  'Guarde los juguetes': '',
-  'Pide ayuda': '',
-  'Conoce su nombre completo': '',
+  'social3y_1'.tr : '',
+  'social3y_2'.tr : '',
+  'social3y_3'.tr : '',
+  'social3y_4'.tr : '',
+  'social3y_5'.tr : '',
+  'social3y_6'.tr : '',
+  'social3y_7'.tr : '',
+  'social3y_8'.tr : '',
+  'social3y_9'.tr : '',
 };
 
 var cognitivo3y = {
-  'Hacer coincidir un objeto en su mano o la habitación con una imagen en un libro':
-      '',
-  'Incluye animales, muñecas y personas en juegos de fantasía': '',
-  'Ordenar fácilmente por forma y color': '',
-  'Completa un rompecabezas con 3 o 4 piezas': '',
-  'Entender la diferencia entre 1 y 2': '',
-  'Nombre de las partes del cuerpo y colores': '',
+  'cognitivo3y_1'.tr : '',
+  'cognitivo3y_2'.tr : '',
+  'cognitivo3y_3'.tr : '',
+  'cognitivo3y_4'.tr : '',
+  'cognitivo3y_5'.tr : '',
+  'cognitivo3y_6'.tr : '',
 };
 
 //--------------------year 4----------------//
 
 var motorGrueso4y = {
-  'Salta y párate en 1 pie durante un máximo de 4 segundos': '',
-  'Patear una pelota hacia adelante': '',
-  'Atrapa una pelota que rebota': '',
+  'motorGrueso4y_1'.tr : '',
+  'motorGrueso4y_2'.tr : '',
+  'motorGrueso4y_3'.tr : '',
 };
 
 var motorFino4y = {
-  'Dibujar a una persona con 2 a 4 partes del cuerpo': '',
-  'Use tijeras para niños': '',
-  'Dibujar círculos y cuadrados': '',
-  'Pulgares giratorios': '',
-  'Hacer una secuencia de dedo a pulgar (por ejemplo, Itsy-Bitsy Spider)': '',
+  'motorFino4y_1'.tr : '',
+  'motorFino4y_2'.tr : '',
+  'motorFino4y_3'.tr : '',
+  'motorFino4y_4'.tr : '',
+  'motorFino4y_5'.tr : '',
 };
 
 var social4y = {
-  'Esperamos nuevas experiencias': '',
-  'Cooperar con otros niños': '',
-  'Jugar "Mamá" o "Papá"': '',
-  'Ser muy inventivo': '',
-  'Vestir y desvestir': '',
-  'Imagina monstruos': '',
-  'Negociar soluciones a los conflictos': '',
+  'social4y_1'.tr : '',
+  'social4y_2'.tr : '',
+  'social4y_3.tr' : '',
+  'social4y_4'.tr : '',
+  'social4y_5'.tr : '',
+  'social4y_6'.tr : '',
+  'social4y_7'.tr : '',
 };
 
 var cognitivo4y = {
-  'Entender el conteo': '',
-  'Siga una instrucción de 3 partes': '',
-  'Recordar partes de una historia': '',
-  'Inventar y contar historias sencillas': '',
-  'Entender "igual" y "diferente"': '',
-  'Disfruta del juego de fantasía': '',
-  'Conocer su dirección': '',
+  'cognitivo4y_1'.tr : '',
+  'cognitivo4y_2'.tr : '',
+  'cognitivo4y_3'.tr : '',
+  'cognitivo4y_4'.tr : '',
+  'cognitivo4y_5'.tr : '',
+  'cognitivo4y_6'.tr : '',
+  'cognitivo4y_7'.tr : '',
 };
