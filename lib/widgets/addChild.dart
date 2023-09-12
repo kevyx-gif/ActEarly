@@ -197,7 +197,7 @@ class _addChild extends State<addChildWidget> with TickerProviderStateMixin {
                                             items.clear();
                                             messageToast(
                                                 context,
-                                                'Hijos agregados con exito',
+                                                'toastAddChild'.tr,
                                                 ColorConstants.green,
                                                 ColorConstants.white);
                                             _controller.forward(from: 0.0);

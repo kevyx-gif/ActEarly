@@ -44,7 +44,7 @@ class _UserTools extends State<UserTools> {
                           shape: MaterialStatePropertyAll(
                               ContinuousRectangleBorder(
                                   borderRadius: BorderRadius.circular(30)))),
-                      label: Text('Editar usuario'),
+                      label: Text('edituser'.tr),
                       onPressed: () => {
                             showDialog(
                                 context: context,
@@ -76,6 +76,7 @@ class _UserTools extends State<UserTools> {
               ),
             ),
           ),
+          /*
           Container(
             width: width,
             height: height * 0.1,
@@ -97,7 +98,7 @@ class _UserTools extends State<UserTools> {
                 ),
               ),
             ),
-          ),
+          ),*/
           Container(
             width: width,
             height: height * 0.1,
@@ -113,7 +114,7 @@ class _UserTools extends State<UserTools> {
                           shape: MaterialStatePropertyAll(
                               ContinuousRectangleBorder(
                                   borderRadius: BorderRadius.circular(30)))),
-                      label: Text('Cambiar Lenguaje'),
+                      label: Text('changelanguage'.tr),
                       onPressed: () => {logOut(context)},
                       icon: Icon(Icons.language)),
                 ),

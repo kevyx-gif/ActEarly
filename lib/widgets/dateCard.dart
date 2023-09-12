@@ -6,6 +6,7 @@ import 'package:actearly/widgets/dialogDateCard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card.dart';
+import 'package:get/get.dart';
 
 class DateCard extends StatefulWidget {
   double width, height;
@@ -74,7 +75,7 @@ class _DateCard extends State<DateCard> {
                                 });
                           },
                           label: Text(
-                            'Add date',
+                            'btnAddDate'.tr,
                             style: TextStyle(
                                 fontFamily: 'Archive',
                                 fontSize: widget.width * 0.04,

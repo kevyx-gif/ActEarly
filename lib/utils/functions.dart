@@ -514,13 +514,16 @@ double calcPorc(Map<String, dynamic> childData, String indicador, int meses) {
 Future<bool> changeUser(userData, email, nameUser, emailUser, passwordUser,
     userType, province, question) async {
   Map<String, dynamic> user = userData.data();
-  if (user['nameUser'] != nameUser.text) user['nombre'] = nameUser.text;
-  if (user['email'] != nameUser.text) user['email'] = emailUser.text;
-  if (user['password'] != nameUser.text) user['password'] = passwordUser.text;
-  if (user['provinceTerritory'] != nameUser.text)
+  if (user['nameUser'] != nameUser.text && nameUser.text != '')
+    user['nameUser'] = nameUser.text;
+  if (user['password'] != passwordUser.text && passwordUser.text != '')
+    user['password'] = passwordUser.text;
+  if (user['provinceTerritory'] != province.text && province.text != '')
     user['provinceTerritory'] = province.text;
-  if (user['question'] != nameUser.text) user['question'] = question.text;
-  if (user['userType'] != nameUser.text) user['userType'] = userType.text;
+  if (user['question'] != question.text && question.text != '')
+    user['question'] = question.text;
+  if (user['userType'] != userType.text && userType.text != '')
+    user['userType'] = userType.text;
 
   final firebase = FirebaseFirestore.instance;
   try {

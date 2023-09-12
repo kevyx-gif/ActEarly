@@ -233,7 +233,7 @@ class cardWidget extends State<ChildW>
                                 borderRadius: BorderRadius.circular(
                                     24.0), // Adjust the radius as needed
                               ),
-                              hintText: 'Nombre',
+                              hintText: 'titleName'.tr,
                               hintStyle: const TextStyle(
                                   fontFamily: 'Archive',
                                   color: ColorConstants.TextGray),
@@ -281,7 +281,7 @@ class cardWidget extends State<ChildW>
                                 borderRadius: BorderRadius.circular(
                                     24.0), // Adjust the radius as needed
                               ),
-                              hintText: 'Fecha',
+                              hintText: 'titleDate'.tr,
                               hintStyle: const TextStyle(
                                   fontFamily: 'Archive',
                                   color: ColorConstants.TextGray),
@@ -321,7 +321,7 @@ class cardWidget extends State<ChildW>
                         children: [
                           //------------------------Text-----------------------//
                           Text(
-                            'Hombre',
+                            'titleMan'.tr,
                             style: TextStyle(
                                 fontFamily: 'Archive',
                                 fontSize: width * 0.024,
@@ -346,7 +346,7 @@ class cardWidget extends State<ChildW>
 
                           //------------------------Text-----------------------//
                           Text(
-                            'Mujer',
+                            'titleWomen'.tr,
                             style: TextStyle(
                                 fontFamily: 'Archive',
                                 fontSize: width * 0.024,
@@ -362,7 +362,7 @@ class cardWidget extends State<ChildW>
                             Container(
                               margin:
                                   EdgeInsets.fromLTRB(0, 0, 0, height * 0.01),
-                              child: Text('Nacio Prematuro',
+                              child: Text('titleBornPremature'.tr,
                                   style: TextStyle(
                                       color: ColorConstants.TextGray,
                                       fontFamily: 'Archive',
@@ -401,7 +401,7 @@ class cardWidget extends State<ChildW>
                                           child: Text(
                                             maxLines: 1,
                                             textAlign: TextAlign.center,
-                                            'No',
+                                            'titleNo'.tr,
                                             style: TextStyle(
                                                 color: ColorConstants.white,
                                                 fontFamily: 'Archive',
@@ -432,7 +432,7 @@ class cardWidget extends State<ChildW>
                                         child: Container(
                                           alignment: Alignment.center,
                                           child: Text(
-                                            'Si',
+                                            'titleYes'.tr,
                                             style: TextStyle(
                                                 color: ColorConstants.white,
                                                 fontFamily: 'Archive',
