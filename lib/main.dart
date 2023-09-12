@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 
     return GetMaterialApp(
-      locale: const Locale('es', 'MX'),
+      locale: const Locale('en', 'CAN'),
       translationsKeys: Messages(),
       title: 'ActEarly',
       home: FutureBuilder(
