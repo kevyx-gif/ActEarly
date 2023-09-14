@@ -20,6 +20,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:io';
 
 import 'package:image_picker/image_picker.dart';
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server/gmail.dart';
 
 //-----------------Menssage Toast Per-----------------//
 void messageToast(
@@ -531,6 +533,40 @@ Future<bool> changeUser(userData, email, nameUser, emailUser, passwordUser,
     return true;
   } catch (e) {
     print('ERROR ' + e.toString());
+    return false;
+  }
+}
+
+Future<bool> forgotPass(String email, String answer) async {
+  CollectionReference usersCollection =
+      FirebaseFirestore.instance.collection('users');
+  QuerySnapshot<Object?> querySnapshot =
+      await usersCollection.where('email', isEqualTo: email).get();
+  if (querySnapshot.docs.isNotEmpty) {
+    Map<String, dynamic>? user;
+    user = querySnapshot.docs.first.data() as Map<String, dynamic>?;
+    if (user!['question'] == answer) {
+      final smtpServer = gmail('gagk000410@gs.utm.mx', 'tigreverde123');
+
+      final message = Message()
+        ..from = Address('gagk000410@gs.utm.mx', 'ActEarly Services')
+        ..recipients.add(email) // Correo del destinatario
+        ..subject = 'Password ActEarly'
+        ..text = 'Password' +
+            user![
+                'password']; // Puedes usar .html en lugar de .text para correo HTML
+
+      try {
+        await send(message, smtpServer);
+        return true;
+      } catch (e) {
+        print(e);
+        return false;
+      }
+    } else {
+      return false;
+    }
+  } else {
     return false;
   }
 }

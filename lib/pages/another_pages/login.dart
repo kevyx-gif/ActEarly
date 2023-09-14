@@ -1,3 +1,4 @@
+import 'package:actearly/widgets/dialogForgotPass.dart';
 import "package:flutter/material.dart";
 //utils import
 import 'package:actearly/utils/functions.dart';
@@ -351,7 +352,45 @@ class _LoginPageState extends State<LoginPage> {
                                                               foregroundColor:
                                                                   Colors.black,
                                                             ),
-                                                            onPressed: () {},
+                                                            onPressed: () {
+                                                              showDialog(
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (BuildContext
+                                                                          context) {
+                                                                    return Dialog(
+                                                                      backgroundColor:
+                                                                          Colors
+                                                                              .white,
+                                                                      shape: const RoundedRectangleBorder(
+                                                                          borderRadius: BorderRadius.only(
+                                                                        bottomRight:
+                                                                            Radius.circular(50),
+                                                                        bottomLeft:
+                                                                            Radius.circular(50),
+                                                                        topLeft:
+                                                                            Radius.circular(50),
+                                                                        topRight:
+                                                                            Radius.circular(50),
+                                                                      )),
+                                                                      child:
+                                                                          Container(
+                                                                        color: Colors
+                                                                            .transparent,
+                                                                        width: width *
+                                                                            0.8,
+                                                                        height: height *
+                                                                            0.6,
+                                                                        child: dialogPass(
+                                                                            (width *
+                                                                                0.8),
+                                                                            (height *
+                                                                                0.6)),
+                                                                      ),
+                                                                    );
+                                                                  });
+                                                            },
                                                             child: AutoSizeText(
                                                                 maxLines: 1,
                                                                 'forgotPass'.tr,

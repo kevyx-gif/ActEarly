@@ -4,6 +4,7 @@ import 'dart:math';
 
 import 'package:actearly/utils/functions.dart';
 import 'package:actearly/widgets/dialogUser.dart';
+import 'package:actearly/widgets/languageDialogs.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -115,7 +116,13 @@ class _UserTools extends State<UserTools> {
                               ContinuousRectangleBorder(
                                   borderRadius: BorderRadius.circular(30)))),
                       label: Text('changelanguage'.tr),
-                      onPressed: () => {logOut(context)},
+                      onPressed: () => {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        LanguageSelectionWidget()))
+                          },
                       icon: Icon(Icons.language)),
                 ),
               ),
