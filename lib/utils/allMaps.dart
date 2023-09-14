@@ -126,7 +126,7 @@ class indicadorClass {
 var motorGrueso1 = {
   'motorGrueso1_1'.tr: '',
   'motorGrueso1_2'.tr: '',
-  'otorGrueso1_3'.tr: '',
+  'motorGrueso1_3'.tr: '',
   'motorGrueso1_4'.tr: '',
   'motorGrueso1_5'.tr: '',
 };
