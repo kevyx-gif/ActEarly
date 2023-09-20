@@ -92,7 +92,7 @@ class TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
                       child: Align(
                         alignment: Alignment.center,
                         child: RawScrollbar(
-                            isAlwaysShown: true,
+                            thumbVisibility: true,
                             thumbColor: ColorConstants.bgColor,
                             thickness: 7,
                             radius: Radius.circular(50),

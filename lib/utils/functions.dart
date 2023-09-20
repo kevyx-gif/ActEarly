@@ -422,6 +422,7 @@ Future<bool> updateIndicator(
 Future<bool> addDateChild(
     Map<String, dynamic> date, listChildren, email) async {
   List<dynamic> aux = listChildren;
+  aux.removeWhere((element) => element['id'] == 0);
   int uuid = Random().nextInt(100);
   do {
     uuid = Random().nextInt(100);

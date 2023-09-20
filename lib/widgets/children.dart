@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 //Colors
 import 'package:actearly/utils/colors.dart';
+import 'package:get/get.dart';
 
 class children extends StatefulWidget {
   DocumentSnapshot<Map<String, dynamic>>? userData;
@@ -54,13 +55,12 @@ class _childrenState extends State<children> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(
-                            margin: EdgeInsets.only(
-                                top: height * 0.05, left: width * 0.08),
-                            alignment: Alignment.centerLeft,
+                            margin: EdgeInsets.only(top: height * 0.05),
+                            alignment: Alignment.center,
                             child: Text(
-                              'My\nChildren',
+                              'tittleChildren'.tr,
                               maxLines: 2,
-                              textAlign: TextAlign.start,
+                              textAlign: TextAlign.center,
                               style: TextStyle(
                                   color: ColorConstants.purple,
                                   fontFamily: 'Archive',
@@ -89,7 +89,7 @@ class _childrenState extends State<children> {
                                 ),
                               ),
                               child: RawScrollbar(
-                                isAlwaysShown: true,
+                                thumbVisibility: true,
                                 controller: rawController,
                                 thumbColor: ColorConstants.bgColor,
                                 thickness: 7,

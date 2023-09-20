@@ -195,7 +195,7 @@ class _DateCard extends State<DateCard> {
                                 child: Center(
                                   child: RawScrollbar(
                                       controller: rawController,
-                                      isAlwaysShown: true,
+                                      thumbVisibility: true,
                                       thumbColor: ColorConstants.bgColor,
                                       thickness: 7,
                                       radius: Radius.circular(50),

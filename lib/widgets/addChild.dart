@@ -72,7 +72,7 @@ class _addChild extends State<addChildWidget> with TickerProviderStateMixin {
           child: Column(children: [
             Expanded(
               child: RawScrollbar(
-                  isAlwaysShown: true,
+                  thumbVisibility: true,
                   controller: rawController,
                   thumbColor: ColorConstants.bgColor,
                   thickness: 7,

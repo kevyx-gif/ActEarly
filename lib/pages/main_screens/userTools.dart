@@ -3,6 +3,7 @@
 import 'dart:math';
 
 import 'package:actearly/utils/functions.dart';
+import 'package:actearly/widgets/dialogChangeLanguaje.dart';
 import 'package:actearly/widgets/dialogUser.dart';
 import 'package:actearly/widgets/languageDialogs.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -117,11 +118,30 @@ class _UserTools extends State<UserTools> {
                                   borderRadius: BorderRadius.circular(30)))),
                       label: Text('changelanguage'.tr),
                       onPressed: () => {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        LanguageSelectionWidget()))
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return Dialog(
+                                    backgroundColor: Colors.transparent,
+                                    shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.only(
+                                      bottomRight: Radius.circular(50),
+                                      bottomLeft: Radius.circular(50),
+                                      topRight: Radius.circular(50),
+                                      topLeft: Radius.circular(50),
+                                    )),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(50)),
+                                        color: Colors.white,
+                                      ),
+                                      width: width * 0.9,
+                                      height: height * 0.4,
+                                      child: LanguajeDialog(),
+                                    ),
+                                  );
+                                })
                           },
                       icon: Icon(Icons.language)),
                 ),

@@ -169,7 +169,7 @@ class _indicatorMain extends State<indicatorMain> {
                                 top: height * 0.02,
                                 bottom: height * 0.02),
                             child: RawScrollbar(
-                              isAlwaysShown: true,
+                              thumbVisibility: true,
                               thumbColor: ColorConstants.whiteGray,
                               thickness: 5,
                               radius: Radius.circular(50),

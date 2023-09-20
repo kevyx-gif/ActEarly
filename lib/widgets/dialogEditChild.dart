@@ -371,7 +371,7 @@ class _dialogEditChild extends State<dialogEditChild>
                               children: [
                                 //------------------------Text-----------------------//
                                 Text(
-                                  'Hombre',
+                                  'titleMan'.tr,
                                   style: TextStyle(
                                       fontFamily: 'Archive',
                                       fontSize: width * 0.024,
@@ -396,7 +396,7 @@ class _dialogEditChild extends State<dialogEditChild>
 
                                 //------------------------Text-----------------------//
                                 Text(
-                                  'Mujer',
+                                  'titleWomen'.tr,
                                   style: TextStyle(
                                       fontFamily: 'Archive',
                                       fontSize: width * 0.024,
@@ -412,7 +412,7 @@ class _dialogEditChild extends State<dialogEditChild>
                               Container(
                                 margin:
                                     EdgeInsets.fromLTRB(0, 0, 0, height * 0.01),
-                                child: Text('Nacio Prematuro',
+                                child: Text('titleBornPremature'.tr,
                                     style: TextStyle(
                                         color: ColorConstants.TextGray,
                                         fontFamily: 'Archive',
@@ -449,7 +449,7 @@ class _dialogEditChild extends State<dialogEditChild>
                                             child: Text(
                                               maxLines: 1,
                                               textAlign: TextAlign.center,
-                                              'No',
+                                              'titleNo'.tr,
                                               style: TextStyle(
                                                   color: ColorConstants.white,
                                                   fontFamily: 'Archive',
@@ -478,7 +478,7 @@ class _dialogEditChild extends State<dialogEditChild>
                                           child: Container(
                                             alignment: Alignment.center,
                                             child: Text(
-                                              'Si',
+                                              'titleYes'.tr,
                                               style: TextStyle(
                                                   color: ColorConstants.white,
                                                   fontFamily: 'Archive',

@@ -40,7 +40,7 @@ class _DateChildrenState extends State<DateChildren> {
         if (userData != null && userData['children'] != null) {
           userData['children'].forEach((element) {
             element['dates'].forEach((item) {
-              dates.insert(0, item);
+              if (item['id'] != 0) dates.insert(0, item);
             });
           });
         }
@@ -68,7 +68,7 @@ class _DateChildrenState extends State<DateChildren> {
         width: width,
         height: height * 0.9,
         child: RawScrollbar(
-          isAlwaysShown: true,
+          thumbVisibility: true,
           controller: rawController,
           thumbColor: ColorConstants.bgColor,
           thickness: 7,

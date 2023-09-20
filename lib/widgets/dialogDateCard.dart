@@ -25,8 +25,8 @@ class _DateDialog extends State<DateDialog> {
   final _timeController = TextEditingController();
   final _descriptionController = TextEditingController();
   List<dynamic>? childrenData = [];
-  List<String> dropdownList = ['select Child'];
-  String dropdownValue = 'select Child';
+  List<String> dropdownList = ['tittleSelectChild'.tr];
+  String dropdownValue = 'tittleSelectChild'.tr;
   TimeOfDay _time = TimeOfDay(hour: 7, minute: 15);
 
   void disposed() {
@@ -97,7 +97,7 @@ class _DateDialog extends State<DateDialog> {
                         borderRadius: BorderRadius.circular(
                             24.0), // Adjust the radius as needed
                       ),
-                      hintText: 'titulo',
+                      hintText: 'tittleTit'.tr,
                       hintStyle: const TextStyle(
                           fontFamily: 'Archive',
                           color: ColorConstants.TextGray),
@@ -179,7 +179,7 @@ class _DateDialog extends State<DateDialog> {
                         borderRadius: BorderRadius.circular(
                             24.0), // Adjust the radius as needed
                       ),
-                      hintText: 'fecha',
+                      hintText: 'titleDate'.tr,
                       hintStyle: const TextStyle(
                           fontFamily: 'Archive',
                           color: ColorConstants.TextGray),
@@ -237,7 +237,7 @@ class _DateDialog extends State<DateDialog> {
                         borderRadius: BorderRadius.circular(
                             24.0), // Adjust the radius as needed
                       ),
-                      hintText: 'Time',
+                      hintText: 'tittleTime'.tr,
                       hintStyle: const TextStyle(
                           fontFamily: 'Archive',
                           color: ColorConstants.TextGray),
@@ -299,7 +299,7 @@ class _DateDialog extends State<DateDialog> {
                         borderRadius: BorderRadius.circular(
                             24.0), // Adjust the radius as needed
                       ),
-                      hintText: 'Description',
+                      hintText: 'tittleDescr'.tr,
                       hintStyle: const TextStyle(
                           fontFamily: 'Archive',
                           color: ColorConstants.TextGray),
@@ -323,7 +323,7 @@ class _DateDialog extends State<DateDialog> {
                     child: ElevatedButton(
                       onPressed: () async {
                         if (titleDateKey.currentState!.validate()) {
-                          if (dropdownValue != 'select Child') {
+                          if (dropdownValue != 'tittleSelectChild'.tr) {
                             Map<String, dynamic> cita = {
                               'title': _titleController.text,
                               'id': '0',
